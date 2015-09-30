@@ -1,4 +1,4 @@
-d2Parser<-function(filename,type,base.url,username,password,organisationUnit,dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="code") {
+d2Parser<-function(filename,type,base.url,username,password,organisationUnit,dataElementIdScheme,orgUnitIdScheme,idScheme) {
   valid_type <- type %in% c("xml","json","csv")
 if (!valid_type) { print("ERROR:Not a valid file type"); stop()} 
 
@@ -15,7 +15,14 @@ if ( type == "xml") {
   if (!is.na(data.attrs["attributeOptionCombo"])) { data$attributeOptionCombo<-data.attrs["attributeOptionCombo"] }
   }
 
-if ( type == "csv") { data<-read.csv(filename,) }
+if ( type == "csv") { 
+  
+  data<-read.csv(filename)
+  not_empty<-which(colwise(sum)(colwise(is.na)(data)) == 0 )
+  data<-data[,not_empty]
+  names(data)<-header[not_empty]
+  
+}
 
 if (type == "json") {
   
@@ -28,9 +35,12 @@ if (type == "json") {
 
 data<-data[,header[ header %in% names(data)]]
 data$value<-as.numeric(data$value)
-data$orgUnit<-remapOUs(data$orgUnit,base.url,username,password,mode=orgUnitIdScheme,organisationUnit)
-data$dataElement<-remapDEs(data$dataElement,base.url,username,password,mode=dataElementIdScheme)
-data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url=base.url,username=username,password=password,mode=idScheme,ou=organisationUnit)
+if ( orgUnitIdScheme != "id" ) {
+data$orgUnit<-remapOUs(data$orgUnit,base.url,username,password,mode=orgUnitIdScheme,organisationUnit) }
+if (dataElementIdScheme != "id" ) {
+data$dataElement<-remapDEs(data$dataElement,base.url,username,password,mode=dataElementIdScheme) }
+if ( idScheme != "id" ) {
+data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url=base.url,username=username,password=password,mode=idScheme,ou=organisationUnit) }
 
 return(data)
 }
