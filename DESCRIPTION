@@ -1,4 +1,4 @@
-Package: datim-validation
+Package: datimvalidation
 Type: Package
 Title: External validation routines for data payloads in DATIM
 Version: 0.0.1

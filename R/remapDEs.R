@@ -1,3 +1,14 @@
+#' Function for remapping of data elements to UIDs
+#'
+#' @param des_in A vector of data element identifiers (codes, names or shortNames)
+#' @param base.url Location of the server
+#' @param username Server username
+#' @param password Server password
+#' @param mode Should be one of code, name or shortName. This is the class we are mapping from to UIDs.
+#' @return Returns a vector of DATIM uids for each data element which needs to be remapped.
+#' @note
+#' remapDes(foo,"https://www.datim.org","admin","district","code")
+#' will remap data elements specified as codes to UIDs
 remapDEs<-function(des_in,base.url,username,password,mode){
   is_valid_mode<-mode %in% c("code","name","shortName")
   if ( is_valid_mode == FALSE )  {break}

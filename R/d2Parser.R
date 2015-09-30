@@ -1,3 +1,25 @@
+#' @title General purpose parsing function for different formats of DHIS2 data
+#' 
+#' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
+#' frame which can be used in subsequent DATIM validation routines
+#'
+#' @param filename Location of the payload to be imported. Should be a valid DHIS2 import file
+#' @param type Type of the file. Should be either xml, json or csv
+#' @param base.url Location of the server
+#' @param username Server username
+#' @param password Server password
+#' @param organisationUnit Organisation unit UID of the operating unit
+#' @param dataElementIdScheme Should be one of either code, name, shortName or id. If this paramater is "id", 
+#' then the Data elements are assumed to be already specififed as UIDs.
+#' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this paramater is "id", 
+#' then the organisation units are assumed to be already specififed as UIDs
+#' @param idScheme Remapping scheme for category option combos
+#' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
+#' 
+#' @note function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",
+#' username="admin",password="district",organisationUnit="Ab12345678",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
+#' 
+#'
 d2Parser<-function(filename,type,base.url,username,password,organisationUnit,dataElementIdScheme,orgUnitIdScheme,idScheme) {
   valid_type <- type %in% c("xml","json","csv")
 if (!valid_type) { print("ERROR:Not a valid file type"); stop()} 

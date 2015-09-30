@@ -1,3 +1,15 @@
+#' Function for remapping of mechanisms to UIDs
+#'
+#' @param mechs_in A vector of data element identifiers (codes, names or shortNames)
+#' @param base.url Location of the server
+#' @param username Server username
+#' @param password Server password
+#' @param mode Should be one of code, name or shortName. This is the class we are mapping from to UIDs.
+#' @param ou The UID of the operating unit.
+#' @return Returns a vector of mechanism UIDs
+#' @note
+#' remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
+#' will remap mechanisms specified as codes to UIDs
 remapMechs<-function(mechs_in,base.url,username,password,mode,ou) {
   is_valid_mode<-mode %in% c("code","name")
   if ( is_valid_mode == FALSE )  {break}
