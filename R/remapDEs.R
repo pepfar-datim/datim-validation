@@ -1,5 +1,9 @@
-#' Function for remapping of data elements to UIDs
-#'
+#' @title Function which converts data element codes, names or shortnames to UIDs
+#' 
+#' @description remapDes should be supplied a vector of data elements (names,codes or shortnames)
+#' along with the other required paramaters. It will return a vector of UIDs
+#' 
+#' 
 #' @param des_in A vector of data element identifiers (codes, names or shortNames)
 #' @param base.url Location of the server
 #' @param username Server username

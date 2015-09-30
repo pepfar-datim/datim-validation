@@ -1,4 +1,7 @@
-#' Function for remapping of organisation units to UIDs
+#' @title Function which converts mechanism codes, names or shortnames to UIDs
+#' 
+#' @description remapOUs should be supplied a vector of organisation Units (names,codes or shortnames)
+#' along with the other required paramaters. It will return a vector of UIDs.
 #'
 #' @param ous_in A vector of organisation unit identifiers (codes, names or shortNames)
 #' @param base.url Location of the server

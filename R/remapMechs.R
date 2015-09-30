@@ -1,4 +1,8 @@
-#' Function for remapping of mechanisms to UIDs
+#' @title Function which converts mechanism codes, names or shortnames to UIDs
+#' 
+#' @description remapMechs should be supplied a vector of data mechanisms (names,codes or shortnames)
+#' along with the other required paramaters. It will return a vector of UIDs.
+#' 
 #'
 #' @param mechs_in A vector of data element identifiers (codes, names or shortNames)
 #' @param base.url Location of the server
