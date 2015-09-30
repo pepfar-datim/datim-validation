@@ -1,4 +1,17 @@
-validateData<-function(data,base.url,username,password,return_violations_only=TRUE) {
+#' @title Function which checks the of a DATIM data payload agaist define validation rules
+#' 
+#' @description validateData should be supplied a d2Parser compliant data frame.
+#'The data frame is checked dynamically against validation rules defined in the DATIM server.
+#' @param data d2Parser data frame
+#' @param base.url Location of the server
+#' @param username Server username
+#' @param password Server password
+#' @param organisationUnit UID of the Operating Unit
+#' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
+#' @return Returns a data frame with validation rule results.
+#' @note
+#' checData(foo,"https://www.datim.org","admin")
+validateData<-function(data,base.url,username,password,organisationUnit,return_violations_only=TRUE) {
 #Calculate the totals  
 data.totals<-aggregate(value ~ dataElement + period + orgUnit + attributeOptionCombo, data = data,FUN=sum)
   
@@ -73,7 +86,7 @@ for(i in 1:nrow(loop_map)) {
 
 validation.results<-read.csv(vr_results_tmp_file)
 #Remap the OUs
-r<-GET(URLencode(paste0(base.url,"api/organisationUnits/",ou,".json?includeDescendants=true&filter=level:ge:3&fields=id,name&paging=false")),
+r<-GET(URLencode(paste0(base.url,"api/organisationUnits/",organisationUnit,".json?includeDescendants=true&filter=level:ge:3&fields=id,name&paging=false")),
        authenticate(username,password))
 r<- content(r, "parsed", "application/json")
 sites<-ldply(lapply(r$organisationUnits, function(x) t(unlist(x))))
@@ -81,7 +94,7 @@ names(sites)<-c("id","name")
 sites<-colwise(as.character)(sites)
 validation.results$orgUnit<-mapvalues(validation.results$orgUnit,sites$id,sites$name,warn_missing=FALSE)
 #Remap the mechanisms
-r<-GET(URLencode(paste0(base.url,"/api/categoryOptions?filter=organisationUnits.id:eq:",ou,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
+r<-GET(URLencode(paste0(base.url,"/api/categoryOptions?filter=organisationUnits.id:eq:",organisationUnit,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
        authenticate(username,password))
 r<- content(r, "parsed", "application/json")
 mechs<-ldply(lapply(r$categoryOptions, function(x) t(unlist(x))))
