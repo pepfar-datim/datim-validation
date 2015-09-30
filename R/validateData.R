@@ -33,11 +33,14 @@ vr<-data.frame(name=vr.names,ls=vr.ls,op=vr.op,rs=vr.rs,ls.strategy=vr.ls.strate
 #Static predefined map of operators
 op.map<-data.frame(x=c("greater_than_or_equal_to","greater_than","equal_to","not_equal_to","less_than_or_equal_to","less_than"),
                    y=c(">=",">","==","!=","<=","<"),stringsAsFactors=F)
+#Strategies
 strat.map<-data.frame(x=c("SKIP_IF_ANY_VALUE_MISSING","SKIP_IF_ALL_VALUES_MISSING","NEVER_SKIP"))
-
+#Remap the operators
 vr$op<-mapvalues(vr$op,op.map$x,op.map$y,warn_missing=FALSE)
+#Remove decorations
 vr$ls<-gsub("[#{}]","",vr$ls)
 vr$rs<-gsub("[#{}]","",vr$rs)
+#Count the left and right side operators
 vr$rs.ops<-stringr::str_count(vr$rs,expression.pattern)
 vr$ls.ops<-stringr::str_count(vr$ls,expression.pattern)
 #vr$rs.ops<-ifelse(vr$rs.ops==0,1,vr$rs.ops)
@@ -83,7 +86,7 @@ for(i in 1:nrow(loop_map)) {
   matches<-merge(matches,loop_map[i,],all=T)
   write.table(matches,file=vr_results_tmp_file,append=(i!=1),sep=",",col.names=(i==1),row.names=F) }
 
-
+#Read the temp file
 validation.results<-read.csv(vr_results_tmp_file)
 #Remap the OUs
 r<-GET(URLencode(paste0(base.url,"api/organisationUnits/",organisationUnit,".json?includeDescendants=true&filter=level:ge:3&fields=id,name&paging=false")),
