@@ -6,6 +6,7 @@ getInvalidDataElements<-function(data,base.url,username,password,dataset){
   des<-ldply(lapply(r$rows, function(x) t(unlist(x))))
   foo<-ldply(lapply(r$header, function(x) t(unlist(x))))[1]
   names(des)<-as.character(foo$name)
+  des<-colwise(as.character)(des)
   #Datasets
   
   r<-GET(URLencode(paste0(base.url,"api/dataSets?filter=name:like:",dataset,"&fields=id,name")),
@@ -22,7 +23,8 @@ getInvalidDataElements<-function(data,base.url,username,password,dataset){
   foo$combi<-paste0(foo$dataElement,".",foo$categoryOptionCombo)
   foo<-foo[!(foo$combi %in% des.this$combi ),]
   foo<-foo[complete.cases(foo),]
-  foo$dataElementName<-mapvalues(foo$dataElement,des.this$dataelementuid,as.character(des.this$shortname),warn_missing=FALSE)
+  #Get all data element names and uids
+  foo$dataElementName<-mapvalues(as.character(foo$dataElement),as.character(des.this$dataelementuid),as.character(des.this$shortname),warn_missing=FALSE)
   foo$categoryOptionComboName<-mapvalues(foo$categoryOptionCombo,des.this$categoryoptioncombouid,as.character(des.this$categoryoptioncombo),warn_missing=FALSE)
-  return(foo)
+  return(foo[,c("dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo")])
 }
