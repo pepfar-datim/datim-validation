@@ -89,20 +89,9 @@ for(i in 1:nrow(loop_map)) {
 #Read the temp file
 validation.results<-read.csv(vr_results_tmp_file)
 #Remap the OUs
-r<-GET(URLencode(paste0(base.url,"api/organisationUnits/",organisationUnit,".json?includeDescendants=true&filter=level:ge:3&fields=id,name&paging=false")),
-       authenticate(username,password))
-r<- content(r, "parsed", "application/json")
-sites<-ldply(lapply(r$organisationUnits, function(x) t(unlist(x))))
-names(sites)<-c("id","name")
-sites<-colwise(as.character)(sites)
-validation.results$orgUnit<-mapvalues(validation.results$orgUnit,sites$id,sites$name,warn_missing=FALSE)
+validation.results$orgUnit<-mapvalues(validation.results$orgUnit,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
 #Remap the mechanisms
-r<-GET(URLencode(paste0(base.url,"/api/categoryOptions?filter=organisationUnits.id:eq:",organisationUnit,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
-       authenticate(username,password))
-r<- content(r, "parsed", "application/json")
-mechs<-ldply(lapply(r$categoryOptions, function(x) t(unlist(x))))
-mechs<-colwise(as.character)(mechs)
-validation.results$attributeOptionCombo<-mapvalues(validation.results$attributeOptionCombo,mechs$categoryOptionCombos.id,mechs$code)
+validation.results$attributeOptionCombo<-mapvalues(validation.results$attributeOptionCombo,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
 
 if (return_violations_only) {
   

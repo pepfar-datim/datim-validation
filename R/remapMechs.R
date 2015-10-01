@@ -8,19 +8,21 @@
 #' @param base.url Location of the server
 #' @param username Server username
 #' @param password Server password
-#' @param mode Should be one of code, name or shortName. This is the class we are mapping from to UIDs.
+#' @param mode_in Should be one of code, name or id. This is the class we are mapping from.
+#' @param mode_out Should be one of code,name or id. This is the class we are mapping to.
 #' @param ou The UID of the operating unit.
 #' @return Returns a vector of mechanism UIDs
 #' @note
 #' remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
 #' will remap mechanisms specified as codes to UIDs
-remapMechs<-function(mechs_in,base.url,username,password,mode,ou) {
-  is_valid_mode<-mode %in% c("code","name")
+remapMechs<-function(mechs_in,base.url,username,password,organisationUnit,mode_in="code",mode_out="id") {
+  is_valid_mode<- (mode_in %in% c("code","name","id") ) & (mode_out %in% c("code","name","id") )
   if ( is_valid_mode == FALSE )  {break}
-  r<-GET(URLencode(paste0(base.url,"/api/categoryOptions?filter=organisationUnits.id:eq:",ou,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
+  r<-GET(URLencode(paste0(base.url,"/api/categoryOptions?filter=organisationUnits.id:eq:",organisationUnit,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
          authenticate(username,password))
   r<- content(r, "parsed", "application/json")
   mechs<-ldply(lapply(r$categoryOptions, function(x) t(unlist(x))))
   mechs<-colwise(as.character)(mechs)
-  cmd<-paste0("mapvalues(mechs_in,mechs$",mode,",mechs$categoryOptionCombos.id,warn_missing = FALSE)")
+  if (mode_out =="id") {mode_out <- "categoryOptionCombos.id" }
+  cmd<-paste0("mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
   as.character(eval(parse(text=cmd))) }

@@ -4,7 +4,8 @@
 \alias{remapMechs}
 \title{Function which converts mechanism codes, names or shortnames to UIDs}
 \usage{
-remapMechs(mechs_in, base.url, username, password, mode, ou)
+remapMechs(mechs_in, base.url, username, password, organisationUnit,
+  mode_in = "code", mode_out = "id")
 }
 \arguments{
 \item{mechs_in}{A vector of data element identifiers (codes, names or shortNames)}
@@ -15,7 +16,9 @@ remapMechs(mechs_in, base.url, username, password, mode, ou)
 
 \item{password}{Server password}
 
-\item{mode}{Should be one of code, name or shortName. This is the class we are mapping from to UIDs.}
+\item{mode_in}{Should be one of code, name or id. This is the class we are mapping from.}
+
+\item{mode_out}{Should be one of code,name or id. This is the class we are mapping to.}
 
 \item{ou}{The UID of the operating unit.}
 }

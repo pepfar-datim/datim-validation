@@ -58,11 +58,11 @@ if (type == "json") {
 data<-data[,header[ header %in% names(data)]]
 data$value<-as.numeric(data$value)
 if ( orgUnitIdScheme != "id" ) {
-data$orgUnit<-remapOUs(data$orgUnit,base.url,username,password,mode=orgUnitIdScheme,organisationUnit) }
+data$orgUnit<-remapOUs(data$orgUnit,base.url,username,password,organisationUnit,mode_in=orgUnitIdScheme,mode_out="id") }
 if (dataElementIdScheme != "id" ) {
-data$dataElement<-remapDEs(data$dataElement,base.url,username,password,mode=dataElementIdScheme) }
+data$dataElement<-remapDEs(data$dataElement,base.url,username,password,mode_in=dataElementIdScheme,mode_out="id") }
 if ( idScheme != "id" ) {
-data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url=base.url,username=username,password=password,mode=idScheme,ou=organisationUnit) }
+data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url,username,password,ou=organisationUnit,mode_in=idScheme,mode_out="id") }
 
 return(data)
 }

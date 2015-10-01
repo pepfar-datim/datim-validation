@@ -2,9 +2,10 @@
 % Please edit documentation in R/remapOUs.R
 \name{remapOUs}
 \alias{remapOUs}
-\title{Function which converts mechanism codes, names or shortnames to UIDs}
+\title{Function which converts mechanism codes, names or shortnames to to another class of identifiers}
 \usage{
-remapOUs(ous_in, base.url, username, password, mode, ou)
+remapOUs(ous_in, base.url, username, password, organisationUnit,
+  mode_in = "code", mode_out = "id")
 }
 \arguments{
 \item{ous_in}{A vector of organisation unit identifiers (codes, names or shortNames)}
@@ -15,19 +16,21 @@ remapOUs(ous_in, base.url, username, password, mode, ou)
 
 \item{password}{Server password}
 
-\item{mode}{Should be one of code, name or shortName. This is the class we are mapping from to UIDs.}
+\item{organisationUnit}{UID of the Operating Unit/Country}
 
-\item{ou}{UID of the Operating Unit/Country}
+\item{mode_in}{Should be one of code, name, shortName or id. This is the class we are mapping from.}
+
+\item{mode_out}{Should be on of code,name,shortName or id. This is the class we are mapping to.}
 }
 \value{
 Returns a vector of organisation unit UIDs
 }
 \description{
 remapOUs should be supplied a vector of organisation Units (names,codes or shortnames)
-along with the other required paramaters. It will return a vector of UIDs.
+along with the other required paramaters. It will return a vector of to another class of identifiers.
 }
 \note{
-remapOUs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
+remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
 will remap organisation units specified as codes to UIDs
 }
 
