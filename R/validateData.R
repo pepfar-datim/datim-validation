@@ -89,9 +89,9 @@ for(i in 1:nrow(loop_map)) {
 #Read the temp file
 validation.results<-read.csv(vr_results_tmp_file)
 #Remap the OUs
-validation.results$orgUnit<-mapvalues(validation.results$orgUnit,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
+validation.results$orgUnit<-remapOUs(validation.results$orgUnit,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
 #Remap the mechanisms
-validation.results$attributeOptionCombo<-mapvalues(validation.results$attributeOptionCombo,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
+validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
 
 if (return_violations_only) {
   

@@ -44,8 +44,11 @@ organisationUnit = "FETQ6OmnsKB"
 ```
 
 Next, we will use the `d2Parser` function, which is a general purpose function to load the different formats of data which 
-DATIM accepts and to standardize this so that we can use other validation functions on the data. Refer to each functons specific documenation on how to use the functions. 
+DATIM accepts and to standardize this so that we can use other validation functions on the data. 
 
+In addition to your username and password, you will need to specific the `type` of the file. This should be one of 'json','csv',or 'xml'. 
+You will also need to know the identification scheme of the file. The easiest way is to open the file in a text editor, and see what id scheme
+the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
 
 ```{r eval=FALSE}
 d<-d2Parser(file="/home/user/data/REVISED COP15 FINAL_IMPORT.csv",type = "csv",
