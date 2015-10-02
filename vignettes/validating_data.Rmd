@@ -49,7 +49,7 @@ First, we will check that the supplied organisation unit, which should be the UI
 try(if(checkOperatingUnit(organisationUnit,base.url,username,password) == FALSE)) stop("Not a valid operating unit"))
 ```
 
-Be sure your operating unit is set correctly, otherwise, the rest of the validation scripts will fail. It must be a valid Operating Unit UID in DATIM.
+Be sure your operating unit is set correctly, otherwise, the rest of the validation scripts will fail. It must be a valid Operating Unit UID in DATIM. If you are not sure of the correct UID, you can use the utility function `getValidOperatingUnits(base.url,username,password)` to get a list of valid operating units along with their UIDs.
 
 Next, we will use the `d2Parser` function, which is a general purpose function to load the different formats of data which 
 DATIM accepts and to standardize this so that we can use other validation functions on the data. 
