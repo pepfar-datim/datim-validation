@@ -16,4 +16,4 @@ Once the package has installed, you can load it with
 
 ```R
 library(datimvalidation)
-``
+```
