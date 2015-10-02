@@ -1,0 +1,86 @@
+---
+title: "Validation of data payloads for DATIM"
+author: "Jason P. Pickering"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Validation of data payloads for DATIM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+##Using the datimvalidation package
+
+DATIM is based on the [DHIS2](https://dhis2.org/) software, and is therefore capable of importing different types of data, including
+CSV, JSON and XML formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
+the various formats which DHIS2 supports and the syntax of each of these. The DHIS2 development team has provided extensive technical
+documetnation on the various formats [here](https://www.dhis2.org/doc/snapshot/en/developer/html/ch01s11.html). 
+
+In addition to the general DHIS2 documentation, a series of DATIM specific resources is available [here](https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange). These guides provide more detailed information on the data import process into DATIM, including
+code listings for indicators and disaggregations. 
+
+DATIM has strict controls on data imports, including the requirement to adhere to the numerous validation rules of the system. To help
+data importers to prepare their files for submission to DATIM, this R package has been created to help validate the data prior to importing
+it into the system. This pacakge will help you to load your data payload and validate it against the business logic of DATIM, prior to 
+attempting to import it into the system. This approach is useful, as it will allow you to interactively correct mistakes in the payload
+prior to submission of the data for import. 
+
+In order to get started, you will need to have installed the R package "datimvalidation". The source code for this library can be found [here](https://github.com/jason-p-pickering/datim-validation). 
+
+The `datavalidation` library provides an abstraction layer to the validation routines and to loading the payload into your R session. To get started, 
+it is useful to define some variables which are required by the scripts. The `username` and `password` variables should be your DATIM username and password. 
+Resources are dynamically retreived from the server, and will be dependent on your actual username and password. The `base.url` should be the DATIM
+instance you wish to validate your data against. The `organisationUnit` should be the UID of the operating unit which you are validating data for. 
+You can find your operating units UID by looking at the code list for your country, and finding the first entry (corresponding to level 3) of the code list. These variables are used through-out the scripts, so it is useful to define them globally in your local script which will actually perform the validation of the data. 
+
+
+```{r eval=FALSE}
+require(datimvalidation)
+username = "admin"
+password ="district"
+base.url = "https://www.datim.org/"
+organisationUnit = "FETQ6OmnsKB"
+```
+
+Next, we will use the `d2Parser` function, which is a general purpose function to load the different formats of data which 
+DATIM accepts and to standardize this so that we can use other validation functions on the data. Refer to each functons specific documenation on how to use the functions. 
+
+
+```{r eval=FALSE}
+d<-d2Parser(file="/home/user/data/REVISED COP15 FINAL_IMPORT.csv",type = "csv",
+            base.url = base.url,
+            username = username,password = password,
+            organisationUnit = organisationUnit,
+            dataElementIdScheme = "id",orgUnitIdScheme = "id",idScheme = "id"  )
+```
+
+Now, we have loaded our data payload into the object `d`, we can proceed to validate it. The `checkValidMechanisms` will check that all mechanisms present in the payload are currently active in DATIM. 
+
+```{r eval=FALSE}
+#Check for valid mechanisms and simply print those which are not valid
+checkValidMechanisms(d,base.url,username,password,organisationUnit)
+```
+
+
+Next, we can check the indicators and disaggregations for validity against the current dataset form definitions. A data frame of indicator/disagg combinations will be returned.
+
+
+```{r eval=FALSE}
+#Check for indicator / disagg combinations and save the result as a CSV file
+invalid_des<-getInvalidDataElements(data = d,
+                                    base.url = base.url,
+                                    username=username,
+                                    password=password,dataset="MER Results")
+write.csv(invalid_des,file="invalid_des.csv")
+```
+
+Finally, we can perform a check of the validation rules as defined in DATIM on the data payload.
+
+```{r eval=FALSE}
+#Run the validation rule and save the output as a CSV file
+vr_violations<-validateData(data = d,base.url = "https://www.datim.org/",
+                            username = username,password = password,
+                            organisationUnit = organisationUnit,return_violations_only = TRUE)
+write.csv(vr_violations,file="validation_rule_violations.csv")
+```
