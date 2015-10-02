@@ -62,7 +62,7 @@ data$orgUnit<-remapOUs(data$orgUnit,base.url,username,password,organisationUnit,
 if (dataElementIdScheme != "id" ) {
 data$dataElement<-remapDEs(data$dataElement,base.url,username,password,mode_in=dataElementIdScheme,mode_out="id") }
 if ( idScheme != "id" ) {
-data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url,username,password,ou=organisationUnit,mode_in=idScheme,mode_out="id") }
+data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url,username,password,organisationUnit=organisationUnit,mode_in=idScheme,mode_out="id") }
 
 return(data)
 }
