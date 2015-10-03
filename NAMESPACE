@@ -1,7 +1,7 @@
 import(XML)
 import(plyr)
 import(httr)
-import(rjson)
+import(jsonlite)
 import(stringr)
 export(remapDEs)
 export(remapOUs)

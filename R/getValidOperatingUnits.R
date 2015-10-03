@@ -11,10 +11,9 @@
 #' will remap organisation units specified as codes to UIDs
 getValidOperatingUnits<-function(base.url,username,password) {
   
-  r<-GET(URLencode(paste0(base.url,"api/organisationUnits/api/organisationUnits?level=3&fields=id,name&paging=false")),
+  r<-GET(URLencode(paste0(base.url,"api/organisationUnits?level=3&fields=id,name&paging=false")),
          authenticate(username,password))
-  r<- content(r, "parsed", "application/json")
-  sites<-ldply(lapply(r$organisationUnits, function(x) t(unlist(x))))
-  sites<-colwise(as.character)(sites)
+  r<- content(r, "text")
+  sites<-jsonlite::fromJSON(r,flatten=TRUE)$organisationUnits
   return(sites)
 }

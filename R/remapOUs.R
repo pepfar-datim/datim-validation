@@ -19,8 +19,7 @@ remapOUs<-function(ous_in,base.url,username,password,organisationUnit,mode_in="c
   if ( is_valid_mode == FALSE )  {break}
   r<-GET(URLencode(paste0(base.url,"api/organisationUnits/",organisationUnit,".json?includeDescendants=true&filter=level:ge:3&fields=id,code,name,shortName&paging=false")),
          authenticate(username,password))
-  r<- content(r, "parsed", "application/json")
-  sites<-ldply(lapply(r$organisationUnits, function(x) t(unlist(x))))
-  sites<-colwise(as.character)(sites)
+  r<- content(r, "text")
+  sites<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
   cmd<-paste0("mapvalues(ous_in,sites$",mode_in,",sites$",mode_out,",warn_missing = FALSE)")
   as.character(eval(parse(text=cmd))) }

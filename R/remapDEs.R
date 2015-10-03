@@ -17,9 +17,8 @@
 remapDEs<-function(des_in,base.url,username,password,mode_in="code",mode_out="id"){
   is_valid_mode<- (mode_in %in% c("code","name","shortName","id") )  & ( mode_out %in% c("code","name","shortName","id") )
   if ( is_valid_mode == FALSE )  {break}
-  r<-GET(URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName&paging=false")), authenticate(username,password))
-  r<- content(r, "parsed", "application/json")
-  des<-ldply(lapply(r$dataElements, function(x) t(unlist(x))))
-  des<-colwise(as.character)(des)
+  r<-GET(URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName,name&paging=false")), authenticate(username,password))
+  r<- content(r, "text")
+  des<-mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
   cmd<-paste0("mapvalues(des_in,des$",mode_in,",des$",mode_out,",warn_missing = FALSE)")
   eval(parse(text=cmd)) }

@@ -48,8 +48,8 @@ if ( type == "csv") {
 
 if (type == "json") {
   
-  j<-fromJSON(file=filename)
-  data<-ldply(lapply(j$dataValues, function(x) t(unlist(x))))
+  j<-jsonlite::fromJSON(file=filename)
+  data<-j$dataValues
   if (!is.null(j[["period"]])) { data$period<-j$period }
   if (!is.null(j[["orgUnit"]])) { data$orgUnit<-j$orgUnit }
   if (!is.null(j[["attributeOptionCombo"]])) { data$attributeOptionCombo<-j$attributeOptionComboid }
