@@ -48,7 +48,7 @@ if ( type == "csv") {
 
 if (type == "json") {
   
-  j<-jsonlite::fromJSON(file=filename)
+  j<-jsonlite::fromJSON(txt=filename)
   data<-j$dataValues
   if (!is.null(j[["period"]])) { data$period<-j$period }
   if (!is.null(j[["orgUnit"]])) { data$orgUnit<-j$orgUnit }
