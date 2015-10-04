@@ -4,8 +4,8 @@
 \alias{validateData}
 \title{Function which checks the of a DATIM data payload agaist define validation rules}
 \usage{
-validateData(data, base.url, username, password, organisationUnit,
-  return_violations_only = TRUE)
+validateData(data, base.url, username, password,
+  return_violations_only = TRUE, parallel = TRUE)
 }
 \arguments{
 \item{data}{d2Parser data frame}
@@ -16,9 +16,9 @@ validateData(data, base.url, username, password, organisationUnit,
 
 \item{password}{Server password}
 
-\item{organisationUnit}{UID of the Operating Unit}
-
 \item{return_violations_only}{Paramater to return only violations or all validation rule evalualtions.}
+
+\item{parallel}{Should the rules be evaluated in parallel.}
 }
 \value{
 Returns a data frame with validation rule results.
@@ -26,8 +26,5 @@ Returns a data frame with validation rule results.
 \description{
 validateData should be supplied a d2Parser compliant data frame.
 The data frame is checked dynamically against validation rules defined in the DATIM server.
-}
-\note{
-checData(foo,"https://www.datim.org","admin")
 }
 
