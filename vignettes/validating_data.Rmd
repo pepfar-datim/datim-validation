@@ -46,7 +46,7 @@ organisationUnit = "FETQ6OmnsKB"
 First, we will check that the supplied organisation unit, which should be the UID of the operating unit you are checking, is valid.
 
 ```{r eval=FALSE}
-try(if(checkOperatingUnit(organisationUnit,base.url,username,password) == FALSE)) stop("Not a valid operating unit"))
+try(if(checkOperatingUnit(organisationUnit,base.url,username,password) == FALSE ) stop("Not a valid operating unit") )
 ```
 
 Be sure your operating unit is set correctly, otherwise, the rest of the validation scripts will fail. It must be a valid Operating Unit UID in DATIM. If you are not sure of the correct UID, you can use the utility function `getValidOperatingUnits(base.url,username,password)` to get a list of valid operating units along with their UIDs.

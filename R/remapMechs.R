@@ -22,7 +22,6 @@ remapMechs<-function(mechs_in,base.url,username,password,organisationUnit,mode_i
          authenticate(username,password))
   r<- content(r, "text")
   mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
-  mechs$categoryOptionCombos<-unlist(foo$categoryOptionCombos)
-  if (mode_out =="id") {mode_out <- "categoryOptionCombos.id" }
+  if (mode_out =="id") {mode_out <- "categoryOptionCombos" }
   cmd<-paste0("mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
   as.character(eval(parse(text=cmd))) }
