@@ -28,12 +28,13 @@ validation.results$orgUnit<-remapOUs(validation.results$orgUnit,base.url,usernam
 #Remap the mechanisms
 validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
 
-if (return_violations_only) {
+if ( return_violations_only == TRUE & !is.na(return_violations_only) ) {
   
-validation.results[!validation.results$result,] 
+return( validation.results[!validation.results$result,] )
 
 } else { 
-validation.results 
+  
+return  (validation.results )
 
 }
 }

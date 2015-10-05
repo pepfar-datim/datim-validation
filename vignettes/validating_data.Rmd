@@ -34,6 +34,8 @@ Resources are dynamically retreived from the server, and will be dependent on yo
 instance you wish to validate your data against. The `organisationUnit` should be the UID of the operating unit which you are validating data for. 
 You can find your operating units UID by looking at the code list for your country, and finding the first entry (corresponding to level 3) of the code list. These variables are used through-out the scripts, so it is useful to define them globally in your local script which will actually perform the validation of the data. 
 
+Most operations in this library require you to have an internet connection and a valid account on a DATIM server. 
+
 
 ```{r eval=FALSE}
 require(datimvalidation)
@@ -58,6 +60,8 @@ In addition to your username and password, you will need to specific the `type` 
 You will also need to know the identification scheme of the file. The easiest way is to open the file in a text editor, and see what id scheme
 the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
 
+Depending on the size of the datasets and the objects which need to be recoded, this operation could take serveral minutes. 
+
 ```{r eval=FALSE}
 d<-d2Parser(file="/home/user/data/REVISED COP15 FINAL_IMPORT.csv",type = "csv",
             base.url = base.url,
@@ -74,7 +78,7 @@ checkValidMechanisms(d,base.url,username,password,organisationUnit)
 ```
 
 
-Next, we can check the indicators and disaggregations for validity against the current dataset form definitions. A data frame of indicator/disagg combinations will be returned.
+Next, we can check the indicators and disaggregations for validity against the current dataset form definitions. A data frame of indicator/disagg combinations will be returned. The 'dataset' paramater should be either the exact name of the dataset, or a grouping name like "MER Results" of 
 
 
 ```{r eval=FALSE}
