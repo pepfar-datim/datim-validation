@@ -9,7 +9,7 @@
 #' @param vr Validation rule object
 #' @return Returns a data frame of validation rule evaluations
 evaluateValidation<-function(combis,values,vr) {
-  
+  expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
   this.des<-vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1))
   #Get the matching rules to apply
   matches <-vr[ grepl(paste(this.des,collapse="|"), vr$ls) | grepl(paste(this.des,collapse="|"), vr$rs),]
