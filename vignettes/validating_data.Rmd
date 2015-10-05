@@ -92,10 +92,19 @@ write.csv(invalid_des,file="invalid_des.csv")
 
 Finally, we can perform a check of the validation rules as defined in DATIM on the data payload.
 
+The `validateData` function is capable of performing the validation operation in parallel. To activate this, you must inform R of the number of parallel
+sessions which may be spawned. Usually, taking the number of cores on your system is a good starting point.You can modify the following command based on the number of system cores you have access to. Consult the `plyr` documentation for specifics on parallel operations. 
+
+```{r eval=FALSE}
+doMC::registerDoMC(cores=4) # or however many cores you have access to
+parallel=TRUE
+```
+
+
 ```{r eval=FALSE}
 #Run the validation rule and save the output as a CSV file
 vr_violations<-validateData(data = d,base.url = "https://www.datim.org/",
                             username = username,password = password,
-                            organisationUnit = organisationUnit,return_violations_only = TRUE)
+                            return_violations_only = TRUE, parallel =parallel )
 write.csv(vr_violations,file="validation_rule_violations.csv")
 ```
