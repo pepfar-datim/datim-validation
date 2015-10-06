@@ -17,11 +17,8 @@
 #' will remap mechanisms specified as codes to UIDs
 remapMechs<-function(mechs_in,base.url,username,password,organisationUnit,mode_in="code",mode_out="id") {
   is_valid_mode<- (mode_in %in% c("code","name","id") ) & (mode_out %in% c("code","name","id") )
-  if ( is_valid_mode == FALSE )  {break}
-  r<-GET(URLencode(paste0(base.url,"/api/categoryOptions?filter=organisationUnits.id:eq:",organisationUnit,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
-         authenticate(username,password))
-  r<- content(r, "text")
-  mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
+  if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name or id"); stop() }
+  mechs<-getMechanismsMap(base.url,username,password)
   if (mode_out =="id") {mode_out <- "categoryOptionCombos" }
   cmd<-paste0("mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
   as.character(eval(parse(text=cmd))) }

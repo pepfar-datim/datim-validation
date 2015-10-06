@@ -12,8 +12,9 @@
 getValidOperatingUnits<-function(base.url,username,password) {
   
   r<-GET(URLencode(paste0(base.url,"api/organisationUnits?level=3&fields=id,name&paging=false")),
-         authenticate(username,password))
+         authenticate(username,password),timeout(60))
+  if (r$status == 200 ) {
   r<- content(r, "text")
   sites<-jsonlite::fromJSON(r,flatten=TRUE)$organisationUnits
-  return(sites)
+  return(sites) } else { print(paste("Could not retreive valid operating units",content(r$status))); stop() }
 }

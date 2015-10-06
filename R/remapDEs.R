@@ -16,9 +16,9 @@
 #' will remap data elements specified as codes to UIDs
 remapDEs<-function(des_in,base.url,username,password,mode_in="code",mode_out="id"){
   is_valid_mode<- (mode_in %in% c("code","name","shortName","id") )  & ( mode_out %in% c("code","name","shortName","id") )
-  if ( is_valid_mode == FALSE )  {break}
-  r<-GET(URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName,name&paging=false")), authenticate(username,password))
-  r<- content(r, "text")
-  des<-mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
+  if ( is_valid_mode == FALSE )  {print("Not a valid mode. Must be one of code,name,shortName or id"); stop() } else {
+  des<-getDataElementMap(base.url,username,password)
   cmd<-paste0("mapvalues(des_in,des$",mode_in,",des$",mode_out,",warn_missing = FALSE)")
-  eval(parse(text=cmd)) }
+  eval(parse(text=cmd)) } 
+    
+}

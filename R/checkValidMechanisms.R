@@ -16,9 +16,13 @@ checkValidMechanisms <-
 function(data,base.url,username,password,organisationUnit) {
   if ( class(data) != "data.frame" ) {print("Data must be a valid data frame"); stop() }
 r<-GET(URLencode(paste0(base.url,"api/categoryOptions?filter=organisationUnits.id:eq:",organisationUnit,"&fields=name,id,code,categoryOptionCombos[id]&filter=endDate:gt:2016-09-29&paging=false")),
-       authenticate(username,password))
+       authenticate(username,password),timeout(10))
+
+if ( r$status_code == "200" ) {
 r<- content(r, "text")
 mechs.valid<-fromJSON(r,flatten=TRUE)[[1]]
 mechs.valid$categoryOptionCombos<-unlist(mechs.valid$categoryOptionCombos)
 mechs<-unique(data$attributeOptionCombo)
 mechs[!(mechs %in% mechs.valid$categoryOptionCombos)] }
+else { print("Could not retreive mehanisms",content(r, "text")); stop() } }
+

@@ -16,10 +16,8 @@
 #' will remap organisation units specified as codes to UIDs
 remapOUs<-function(ous_in,base.url,username,password,organisationUnit,mode_in="code",mode_out="id") {
   is_valid_mode<- (mode_in %in% c("code","name","shortName","id") )  & ( mode_out %in% c("code","name","shortName","id") )
-  if ( is_valid_mode == FALSE )  {break}
-  r<-GET(URLencode(paste0(base.url,"api/organisationUnits/",organisationUnit,".json?includeDescendants=true&filter=level:ge:3&fields=id,code,name,shortName&paging=false")),
-         authenticate(username,password))
-  r<- content(r, "text")
-  sites<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
+  if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name,shortName or id"); stop() } else {
+  site<-getOrganisationUnitMap(base.url,username,passowrd,organisationUnit)
   cmd<-paste0("mapvalues(ous_in,sites$",mode_in,",sites$",mode_out,",warn_missing = FALSE)")
-  as.character(eval(parse(text=cmd))) }
+  as.character(eval(parse(text=cmd))) } 
+}
