@@ -15,10 +15,10 @@ evaluateValidation<-function(combis,values,vr) {
   matches <-vr[ grepl(paste(this.des,collapse="|"), vr$ls) | grepl(paste(this.des,collapse="|"), vr$rs),]
   
   #Get the matching rules
-  matches$ls<-mapvalues(matches$ls,combis,values,warn_missing=FALSE)
+  matches$ls<-plyr::mapvalues(matches$ls,combis,values,warn_missing=FALSE)
   matches$ls.count<-stringr::str_count(matches$ls,expression.pattern)
   
-  matches$rs<-mapvalues(matches$rs,combis,values,warn_missing=FALSE)
+  matches$rs<-plyr::mapvalues(matches$rs,combis,values,warn_missing=FALSE)
   matches$rs.count<-stringr::str_count(matches$rs,expression.pattern)
   #Remove rules which should not be evaluated
   foo<-!(matches$ls.strategy == "SKIP_IF_ANY_VALUE_MISSING" & (matches$ls.ops != matches$ls.count)) | 

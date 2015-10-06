@@ -16,11 +16,11 @@ remapMechs(mechs_in, base.url, username, password, organisationUnit,
 
 \item{password}{Server password}
 
+\item{organisationUnit}{The UID of the operating unit.}
+
 \item{mode_in}{Should be one of code, name or id. This is the class we are mapping from.}
 
 \item{mode_out}{Should be one of code,name or id. This is the class we are mapping to.}
-
-\item{ou}{The UID of the operating unit.}
 }
 \value{
 Returns a vector of mechanism UIDs

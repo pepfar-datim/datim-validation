@@ -10,12 +10,12 @@
 
 getDataElementMap<-function(base.url,username,password) {
   
-  r<-GET(URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName,name&paging=false")), authenticate(username,password),timeout(10))
+  r<-httr::GET(URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName,name&paging=false")), httr::authenticate(username,password),httr::timeout(60))
   if (r$status == 200L ){
-    r<- content(r, "text")
+    r<- httr::content(r, "text")
     des<-jsonlite::fromJSON(r,flatten=TRUE)[[1]] 
     return( des ) } else {
-      print(paste("Could not retreive data elements",content(r,"text")))
+      print(paste("Could not retreive data elements",httr::content(r,"text")))
       stop()
     }
   

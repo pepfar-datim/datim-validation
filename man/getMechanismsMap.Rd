@@ -4,7 +4,8 @@
 \alias{getMechanismsMap}
 \title{getMechanismsMap(base.url,username,passowrd)}
 \usage{
-getMechanismsMap(base.url, username, password)
+getMechanismsMap(base.url, username, password, organisationUnit,
+  endDate = "2016-09-29")
 }
 \arguments{
 \item{base.url}{Location of the server}
@@ -12,6 +13,10 @@ getMechanismsMap(base.url, username, password)
 \item{username}{Server username}
 
 \item{password}{Server password}
+
+\item{organisationUnit}{Operating unit in question specified as a UID}
+
+\item{endDate}{Date which marks the mechanism as valid. Must be specified in a valid R date syntax}
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)

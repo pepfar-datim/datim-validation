@@ -27,10 +27,10 @@ if (!valid_type) { print("ERROR:Not a valid file type"); stop()}
 header<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value","storedby","lastUpdated","comment")
 
 if ( type == "xml") {
-  d<-xmlTreeParse(filename,useInternalNode=TRUE)
-  data<-data.frame(t( sapply(xmlRoot(d) [ "dataValue" ], xmlAttrs) ) )
+  d<-XML::xmlTreeParse(filename,useInternalNode=TRUE)
+  data<-data.frame(t( sapply(XML::xmlRoot(d) [ "dataValue" ], XML::xmlAttrs) ) )
   #Get all the attributes specified in the 
-  data.attrs<-xmlAttrs(xmlRoot(d))
+  data.attrs<-XML::xmlAttrs(XML::xmlRoot(d))
   #Period
   if (!is.na(data.attrs["period"])) { data$period<-data.attrs["period"] }
   if (!is.na(data.attrs["orgUnit"])) { data$orgUnit<-data.attrs["orgUnit"] }
@@ -40,7 +40,7 @@ if ( type == "xml") {
 if ( type == "csv") { 
   
   data<-read.csv(filename)
-  not_empty<-which(colwise(sum)(colwise(is.na)(data)) == 0 )
+  not_empty<-which(plyr::colwise(sum)(plyr::colwise(is.na)(data)) == 0 )
   data<-data[,not_empty]
   names(data)<-header[not_empty]
   

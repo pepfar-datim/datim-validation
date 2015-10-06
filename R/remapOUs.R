@@ -16,8 +16,8 @@
 #' will remap organisation units specified as codes to UIDs
 remapOUs<-function(ous_in,base.url,username,password,organisationUnit,mode_in="code",mode_out="id") {
   is_valid_mode<- (mode_in %in% c("code","name","shortName","id") )  & ( mode_out %in% c("code","name","shortName","id") )
-  if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name,shortName or id"); stop() } else {
-  site<-getOrganisationUnitMap(base.url,username,passowrd,organisationUnit)
-  cmd<-paste0("mapvalues(ous_in,sites$",mode_in,",sites$",mode_out,",warn_missing = FALSE)")
+  if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name,shortName or id"); stop()} else {
+  site<-getOrganisationUnitMap(base.url,username,password,organisationUnit)
+  cmd<-paste0("plyr::mapvalues(ous_in,sites$",mode_in,",sites$",mode_out,",warn_missing = FALSE)")
   as.character(eval(parse(text=cmd))) } 
 }

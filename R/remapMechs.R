@@ -10,7 +10,7 @@
 #' @param password Server password
 #' @param mode_in Should be one of code, name or id. This is the class we are mapping from.
 #' @param mode_out Should be one of code,name or id. This is the class we are mapping to.
-#' @param ou The UID of the operating unit.
+#' @param organisationUnit The UID of the operating unit.
 #' @return Returns a vector of mechanism UIDs
 #' @note
 #' remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
@@ -18,7 +18,7 @@
 remapMechs<-function(mechs_in,base.url,username,password,organisationUnit,mode_in="code",mode_out="id") {
   is_valid_mode<- (mode_in %in% c("code","name","id") ) & (mode_out %in% c("code","name","id") )
   if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name or id"); stop() }
-  mechs<-getMechanismsMap(base.url,username,password)
+  mechs<-getMechanismsMap(base.url,username,password,organisationUnit)
   if (mode_out =="id") {mode_out <- "categoryOptionCombos" }
-  cmd<-paste0("mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
+  cmd<-paste0("plyr::mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
   as.character(eval(parse(text=cmd))) }

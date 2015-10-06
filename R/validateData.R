@@ -21,7 +21,7 @@ data<-rbind(data,data.totals)
 
 #Check the data against the validation rules
 vr<-getValidationRules(base.url,username,password)
-validation.results<-ddply(data,.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr),.parallel=parallel)
+validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr),.parallel=parallel)
 
 #Remap the OUs
 validation.results$orgUnit<-remapOUs(validation.results$orgUnit,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
