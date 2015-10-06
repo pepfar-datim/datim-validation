@@ -74,7 +74,7 @@ Now, we have loaded our data payload into the object `d`, we can proceed to vali
 
 ```{r eval=FALSE}
 #Check for valid mechanisms and simply print those which are not valid
-checkValidMechanisms(d,base.url,username,password,organisationUnit)
+getInvalidMechanisms(d,base.url,username,password,organisationUnit)
 ```
 
 
