@@ -15,15 +15,17 @@ getInvalidDataElements<-function(data,base.url,username,password,dataset){
   #Valid data set assignments against the dataset
   r<-httr::GET(URLencode(paste0(base.url,"api/sqlViews/bkJ3PteNu7A/data.json?paging=false")),
          httr::authenticate(username,password),httr::timeout(60))
+  if (r$status == 200L ){
   r<- httr::content(r, "text")
   r<- jsonlite::fromJSON(r)
   des<-as.data.frame(r$rows)
   foo<-r$header
-  names(des)<-as.character(foo$name)
+  names(des)<-as.character(foo$name) } else {print("Could not get valid data elements"); stop()}
   #Datasets
   
   r<-httr::GET(URLencode(paste0(base.url,"api/dataSets?filter=name:like:",dataset,"&fields=id,name")),
                     httr::authenticate(username,password),httr::timeout(60))
+  if (r$status == 200L ){
   r<- httr::content(r, "text")
   ds<-jsonlite::fromJSON(r)$dataSets
 
@@ -38,5 +40,5 @@ getInvalidDataElements<-function(data,base.url,username,password,dataset){
   #Get all data element names and uids
   foo$dataElementName<-plyr::mapvalues(as.character(foo$dataElement),as.character(des.this$dataelementuid),as.character(des.this$shortname),warn_missing=FALSE)
   foo$categoryOptionComboName<-plyr::mapvalues(foo$categoryOptionCombo,des.this$categoryoptioncombouid,as.character(des.this$categoryoptioncombo),warn_missing=FALSE)
-  return(foo[,c("dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo")])
+  return(foo[,c("dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo")]) } else {print("Could not get datasets");break()}
 }
