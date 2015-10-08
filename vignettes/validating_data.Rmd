@@ -95,6 +95,7 @@ Finally, we can perform a check of the validation rules as defined in DATIM on t
 The `validateData` function is capable of performing the validation operation in parallel. To activate this, you must inform R of the number of parallel
 sessions which may be spawned. Usually, taking the number of cores on your system is a good starting point.You can modify the following command based on the number of system cores you have access to. Consult the `plyr` documentation for specifics on parallel operations. 
 
+For users of the `datimvalidation` package on Linux, you may be able to decrease the amount of time it takes to perform the validation, which can be a very lengthy process, depending on the amount of data and speed of your machine. To execute the the 
 ```{r eval=FALSE}
 doMC::registerDoMC(cores=4) # or however many cores you have access to
 parallel=TRUE

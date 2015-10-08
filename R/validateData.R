@@ -11,6 +11,9 @@
 #' @return Returns a data frame with validation rule results.
 validateData<-function(data,base.url,username,password,return_violations_only=TRUE,parallel=TRUE) {
 
+data$value<-as.numeric(data$value) #This may throw a warning 
+foo<-apply(apply(d,2,is.na),1,sum) == 0 #Filter out anything which is not complete.
+data<-data[foo,]
 #Calculate the totals  and append to the data frame
 data$combi<-paste0(data$dataElement,".",data$categoryOptionCombo)
 data.totals<-aggregate(value ~ dataElement + period + orgUnit + attributeOptionCombo, data = data,FUN=sum)
@@ -21,7 +24,7 @@ data<-rbind(data,data.totals)
 
 #Check the data against the validation rules
 vr<-getValidationRules(base.url,username,password)
-if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) {warning("Parallel execution may not be supported on Windows")}
+if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) { warning("Parallel execution may not be supported on Windows") }
 
 validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr),.parallel=parallel)
 

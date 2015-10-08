@@ -18,7 +18,7 @@
 #' 
 #' @note function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",
 #' username="admin",password="district",organisationUnit="Ab12345678",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
-#' 
+#' Note that all values will be returned as characters.
 #'
 d2Parser<-function(filename,type,base.url,username,password,organisationUnit,dataElementIdScheme,orgUnitIdScheme,idScheme) {
   valid_type <- type %in% c("xml","json","csv")
@@ -55,6 +55,7 @@ if (type == "json") {
   if (!is.null(j[["attributeOptionCombo"]])) { data$attributeOptionCombo<-j$attributeOptionComboid }
 }
 
+
 data<-data[,header[ header %in% names(data)]]
 data$value<-as.numeric(data$value)
 if ( orgUnitIdScheme != "id" ) {
@@ -63,6 +64,9 @@ if (dataElementIdScheme != "id" ) {
 data$dataElement<-remapDEs(data$dataElement,base.url,username,password,mode_in=dataElementIdScheme,mode_out="id") }
 if ( idScheme != "id" ) {
 data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url,username,password,organisationUnit=organisationUnit,mode_in=idScheme,mode_out="id") }
+
+#Data frame needs to be completely flattened to characters
+data<-plyr::colwise(as.character)(data)
 
 return(data)
 }
