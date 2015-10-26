@@ -57,7 +57,7 @@ if (type == "json") {
 
 
 data<-data[,header[ header %in% names(data)]]
-data$value<-as.numeric(data$value)
+data$value<-as.numeric(as.character(data$value))
 if ( orgUnitIdScheme != "id" ) {
 data$orgUnit<-remapOUs(data$orgUnit,base.url,username,password,organisationUnit,mode_in=orgUnitIdScheme,mode_out="id") }
 if (dataElementIdScheme != "id" ) {
