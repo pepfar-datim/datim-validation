@@ -18,7 +18,7 @@ getMechanismsMap<-function(base.url,username,password,organisationUnit,endDate="
     mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
 	mechs$categoryOptionCombos<-unlist(mechs$categoryOptionCombos)
 	#Convert the dates to booleans
-	mechs$isValid<-( as.Date(mechs$endDate) >= as.Date( endDate ) )
+	mechs$isValid<-( as.Date(mechs$endDate,"%Y-%m-%d") >= as.Date( endDate,"%Y-%m-%d" ) )
     return( mechs ) } else {
       print(paste("Could not retreive mechanisms",httr::content(r,"text")))
       stop()
