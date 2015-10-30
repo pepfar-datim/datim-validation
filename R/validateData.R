@@ -12,7 +12,7 @@
 validateData<-function(data,base.url,username,password,return_violations_only=TRUE,parallel=TRUE) {
 
 data$value<-as.numeric(data$value) #This may throw a warning 
-foo<-apply(apply(d,2,is.na),1,sum) == 0 #Filter out anything which is not complete.
+foo<-apply(apply(data,2,is.na),1,sum) == 0 #Filter out anything which is not complete.
 data<-data[foo,]
 #Calculate the totals  and append to the data frame
 data$combi<-paste0(data$dataElement,".",data$categoryOptionCombo)
