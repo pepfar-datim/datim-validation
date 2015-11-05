@@ -38,6 +38,5 @@ frame which can be used in subsequent DATIM validation routines
 \note{
 function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",
 username="admin",password="district",organisationUnit="Ab12345678",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
-Note that all values will be returned as characters.
 }
 

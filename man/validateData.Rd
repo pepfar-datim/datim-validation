@@ -5,7 +5,7 @@
 \title{Function which checks the of a DATIM data payload agaist define validation rules}
 \usage{
 validateData(data, base.url, username, password,
-  return_violations_only = TRUE, parallel = TRUE, outputToFile)
+  return_violations_only = TRUE, parallel = TRUE)
 }
 \arguments{
 \item{data}{d2Parser data frame}
@@ -19,10 +19,6 @@ validateData(data, base.url, username, password,
 \item{return_violations_only}{Paramater to return only violations or all validation rule evalualtions.}
 
 \item{parallel}{Should the rules be evaluated in parallel.}
-
-\item{outputToFile}{Do not return an object, but rather output to a file directly}
-
-\item{return_violations_only}{Only return violations}
 }
 \value{
 Returns a data frame with validation rule results.
