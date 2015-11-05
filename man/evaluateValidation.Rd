@@ -4,7 +4,7 @@
 \alias{evaluateValidation}
 \title{Utility function for evaluating validation rules}
 \usage{
-evaluateValidation(combis, values, vr)
+evaluateValidation(combis, values, vr, violationsOnly = TRUE, outputFile)
 }
 \arguments{
 \item{combis}{Data elements and category option combinations}
@@ -12,9 +12,13 @@ evaluateValidation(combis, values, vr)
 \item{values}{Values}
 
 \item{vr}{Validation rule object}
+
+\item{violationsOnly}{Only return validation rule violations}
+
+\item{Output}{to a file directly instead of returning an object}
 }
 \value{
-Returns a data frame of validation rule evaluations
+Returns a data frame of validation rule evaluations, alternatively a file
 }
 \description{
 evaluationValidation will accept a vector of combis (data elements.category optioncombinations) and values

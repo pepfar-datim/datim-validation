@@ -8,11 +8,13 @@
 #' @param password Server password
 #' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
 #' @param parallel Should the rules be evaluated in parallel. 
+#' @param return_violations_only Only return violations
+#' @param outputToFile Do not return an object, but rather output to a file directly
 #' @return Returns a data frame with validation rule results.
-validateData<-function(data,base.url,username,password,return_violations_only=TRUE,parallel=TRUE) {
+validateData<-function(data,base.url,username,password,return_violations_only=TRUE,parallel=TRUE,outputToFile) {
 
 data$value<-as.numeric(data$value) #This may throw a warning 
-foo<-apply(apply(d,2,is.na),1,sum) == 0 #Filter out anything which is not complete.
+foo<-apply(apply(data,2,is.na),1,sum) == 0 #Filter out anything which is not complete.
 data<-data[foo,]
 #Calculate the totals  and append to the data frame
 data$combi<-paste0(data$dataElement,".",data$categoryOptionCombo)
@@ -26,20 +28,8 @@ data<-rbind(data,data.totals)
 vr<-getValidationRules(base.url,username,password)
 if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) { warning("Parallel execution may not be supported on Windows") }
 
-validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr),.parallel=parallel)
+validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only,outputToFile),.parallel=parallel)
 
-#Remap the OUs
-validation.results$orgUnit<-remapOUs(validation.results$orgUnit,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
-#Remap the mechanisms
-validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")
+return(validation.results)
 
-if ( return_violations_only == TRUE & !is.na(return_violations_only) ) {
-  
-return( validation.results[!validation.results$result,] )
-
-} else { 
-  
-return  (validation.results )
-
-}
 }

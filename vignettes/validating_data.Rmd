@@ -8,9 +8,14 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+## Installation of the datimvalidation package
 
+There are several dependencies which are required to use the `datimvalidation` package. 
 
-##Using the datimvalidation package
+1) A recent copy of R.
+2) A recent copy of the Rtools package.
+
+## Using the datimvalidation package
 
 DATIM is based on the [DHIS2](https://dhis2.org/) software, and is therefore capable of importing different types of data, including
 CSV, JSON and XML formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 

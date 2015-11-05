@@ -7,8 +7,10 @@
 #' @param combis Data elements and category option combinations
 #' @param values Values
 #' @param vr Validation rule object
-#' @return Returns a data frame of validation rule evaluations
-evaluateValidation<-function(combis,values,vr) {
+#' @param violationsOnly Only return validation rule violations
+#' @param Output to a file directly instead of returning an object
+#' @return Returns a data frame of validation rule evaluations, alternatively a file
+evaluateValidation<-function(combis,values,vr,violationsOnly=TRUE,outputFile) {
   expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
   this.des<-vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1))
   #Get the matching rules to apply
@@ -33,5 +35,6 @@ evaluateValidation<-function(combis,values,vr) {
   matches$rs<-sapply(matches$rs,function(x) {eval(parse(text=x))})
   matches$formula<-paste(matches$ls,matches$op,matches$rs) 
   matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) 
-  return(matches)
+  if (violationsOnly) { matches<-matches[!matches$result,]}
+  if (!is.na(outputFile)) { write.table(matches,file=outputFile,append=T,row.names=F,col.names=F); return(TRUE)} else { return(matches) }
 }
