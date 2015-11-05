@@ -26,7 +26,7 @@ data<-rbind(data,data.totals)
 vr<-getValidationRules(base.url,username,password)
 if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) { warning("Parallel execution may not be supported on Windows") }
 
-validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr),.parallel=parallel)
+validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only),.parallel=parallel)
 
 #Remap the OUs
 validation.results$orgUnit<-remapOUs(validation.results$orgUnit,base.url,username,password,organisationUnit,mode_in="id",mode_out="code")

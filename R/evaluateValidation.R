@@ -7,8 +7,9 @@
 #' @param combis Data elements and category option combinations
 #' @param values Values
 #' @param vr Validation rule object
+#' @param return_violations_only Only return validation rule violations
 #' @return Returns a data frame of validation rule evaluations
-evaluateValidation<-function(combis,values,vr) {
+evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
   this.des<-vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1))
   #Get the matching rules to apply
@@ -33,5 +34,6 @@ evaluateValidation<-function(combis,values,vr) {
   matches$rs<-sapply(matches$rs,function(x) {eval(parse(text=x))})
   matches$formula<-paste(matches$ls,matches$op,matches$rs) 
   matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) 
+  if (return_violations_only == TRUE) {matches<-matches[!matches$result,]}
   return(matches)
 }
