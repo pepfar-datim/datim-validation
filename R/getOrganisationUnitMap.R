@@ -9,16 +9,20 @@
 #' @return Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)
 #' 
 getOrganisationUnitMap<-function(base.url,username,password,organisationUnit) {
-  
-  r<-httr::GET(URLencode(paste0(base.url,"api/organisationUnits.json?&filter=path:like:",organisationUnit,"&fields=id,code,name,shortName&paging=false")),
-             httr::authenticate(username,password),httr::timeout(60))
+  url<-URLencode(paste0(base.url,"api/organisationUnits.json?&filter=path:like:",organisationUnit,"&fields=id,code,name,shortName&paging=false"))
+  sig<-digest::digest(url,algo='md5', serialize = FALSE)
+  sites<-getCachedObject(sig)
+  if (is.null(sites)){
+  r<-httr::GET(url,httr::authenticate(username,password),httr::timeout(600))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
-    sites<-jsonlite::fromJSON(r,flatten=TRUE)[[1]] 
-    return( sites ) } else {
+    sites<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
+    saveCachedObject(sites,sig)
+     } else {
       print(paste("Could not retreive site listing",httr::content(r,"text")))
       stop()
     }
+  }
   
-  
+  return( sites )
 }

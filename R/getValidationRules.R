@@ -10,11 +10,14 @@
 
 getValidationRules<-function(base.url,username,password) {
   
-expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
+url<-paste0(base.url,"api/validationRules.xml?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
+sig<-digest::digest(url,algo='md5', serialize = FALSE)
+vr<-getCachedObject(sig)
 
+if (is.null(vr)) {
+expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 #Get a copy of the metadata from the server
-r<-httr::GET(paste0(base.url,"api/validationRules.xml?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator&paging=false"),
-       httr::authenticate(username,password),httr::timeout(60))
+r<-httr::GET(url, httr::authenticate(username,password),httr::timeout(60))
 vr.xml<- httr::content(r, "parsed","application/xml")
 vr.names<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule","o"),XML::xmlGetAttr,"name")
 vr.op<-sapply(XML::getNodeSet(vr.xml,"//o:operator","o"),XML::xmlValue)
@@ -22,8 +25,8 @@ vr.ls<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule/o:leftSide/o:expression
 vr.rs<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule/o:rightSide/o:expression","o"),XML::xmlValue)
 vr.ls.strategy<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule/o:leftSide/o:missingValueStrategy","o"),XML::xmlValue)
 vr.rs.strategy<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule/o:rightSide/o:missingValueStrategy","o"),XML::xmlValue)
-vr<-data.frame(name=vr.names,ls=vr.ls,op=vr.op,rs=vr.rs,ls.strategy=vr.ls.strategy,rs.strategy=vr.rs.strategy)
-
+vr.periodType<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule/o:periodType","o"),XML::xmlValue)
+vr<-data.frame(name=vr.names,ls=vr.ls,op=vr.op,rs=vr.rs,ls.strategy=vr.ls.strategy,rs.strategy=vr.rs.strategy,periodType=vr.periodType)
 #Static predefined map of operators
 op.map<-data.frame(x=c("greater_than_or_equal_to","greater_than","equal_to","not_equal_to","less_than_or_equal_to","less_than"),
                    y=c(">=",">","==","!=","<=","<"),stringsAsFactors=F)
@@ -39,5 +42,8 @@ vr$rs.ops<-stringr::str_count(vr$rs,expression.pattern)
 vr$ls.ops<-stringr::str_count(vr$ls,expression.pattern)
 #vr$rs.ops<-ifelse(vr$rs.ops==0,1,vr$rs.ops)
 #vr$ls.ops<-ifelse(vr$ls.ops==0,1,vr$ls.ops)
+saveCachedObject(vr,sig)
+  }
 
-return(vr) }
+return(vr) 
+}
