@@ -1,13 +1,13 @@
 Package: datimvalidation
 Type: Package
 Title: External validation routines for data payloads in DATIM
-Version: 0.0.25
+Version: 0.0.26
 Date: 2015-11-20
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
 Description: External validation routines for data payloads in DATIM
 License: BSD
 Imports: XML, plyr, jsonlite, stringr, httr, digest
-Suggests: knitr, rmarkdown, testthat, roxygenize, foreach, doMC
+Suggests: knitr, rmarkdown, testthat, roxygen2, foreach, doMC
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

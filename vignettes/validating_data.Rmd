@@ -34,7 +34,8 @@ Resources are dynamically retreived from the server, and will be dependent on yo
 instance you wish to validate your data against. The `organisationUnit` should be the UID of the operating unit which you are validating data for. 
 You can find your operating units UID by looking at the code list for your country, and finding the first entry (corresponding to level 3) of the code list. These variables are used through-out the scripts, so it is useful to define them globally in your local script which will actually perform the validation of the data. 
 
-Most operations in this library require you to have an internet connection and a valid account on a DATIM server. 
+You will need an internet connection the first time you use the `datimvalidation` library. Meta-data will be retrieved from the DATIM server, using
+your username and password, and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. 
 
 
 ```{r eval=FALSE}
