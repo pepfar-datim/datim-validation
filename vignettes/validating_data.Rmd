@@ -91,6 +91,16 @@ invalid_des<-getInvalidDataElements(data = d,
 write.csv(invalid_des,file="invalid_des.csv")
 ```
 
+
+DATIM has strict controls on the type of data which can be imported into each data element. For instance, it is not possible to import a data value specified as "11/02/2015" as a date, because DATIM expects the date to be specified in "YYYY-MM-DD" format. In this case, the data would need to be transmitted as "2015-11-02". Using the `checkValueTypeCompliance` function, it is possible to validate a given data payload against the value types which have been specified for each data element. As an example, we can simply invoked the `checkValueTypeCompliance`, with our parsed data (`d`), along with the URL, username and password. Only data which does not 
+meet the specified value type will be returned.
+
+```{r eval=FALSE}
+#Check for indicator / disagg combinations and save the result as a CSV file
+bad_data_values<-checkValueTypeCompliance(d,base.url,username,password)
+```
+
+
 Finally, we can perform a check of the validation rules as defined in DATIM on the data payload.
 
 The `validateData` function is capable of performing the validation operation in parallel. To activate this, you must inform R of the number of parallel
