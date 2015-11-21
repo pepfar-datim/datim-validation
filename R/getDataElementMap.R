@@ -9,7 +9,7 @@
 #' 
 
 getDataElementMap<-function(base.url,username,password) {
-  url<-URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName,name&paging=false"))
+  url<-URLencode(paste0(base.url,"api/dataElements?fields=id,code,shortName,name,numberType,optionSet[id]&paging=false"))
   sig<-digest::digest(url,algo='md5', serialize = FALSE)
   des<-getCachedObject(sig)
   if (is.null(des)){
