@@ -13,7 +13,7 @@ checkValueTypeCompliance<-function(d,base.url,username,password) {
   
   #There are differences in the API version, so first, we need to know which version we are dealing with
   url<-URLencode(paste0(base.url,"api/system/info"))
-  r<-httr::GET(url,authenticate(username,password),timeout(60))
+  r<-httr::GET(url,authenticate(username,password),httr::timeout(60))
   r<- httr::content(r, "text")
   sysInfo<-jsonlite::fromJSON(r,flatten=TRUE)
   version<-as.numeric(strsplit(sysInfo$version,"\\.")[[1]][2])
