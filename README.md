@@ -9,6 +9,7 @@ install.packages('devtools')
 Once you have installed that, you can proceed to try and load the data-validation package with
 
 ```R
+library(devtools)
 install_github("jason-p-pickering/datim-validation")
 ```
 
