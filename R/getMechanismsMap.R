@@ -24,7 +24,7 @@ getMechanismsMap<-function(base.url,username,password,organisationUnit,endDate="
   mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
 	mechs$categoryOptionCombos<-unlist(mechs$categoryOptionCombos)
 	#Convert the dates to booleans
-	mechs$isValid<-( as.Date(mechs$endDate,"%Y-%m-%d") >= as.Date( mechs$endDate,"%Y-%m-%d" ) )
+	mechs$isValid<-( as.Date(mechs$endDate,"%Y-%m-%d") >= as.Date( endDate,"%Y-%m-%d" ) )
 	#Save the file for cache loading next time
   saveCachedObject(mechs,sig) }
   return( mechs ) } 
