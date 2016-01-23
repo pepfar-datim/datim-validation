@@ -35,5 +35,5 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   matches$formula<-paste(matches$ls,matches$op,matches$rs) 
   matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) 
   if (return_violations_only == TRUE) {matches<-matches[!matches$result,]}
-  return(matches)
+  return(plyr::colwise(as.character)(matches))
 }
