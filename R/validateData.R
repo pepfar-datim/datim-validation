@@ -35,11 +35,10 @@ validation.results$attributeOptionCombo<-remapMechs(validation.results$attribute
 
 if ( return_violations_only == TRUE & !is.na(return_violations_only) ) {
   
-return( validation.results[!validation.results$result,] )
-
-} else { 
+validation.results<-validation.results[!validation.results$result,] }
+validation.results<-plyr::colwise(as.character)(validation.results)
   
 return  (validation.results )
 
-}
+
 }
