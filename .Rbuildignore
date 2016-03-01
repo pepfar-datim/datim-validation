@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+.travis.yml
+NEWS.md
+gh-pages/
+man-roxygen/
+Makefile
+.git/
+.editorconfig
