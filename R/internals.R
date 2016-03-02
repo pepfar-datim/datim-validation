@@ -40,7 +40,7 @@ saveCachedObject<-function(toCache,sig,wd=paste0(getwd(),"/.R_Cache/")) {
 #' @param wd Cache directory path. By default, working directory + ".R_Cache"
 #' @return Nothing.
 #'
-clearCache<-function(wd=paste0(getwd(),"/.R_Cache/")){
-resp<-readline(paste("Are you sure you want to delete the directory ", wd,"[Y/N]"))
-if (resp == "Y" ) { unlink(wd) } else { print("Aborting.") }
+clearCache<-function(cache_dir=paste0(getwd(),"/.R_Cache/")){
+resp<-readline(paste("Are you sure you want to delete the directory ", cache_dir,"[Y/N]"))
+if (resp == "Y" ) { unlink(cache_dir,recursive=TRUE) } else { print("Aborting.") }
 }
