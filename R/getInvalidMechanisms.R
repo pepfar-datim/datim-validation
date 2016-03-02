@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which checks the validity of mechanisms
 #' 
 #' @description checkValidMechanisms should be supplied a d2Parser compliant data frame along with the operating unit UID

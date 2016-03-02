@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which checks that the organisation unit provided is valid
 #' 
 #' @description Validates that the supplied UID is a valid operating unit UID

@@ -1,3 +1,4 @@
+#' @export
 #' @title Utility function for evaluating validation rules 
 #' 
 #' @description evaluationValidation will accept a vector of combis (data elements.category optioncombinations) and values

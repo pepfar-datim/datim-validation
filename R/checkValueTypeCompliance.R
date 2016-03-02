@@ -1,3 +1,4 @@
+#' @export
 #' @title checkValueTypeCompliancep(d,base.url,username,passowrd)
 #' 
 #' @description Utility function of extraction of data element ids, codes, shortName and names

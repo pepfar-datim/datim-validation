@@ -1,3 +1,4 @@
+#' @export
 #' @title General purpose parsing function for different formats of DHIS2 data
 #' 
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
@@ -28,7 +29,7 @@ header<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptio
 
 if ( type == "xml") {
   d<-XML::xmlTreeParse(filename,useInternalNode=TRUE)
-  data<-data.frame(t( sapply(XML::xmlRoot(d) [ "dataValue" ], XML::xmlAttrs) ) )
+  data<-data.frame(t( sapply(XML::xmlRoot(d) [ "dataValue" ], XML::xmlAttrs) ),row.names=seq(1,XML::xmlSize(XML::xmlRoot(d))) )
   #Get all the attributes specified in the 
   data.attrs<-XML::xmlAttrs(XML::xmlRoot(d))
   #Period
