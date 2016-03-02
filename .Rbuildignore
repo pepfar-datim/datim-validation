@@ -7,3 +7,5 @@ man-roxygen/
 Makefile
 .git/
 .editorconfig
+.idea
+.idea/.name

@@ -44,26 +44,26 @@ getDataElementsOrgunits<-function(base.url,username,password,organisationUnit,da
   return(des_ous) }
 
 
-getInvalidOrgunitsFromDatasets<-function(data,username,password,organisationUnit,dataset) {
+getInvalidOrgunitsFromDatasets<-function(data,base.url,username,password,organisationUnit,dataset) {
   des_ous<-getDataElementsOrgunits(base.url,username,password,organisationUnit,dataset)
   return(subset(data,!(orgUnit %in% des_ous$ous)))
   }
 
-getInvalidDataElementFromDatasets<-function(data,username,password,organisationUnit,dataset) {
+getInvalidDataElementFromDatasets<-function(data,base.url,username,password,organisationUnit,dataset) {
   des_ous<-getDataElementsOrgunits(base.url,username,password,organisationUnit,dataset)
   subset(data,!(dataElement %in% des_ous$des))
 }
 
-getInvalidDatasetMembers<-function(data,username,password,organisationUnit,dataset){
+getInvalidDatasetMembers<-function(data,base.url,username,password,organisationUnit,dataset){
   foo=data.frame(dataElement=character(),period=character(),orgUnit=character(),categoryOptionCombo=character(),
                  attributeOptionCombo=character(),value=character(),type=character())
-  ous<-getInvalidOrgunitsFromDatasets(data,username,password,organisationUnit,dataset)
+  ous<-getInvalidOrgunitsFromDatasets(data,base.url,username,password,organisationUnit,dataset)
   if (!is.null(ous) & nrow(ous) > 0) {
     ous$type="ORGUNIT DOES NOT EXIST IN DATASETS"
     foo<-rbind(foo,ous)
   }
   
-  des<-getInvalidDataElementFromDatasets(data,username,password,organisationUnit,dataset)
+  des<-getInvalidDataElementFromDatasets(data,base.url,username,password,organisationUnit,dataset)
   if (!is.null(des) & nrow(des) > 0) {
     des$type="DATAELEMENT DOES NOT EXIST IN DATASETS"
     foo<-rbind(foo,des)
