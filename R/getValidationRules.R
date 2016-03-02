@@ -18,7 +18,8 @@ if (is.null(vr)) {
 expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 #Get a copy of the metadata from the server
 r<-httr::GET(url, httr::authenticate(username,password),httr::timeout(60))
-vr.xml<- httr::content(r, "parsed","application/xml")
+r<- httr::content(r, "text")
+vr.xml<-XML::xmlRoot(XML::xmlTreeParse(r))
 vr.names<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule","o"),XML::xmlGetAttr,"name")
 vr.op<-sapply(XML::getNodeSet(vr.xml,"//o:operator","o"),XML::xmlValue)
 vr.ls<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule/o:leftSide/o:expression","o"),XML::xmlValue)

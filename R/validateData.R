@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which checks the of a DATIM data payload agaist define validation rules
 #' 
 #' @description validateData should be supplied a d2Parser compliant data frame.
