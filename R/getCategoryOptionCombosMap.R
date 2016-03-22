@@ -1,3 +1,4 @@
+#' @export
 #' @title getCategoryOptionCombosMap(base.url,username,passowrd)
 #' 
 #' @description Utility function to produce a map of category option combos

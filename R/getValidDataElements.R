@@ -1,3 +1,4 @@
+#' @export
 #' @title getInvalidDataElements(data,base.url,username,password,dataset)
 #' 
 #' @description Utility function to produce a data frame of valid data elements based on current

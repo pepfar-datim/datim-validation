@@ -1,3 +1,4 @@
+#' @export
 #' @title getInvalidDatasetMembers(data,base.url,username,password,organisationUnit,dataset)
 #' 
 #' @description Returns a data frame of invalid data element /organisation unit combinations

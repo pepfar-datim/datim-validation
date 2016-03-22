@@ -1,3 +1,4 @@
+#' @export
 #' @title getMechanismsMap(base.url,username,passowrd)
 #' 
 #' @description Utility function to produce a map of valid mechanisms

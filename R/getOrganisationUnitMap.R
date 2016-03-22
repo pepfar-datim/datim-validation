@@ -1,3 +1,4 @@
+#' @export
 #' @title getOrganisationUnitMap(base.url,username,passowrd,operatingUnit)
 #' 
 #' @description Utility function to produce a map of valid mechanisms

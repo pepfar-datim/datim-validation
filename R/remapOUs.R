@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which converts mechanism codes, names or shortnames to to another class of identifiers
 #' 
 #' @description remapOUs should be supplied a vector of organisation Units (names,codes or shortnames)

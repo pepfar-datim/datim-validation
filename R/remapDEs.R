@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which converts data element codes, names or shortnames to another class of identifiers
 #' 
 #' @description remapDes should be supplied a vector of data elements (names,codes or shortnames)

@@ -1,3 +1,4 @@
+#' @export
 #' @title Utility function for getting validation rules dynamically from DHIS2 and parsing them into a data frame
 #' 
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data

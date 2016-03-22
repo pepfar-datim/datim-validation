@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which converts category option combos from identifier to another 
 #' 
 #' @description remapCategoryOptionCombos should be supplied a vector of category option combos (names,codes,uids or shortnames)

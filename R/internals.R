@@ -1,4 +1,4 @@
-
+#' @export
 #' @title getCachedObject(sig,wd)
 #'
 #' @description Internal utility function to retreive a cached object.
@@ -16,7 +16,7 @@ getCachedObject<-function(sig,wd=paste0(getwd(),"/.R_Cache/")) {
   
 }
 
-
+#' @export
 #' @title saveCachedObject(toCache,sig,wd)
 #'
 #' @description Internal utility function to save an object to the cache.
@@ -33,6 +33,7 @@ saveCachedObject<-function(toCache,sig,wd=paste0(getwd(),"/.R_Cache/")) {
   saveRDS(toCache,file=paste0(wd,sig))
 }
 
+#' @export
 #' @title clearCache(wd)
 #'
 #' @description Internal utility function to clear the object cache.

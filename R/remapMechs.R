@@ -1,3 +1,4 @@
+#' @export
 #' @title Function which converts mechanism codes, names or shortnames to UIDs
 #' 
 #' @description remapMechs should be supplied a vector of data mechanisms (names,codes or shortnames)

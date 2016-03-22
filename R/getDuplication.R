@@ -1,3 +1,4 @@
+#' @export
 #' @title getExactDuplicates(data)
 #' 
 #' @description Returns a listing of exact duplicates by dataElement,period,orgunit,categoryOptionCombo and attributeOptionCombo
@@ -11,7 +12,7 @@ getExactDuplicates<-function(d){
   return(foo)
 }
 
-
+#' @export
 #' @title getPureDuplicates(data)
 #' 
 #' @description Returns a listing of pure duplicates by dataElement,period,orgunit,categoryOptionCombo. 
@@ -26,7 +27,7 @@ getPureDuplicates<-function(d){
   return(foo)
 }
 
-
+#' @export
 #' @title getCrosswalkMap(base.url,username,password)
 #' 
 #' @description Utility function which returns a map of DSD / TA data elements UIDs
@@ -50,6 +51,7 @@ getCrosswalkMap<-function(base.url,username,password){
     }
 }
 
+#' @export
 #' @title getCrosswalkMechanism(base.url,username,password)
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
@@ -70,6 +72,7 @@ getCrosswalkMechanism<-function(base.url,username,password){
   
 }
 
+#' @export
 #' @title getCrossWalkDuplicates(d,base.url,username,password)
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
