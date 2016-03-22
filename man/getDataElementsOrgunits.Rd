@@ -2,9 +2,10 @@
 % Please edit documentation in R/getInvalidDatasetMembers.R
 \name{getDataElementsOrgunits}
 \alias{getDataElementsOrgunits}
-\title{getInvalidDatasetMembers(data,base.url,username,password,organisationUnit,dataset)}
+\title{getDataElementsOrgunits(data,base.url,username,password,organisationUnit,datasets)}
 \usage{
-getDataElementsOrgunits(base.url, username, password, organisationUnit, dataset)
+getDataElementsOrgunits(base.url, username, password, organisationUnit,
+  datasets = NA)
 }
 \arguments{
 \item{base.url}{Location of the server}
@@ -15,13 +16,12 @@ getDataElementsOrgunits(base.url, username, password, organisationUnit, dataset)
 
 \item{organisationUnit}{Should be the UID of the organisation unit ancestor.}
 
-\item{dataset}{Should be a description of the dataset group, such as "MER Results", "MER Targets" or "SIMS"}
+\item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }
 \value{
 Returns a data frame of "data" which was submitted along for a reason of why the data is considered to be invalid.
 }
 \description{
-Returns a data frame of invalid data element /organisation unit combinations
-based on the current data set assignments
+Returns a map of lists consisting of data elements and orgunits for a dataset (or datasets) for a given organisationUnit
 }
 

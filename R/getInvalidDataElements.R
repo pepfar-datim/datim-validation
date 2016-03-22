@@ -8,13 +8,13 @@
 #' @param base.url Location of the server
 #' @param username Server username
 #' @param password Server password
-#' @param dataset Should be a description of the dataset group, such as "MER Results"
+#' @param dataset Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
 #' @return Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data 
 #'
-getInvalidDataElements<-function(data,base.url,username,password,dataset){
+getInvalidDataElements<-function(data,base.url,username,password,datasets=NA){
   
-  des<-getValidDataElements(base.url,username,password,dataset)
+  des<-getValidDataElements(base.url,username,password,datasets)
   des$combi<-paste0(des$dataelementuid,".",des$categoryoptioncombouid)
   des<-plyr::colwise(as.character)(des)
   

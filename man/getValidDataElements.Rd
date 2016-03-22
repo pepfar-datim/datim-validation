@@ -4,7 +4,7 @@
 \alias{getValidDataElements}
 \title{getInvalidDataElements(data,base.url,username,password,dataset)}
 \usage{
-getValidDataElements(base.url, username, password, dataset = NA)
+getValidDataElements(base.url, username, password, datasets = NA)
 }
 \arguments{
 \item{base.url}{Location of the server}
@@ -13,7 +13,7 @@ getValidDataElements(base.url, username, password, dataset = NA)
 
 \item{password}{Server password}
 
-\item{dataset}{Should be the UID of the dataset which you are validating.}
+\item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }
 \value{
 Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"

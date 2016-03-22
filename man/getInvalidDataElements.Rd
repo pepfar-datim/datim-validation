@@ -4,7 +4,7 @@
 \alias{getInvalidDataElements}
 \title{getInvalidDataElements(data,base.url,username,password,dataset)}
 \usage{
-getInvalidDataElements(data, base.url, username, password, dataset)
+getInvalidDataElements(data, base.url, username, password, datasets = NA)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
@@ -15,7 +15,7 @@ getInvalidDataElements(data, base.url, username, password, dataset)
 
 \item{password}{Server password}
 
-\item{dataset}{Should be a description of the dataset group, such as "MER Results"}
+\item{dataset}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"

@@ -13,12 +13,11 @@ vignette: >
 ##Using the datimvalidation package
 
 DATIM is based on the [DHIS2](https://dhis2.org/) software, and is therefore capable of importing different types of data, including
-CSV, JSON and XML formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
+CSV, JSON, XML as well as ADX formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
 the various formats which DHIS2 supports and the syntax of each of these. The DHIS2 development team has provided extensive technical
 documetnation on the various formats [here](https://www.dhis2.org/doc/snapshot/en/developer/html/ch01s11.html). 
 
-In addition to the general DHIS2 documentation, a series of DATIM specific resources is available [here](https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange). These guides provide more detailed information on the data import process into DATIM, including
-code listings for indicators and disaggregations. 
+In addition to the general DHIS2 documentation, a series of DATIM specific resources is available [here](https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange). These guides provide more detailed information on the data import process into DATIM, including code listings for indicators and disaggregations. 
 
 DATIM has strict controls on data imports, including the requirement to adhere to the numerous validation rules of the system. To help
 data importers to prepare their files for submission to DATIM, this R package has been created to help validate the data prior to importing
@@ -37,6 +36,12 @@ You can find your operating units UID by looking at the code list for your count
 You will need an internet connection the first time you use the `datimvalidation` library. Meta-data will be retrieved from the DATIM server, using
 your username and password, and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. 
 
+You can clear the cache at any time by issuing the command 
+```{r eval=FALSE}
+clearCache()
+```
+
+and answering "Y" to the prompt.
 
 ```{r eval=FALSE}
 require(datimvalidation)
@@ -78,6 +83,11 @@ Now, we have loaded our data payload into the object `d`, we can proceed to vali
 getInvalidMechanisms(d,base.url,username,password,organisationUnit)
 ```
 
+Depending on the type of payload you are submitting, there may be multiple data sets which are bundled together. There are strict controls in DATIM regarding the submission of data elements to given organisaion units. For instance, community data should not be submitted for facility sites, and vice versa. It can be difficult to determine for a given data payload whether certain data should be submitted for a given 
+
+```{r eval=FALSE}
+
+
 
 Next, we can check the indicators and disaggregations for validity against the current dataset form definitions. A data frame of indicator/disagg combinations will be returned. The 'dataset' paramater should be either the exact name of the dataset, or a grouping name like "MER Results" of 
 
@@ -87,9 +97,11 @@ Next, we can check the indicators and disaggregations for validity against the c
 invalid_des<-getInvalidDataElements(data = d,
                                     base.url = base.url,
                                     username=username,
-                                    password=password,dataset="MER Results")
+                                    password=password,datasets)
 write.csv(invalid_des,file="invalid_des.csv")
 ```
+
+We can also check to determine if there are any mismatches 
 
 
 DATIM has strict controls on the type of data which can be imported into each data element. For instance, it is not possible to import a data value specified as "11/02/2015" as a date, because DATIM expects the date to be specified in "YYYY-MM-DD" format. In this case, the data would need to be transmitted as "2015-11-02". Using the `checkValueTypeCompliance` function, it is possible to validate a given data payload against the value types which have been specified for each data element. As an example, we can simply invoked the `checkValueTypeCompliance`, with our parsed data (`d`), along with the URL, username and password. Only data which does not 

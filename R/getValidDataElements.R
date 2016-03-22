@@ -7,32 +7,32 @@
 #' @param base.url Location of the server
 #' @param username Server username
 #' @param password Server password
-#' @param dataset Should be the UID of the dataset which you are validating. 
+#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
 #' @return Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"
 #' 
 #'
-getValidDataElements<-function(base.url,username,password,dataset=NA) {
+getValidDataElements<-function(base.url,username,password,datasets=NA) {
 allDataSets<-getDataSets(base.url,username,password)
-dataSetValid<-dataset %in% allDataSets$id 
-while(!dataSetValid ) {
-  dataset<-selectDataset(base.url,username,password)
-  if (length(dataset) == 0) {break;}
-  dataSetValid <- Reduce("&",dataset %in% allDataSets$id) }
-if (length(dataset) == 0 || is.na(dataset)) { stop("Invalid dataset"); }
+dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
+while(!dataSetValid || is.na(dataSetValid) ) {
+  datasets<-selectDataset(base.url,username,password)
+  if (length(datasets) == 0) {break;}
+  dataSetValid <- Reduce("&",datasets %in% allDataSets$id) }
+if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
 #Valid data set assignments against the dataset
 #Custom forms
 des.all<-data.frame(dataset=character(),dataelement=character(),shortname=character(),code=character(),dataelementuid=character(),
                 categoryoptioncombo=character(),categoryoptioncombouid=character())
 
-for (i in 1:length(dataset)) {
+for (i in 1:length(datasets)) {
 
-if ( allDataSets[allDataSets$id==dataset[i],"formType"] == "CUSTOM" ) {
+if ( allDataSets[allDataSets$id==datasets[i],"formType"] == "CUSTOM" ) {
 
-  url<-URLencode(paste0(base.url,"api/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",dataset[i],"&paging=false")) 
+  url<-URLencode(paste0(base.url,"api/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",datasets[i],"&paging=false")) 
 
-} else { url<-URLencode(paste0(base.url,"api/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",dataset[i],"&paging=false")) }
+} else { url<-URLencode(paste0(base.url,"api/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",datasets[i],"&paging=false")) }
 
-sig<-digest::digest(paste0(url,dataset[i]),algo='md5', serialize = FALSE)
+sig<-digest::digest(paste0(url,datasets[i]),algo='md5', serialize = FALSE)
 des<-getCachedObject(sig)
 
 if (is.null(des)) {
