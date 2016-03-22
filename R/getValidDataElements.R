@@ -16,18 +16,23 @@ allDataSets<-getDataSets(base.url,username,password)
 dataSetValid<-dataset %in% allDataSets$id 
 while(!dataSetValid ) {
   dataset<-selectDataset(base.url,username,password)
-  if (dataset == "") {break;}
-  dataSetValid<- dataset %in% allDataSets$id }
-if (dataset == "" || is.na(dataset)) { stop("Invalid dataset"); }
+  if (length(dataset) == 0) {break;}
+  dataSetValid <- Reduce("&",dataset %in% allDataSets$id) }
+if (length(dataset) == 0 || is.na(dataset)) { stop("Invalid dataset"); }
 #Valid data set assignments against the dataset
 #Custom forms
-if ( allDataSets[allDataSets$id==dataset,"formType"] == "CUSTOM" ) {
+des.all<-data.frame(dataset=character(),dataelement=character(),shortname=character(),code=character(),dataelementuid=character(),
+                categoryoptioncombo=character(),categoryoptioncombouid=character())
 
-  url<-URLencode(paste0(base.url,"api/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",dataset,"&paging=false")) 
+for (i in 1:length(dataset)) {
 
-} else { url<-URLencode(paste0(base.url,"api/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",dataset,"&paging=false")) }
+if ( allDataSets[allDataSets$id==dataset[i],"formType"] == "CUSTOM" ) {
 
-sig<-digest::digest(paste0(url,dataset),algo='md5', serialize = FALSE)
+  url<-URLencode(paste0(base.url,"api/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",dataset[i],"&paging=false")) 
+
+} else { url<-URLencode(paste0(base.url,"api/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",dataset[i],"&paging=false")) }
+
+sig<-digest::digest(paste0(url,dataset[i]),algo='md5', serialize = FALSE)
 des<-getCachedObject(sig)
 
 if (is.null(des)) {
@@ -38,11 +43,16 @@ if (is.null(des)) {
     des<-as.data.frame(r$rows)
     foo<-r$header
     names(des)<-as.character(foo$name)
-    saveCachedObject(des,sig)}
+    saveCachedObject(des,sig)
+    if (nrow(des) > 0) { des.all<-rbind(des.all,des) }
+  }
   
   else {print("Could not get valid data elements"); stop()}
+  
+} else {  if (nrow(des) > 0) { des.all<-rbind(des.all,des) } }
+
 }
 
+return(des.all)
 
- return(des)
 }
