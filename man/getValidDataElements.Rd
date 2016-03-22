@@ -4,7 +4,7 @@
 \alias{getValidDataElements}
 \title{getInvalidDataElements(data,base.url,username,password,dataset)}
 \usage{
-getValidDataElements(base.url, username, password, dataset)
+getValidDataElements(base.url, username, password, dataset = NA)
 }
 \arguments{
 \item{base.url}{Location of the server}
@@ -13,11 +13,10 @@ getValidDataElements(base.url, username, password, dataset)
 
 \item{password}{Server password}
 
-\item{dataset}{Should be a description of the dataset group, such as "MER Results", "MER Targets" or "SIMS"}
+\item{dataset}{Should be the UID of the dataset which you are validating.}
 }
 \value{
-Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"
-of invalid data elements which are present the the data
+Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"
 }
 \description{
 Utility function to produce a data frame of valid data elements based on current
