@@ -10,7 +10,7 @@
 #' @return Returns a data frame  of 
 #'
 getDataSets<-function(base.url,username,password) {
-  url<-URLencode(paste0(base.url,"api/dataSets?fields=name,id"))
+  url<-URLencode(paste0(base.url,"api/dataSets?fields=name,id,formType"))
   sig<-digest::digest(paste0(url),algo='md5', serialize = FALSE)
   ds<-getCachedObject(sig)
   if (is.null(ds)) {
