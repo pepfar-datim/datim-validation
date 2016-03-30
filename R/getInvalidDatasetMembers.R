@@ -50,7 +50,8 @@ getDataElementsOrgunits<-function(base.url,username,password,organisationUnit,da
 #' 
 #' @description Returns a data frame of invalid data element /organisation unit combinations
 #' based on the current data set assignments
-#'
+#' 
+#' @param data D2 compliant data frame
 #' @param base.url Location of the server
 #' @param username Server username
 #' @param password Server password
@@ -68,6 +69,7 @@ getInvalidOrgunitsFromDatasets<-function(data,base.url,username,password,organis
 #' @description Returns a data frame of invalid data element /organisation unit combinations
 #' based on the current data set assignments
 #'
+#' @param data D2 compliant data frame
 #' @param base.url Location of the server
 #' @param username Server username
 #' @param password Server password

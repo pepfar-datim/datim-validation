@@ -53,6 +53,5 @@ if (is.null(des)) {
 
 }
 
-return(des.all)
-
+return( plyr::colwise(as.character)(des.all) )
 }

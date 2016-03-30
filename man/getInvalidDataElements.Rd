@@ -15,7 +15,7 @@ getInvalidDataElements(data, base.url, username, password, datasets = NA)
 
 \item{password}{Server password}
 
-\item{dataset}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
+\item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"

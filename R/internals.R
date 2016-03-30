@@ -7,8 +7,6 @@
 #' @param wd By default, the .R_Cache directory in the working directory.
 #' @return Returns a cahced data object.
 #'
-
-
 getCachedObject<-function(sig,wd=paste0(getwd(),"/.R_Cache/")) {
   isCached<-file.exists(file=paste0(getwd(),"/.R_Cache/",sig))
   if (isCached) { foo<-readRDS(file=paste0(getwd(),"/.R_Cache/",sig));return(foo) }
@@ -38,7 +36,7 @@ saveCachedObject<-function(toCache,sig,wd=paste0(getwd(),"/.R_Cache/")) {
 #'
 #' @description Internal utility function to clear the object cache.
 #'
-#' @param wd Cache directory path. By default, working directory + ".R_Cache"
+#' @param cache_dir Cache directory path. By default, working directory + ".R_Cache"
 #' @return Nothing.
 #'
 clearCache<-function(cache_dir=paste0(getwd(),"/.R_Cache/")){

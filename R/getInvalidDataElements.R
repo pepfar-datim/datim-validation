@@ -8,7 +8,7 @@
 #' @param base.url Location of the server
 #' @param username Server username
 #' @param password Server password
-#' @param dataset Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
+#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
 #' @return Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data 
 #'

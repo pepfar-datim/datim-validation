@@ -7,7 +7,7 @@
 clearCache(cache_dir = paste0(getwd(), "/.R_Cache/"))
 }
 \arguments{
-\item{wd}{Cache directory path. By default, working directory + ".R_Cache"}
+\item{cache_dir}{Cache directory path. By default, working directory + ".R_Cache"}
 }
 \value{
 Nothing.
