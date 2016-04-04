@@ -15,13 +15,14 @@
 #' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this paramater is "id", 
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
+#' @param Include any invalidData (NA or missing) data from the parsed file?
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #' 
 #' @note function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",
 #' username="admin",password="district",organisationUnit="Ab12345678",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
 #' Note that all values will be returned as characters.
 #'
-d2Parser<-function(filename,type,base.url,username,password,organisationUnit,dataElementIdScheme,orgUnitIdScheme,idScheme) {
+d2Parser<-function(filename,type,base.url,username,password,organisationUnit,dataElementIdScheme,orgUnitIdScheme,idScheme,invalidData=FALSE) {
   valid_type <- type %in% c("xml","json","csv")
 if (!valid_type) { print("ERROR:Not a valid file type"); stop()} 
 
@@ -69,5 +70,13 @@ data$attributeOptionCombo<-remapMechs(data$attributeOptionCombo,base.url,usernam
 #Data frame needs to be completely flattened to characters
 data<-plyr::colwise(as.character)(data)
 
+invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })}  
+invalid.rows<-apply(apply(data,2,invalid),1,sum) == 0 #Anything which is not complete.
+if (sum(invalid.rows) != nrow(data)) {
+  foo<-nrow(data)-sum(invalid.rows)
+  msg<-paste(foo, " rows are missing data. Please check your file to ensure its correct.")
+  warning(msg) }
+if (!invalidData){ data<-data[invalid.rows,]}
 return(data)
+
 }
