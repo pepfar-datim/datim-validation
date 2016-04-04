@@ -5,7 +5,7 @@
 \title{General purpose parsing function for different formats of DHIS2 data}
 \usage{
 d2Parser(filename, type, base.url, username, password, organisationUnit,
-  dataElementIdScheme, orgUnitIdScheme, idScheme)
+  dataElementIdScheme, orgUnitIdScheme, idScheme, invalidData = FALSE)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid DHIS2 import file}
@@ -27,6 +27,8 @@ then the Data elements are assumed to be already specififed as UIDs.}
 then the organisation units are assumed to be already specififed as UIDs}
 
 \item{idScheme}{Remapping scheme for category option combos}
+
+\item{Include}{any invalidData (NA or missing) data from the parsed file?}
 }
 \value{
 Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"

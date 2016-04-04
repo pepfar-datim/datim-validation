@@ -74,7 +74,7 @@ invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })
 invalid.rows<-apply(apply(data,2,invalid),1,sum) == 0 #Anything which is not complete.
 if (sum(invalid.rows) != nrow(data)) {
   foo<-nrow(data)-sum(invalid.rows)
-  msg<-paste(foo, " rows are missing data. Please check your file to ensure its correct.")
+  msg<-paste(foo, " rows are incomplete. Please check your file to ensure its correct.")
   warning(msg) }
 if (!invalidData){ data<-data[invalid.rows,]}
 return(data)
