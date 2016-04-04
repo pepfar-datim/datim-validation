@@ -12,9 +12,16 @@
 #' @return Returns a data frame with validation rule results.
 validateData<-function(data,base.url,username,password,return_violations_only=TRUE,parallel=TRUE) {
 
+if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
+  
+invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })}  
 data$value<-as.numeric(data$value) #This may throw a warning 
-foo<-apply(apply(data,2,is.na),1,sum) == 0 #Filter out anything which is not complete.
-data<-data[foo,]
+invalid.rows<-apply(apply(data,2,invalid),1,sum) == 0 #Filter out anything which is not complete.
+if (sum(invalid.rows) != nrow(data)) {
+  foo<-nrow(data)-sum(invalid.rows)
+  msg<-paste(foo, " rows are invalid. Please check your data.")
+  warning(msg)}
+data<-data[invalid.rows,]
 #Calculate the totals  and append to the data frame
 data$combi<-paste0(data$dataElement,".",data$categoryOptionCombo)
 data.totals<-aggregate(value ~ dataElement + period + orgUnit + attributeOptionCombo, data = data,FUN=sum)
