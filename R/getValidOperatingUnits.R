@@ -1,3 +1,4 @@
+#' @export
 #' @title Utility function which provides a list of valid operating units
 #' 
 #' @description Utility function which provides a list of valid operating units
