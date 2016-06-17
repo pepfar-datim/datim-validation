@@ -18,7 +18,8 @@ getInvalidMechanisms <-
   function(data,base.url,username,password,organisationUnit,validityDate='2016-09-29') {
     if ( class(data) != "data.frame" ) {print("Data must be a valid data frame"); stop() }
     mechs<-getMechanismsMap(base.url,username,password,organisationUnit)
-    invalidMechs<-mechs[!mechs$isValid & mechs$categoryOptionCombo %in% unique(data$attributeOptionCombo),]
+    foo<-unique(data$attributeOptionCombo)
+    invalidMechs<-foo[!(foo %in% mechs$categoryOptionCombos) | (foo %in% mechs[!mechs$isValid,c("categoryOptionCombos")])]
     return ( invalidMechs )
   }
 
