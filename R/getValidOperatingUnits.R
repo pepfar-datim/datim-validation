@@ -10,10 +10,9 @@
 #' @note
 #' getValidOperatingUnits("https://www.datim.org","admin","district")
 #' will remap organisation units specified as codes to UIDs
-getValidOperatingUnits<-function(base.url,username,password) {
-  
-  r<-httr::GET(URLencode(paste0(base.url,"api/organisationUnits?level=3&fields=id,name&paging=false")),
-         httr::authenticate(username,password),httr::timeout(60))
+getValidOperatingUnits<-function() {
+  base.url <- getOption("baseurl")
+  r<-httr::GET(URLencode(paste0(base.url,"api/organisationUnits?level=3&fields=id,name&paging=false")),httr::timeout(60))
   if (r$status == 200 ) {
   r<- httr::content(r, "text")
   sites<-jsonlite::fromJSON(r,flatten=TRUE)$organisationUnits
