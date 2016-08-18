@@ -11,8 +11,8 @@
 #' @note
 #' remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
 #' will remap organisation units specified as codes to UIDs
-checkOperatingUnit<-function(organisationUnit,base.url,username,password) {
-      sites<-getValidOperatingUnits(base.url,username,password)
+checkOperatingUnit<-function(organisationUnit) {
+      sites<-getValidOperatingUnits()
       isValid<-organisationUnit %in% sites$id
       return(isValid)       
 }
