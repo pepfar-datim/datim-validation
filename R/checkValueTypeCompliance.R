@@ -4,14 +4,15 @@
 #' @description Utility function of extraction of data element ids, codes, shortName and names
 #'
 #' @param d Parsed data frame
-#' @param base.url Location of the server
-#' @param username Server username
-#' @param password Server password
-#' @return Returns a parsed data frame plus the valueType
+#' @param secrets Location of DHIS secrets file
+#' @return Returns a data frame of invalid data only
 #' 
-checkValueTypeCompliance<-function(d,base.url,username,password) {
+checkValueTypeCompliance<-function(d,secrets) {
   
-  
+  s <- loadSecrets(secrets)
+  base.url <- s$dhis$baseurl
+  username <- s$dhis$username
+  password <- s$dhis$password
   #There are differences in the API version, so first, we need to know which version we are dealing with
   url<-URLencode(paste0(base.url,"api/system/info"))
   r<-httr::GET(url,httr::authenticate(username,password),httr::timeout(60))
@@ -57,12 +58,14 @@ checkValueTypeCompliance<-function(d,base.url,username,password) {
   d<-merge(d,des,by.x="dataElement",by.y="id")
   
   #Support only valueTypes with a regex
-  foo<-d[!is.na(d$regex) & is.na(d$optionSet.id),]
+  foo<-d[!is.na(d$regex),]
   foo$isValidRegex<-mapply(grepl,foo$regex,as.character(foo$value))
   
-  #ToDo: Validation of option sets
-  #TODO: Validation of zero significance
+  #ToDo: Stricter validation of options
+  
+  #Validation of zero significance
+  foo$zeroSignificance<-!foo$zeroIsSignificant & foo$value == "0"
   #TODO: Remap data elements and so forth
-  return(foo[foo$isValidRegex==FALSE,c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value","valueType")])
+  return(foo[( foo$isValidRegex==FALSE | !foo$zeroSignificance == FALSE ),])
 
 }

@@ -4,19 +4,15 @@
 \alias{checkValueTypeCompliance}
 \title{checkValueTypeCompliancep(d,base.url,username,passowrd)}
 \usage{
-checkValueTypeCompliance(d, base.url, username, password)
+checkValueTypeCompliance(d, secrets)
 }
 \arguments{
 \item{d}{Parsed data frame}
 
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+\item{secrets}{Location of DHIS secrets file}
 }
 \value{
-Returns a parsed data frame plus the valueType
+Returns a data frame of invalid data only
 }
 \description{
 Utility function of extraction of data element ids, codes, shortName and names
