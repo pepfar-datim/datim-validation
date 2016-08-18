@@ -4,7 +4,7 @@
 \alias{getMechanismsMap}
 \title{getMechanismsMap(base.url,username,passowrd)}
 \usage{
-getMechanismsMap(base.url, username, password, organisationUnit,
+getMechanismsMap(base.url, username, password, organisationUnit = NA,
   endDate = "2016-09-29")
 }
 \arguments{
@@ -14,7 +14,7 @@ getMechanismsMap(base.url, username, password, organisationUnit,
 
 \item{password}{Server password}
 
-\item{organisationUnit}{Operating unit in question specified as a UID}
+\item{organisationUnit}{Operating unit in question specified as a UID. If not specified, assume to be Global.}
 
 \item{endDate}{Date which marks the mechanism as valid. Must be specified in a valid R date syntax}
 }

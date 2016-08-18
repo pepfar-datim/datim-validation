@@ -15,7 +15,8 @@
 #' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this paramater is "id", 
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
-#' @param Include any invalidData (NA or missing) data from the parsed file?
+#' @param invalidData Exclude any (NA or missing) data from the parsed file?
+#' 
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #' 
 #' @note function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",

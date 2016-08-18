@@ -28,7 +28,7 @@ then the organisation units are assumed to be already specififed as UIDs}
 
 \item{idScheme}{Remapping scheme for category option combos}
 
-\item{Include}{any invalidData (NA or missing) data from the parsed file?}
+\item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 }
 \value{
 Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
