@@ -12,14 +12,14 @@
 #'
 #'
 #' @param secrets Location of the secrets file
-#' @return Returns a secrets object.
+#' @return Returns a boolean value indicating that the secrets file is valid by accessing /api/me
 #'
 loadSecrets<-function(secrets) {
   s<-jsonlite::fromJSON(secrets)
-  url<-URLencode(paste0(s$dhis$baseurl,"api/me"))
+  options("baseurl"= s$dhis$baseurl )
+  options("secrets"=secrets)
+  url<-URLencode( URL = paste0(getOption("baseurl"),"api/me") )
   r<-httr::GET(url ,
                httr::authenticate(s$dhis$username,s$dhis$password),
                httr::timeout(60))
-  assertthat::assert_that(r$status == 200L)
-  return(s) 
-}
+  assertthat::assert_that(r$status == 200L) }
