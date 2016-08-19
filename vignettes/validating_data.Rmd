@@ -29,11 +29,15 @@ In order to get started, you will need to have installed the R package "datimval
 
 The `datavalidation` library provides an abstraction layer to the validation routines and to loading the payload into your R session. To get started, you should create a "secrets" file, which will contain
 the authentication information required to access DATIM. You should keep this in a secure place on your
-computer, as it will require storing the username and password you access DATIM as a file on your disk.
-You can find your operating units UID by looking at the code list for your country, and finding the first entry (corresponding to level 3) of the code list. These variables are used through-out the scripts, so it is useful to define them globally in your local script which will actually perform the validation of the data. 
+computer, as it will require storing the username and password you access DATIM as a file on your disk. If you are unable to securely store this file, you can also enter your username and password through a dialog. A secrets file should a single JSON file which looks like this
+
+
+You can find your operating units UID by looking at the code list for your country, and finding the first entry (corresponding to level 3) of the code list. 
 
 You will need an internet connection the first time you use the `datimvalidation` library. Meta-data will be retrieved from the DATIM server, using
-your username and password, and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. 
+your username and password, and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. This helps to speed up operations, but the cache may become
+invalid with respect to the metadata in the system over time, so its probably a good idea to clear when there 
+have been changes to the metadata (and at least once a day).
 
 You can clear the cache at any time by issuing the command 
 ```{r eval=FALSE}
@@ -41,13 +45,10 @@ clearCache()
 ```
 
 and answering "Y" to the prompt.
-
+To get started, we will load the package and provide a location of our secrets file
 ```{r eval=FALSE}
 require(datimvalidation)
-username = "admin"
-password ="district"
-base.url = "https://www.datim.org/"
-organisationUnit = "FETQ6OmnsKB"
+secrets<-"/home/littebobbytables/.secrets/datim.json"
 ```
 
 First, we will check that the supplied organisation unit, which should be the UID of the operating unit you are checking, is valid.

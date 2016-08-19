@@ -21,7 +21,7 @@ loadSecrets<-function(secrets=NA) {
     assertthat::assert_that(file.exists(secrets))
     s<-jsonlite::fromJSON(secrets) 
     } else {
-      
+      #TODO: Need to deal with command line interfaces
       getPass<-function(){  
         
         
