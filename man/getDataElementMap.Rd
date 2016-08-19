@@ -2,16 +2,9 @@
 % Please edit documentation in R/getDataElementMap.R
 \name{getDataElementMap}
 \alias{getDataElementMap}
-\title{getDataElementMap(base.url,username,passowrd)}
+\title{getDataElementMap()}
 \usage{
-getDataElementMap(base.url, username, password)
-}
-\arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+getDataElementMap()
 }
 \value{
 Returns a data frame  of id,code,shortName and name

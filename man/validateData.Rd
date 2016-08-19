@@ -4,17 +4,13 @@
 \alias{validateData}
 \title{Function which checks the of a DATIM data payload agaist define validation rules}
 \usage{
-validateData(data, base.url, username, password,
-  return_violations_only = TRUE, parallel = TRUE)
+validateData(data, organisationUnit = NA, return_violations_only = TRUE,
+  parallel = TRUE)
 }
 \arguments{
 \item{data}{d2Parser data frame}
 
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+\item{organisationUnit}{Organisation unit. Defaults to the user organisation unit if not supplied.}
 
 \item{return_violations_only}{Paramater to return only violations or all validation rule evalualtions.}
 

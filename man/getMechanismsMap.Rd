@@ -2,18 +2,11 @@
 % Please edit documentation in R/getMechanismsMap.R
 \name{getMechanismsMap}
 \alias{getMechanismsMap}
-\title{getMechanismsMap(base.url,username,passowrd)}
+\title{getMechanismsMap()}
 \usage{
-getMechanismsMap(base.url, username, password, organisationUnit = NA,
-  endDate = "2016-09-29")
+getMechanismsMap(organisationUnit = NA, endDate = "2016-09-29")
 }
 \arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
-
 \item{organisationUnit}{Operating unit in question specified as a UID. If not specified, assume to be Global.}
 
 \item{endDate}{Date which marks the mechanism as valid. Must be specified in a valid R date syntax}

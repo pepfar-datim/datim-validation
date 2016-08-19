@@ -2,16 +2,9 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrosswalkMap}
 \alias{getCrosswalkMap}
-\title{getCrosswalkMap(base.url,username,password)}
+\title{getCrosswalkMap()}
 \usage{
-getCrosswalkMap(base.url, username, password)
-}
-\arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+getCrosswalkMap()
 }
 \value{
 Returns a map of DSD/TA data element UIDs.

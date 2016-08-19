@@ -2,18 +2,12 @@
 % Please edit documentation in R/getInvalidDataElements.R
 \name{getInvalidDataElements}
 \alias{getInvalidDataElements}
-\title{getInvalidDataElements(data,base.url,username,password,dataset)}
+\title{getInvalidDataElements(data,dataset)}
 \usage{
-getInvalidDataElements(data, base.url, username, password, datasets = NA)
+getInvalidDataElements(data, datasets = NA)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
-
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
 
 \item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }

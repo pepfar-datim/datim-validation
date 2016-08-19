@@ -2,14 +2,12 @@
 % Please edit documentation in R/checkValueTypeCompliance.R
 \name{checkValueTypeCompliance}
 \alias{checkValueTypeCompliance}
-\title{checkValueTypeCompliancep(d,base.url,username,passowrd)}
+\title{checkValueTypeCompliancep(d)}
 \usage{
-checkValueTypeCompliance(d, secrets)
+checkValueTypeCompliance(d)
 }
 \arguments{
-\item{d}{Parsed data frame}
-
-\item{secrets}{Location of DHIS secrets file}
+\item{d}{A D2Parsed data frame}
 }
 \value{
 Returns a data frame of invalid data only

@@ -4,16 +4,11 @@
 \alias{checkOperatingUnit}
 \title{Function which checks that the organisation unit provided is valid}
 \usage{
-checkOperatingUnit(organisationUnit, base.url, username, password)
+checkOperatingUnit(organisationUnit = NA)
 }
 \arguments{
-\item{organisationUnit}{Should be a UID of an operating unit}
-
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+\item{organisationUnit}{Should be a UID of an operating unit. Defaults to the 
+user organisation unit if not supplied}
 }
 \value{
 Returns a vector of organisation unit UIDs

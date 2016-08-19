@@ -4,17 +4,10 @@
 \alias{remapDEs}
 \title{Function which converts data element codes, names or shortnames to another class of identifiers}
 \usage{
-remapDEs(des_in, base.url, username, password, mode_in = "code",
-  mode_out = "id")
+remapDEs(des_in, mode_in = "code", mode_out = "id")
 }
 \arguments{
 \item{des_in}{A vector of data element identifiers (codes, names or shortNames)}
-
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
 
 \item{mode_in}{Should be one of code, name or shortName. This is the class we are mapping from to UIDs.}
 

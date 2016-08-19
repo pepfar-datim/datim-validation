@@ -4,14 +4,7 @@
 \alias{getValidationRules}
 \title{Utility function for getting validation rules dynamically from DHIS2 and parsing them into a data frame}
 \usage{
-getValidationRules(base.url, username, password)
-}
-\arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+getValidationRules()
 }
 \value{
 Returns a data frame of validation rules consisting of name, left and right side operators and strategies

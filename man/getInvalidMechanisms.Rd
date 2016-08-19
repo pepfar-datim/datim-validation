@@ -4,21 +4,14 @@
 \alias{getInvalidMechanisms}
 \title{Function which checks the validity of mechanisms}
 \usage{
-getInvalidMechanisms(data, base.url, username, password, organisationUnit,
-  validityDate = "2016-09-29")
+getInvalidMechanisms(data, organisationUnit = NA, endDate = NA)
 }
 \arguments{
 \item{data}{d2Parser data frame}
 
-\item{base.url}{Location of the server}
+\item{organisationUnit}{UID of the operating unit.Defaults to the user organisation unit if left blank}
 
-\item{username}{Server username}
-
-\item{password}{Server password}
-
-\item{organisationUnit}{UID of the operating unit}
-
-\item{validityDate}{Indicates the validity date, as a valid R-parsable date string}
+\item{endDate}{Indicates the end date of the period of interest.}
 }
 \value{
 Returns a vector of non-valid mechanisms

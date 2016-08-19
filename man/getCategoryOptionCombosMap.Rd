@@ -2,16 +2,9 @@
 % Please edit documentation in R/getCategoryOptionCombosMap.R
 \name{getCategoryOptionCombosMap}
 \alias{getCategoryOptionCombosMap}
-\title{getCategoryOptionCombosMap(base.url,username,passowrd)}
+\title{getCategoryOptionCombosMap()}
 \usage{
-getCategoryOptionCombosMap(base.url, username, password)
-}
-\arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+getCategoryOptionCombosMap()
 }
 \value{
 Returns a data frame  of code,name,id and shortName of all categoryOptionCombos

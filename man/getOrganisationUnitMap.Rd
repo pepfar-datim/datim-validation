@@ -2,17 +2,11 @@
 % Please edit documentation in R/getOrganisationUnitMap.R
 \name{getOrganisationUnitMap}
 \alias{getOrganisationUnitMap}
-\title{getOrganisationUnitMap(base.url,username,passowrd,operatingUnit)}
+\title{getOrganisationUnitMap(operatingUnit)}
 \usage{
-getOrganisationUnitMap(base.url, username, password, organisationUnit)
+getOrganisationUnitMap(organisationUnit = NA)
 }
 \arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
-
 \item{organisationUnit}{of question specified as a UID}
 }
 \value{

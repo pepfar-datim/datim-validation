@@ -2,16 +2,9 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrosswalkMechanism}
 \alias{getCrosswalkMechanism}
-\title{getCrosswalkMechanism(base.url,username,password)}
+\title{getCrosswalkMechanism()}
 \usage{
-getCrosswalkMechanism(base.url, username, password)
-}
-\arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+getCrosswalkMechanism()
 }
 \value{
 Returns a UID of the crosswalk de-duplication mechanism

@@ -4,21 +4,18 @@
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
 #' frame which can be used in subsequent DATIM validation routines
 #'
-#' @param base.url Location of the server
-#' @param username Server username
-#' @param password Server password
 #' @return Returns a data frame of validation rules consisting of name, left and right side operators and strategies
 
-getValidationRules<-function(base.url,username,password) {
+getValidationRules<-function() {
   
-url<-paste0(base.url,"api/validationRules.xml?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
+url<-paste0(getOption("baseurl"),"api/validationRules.xml?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
 sig<-digest::digest(url,algo='md5', serialize = FALSE)
 vr<-getCachedObject(sig)
 
 if (is.null(vr)) {
 expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 #Get a copy of the metadata from the server
-r<-httr::GET(url, httr::authenticate(username,password),httr::timeout(60))
+r<-httr::GET(url,httr::timeout(60))
 r<- httr::content(r, "text")
 vr.xml<-XML::xmlRoot(XML::xmlTreeParse(r))
 vr.names<-sapply(XML::getNodeSet(vr.xml,"//o:validationRule","o"),XML::xmlGetAttr,"name")

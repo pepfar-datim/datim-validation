@@ -4,16 +4,13 @@
 \alias{d2Parser}
 \title{General purpose parsing function for different formats of DHIS2 data}
 \usage{
-d2Parser(filename, type, secrets, organisationUnit = NA,
-  dataElementIdScheme = "id", orgUnitIdScheme = "id", idScheme = "id",
-  invalidData = FALSE)
+d2Parser(filename, type, organisationUnit = NA, dataElementIdScheme = "id",
+  orgUnitIdScheme = "id", idScheme = "id", invalidData = FALSE)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid DHIS2 import file}
 
 \item{type}{Type of the file. Should be either xml, json or csv}
-
-\item{secrets}{Location of the secrets file}
 
 \item{organisationUnit}{Organisation unit UID of the operating unit. If left blank, assumed to be global.}
 
@@ -35,8 +32,7 @@ d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into
 frame which can be used in subsequent DATIM validation routines
 }
 \note{
-function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",
-username="admin",password="district",organisationUnit="Ab12345678",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
+function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
 Note that all values will be returned as characters.
 }
 

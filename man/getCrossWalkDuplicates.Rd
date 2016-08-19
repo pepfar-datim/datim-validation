@@ -2,18 +2,12 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrossWalkDuplicates}
 \alias{getCrossWalkDuplicates}
-\title{getCrossWalkDuplicates(d,base.url,username,password)}
+\title{getCrossWalkDuplicates(d)}
 \usage{
-getCrossWalkDuplicates(d, base.url, username, password)
+getCrossWalkDuplicates(d)
 }
 \arguments{
 \item{d}{A d2 parsed data frame of data.}
-
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
 }
 \value{
 Returns a data frame of all crosswalk mechanism values, along with default de-deudplication adjustments.

@@ -5,19 +5,18 @@
 #' along with the other required paramaters. It will return a vector of non-valid mechanism UIDs which were part of the data
 #'
 #' @param data d2Parser data frame
-#' @param base.url Location of the server
-#' @param username Server username
-#' @param password Server password
-#' @param organisationUnit UID of the operating unit
-#' @param validityDate Indicates the validity date, as a valid R-parsable date string
+#' @param organisationUnit UID of the operating unit.Defaults to the user organisation unit if left blank
+#' @param endDate Indicates the end date of the period of interest. 
 #' @return Returns a vector of non-valid mechanisms
 #' @note
 #' getValidMechanisms(foo,"https://www.datim.org","admin","district","Ab12345678")
 #' will remap organisation units specified as codes to UIDs
 getInvalidMechanisms <-
-  function(data,base.url,username,password,organisationUnit,validityDate='2016-09-29') {
+  function(data,organisationUnit=NA,endDate=NA) {
     if ( class(data) != "data.frame" ) {print("Data must be a valid data frame"); stop() }
-    mechs<-getMechanismsMap(base.url,username,password,organisationUnit)
+    if ( is.na(endDate) ) {print("A valid endDate must be supplied"); stop() }
+    if (is.na(organisationUnit)) {organisationUnit = getOption("organisationUnit")}
+    mechs<-getMechanismsMap(organisationUnit,endDate)
     foo<-unique(data$attributeOptionCombo)
     invalidMechs<-foo[!(foo %in% mechs$categoryOptionCombos) | (foo %in% mechs[!mechs$isValid,c("categoryOptionCombos")])]
     return ( invalidMechs )

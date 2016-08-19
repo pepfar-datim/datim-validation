@@ -4,17 +4,10 @@
 \alias{remapCategoryOptionCombos}
 \title{Function which converts category option combos from identifier to another}
 \usage{
-remapCategoryOptionCombos(cocs_in, base.url, username, password, mode_in,
-  mode_out)
+remapCategoryOptionCombos(cocs_in, mode_in, mode_out)
 }
 \arguments{
 \item{cocs_in}{A vector of category option combinations}
-
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
 
 \item{mode_in}{Should be one of code, name,shortName or id. This is the class we are mapping from.}
 

@@ -4,14 +4,7 @@
 \alias{getValidOperatingUnits}
 \title{Utility function which provides a list of valid operating units}
 \usage{
-getValidOperatingUnits(base.url, username, password)
-}
-\arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
+getValidOperatingUnits()
 }
 \value{
 Returns a data frame of operating units and their UIDs

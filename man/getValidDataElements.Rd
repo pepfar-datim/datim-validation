@@ -2,17 +2,11 @@
 % Please edit documentation in R/getValidDataElements.R
 \name{getValidDataElements}
 \alias{getValidDataElements}
-\title{getInvalidDataElements(data,base.url,username,password,dataset)}
+\title{getInvalidDataElements(datasets)}
 \usage{
-getValidDataElements(base.url, username, password, datasets = NA)
+getValidDataElements(datasets = NA)
 }
 \arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
-
 \item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }
 \value{

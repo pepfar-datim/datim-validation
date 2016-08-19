@@ -6,7 +6,6 @@
 #'
 #' @param filename Location of the payload to be imported. Should be a valid DHIS2 import file
 #' @param type Type of the file. Should be either xml, json or csv
-#' @param secrets Location of the secrets file
 #' @param organisationUnit Organisation unit UID of the operating unit. If left blank, assumed to be global.
 #' @param dataElementIdScheme Should be one of either code, name, shortName or id. If this paramater is "id",
 #' then the Data elements are assumed to be already specififed as UIDs.
@@ -17,27 +16,22 @@
 #'
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
-#' @note function(filename="/home/me/foo.xml",type="xml",base.url="https://www.datim.org/",
-#' username="admin",password="district",organisationUnit="Ab12345678",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
+#' @note function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
 #' Note that all values will be returned as characters.
 #'
 d2Parser <-
   function(filename,
            type,
-           secrets,
            organisationUnit = NA,
            dataElementIdScheme = "id",
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE) {
     
-    s <- loadSecrets(secrets)
-    base.url <- s$dhis$baseurl
-    username <- s$dhis$username
-    password <- s$dhis$password
     
     if (is.na(organisationUnit)) {
-      organisationUnit <- "ybg3MO3hcf4"
+      #Get the users organisation unit if not specified 
+      organisationUnit <- getOption("organisationUnit")
     }
     
     valid_type <- type %in% c("xml", "json", "csv")
@@ -112,9 +106,6 @@ d2Parser <-
       data$orgUnit <-
         remapOUs(
           data$orgUnit,
-          base.url,
-          username,
-          password,
           organisationUnit,
           mode_in = orgUnitIdScheme,
           mode_out = "id"
@@ -124,9 +115,6 @@ d2Parser <-
       data$dataElement <-
         remapDEs(
           data$dataElement,
-          base.url,
-          username,
-          password,
           mode_in = dataElementIdScheme,
           mode_out = "id"
         )
@@ -134,9 +122,6 @@ d2Parser <-
     if (idScheme != "id") {
       data$attributeOptionCombo <- remapMechs(
         data$attributeOptionCombo,
-        base.url,
-        username,
-        password,
         organisationUnit = organisationUnit,
         mode_in = idScheme,
         mode_out = "id"

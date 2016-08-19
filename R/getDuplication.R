@@ -28,18 +28,15 @@ getPureDuplicates<-function(d){
 }
 
 #' @export
-#' @title getCrosswalkMap(base.url,username,password)
+#' @title getCrosswalkMap()
 #' 
 #' @description Utility function which returns a map of DSD / TA data elements UIDs
-#' 
-#' @param base.url Location of the server
-#' @param username Server username
-#' @param password Server password
+#'
 #' @return Returns a map of DSD/TA data element UIDs.
 #' 
-getCrosswalkMap<-function(base.url,username,password){
+getCrosswalkMap<-function(){
   
-  r<-httr::GET(URLencode(paste0(base.url,"api/sqlViews/UTlIicJBZFg/data.json&paging=false")), httr::authenticate(username,password),httr::timeout(60))
+  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/sqlViews/UTlIicJBZFg/data.json&paging=false")),httr::timeout(60))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     r<-jsonlite::fromJSON(r,flatten=TRUE)
@@ -52,17 +49,14 @@ getCrosswalkMap<-function(base.url,username,password){
 }
 
 #' @export
-#' @title getCrosswalkMechanism(base.url,username,password)
+#' @title getCrosswalkMechanism()
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
 #' 
-#' @param base.url Location of the server
-#' @param username Server username
-#' @param password Server password
 #' @return Returns a UID of the crosswalk de-duplication mechanism
 #' 
-getCrosswalkMechanism<-function(base.url,username,password){
-  r<-httr::GET(URLencode(paste0(base.url,"api/categoryOptionCombos?filter=name:like:00001")), httr::authenticate(username,password),httr::timeout(60))
+getCrosswalkMechanism<-function(){
+  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/categoryOptionCombos?filter=name:like:00001")),httr::timeout(60))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     r<-jsonlite::fromJSON(r,flatten=TRUE)
@@ -73,18 +67,15 @@ getCrosswalkMechanism<-function(base.url,username,password){
 }
 
 #' @export
-#' @title getCrossWalkDuplicates(d,base.url,username,password)
+#' @title getCrossWalkDuplicates(d)
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
 #' 
 #' @param d A d2 parsed data frame of data.
-#' @param base.url Location of the server
-#' @param username Server username
-#' @param password Server password
 #' @return Returns a data frame of all crosswalk mechanism values, along with default de-deudplication adjustments.
 #'
-getCrossWalkDuplicates<-function(d,base.url,username,password){
-  cw<-getCrosswalkMap(base.url,username,password)
+getCrossWalkDuplicates<-function(d){
+  cw<-getCrosswalkMap()
   #TA values
   ta<-merge(d,cw,by.x="dataElement",by.y="ta_de_uid")
   ta<-ta[ , -which(names(ta) %in% c("dsd_de_uid"))]
@@ -101,7 +92,7 @@ getCrossWalkDuplicates<-function(d,base.url,username,password){
   dupes<-merge(ta,dsd,by=c("dataElement","period","orgUnit","categoryOptionCombo"))
   
   dsd.ta.agg<-function(x,y) { ifelse(y >= x,-x,-y) }
-  dupes$crosswalk_mechanism<-getCrosswalkMechanism(base.url,username,password)
+  dupes$crosswalk_mechanism<-getCrosswalkMechanism()
   dupes$auto_resolve<-mapply(dsd.ta.agg,as.numeric(dupes$value_dsd),as.numeric(dupes$value_ta))
   return(dupes)
 }

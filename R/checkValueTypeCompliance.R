@@ -1,21 +1,16 @@
 #' @export
-#' @title checkValueTypeCompliancep(d,base.url,username,passowrd)
+#' @title checkValueTypeCompliancep(d)
 #' 
 #' @description Utility function of extraction of data element ids, codes, shortName and names
 #'
-#' @param d Parsed data frame
-#' @param secrets Location of DHIS secrets file
+#' @param d A D2Parsed data frame
 #' @return Returns a data frame of invalid data only
 #' 
-checkValueTypeCompliance<-function(d,secrets) {
+checkValueTypeCompliance<-function(d) {
   
-  s <- loadSecrets(secrets)
-  base.url <- s$dhis$baseurl
-  username <- s$dhis$username
-  password <- s$dhis$password
   #There are differences in the API version, so first, we need to know which version we are dealing with
-  url<-URLencode(paste0(base.url,"api/system/info"))
-  r<-httr::GET(url,httr::authenticate(username,password),httr::timeout(60))
+  url<-URLencode(paste0(getOption("baseurl"),"api/system/info"))
+  r<-httr::GET(url,httr::timeout(60))
   r<- httr::content(r, "text")
   sysInfo<-jsonlite::fromJSON(r,flatten=TRUE)
   version<-as.numeric(strsplit(sysInfo$version,"\\.")[[1]][2])
@@ -37,12 +32,12 @@ checkValueTypeCompliance<-function(d,secrets) {
   
   patterns<-reshape2::melt(patterns)
   names(patterns)<-c("regex","valueType")    
-  url<-URLencode(paste0(base.url,"api/dataElements?fields=id,valueType,optionSet[id],zeroIsSignificant&paging=false"))  
+  url<-URLencode(paste0(getOption("baseurl"),"api/dataElements?fields=id,valueType,optionSet[id],zeroIsSignificant&paging=false"))  
   sig<-digest::digest(url,algo='md5', serialize = FALSE)
   des<-getCachedObject(sig)
   
   if (is.null(des)){
-    r<-httr::GET(url, httr::authenticate(username,password),httr::timeout(60))
+    r<-httr::GET(url,httr::timeout(60))
     if (r$status == 200L ){
       r<- httr::content(r, "text")
       des<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]

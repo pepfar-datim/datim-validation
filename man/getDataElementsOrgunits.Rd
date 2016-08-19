@@ -2,19 +2,12 @@
 % Please edit documentation in R/getInvalidDatasetMembers.R
 \name{getDataElementsOrgunits}
 \alias{getDataElementsOrgunits}
-\title{getDataElementsOrgunits(data,base.url,username,password,organisationUnit,datasets)}
+\title{getDataElementsOrgunits(data,organisationUnit,datasets)}
 \usage{
-getDataElementsOrgunits(base.url, username, password, organisationUnit,
-  datasets = NA)
+getDataElementsOrgunits(organisationUnit = NA, datasets = NA)
 }
 \arguments{
-\item{base.url}{Location of the server}
-
-\item{username}{Server username}
-
-\item{password}{Server password}
-
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor.}
+\item{organisationUnit}{Organisation unit. Defaults to user organisation unit if not supplied explicitly.}
 
 \item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 }
