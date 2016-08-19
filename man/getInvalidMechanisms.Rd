@@ -4,14 +4,14 @@
 \alias{getInvalidMechanisms}
 \title{Function which checks the validity of mechanisms}
 \usage{
-getInvalidMechanisms(data, organisationUnit = NA, endDate = NA)
+getInvalidMechanisms(data, organisationUnit = NA, ISO = NA)
 }
 \arguments{
 \item{data}{d2Parser data frame}
 
 \item{organisationUnit}{UID of the operating unit.Defaults to the user organisation unit if left blank}
 
-\item{endDate}{Indicates the end date of the period of interest.}
+\item{ISO}{String which identifies the period, such as 2016Q1 or 2016Q2}
 }
 \value{
 Returns a vector of non-valid mechanisms

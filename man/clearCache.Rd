@@ -4,10 +4,12 @@
 \alias{clearCache}
 \title{clearCache(wd)}
 \usage{
-clearCache(cache_dir = paste0(getwd(), "/.R_Cache/"))
+clearCache(cache_dir = paste0(getwd(), "/.R_Cache/"), force = NA)
 }
 \arguments{
 \item{cache_dir}{Cache directory path. By default, working directory + ".R_Cache"}
+
+\item{force}{Boolean (default FALSE) to clear cache without asking the user}
 }
 \value{
 Nothing.

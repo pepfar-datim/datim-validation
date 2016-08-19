@@ -4,15 +4,16 @@
 \alias{getMechanismsMap}
 \title{getMechanismsMap()}
 \usage{
-getMechanismsMap(organisationUnit = NA, endDate = "2016-09-29")
+getMechanismsMap(organisationUnit = NA, ISO = NA)
 }
 \arguments{
 \item{organisationUnit}{Operating unit in question specified as a UID. If not specified, assume to be Global.}
 
-\item{endDate}{Date which marks the mechanism as valid. Must be specified in a valid R date syntax}
+\item{ISO}{String which identifies the period, such as 2016Q1 or 2016Q2}
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)
+If the ISO period is supplied, isValid will indicate whether the mechanism is valid for the given period
 }
 \description{
 Utility function to produce a map of valid mechanisms
