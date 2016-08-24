@@ -12,7 +12,7 @@ getCachedObject(sig, wd = paste0(getwd(), "/.R_Cache/"))
 \item{wd}{By default, the .R_Cache directory in the working directory.}
 }
 \value{
-Returns a cahced data object.
+Returns a cached data object.
 }
 \description{
 Internal utility function to retreive a cached object.

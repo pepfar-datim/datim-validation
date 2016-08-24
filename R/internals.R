@@ -1,18 +1,38 @@
 #' @export
+#' @title isValidCachedObject(sig,wd)
+#'
+#' @description Internal utility function to determine whether a cached object is stale.
+#' If its stale, it will be removed.
+#'
+#' @param sig MD5 hash of the objects URL reference
+#' @param wd By default, the .R_Cache directory in the working directory.
+#' @return If the file exists and is not stale, returns TRUE, otherwise FALSE.
+#'
+isValidCachedObject <- function(x){
+  is_there<-file.exists(x)
+  #Age of files in days
+  is_fresh<-as.numeric(Sys.time()-file.info(x)$mtime ) < getOption("maxCacheAge")
+  return (is_there && is_fresh)
+}
+
+#' @export
 #' @title getCachedObject(sig,wd)
 #'
 #' @description Internal utility function to retreive a cached object.
 #'
 #' @param sig MD5 hash of the objects URL reference
 #' @param wd By default, the .R_Cache directory in the working directory.
-#' @return Returns a cahced data object.
+#' @return Returns a cached data object.
 #'
 getCachedObject<-function(sig,wd=paste0(getwd(),"/.R_Cache/")) {
-  isCached<-file.exists(file=paste0(getwd(),"/.R_Cache/",sig))
-  if (isCached) { foo<-readRDS(file=paste0(getwd(),"/.R_Cache/",sig));return(foo) }
-  else {return(NULL)}
-  
+  this_obj = file=paste0(getwd(),"/.R_Cache/",sig)
+  if (isValidCachedObject(this_obj)) { return(readRDS(this_obj)) }
+  else {
+    unlink(this_obj)
+    return(NULL)}
 }
+
+
 
 #' @export
 #' @title saveCachedObject(toCache,sig,wd)

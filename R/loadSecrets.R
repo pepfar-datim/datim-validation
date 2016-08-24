@@ -58,4 +58,6 @@ loadSecrets<-function(secrets=NA) {
   r<- httr::content(r, "text")
   me<-jsonlite::fromJSON(r)
   options("organisationUnit" = me$organisationUnits$id)
+  #Set the cache time out in days
+  options("maxCacheAge" = 7)
   }
