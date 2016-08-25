@@ -75,7 +75,7 @@ d2Parser <-
     if (type == "csv") {
       data <- read.csv(filename)
       #Get number of columns and assign the header
-      names(data)[ncol(data)]<-header[ncol(data)] 
+      names(data)[1:ncol(data)]<-header[1:ncol(data)] 
       #Data element, period and orgunit must be specified
       missing_required<-!complete.cases(data[,1:3])
       if (sum(missing_required) > 0) { 
