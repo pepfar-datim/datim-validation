@@ -4,8 +4,7 @@
 #' @description Internal utility function to determine whether a cached object is stale.
 #' If its stale, it will be removed.
 #'
-#' @param sig MD5 hash of the objects URL reference
-#' @param wd By default, the .R_Cache directory in the working directory.
+#' @param x file path of the cached object
 #' @return If the file exists and is not stale, returns TRUE, otherwise FALSE.
 #'
 isValidCachedObject <- function(x){
