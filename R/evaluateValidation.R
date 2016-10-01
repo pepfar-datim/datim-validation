@@ -17,23 +17,23 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   matches <-vr[ grepl(paste(this.des,collapse="|"), vr$ls) | grepl(paste(this.des,collapse="|"), vr$rs),]
   
   #Get the matching rules
-  matches$ls<-plyr::mapvalues(matches$ls,combis,values,warn_missing=FALSE)
-  matches$ls.count<-stringr::str_count(matches$ls,expression.pattern)
+  matches$leftSide.expression<-plyr::mapvalues(matches$leftSide.expression,combis,values,warn_missing=FALSE)
+  matches$ls.count<-stringr::str_count(matches$leftSide.expression,expression.pattern)
   
-  matches$rs<-plyr::mapvalues(matches$rs,combis,values,warn_missing=FALSE)
-  matches$rs.count<-stringr::str_count(matches$rs,expression.pattern)
+  matches$rightSide.expression<-plyr::mapvalues(matches$rightSide.expression,combis,values,warn_missing=FALSE)
+  matches$rs.count<-stringr::str_count(matches$rightSide.expression,expression.pattern)
   #Remove rules which should not be evaluated
-  foo<-!(matches$ls.strategy == "SKIP_IF_ANY_VALUE_MISSING" & (matches$ls.ops != matches$ls.count)) | 
-    !(matches$rs.strategy == "SKIP_IF_ANY_VALUE_MISSING" & (matches$rs.ops != matches$rs.count)) | 
-    matches$rs.strategy == "NEVER_SKIP" |
-    matches$ls.strategy == "NEVER_SKIP"
+  foo<-!(matches$leftSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" & (matches$ls.ops != matches$ls.count)) | 
+    !(matches$rightSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" & (matches$rs.ops != matches$rs.count)) | 
+    matches$rightSide.missingValueStrategy== "NEVER_SKIP" |
+    matches$leftSide.missingValueStrategy == "NEVER_SKIP"
   matches<-matches[foo,]
   
-  matches$ls<-gsub(expression.pattern,"0",matches$ls) 
-  matches$rs<-gsub(expression.pattern,"0",matches$rs)
-  matches$ls<-sapply(matches$ls,function(x) {eval(parse(text=x))})
-  matches$rs<-sapply(matches$rs,function(x) {eval(parse(text=x))})
-  matches$formula<-paste(matches$ls,matches$op,matches$rs) 
+  matches$leftSide.expression<-gsub(expression.pattern,"0",matches$leftSide.expression) 
+  matches$rightSide.expression<-gsub(expression.pattern,"0",matches$rightSide.expression)
+  matches$leftSide.expression<-sapply(matches$leftSide.expression,function(x) {eval(parse(text=x))})
+  matches$rightSide.expression<-sapply(matches$rightSide.expression,function(x) {eval(parse(text=x))})
+  matches$formula<-paste(matches$leftSide.expression,matches$operator,matches$rightSide.expression) 
   matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) 
   if (return_violations_only == TRUE) {matches<-matches[!matches$result,]}
   return(matches)
