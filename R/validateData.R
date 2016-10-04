@@ -15,7 +15,7 @@ if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
 invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })}  
 data$value<-as.numeric(data$value) #This may throw a warning 
 invalid.rows<-apply(apply(data,2,invalid),1,sum) == 0 #Filter out anything which is not complete.
-if (sum(invalid.rows) != nrow(data)) {
+if (sum(invalid.rows) != sum(invalid.rows)) {
   foo<-nrow(data)-sum(invalid.rows)
   msg<-paste(foo, " rows are invalid. Please check your data.")
   warning(msg)}
@@ -30,9 +30,11 @@ data<-rbind(data,data.totals)
 
 #Check the data against the validation rules
 vr<-getValidationRules()
-if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) { warning("Parallel execution is not be supported on Windows") }
+if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) { warning("Parallel execution is not supported on Windows") }
 
-validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only),.parallel=parallel)
+validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), 
+                                function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only),
+                                .parallel=parallel)
 
 #Remap the OUs
 validation.results$orgUnit<-remapOUs(validation.results$orgUnit,organisationUnit,mode_in="id",mode_out="code")

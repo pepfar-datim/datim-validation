@@ -49,6 +49,7 @@ To get started, we will load the package and provide a location of our secrets f
 ```{r eval=FALSE}
 require(datimvalidation)
 secrets<-"/home/littebobbytables/.secrets/datim.json"
+loadSecrets(secrets)
 ```
 
 

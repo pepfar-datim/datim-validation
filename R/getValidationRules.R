@@ -8,7 +8,7 @@
 
 getValidationRules<-function() {
   
-url<-paste0(base.url,"api/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
+url<-paste0(getOption("baseurl"),"api/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
 sig<-digest::digest(url,algo='md5', serialize = FALSE)
 vr<-getCachedObject(sig)
 
@@ -19,8 +19,8 @@ r<-httr::GET(url,httr::timeout(60))
 r<- httr::content(r, "text")
 vr<-jsonlite::fromJSON(r,flatten=TRUE)$validationRules
 #Static predefined map of operators
-op.map<-data.frame(x=c("greater_than_or_equal_to","greater_than","equal_to","not_equal_to","less_than_or_equal_to","less_than"),
-                   y=c(">=",">","==","!=","<=","<"),stringsAsFactors=F)
+op.map<-data.frame(x=c("greater_than_or_equal_to","greater_than","equal_to","not_equal_to","less_than_or_equal_to","less_than","exclusive_pair","compulsory_pair"),
+                   y=c(">=",">","==","!=","<=","<","|","&"),stringsAsFactors=F)
 #Strategies
 strat.map<-data.frame(x=c("SKIP_IF_ANY_VALUE_MISSING","SKIP_IF_ALL_VALUES_MISSING","NEVER_SKIP"))
 #Remap the operators
@@ -29,10 +29,8 @@ vr$operator<-plyr::mapvalues(vr$operator,op.map$x,op.map$y,warn_missing=FALSE)
 vr$leftSide.expression<-gsub("[#{}]","",vr$leftSide.expression)
 vr$rightSide.expression<-gsub("[#{}]","",vr$rightSide.expression)
 #Count the left and right side operators
-vr$rs.ops<-stringr::str_count(vr$rightSide.expression,expression.pattern)
-vr$ls.ops<-stringr::str_count(vr$leftSide.expression,expression.pattern)
-#vr$rs.ops<-ifelse(vr$rs.ops==0,1,vr$rs.ops)
-#vr$ls.ops<-ifelse(vr$ls.ops==0,1,vr$ls.ops)
+vr$rightSide.ops<-stringr::str_count(vr$rightSide.expression,expression.pattern)
+vr$leftSide.ops<-stringr::str_count(vr$leftSide.expression,expression.pattern)
 saveCachedObject(vr,sig)
   }
 
