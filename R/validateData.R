@@ -27,26 +27,41 @@ data.totals$combi<-data.totals$dataElement
 data.totals$categoryOptionCombo<-NA
 data.totals<-data.totals[,names(data)]
 data<-rbind(data,data.totals)
+#Empty data frame
+validation.results_empty<-data.frame(name=character(),id=character(),
+                                     periodType=character(),description=character(),
+                                     operator=character(),leftSide.expression=numeric(),
+                                     leftSide.missingValueStrategy=character(),rightSide.expression=numeric(),
+                                     rightSide.ops=integer(),leftSide.ops=integer(),leftSide.count=integer(),
+                                     rightSide.count=integer(),formula=character(),result=logical())
+validation.results<-validation.results_empty
 
 #Check the data against the validation rules
 vr<-getValidationRules()
-if (Sys.info()[['sysname']] == "Windows" & parallel == TRUE ) { warning("Parallel execution is not supported on Windows") }
-
-validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit), 
-                                function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only),
-                                .parallel=parallel)
-
-#Remap the OUs
-validation.results$orgUnit<-remapOUs(validation.results$orgUnit,organisationUnit,mode_in="id",mode_out="code")
-#Remap the mechanisms
-validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,organisationUnit,mode_in="id",mode_out="code")
-
-if ( return_violations_only == TRUE & !is.na(return_violations_only) ) {
+if (Sys.info()[['sysname']] == "Windows"  ) { 
   
-validation.results<-validation.results[!validation.results$result,] }
-validation.results<-plyr::colwise(as.character)(validation.results)
+  if  ( parallel == TRUE ) { warning("Parallel execution is not supported on Windows" ) }
+    foo<-unique(data[,c("period","attributeOptionCombo","orgUnit")])
+    for (i in 1:nrow(foo)){
+      this_data<-data[data$orgUnit == foo$orgUnit[i] & data$period == foo$period[i] & data$attributeOptionCombo == foo$attributeOptionCombo[i],]
+      bar<-evaluateValidation(this_data$combi,this_data$value,vr,return_violations_only)
+      validation.results<-plyr::rbind.fill(validation.results,bar)
+    }
+  } else {
+    validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit),
+                                    function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only),
+                                    .parallel=parallel,
+                                    .inform=TRUE)
+    }
+    
+if ( nrow(validation.results) > 0 ) {
+validation.results$orgUnit<-remapOUs(validation.results$orgUnit,
+                                     organisationUnit,
+                                     mode_in="id",mode_out="code")
+validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,
+                                                    organisationUnit,
+                                                    mode_in="id",mode_out="code") }
+
+validation.results<-plyr::colwise(as.character)(validation.results) 
   
-return  (validation.results )
-
-
-}
+return  ( validation.results ) }
