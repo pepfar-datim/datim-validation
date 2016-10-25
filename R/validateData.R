@@ -53,14 +53,11 @@ if (Sys.info()[['sysname']] == "Windows"  ) {
                                     .parallel=parallel,
                                     .inform=TRUE)
     }
-    
-if ( nrow(validation.results) > 0 ) {
-validation.results$orgUnit<-remapOUs(validation.results$orgUnit,
-                                     organisationUnit,
-                                     mode_in="id",mode_out="code")
-validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,
-                                                    organisationUnit,
-                                                    mode_in="id",mode_out="code") }
+ 
+#if ( nrow(validation.results) > 0 ) {
+#validation.results$orgUnit<-remapOUs(validation.results$orgUnit,  organisationUnit,  mode_in="id",mode_out="code")
+#validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,  organisationUnit,  mode_in="id",mode_out="code") 
+#}
 
 validation.results<-plyr::colwise(as.character)(validation.results) 
   
