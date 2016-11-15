@@ -39,23 +39,14 @@ validation.results<-validation.results_empty
 #Check the data against the validation rules
 vr<-getValidationRules()
 if (Sys.info()[['sysname']] == "Windows"  ) { 
-  
-    foo<-unique(data[,c("period","attributeOptionCombo","orgUnit")])
-    
-    for (i in 1:nrow(foo)){
-      this_data<-data[data$orgUnit == foo$orgUnit[i] & data$period == foo$period[i] & data$attributeOptionCombo == foo$attributeOptionCombo[i],]
-      bar<-evaluateValidation(this_data$combi,this_data$value,vr,return_violations_only)
-      if (nrow(bar) > 0 & !is.null(bar)) {
-      validation.results<-plyr::rbind.fill(validation.results,bar)
-      }
-    }
-  } else {
-    validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit),
+    if  ( parallel == TRUE )  {warning("Parallel execution is not supported on Windows" ); parallel = FALSE }
+}
+
+validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit),
                                     function(x) evaluateValidation(x$combi,x$value,vr,return_violations_only),
                                     .parallel=parallel,
                                     .inform=TRUE)
-    }
-    
+
 if ( nrow(validation.results) > 0 ) {
 validation.results$orgUnit<-remapOUs(validation.results$orgUnit,
                                      organisationUnit,
