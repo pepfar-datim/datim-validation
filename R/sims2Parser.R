@@ -38,7 +38,10 @@ sims2Parser <-
         "assessmentid"
       )
     
-      data <- read.csv(filename,stringsAsFactors = FALSE)
+    #We need to be a global user.
+    organisationUnit <- getOption("organisationUnit")
+    assertthat::assert_that(organisationUnit =="ybg3MO3hcf4")
+    data <- read.csv(filename,stringsAsFactors = FALSE)
       #Get number of columns and assign the header
       names(data)[1:ncol(data)]<-header[1:ncol(data)] 
       #Data element, period and orgunit must be specified
@@ -88,16 +91,15 @@ sims2Parser <-
         })
       }
     invalid.rows <-
-      apply(apply(data, 2, invalid), 1, sum) == 0 #Anything which is not complete.
-    if (sum(invalid.rows) != nrow(data)) {
-      foo <- nrow(data) - sum(invalid.rows)
-      msg <-
-        paste(foo,
+      apply(apply(data, 2, invalid), 1, sum) != 0 #Anything which is not complete.
+    if ( sum(invalid.rows) ) {
+        paste(sum(invalid.rows),
               " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
+    
     if (sum(invalid.rows)) {
-      data <- data[invalid.rows, ]
+      data <- data[!invalid.rows, ]
     }
     data_shifted<-data[0,]
     assessments<-unique(data[,c("period","orgUnit","attributeOptionCombo","assessmentid")])
@@ -105,8 +107,8 @@ sims2Parser <-
     names(assessments)<-c("period","orgUnit","attributeOptionCombo","assessments")
 
     for (i in 1:nrow(assessments)) {
-      foo<-assessments[i,]
-      bar<-merge(data,assessments[,c("period","orgUnit","attributeOptionCombo")],
+      
+      foo<-merge(data,assessments[i,c("period","orgUnit","attributeOptionCombo")],
                  by=c("period","orgUnit","attributeOptionCombo"))
       if (foo$assessments > 1) {
       assessments_dates<-seq(strptime(foo$period,"%Y%m%d"), by = "day", length.out = foo$assessments)
