@@ -153,6 +153,6 @@ sims2Parser <-
     data_not_clear<-data_not_clear[,c("orgUnit","attributeOptionCombo","dataElement","period.y","categoryOptionCombo","value","assessmentid")]
     names(data_not_clear)<-names(data_clear)
     data_shifted<-rbind(data_clear,data_not_clear)
-    assertthat::assert_that(nrow(data) == nrow(data_shifted)
+    assertthat::assert_that(nrow(data) == nrow(data_shifted))
    return(data_shifted)
 }
