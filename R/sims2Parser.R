@@ -164,5 +164,21 @@ sims2Parser <-
     names(data_not_clear)<-names(data_clear)
     data_shifted<-rbind(data_clear,data_not_clear)
     assertthat::assert_that(nrow(data) == nrow(data_shifted))
+    data_shifted$comment<-data_shifted$assessmentid
+    data_shifted$storedby<-NA
+    data_shifted$timestamp<-NA
+    header_final <-
+      c(
+        "dataElement",
+        "period",
+        "orgUnit",
+        "categoryOptionCombo",
+        "attributeOptionCombo",
+        "value",
+        "storedby",
+        "timestamp",
+        "comment"
+      )
+    data_shifted <- data_shifted[, header_final[header_final %in% names(data_shifted)]]
     return(data_shifted)
   }
