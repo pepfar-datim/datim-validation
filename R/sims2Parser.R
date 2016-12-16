@@ -41,7 +41,7 @@ sims2Parser <-
     #We need to be a global user.
     organisationUnit <- getOption("organisationUnit")
     assertthat::assert_that(organisationUnit =="ybg3MO3hcf4")
-    data <- read.csv(filename,stringsAsFactors = FALSE)
+    data <- read.csv(filename,na="",stringsAsFactors = FALSE)
     #Ensure we have the correct number of columns
     data<-data[,1:length(header)]
     #Get number of columns and assign the header
@@ -53,8 +53,7 @@ sims2Parser <-
                   paste(which(missing_required == TRUE),sep="",collapse = ","),". These rows will be excluded.")
       warning(msg)
     }
-    data<-data[!missing_required,] 
-    
+    data<-data[!missing_required ,] 
     
     data <- data[, header[header %in% names(data)]]
     if (orgUnitIdScheme != "id") {
@@ -124,6 +123,7 @@ sims2Parser <-
     #Possible collisions
     assessments_ou_acoc_dups<-assessments_ou_acoc[assessments_ou_acoc$period > 1,]
     asessments_collisions<-assessments[0,]
+    if (nrow(asessments_collisions)> 0 ) {
     for (i in 1:nrow(assessments_ou_acoc_dups)) {
       foo<-assessments_ou_acoc_dups[i,]
       bar<-assessments[assessments$orgUnit==foo$orgUnit & assessments$attributeOptionCombo==foo$attributeOptionCombo,]
@@ -166,7 +166,8 @@ sims2Parser <-
     assertthat::assert_that(nrow(data) == nrow(data_shifted))
     data_shifted$comment<-data_shifted$assessmentid
     data_shifted$storedby<-NA
-    data_shifted$timestamp<-NA
+    data_shifted$timestamp<-NA } else { data_shifted<-data }
+    
     header_final <-
       c(
         "dataElement",
