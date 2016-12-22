@@ -11,7 +11,17 @@
 validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=TRUE) {
 if ( is.na(organisationUnit) ) {organisationUnit = getOption("organisationUnit")}
 if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
+
+  header <-
+    c(
+      "dataElement",
+      "period",
+      "orgUnit",
+      "categoryOptionCombo",
+      "attributeOptionCombo",
+      "value")
   
+data <- data[, header[header %in% names(data)]]
 invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })}  
 data$value<-as.numeric(data$value) #This may throw a warning 
 invalid.rows<-apply(apply(data,2,invalid),1,sum) == 0 #Filter out anything which is not complete.
