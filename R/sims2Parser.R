@@ -127,7 +127,7 @@ sims2Parser <-
     #Possible collisions
     assessments_ou_acoc_dups<-assessments_ou_acoc[assessments_ou_acoc$period > 1,]
     asessments_collisions<-assessments[0,]
-    if (nrow(asessments_collisions)> 0 ) {
+    if (nrow(assessments_ou_acoc_dups)> 0 ) {
     for (i in 1:nrow(assessments_ou_acoc_dups)) {
       foo<-assessments_ou_acoc_dups[i,]
       bar<-assessments[assessments$orgUnit==foo$orgUnit & assessments$attributeOptionCombo==foo$attributeOptionCombo,]
