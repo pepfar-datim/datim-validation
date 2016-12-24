@@ -14,7 +14,8 @@
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
-#'
+#' @param hasHeader TRUE by default. Should be set to FALSE if the file does not contain header information. 
+#' 
 #' @return Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
 #' @note function(filename="/home/me/foo.csv",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id",invalidData=FALSE)
@@ -25,7 +26,8 @@ sims2Parser <-
            dataElementIdScheme = "code",
            orgUnitIdScheme = "id",
            idScheme = "id",
-           invalidData = FALSE) {
+           invalidData = FALSE,
+           hasHeader=TRUE) {
     
     header <-
       c(
@@ -41,7 +43,9 @@ sims2Parser <-
     #We need to be a global user.
     organisationUnit <- getOption("organisationUnit")
     assertthat::assert_that(organisationUnit =="ybg3MO3hcf4")
-    data <- read.csv(filename,na="",stringsAsFactors = FALSE)
+    data <- read.csv(filename,na="",stringsAsFactors = FALSE, header=hasHeader,quote='"',row.names = NULL,sep=",")
+    #Number of lines in the file number equal the number of records
+    assertthat::assert_that(nrow(data) == length(readLines(filename)))
     #Ensure we have the correct number of columns
     data<-data[,1:length(header)]
     #Get number of columns and assign the header
