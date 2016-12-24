@@ -123,6 +123,9 @@ sims2Parser <-
     #Start to shift the data
     data_shifted<-data[0,]
     assessments<-unique(data[,c("period","orgUnit","attributeOptionCombo","assessmentid")])
+    #Are there any assessment ids which occur on different dates?
+    #This should not be possible
+    if ( sum(duplicated(assessments$assessmentid)) != 0 ) {stop("Duplicate assessment IDS were found.")}
     assessments_ou_acoc<-aggregate(. ~ orgUnit + attributeOptionCombo,data=assessments[,-4],length)
     #Possible collisions
     assessments_ou_acoc_dups<-assessments_ou_acoc[assessments_ou_acoc$period > 1,]
