@@ -1,8 +1,8 @@
 language: r
 sudo: required
 warnings_are_errors: false
-github_packages:
- - httrmock
+r_github_packages:
+ - jason-p-pickering/httrmock
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
