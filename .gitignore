@@ -3,7 +3,6 @@
 .RData
 inst/doc
 .idea
-*.Rd
 *.*~
 .R_Cache
 *.Rproj
