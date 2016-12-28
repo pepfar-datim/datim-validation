@@ -23,8 +23,6 @@ loadSecrets<-function(secrets=NA) {
     } else {
       #TODO: Need to deal with command line interfaces
       getPass<-function(){  
-        
-        
         wnd<-tcltk::tktoplevel();tcltk::tclVar("")->passVar;  
         #Label  
         tcltk::tkgrid(tcltk::tklabel(wnd,text="Enter password:"));  
@@ -39,8 +37,6 @@ loadSecrets<-function(secrets=NA) {
         password<-tcltk::tclvalue(passVar);  
         return(password);  
       }  
-      
-      
     s<-list(dhis=list())
     s$dhis$username<-readline("Username: ")
     s$dhis$password<-getPass()
