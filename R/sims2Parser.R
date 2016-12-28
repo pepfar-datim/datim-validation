@@ -44,6 +44,7 @@ sims2Parser <-
     organisationUnit <- getOption("organisationUnit")
     assertthat::assert_that(organisationUnit =="ybg3MO3hcf4")
     data <- read.csv(filename,na="",stringsAsFactors = FALSE, header=hasHeader,quote='"',row.names = NULL,sep=",")
+    #TODO: Centralize all of this between the SIMS parser and general parser
     #Number of lines in the file number equal the number of records
     assertthat::assert_that(nrow(data) == length(readLines(filename)))
     #Ensure we have the correct number of columns
@@ -68,14 +69,16 @@ sims2Parser <-
           mode_in = orgUnitIdScheme,
           mode_out = "id"
         )
-      #Filter out any thing which does not correspond to the orgUnit mapping scheme
-      ou_non_match<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap()$id)]
-      if (length(ou_non_match > 0)) {
-        msg<-paste0("The following orgunits are not valid and will be removed",paste(ou_non_match,sep="",collapse=","))
-        warning(msg)
-      }
-      data<-data[!(data$orgUnit %in% ou_non_match),]
     }
+    ou_non_match<-NA
+    #Filter out any thing which does not correspond to the orgUnit mapping scheme
+    ou_non_match<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap()$id)]
+    if (length(ou_non_match > 0) & !is.na(ou_non_match)) {
+      msg<-paste0("The following orgunits are not valid and will be removed",paste(ou_non_match,sep="",collapse=","))
+      warning(msg)
+    }
+    data<-data[!(data$orgUnit %in% ou_non_match),]
+    
     if (dataElementIdScheme != "id") {
       data$dataElement <-
         remapDEs(
@@ -83,14 +86,15 @@ sims2Parser <-
           mode_in = dataElementIdScheme,
           mode_out = "id"
         )
-      
-      de_non_match<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
-      if (length(de_non_match > 0)) {
-        msg<-paste0("The following data elements are not valid and will be removed: ",paste(de_non_match,sep="",collapse=" , "))
-        warning(msg)
-      }
-      data<-data[!(data$dataElement %in% de_non_match),]
     }
+    de_non_match<-NA
+    de_non_match<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
+    if ( length(de_non_match > 0) & !is.na(de_non_match)) {
+      msg<-paste0("The following data elements are not valid and will be removed: ",paste(de_non_match,sep="",collapse=" , "))
+      warning(msg)
+    }
+    
+    data<-data[!(data$dataElement %in% de_non_match), ]
     if (idScheme != "id") {
       data$attributeOptionCombo <- remapMechs(
         data$attributeOptionCombo,
@@ -98,6 +102,12 @@ sims2Parser <-
         mode_in = idScheme,
         mode_out = "id"
       )
+    }
+    mechs_non_match<-NA
+    mechs_non_match<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap()$id)]
+    if (length(mechs_non_match > 0) & !is.na(mechs_non_match)) {
+      msg<-paste0("The following data elements are not valid and will be removed: ",paste(de_non_match,sep="",collapse=" , "))
+      warning(msg)
     }
     
     #Data frame needs to be completely flattened to characters
@@ -120,6 +130,10 @@ sims2Parser <-
     if (sum(invalid.rows)) {
       data <- data[!invalid.rows, ]
     }
+    
+    #TODO: End centralization here. 
+    #TODO: Functionalize this with dateShifter
+    
     #Start to shift the data
     data_shifted<-data[0,]
     assessments<-unique(data[,c("period","orgUnit","attributeOptionCombo","assessmentid")])
