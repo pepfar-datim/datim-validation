@@ -9,7 +9,6 @@ Description: External validation routines for data payloads in DATIM.
 License: file LICENSE
 Imports: XML, plyr, jsonlite, stringr, httr, digest,
         reshape2,assertthat,rlist
-Suggests: rmarkdown,roxygen2, foreach, doMC, knitr,tcltk,
-    testthat
+Suggests: rmarkdown,roxygen2, foreach, doMC, knitr,tcltk,testthat
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
