@@ -46,7 +46,7 @@ sims2Parser <-
     data <- read.csv(filename,na="",stringsAsFactors = FALSE, header=hasHeader,quote='"',row.names = NULL,sep=",")
     #TODO: Centralize all of this between the SIMS parser and general parser
     #Number of lines in the file number equal the number of records
-    assertthat::assert_that(nrow(data) == length(readLines(filename)))
+    assertthat::assert_that(nrow(data) == length(readLines(filename))-as.numeric(hasHeader))
     #Ensure we have the correct number of columns
     data<-data[,1:length(header)]
     #Get number of columns and assign the header
