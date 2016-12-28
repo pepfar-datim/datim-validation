@@ -106,7 +106,7 @@ sims2Parser <-
     mechs_non_match<-NA
     mechs_non_match<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap()$id)]
     if (length(mechs_non_match > 0) & !is.na(mechs_non_match)) {
-      msg<-paste0("The following data elements are not valid and will be removed: ",paste(de_non_match,sep="",collapse=" , "))
+      msg<-paste0("The following mechanisms are not valid and will be removed: ",paste(mechs_non_match,sep="",collapse=" , "))
       warning(msg)
     }
     
