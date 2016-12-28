@@ -9,3 +9,5 @@ Makefile
 .editorconfig
 .idea
 .idea/.name
+^packrat/
+^\.Rprofile$

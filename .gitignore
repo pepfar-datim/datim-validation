@@ -6,3 +6,4 @@ inst/doc
 *.*~
 .R_Cache
 *.Rproj
+packrat/lib*/

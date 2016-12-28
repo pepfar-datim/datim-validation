@@ -1,8 +1,11 @@
 language: r
 sudo: required
 warnings_are_errors: false
-r_github_packages:
- - jason-p-pickering/httrmock
+cache:
+  directories: $TRAVIS_BUILD_DIR/packrat/
+  packages: true
+install:
+  - R -e "0" --args --bootstrap-packrat
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
