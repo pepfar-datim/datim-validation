@@ -4,8 +4,8 @@ warnings_are_errors: false
 cache:
   directories: $TRAVIS_BUILD_DIR/packrat/
   packages: true
-r_install:
-    knitr
+r_packages:
+  - rmarkdown  
 install:
   - R -e "0" --args --bootstrap-packrat
 apt_packages:
