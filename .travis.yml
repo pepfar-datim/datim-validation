@@ -1,12 +1,9 @@
 language: r
 sudo: required
 warnings_are_errors: false
-cache:
-  directories: $TRAVIS_BUILD_DIR/packrat/
-  packages: true
 r_packages:
   - rmarkdown  
-  - detools
+  - devtools
 install:
   - R -e "0" --args --bootstrap-packrat
 apt_packages:
