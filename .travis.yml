@@ -6,12 +6,12 @@ cache:
   packages: true
 r_packages:
   - rmarkdown  
+
 install:
   - R -e "0" --args --bootstrap-packrat
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
  - libcurl3
-env:
-  global:
-    - R_CHECK_TESTS="FALSE"
+r_build_args: --no-build-vignettes --no-manual --no-resave-data
+r_check_args: --no-build-vignettes --no-manual
