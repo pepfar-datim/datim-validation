@@ -6,7 +6,7 @@ cache:
   packages: true
 r_packages:
   - rmarkdown  
-
+  - detools
 install:
   - R -e "0" --args --bootstrap-packrat
 apt_packages:
