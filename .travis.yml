@@ -1,6 +1,7 @@
 language: r
 sudo: required
 warnings_are_errors: false
+cache: packages
 r_packages:
   - rmarkdown  
   - devtools
