@@ -1,11 +1,11 @@
 language: r
 sudo: required
-before_install:
-  - tlmgr install index
 warnings_are_errors: false
 cache:
   directories: $TRAVIS_BUILD_DIR/packrat/
   packages: true
+r_install:
+    knitr
 install:
   - R -e "0" --args --bootstrap-packrat
 apt_packages:
