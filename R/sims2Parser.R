@@ -70,14 +70,15 @@ sims2Parser <-
           mode_out = "id"
         )
     }
-    ou_non_match<-NA
+
     #Filter out any thing which does not correspond to the orgUnit mapping scheme
     ou_non_match<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap()$id)]
-    if (length(ou_non_match > 0) & !is.na(ou_non_match)) {
+    if ( length(ou_non_match) > 0 ) {
       msg<-paste0("The following orgunits are not valid and will be removed",paste(ou_non_match,sep="",collapse=","))
       warning(msg)
+      data<-data[!(data$orgUnit %in% ou_non_match),]
     }
-    data<-data[!(data$orgUnit %in% ou_non_match),]
+    
     
     if (dataElementIdScheme != "id") {
       data$dataElement <-
@@ -87,14 +88,15 @@ sims2Parser <-
           mode_out = "id"
         )
     }
-    de_non_match<-NA
+
     de_non_match<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
-    if ( length(de_non_match > 0) & !is.na(de_non_match)) {
+    if ( length(de_non_match) > 0 )  {
       msg<-paste0("The following data elements are not valid and will be removed: ",paste(de_non_match,sep="",collapse=" , "))
       warning(msg)
-    }
+      data<-data[!(data$dataElement %in% de_non_match), ]  }
     
-    data<-data[!(data$dataElement %in% de_non_match), ]
+    
+
     if (idScheme != "id") {
       data$attributeOptionCombo <- remapMechs(
         data$attributeOptionCombo,
@@ -103,11 +105,12 @@ sims2Parser <-
         mode_out = "id"
       )
     }
-    mechs_non_match<-NA
+
     mechs_non_match<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap()$id)]
-    if (length(mechs_non_match > 0) & !is.na(mechs_non_match)) {
+    if ( length(mechs_non_match) > 0 ) {
       msg<-paste0("The following mechanisms are not valid and will be removed: ",paste(mechs_non_match,sep="",collapse=" , "))
       warning(msg)
+      data<-data[!(data$attributeOptionCombo %in% mechs_non_match), ] 
     }
     
     #Data frame needs to be completely flattened to characters
