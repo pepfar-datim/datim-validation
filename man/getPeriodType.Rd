@@ -7,7 +7,7 @@
 getPeriodType(iso)
 }
 \arguments{
-\item{ISO}{String which identifies the period, such as 2016Q1 or 2016Q2}
+\item{iso}{String which identifies the period, such as 2016Q1 or 2016Q2}
 }
 \value{
 Returns a a character of the period, like "Monthly"

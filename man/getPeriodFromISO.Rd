@@ -7,7 +7,7 @@
 getPeriodFromISO(iso)
 }
 \arguments{
-\item{ISO}{String which identifies the period, such as 2016Q1 or 2016Q2}
+\item{iso}{String which identifies the period, such as 2016Q1 or 2016Q2}
 }
 \value{
 Returns a data frame consisting of iso (character),startDate (Date),endDate (Date) and period type (character)

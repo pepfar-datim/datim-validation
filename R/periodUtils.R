@@ -3,7 +3,7 @@
 #' 
 #' @description Utility function return a DHIS2 period type from an ISO string
 #'
-#' @param ISO String which identifies the period, such as 2016Q1 or 2016Q2
+#' @param iso String which identifies the period, such as 2016Q1 or 2016Q2
 #' @return Returns a a character of the period, like "Monthly"
 #' 
 #' 
@@ -22,7 +22,7 @@ getPeriodType<-function(iso){
 #' 
 #' @description Utility function return a data frame of a periods start date, end date, ISO character and periodtype
 #'
-#' @param ISO String which identifies the period, such as 2016Q1 or 2016Q2
+#' @param iso String which identifies the period, such as 2016Q1 or 2016Q2
 #' @return Returns a data frame consisting of iso (character),startDate (Date),endDate (Date) and period type (character)
 #' 
 #' 
