@@ -69,7 +69,7 @@ getPeriodFromISO <- function(iso) {
     startDate<-startDate<-as.Date(paste0(y,"1001"),"%Y%m%d")
     endDate<-startDate + years(1) - days(1)
   }
-  period<-data.frame(iso=iso,startdate=startDate,endDate=endDate,periodtype=pt)
+  period<-data.frame(iso=iso,startDate=startDate,endDate=endDate,periodType=pt)
   return(period)
 }
 
