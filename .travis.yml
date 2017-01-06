@@ -1,16 +1,7 @@
 language: r
 sudo: required
 warnings_are_errors: false
-cache: packages
-r_packages:
-  - rmarkdown 
-install:
-  - Rscript -e 'install.packages("devtools", repos = "http://cran.rstudio.com")'
-  - Rscript -e 'install.packages(c("devtools","XML", "plyr", "stringr","reshape2", "assertthat","rlist", "ISOWeek"), repos = "http://cran.rstudio.com")'
-  - R -e "0" --args --bootstrap-packrat
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
  - libcurl3
-r_build_args: --no-build-vignettes --no-manual --no-resave-data
-r_check_args: --no-build-vignettes --no-manual
