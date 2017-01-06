@@ -14,7 +14,7 @@ getPeriodType<-function(iso){
   else if ( grepl("^\\d{4}Q\\d{1}$",iso,perl=TRUE) )  {return("Quarterly") }
   else if ( grepl("^\\d{4}$",iso,perl=TRUE) )  {return("Yearly") }
   else if ( grepl("^\\d{4}Oct$",iso,perl=TRUE) )  {return("FinancialOct") }
-  else {return(NA)}
+  else {return(NULL)}
 }
 
 #' @export
@@ -28,6 +28,7 @@ getPeriodType<-function(iso){
 #' 
 getPeriodFromISO <- function(iso) {
   pt <- getPeriodType(iso)
+  if (is.null(pt)) {return(NULL)}
   assertthat::noNA(pt)
   startDate <- NA
   endDate <- NA
@@ -71,3 +72,4 @@ getPeriodFromISO <- function(iso) {
   period<-data.frame(iso=iso,startdate=startDate,endDate=endDate,periodtype=pt)
   return(period)
 }
+
