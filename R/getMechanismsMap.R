@@ -19,7 +19,7 @@ getMechanismsMap<-function(organisationUnit=NA) {
     url<-paste0(url,paste0("&filter=categoryOptions.organisationUnits.id:eq:",organisationUnit)) 
   }
   url<-URLencode(url)
-  sig<-digest::digest(paste0(url,as.character(ISO)),algo='md5', serialize = FALSE)
+  sig<-digest::digest(paste0(url),algo='md5', serialize = FALSE)
   mechs<-getCachedObject(sig)
   if (!is.null(mechs))  { return(mechs) } else
   if(is.null(mechs)) {
