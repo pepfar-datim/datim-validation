@@ -32,12 +32,12 @@ getMechanismsMap<-function(organisationUnit=NA) {
   foo<-mechs$categoryOptions
   n<-length(foo)
   mechs_details<-data.frame(matrix(as.character(""), nrow = n, ncol = 3),stringsAsFactors = FALSE)
-  names(mechs_details)<-c("startDate","endDate","organisationUnits")
+  names(mechs_details)<-c("startDate","endDate","ou3")
   for (i in 1:length(foo)) {
     bar<-foo[i]
     mechs_details$startDate[i]<- bar[[1]]$startDate[1]
     mechs_details$endDate[i]<- bar[[1]]$endDate[1]
-    mechs_details$organisationUnits[i]<-bar[[1]]$organisationUnits[[1]]$id
+    mechs_details$ou3[i]<-bar[[1]]$organisationUnits[[1]]$id
   }
   
   #Need to unwind the dates
