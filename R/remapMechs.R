@@ -13,8 +13,12 @@
 #' @note
 #' remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
 #' will remap mechanisms specified as codes to UIDs
-remapMechs<-function(mechs_in,organisationUnit,mode_in="code",mode_out="id") {
+remapMechs<-function(mechs_in,organisationUnit=NA,mode_in="code",mode_out="id") {
+  if ( is.na(organisationUnit) ) { 
+    organisationUnit<-getOption("organisationUnit")
+  }
   is_valid_mode<- (mode_in %in% c("code","name","id") ) & (mode_out %in% c("code","name","id") )
+  if (is.na(organisationUnit)) {organisataionUnit<-getOption("organiasationUnit")}
   if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name or id"); stop() }
   mechs<-getMechanismsMap(organisationUnit)
   cmd<-paste("plyr::mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
