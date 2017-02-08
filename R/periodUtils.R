@@ -58,8 +58,9 @@ getPeriodFromISO <- function(iso) {
     }  else {
       (stop("Invalid quarter specified."))
     }
+    add.months= function(date,n) seq(date, by = paste (n, "months"), length = 2)[2]
     startDate<-as.Date(paste0(y,m,"01"),"%Y%m%d")
-    endDate<-startDate + months(3) - days(1)
+    endDate<-add.months(startDate,1) - days(1)
   } else if (pt =="Yearly") {
     startDate<-as.Date(paste0(iso,"0101"),"%Y%m%d")
     endDate<-startDate + years(1) - days(1)
