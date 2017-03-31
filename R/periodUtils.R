@@ -66,8 +66,8 @@ getPeriodFromISO <- function(iso) {
     endDate<-startDate + years(1) - days(1)
     
   } else if (pt == "FinancialOct") {
-    y <- as.integer(substr(iso, 1, 4))-1
-    startDate<-startDate<-as.Date(paste0(y,"1001"),"%Y%m%d")
+    y <- as.integer(substr(iso, 1, 4))
+    startDate<-as.Date(paste0(y,"1001"),"%Y%m%d")
     endDate<-startDate + years(1) - days(1)
   }
   period<-data.frame(iso=iso,startDate=startDate,endDate=endDate,periodType=pt)
