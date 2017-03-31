@@ -8,7 +8,7 @@ Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
 Description: External validation routines for data payloads in DATIM.
 License: file LICENSE
 Imports: XML, plyr, jsonlite, stringr, httr, digest,
-        reshape2,assertthat,rlist,ISOweek
+        reshape2,assertthat,rlist,ISOweek,lubridate
 Suggests: rmarkdown,roxygen2, foreach, doMC,
         knitr,tcltk,testthat
 VignetteBuilder: knitr

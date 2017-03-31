@@ -1,4 +1,5 @@
 #' @export
+#' @importFrom utils URLencode
 #' @title loadSecrets(secrets)
 
 #' @description Load a DHIS secrets file which should be a JSON file as below
@@ -21,22 +22,6 @@ loadSecrets<-function(secrets=NA) {
     assertthat::assert_that(file.exists(secrets))
     s<-jsonlite::fromJSON(secrets) 
     } else {
-      #TODO: Need to deal with command line interfaces
-      getPass<-function(){  
-        wnd<-tcltk::tktoplevel();tcltk::tclVar("")->passVar;  
-        #Label  
-        tcltk::tkgrid(tcltk::tklabel(wnd,text="Enter password:"));  
-        #Password box  
-        tcltk::tkgrid(tcltk::tkentry(wnd,textvariable=passVar,show="*")->passBox);  
-        #Hitting return will also submit password  
-        tcltk::tkbind(passBox,"<Return>",function() tcltk::tkdestroy(wnd));  
-        #OK button  
-        tcltk::tkgrid(tcltk::tkbutton(wnd,text="OK",command=function() tcltk::tkdestroy(wnd)));  
-        #Wait for user to click OK  
-        tcltk::tkwait.window(wnd);  
-        password<-tcltk::tclvalue(passVar);  
-        return(password);  
-      }  
     s<-list(dhis=list())
     s$dhis$username<-readline("Username: ")
     s$dhis$password<-getPass()
