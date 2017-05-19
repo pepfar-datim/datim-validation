@@ -60,7 +60,7 @@ getPeriodFromISO <- function(iso) {
     }
     add.months= function(date,n) seq(date, by = paste (n, "months"), length = 2)[2]
     startDate<-as.Date(paste0(y,m,"01"),"%Y%m%d")
-    endDate<-add.months(startDate,1) - 1
+    endDate<-add.months(startDate,3) - 1
   } else if (pt =="Yearly") {
     startDate<-as.Date(paste0(iso,"0101"),"%Y%m%d")
     endDate<-startDate + years(1) - days(1)

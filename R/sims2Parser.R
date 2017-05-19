@@ -14,7 +14,8 @@
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
-#' @param hasHeader TRUE by default. Should be set to FALSE if the file does not contain header information. 
+#' @param hasHeader TRUE by default. Should be set to FALSE if the file does not contain header information.
+#' @param isoPeriod period to be used for date shift boundaries. If not provided, no boundaries are set.
 #' 
 #' @return Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
@@ -27,7 +28,8 @@ sims2Parser <-
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE,
-           hasHeader=TRUE) {
+           hasHeader=TRUE,
+           isoPeriod=NA) {
     
     header <-
       c(
@@ -132,12 +134,19 @@ sims2Parser <-
       warning(msg)
     }
     
-    if (sum(invalid.rows)) {
+    if (!invalidData) {
       data <- data[!invalid.rows, ]
     }
     
     #TODO: End centralization here. 
     #TODO: Functionalize this with dateShifter
+
+    #if period is provided, use it for boundaries
+    if(!is.na(isoPeriod)){
+      period<-getPeriodFromISO(isoPeriod);
+    } else {
+      period<-NA
+    }
     
     #Start to shift the data
     data_shifted<-data[0,]
@@ -163,6 +172,16 @@ sims2Parser <-
         if ( (start_date - end_date) < nrow(bar) ) {
           end_date<-start_date + nrow(bar)
         }
+        #make sure end date does not go beyond boundaries
+        if(!is.na(period)){
+          if(end_date > period$endDate){
+            start_date = start_date - (end_date - period$endDate)
+          }
+          if(start_date < period$startDate){
+            warning("Shifting results in periods outside of the defined isoPeriod")
+          }
+        }
+
         possible_dates<-seq(start_date,end_date,by="day")
         #Remove any dates which are already used
         possible_dates<-possible_dates[!(possible_dates %in% dates)]
@@ -192,7 +211,12 @@ sims2Parser <-
     assertthat::assert_that(nrow(data) == nrow(data_shifted))
     data_shifted$comment<-data_shifted$assessmentid
     data_shifted$storedby<-NA
-    data_shifted$timestamp<-NA } else { data_shifted<-data }
+    data_shifted$timestamp<-NA
+  } else { data_shifted<-data 
+    data_shifted$storedby<-NA
+    data_shifted$timestamp<-NA
+    data_shifted$comment<-data_shifted$assessmentid
+    }
     
     header_final <-
       c(
