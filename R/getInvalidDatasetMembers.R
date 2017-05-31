@@ -8,8 +8,9 @@
 
 getDataElementsOrgunits<-function(organisationUnit=NA,datasets=NA) {
   if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
-  if ( length(datasets) == 0 || is.na(datasets) ){
-  allDataSets<-getDataSets() }
+  #if ( length(datasets) == 0 || is.na(datasets) ){
+  allDataSets<-getDataSets() 
+  #}
   
   dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
   
@@ -56,8 +57,12 @@ getDataElementsOrgunits<-function(organisationUnit=NA,datasets=NA) {
 getInvalidOrgunitsFromDatasets<-function(data,organisationUnit=NA,datasets=NA) {
   if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
   des_ous<-getDataElementsOrgunits(organisationUnit,datasets)
-  return(subset(data,!(organisationUnit %in% des_ous$ous)))
+  all_ous <- c()
+  for(l in des_ous){
+    all_ous <- c(all_ous, l[[2]]$ous)
   }
+  return(subset(data,!(orgUnit %in% all_ous)))
+}
 
 #' @export
 #' @title getInvalidOrgunitsFromDatasets(data,organisationUnit,datasets)
