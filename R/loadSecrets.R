@@ -24,7 +24,7 @@ loadSecrets<-function(secrets=NA) {
     } else {
     s<-list(dhis=list())
     s$dhis$username<-readline("Username: ")
-    s$dhis$password<-getPass()
+    s$dhis$password<-getPass::getPass()
     s$dhis$baseurl<-readline("Server URL (ends with /): ")
 }
   
