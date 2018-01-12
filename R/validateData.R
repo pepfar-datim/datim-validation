@@ -58,12 +58,6 @@ validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit
                                     .inform=TRUE)
 
 if ( nrow(validation.results) > 0 ) {
-validation.results$orgUnit<-remapOUs(validation.results$orgUnit,
-                                     organisationUnit,
-                                     mode_in="id",mode_out="code")
-validation.results$attributeOptionCombo<-remapMechs(validation.results$attributeOptionCombo,
-                                                    organisationUnit,
-                                                    mode_in="id",mode_out="code") 
 validation.results<-plyr::colwise(as.character)(validation.results) 
 return  ( validation.results ) 
 } else
