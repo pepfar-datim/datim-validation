@@ -59,7 +59,12 @@ validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit
 
 if ( nrow(validation.results) > 0 ) {
 validation.results<-plyr::colwise(as.character)(validation.results) 
-return  ( validation.results ) 
+mechs<-getMechanismsMap()
+ous<-getOrganisationUnitMap()
+
+validation.results$mech_code<-plyr::mapvalues(validation.results$attributeOptionCombo,mechs$id,mechs$code,warn_missing = FALSE)
+validation.results$ou_name<-plyr::mapvalues(validation.results$orgUnit,ous$id,ous$shortName,warn_missing = FALSE)
+return(validation.results[,c("period","ou_name","mech_code","name","id","formula")])
 } else
 {
   return( validation.results_empty )
