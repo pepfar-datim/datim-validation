@@ -15,4 +15,3 @@ Returns a data frame consisting of iso (character),startDate (Date),endDate (Dat
 \description{
 Utility function return a data frame of a periods start date, end date, ISO character and periodtype
 }
-

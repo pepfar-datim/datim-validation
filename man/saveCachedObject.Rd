@@ -19,4 +19,3 @@ Nothing.
 \description{
 Internal utility function to save an object to the cache.
 }
-

@@ -12,4 +12,3 @@ Returns a map of DSD/TA data element UIDs.
 \description{
 Utility function which returns a map of DSD / TA data elements UIDs
 }
-

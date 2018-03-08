@@ -16,4 +16,3 @@ If the file exists and is not stale, returns TRUE, otherwise FALSE.
 Internal utility function to determine whether a cached object is stale.
 If its stale, it will be removed.
 }
-

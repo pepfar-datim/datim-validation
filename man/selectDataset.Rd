@@ -13,4 +13,3 @@ of invalid data elements which are present the the data
 \description{
 Utility function to produce a vector of data set UIDs from user input
 }
-

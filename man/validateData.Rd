@@ -23,4 +23,3 @@ Returns a data frame with validation rule results.
 validateData should be supplied a d2Parser compliant data frame.
 The data frame is checked dynamically against validation rules defined in the DATIM server.
 }
-

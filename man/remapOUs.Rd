@@ -26,4 +26,3 @@ along with the other required paramaters. It will return a vector of to another 
 remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
 will remap organisation units specified as codes to UIDs
 }
-

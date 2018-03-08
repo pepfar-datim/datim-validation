@@ -5,7 +5,8 @@
 \title{Special purpose parsing function for SIMS2 aggregate data with duplicates}
 \usage{
 sims2Parser(filename, dataElementIdScheme = "code", orgUnitIdScheme = "id",
-  idScheme = "id", invalidData = FALSE, hasHeader = TRUE)
+  idScheme = "id", invalidData = FALSE, hasHeader = TRUE,
+  isoPeriod = NA)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid SIMS2 aggregate file. See the separate spec for details}
@@ -21,6 +22,8 @@ then the organisation units are assumed to be already specififed as UIDs}
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
 \item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not contain header information.}
+
+\item{isoPeriod}{period to be used for date shift boundaries. If not provided, no boundaries are set.}
 }
 \value{
 Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
@@ -36,4 +39,3 @@ will automatically decollide these types of visits
 function(filename="/home/me/foo.csv",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id",invalidData=FALSE)
 Note that all values will be returned as characters.
 }
-

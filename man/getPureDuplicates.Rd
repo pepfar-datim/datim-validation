@@ -16,4 +16,3 @@ Returns a data frame of d2 data, with pure duplicates.
 Returns a listing of pure duplicates by dataElement,period,orgunit,categoryOptionCombo. 
 For the purposes of de-duplication, these are considered to be pure duplicates (only the attributeOptionCombo differ)
 }
-

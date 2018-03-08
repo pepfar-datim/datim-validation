@@ -15,4 +15,3 @@ Returns a data frame of all crosswalk mechanism values, along with default de-de
 \description{
 Utility function which returns the crosswalk mechanism UID
 }
-

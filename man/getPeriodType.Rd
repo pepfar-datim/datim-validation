@@ -15,4 +15,3 @@ Returns a a character of the period, like "Monthly"
 \description{
 Utility function return a DHIS2 period type from an ISO string
 }
-

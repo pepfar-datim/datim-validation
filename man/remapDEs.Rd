@@ -24,4 +24,3 @@ along with the other required paramaters. It will return a vector of identifiers
 remapDes(foo,"https://www.datim.org","admin","district","code")
 will remap data elements specified as codes to UIDs
 }
-

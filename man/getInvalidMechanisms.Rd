@@ -4,14 +4,12 @@
 \alias{getInvalidMechanisms}
 \title{Function which checks the validity of mechanisms}
 \usage{
-getInvalidMechanisms(data, organisationUnit = NA, ISO = NA)
+getInvalidMechanisms(data, organisationUnit = NA)
 }
 \arguments{
 \item{data}{d2Parser data frame}
 
 \item{organisationUnit}{UID of the operating unit.Defaults to the user organisation unit if left blank}
-
-\item{ISO}{String which identifies the period, such as 2016Q1 or 2016Q2}
 }
 \value{
 Returns a vector of non-valid mechanisms
@@ -24,4 +22,3 @@ along with the other required paramaters. It will return a vector of non-valid m
 getValidMechanisms(foo,"https://www.datim.org","admin","district","Ab12345678")
 will remap organisation units specified as codes to UIDs
 }
-

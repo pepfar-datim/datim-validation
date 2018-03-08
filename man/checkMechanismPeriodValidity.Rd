@@ -16,4 +16,3 @@ Returns a data frame of invalid period-mechanism combinations.
 This function will return an object of invalid mechanisms and periods. All data which is reported 
 must have a period within the valid start and end dates of the attribute option combination to which it is assigned.
 }
-

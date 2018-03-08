@@ -1,4 +1,7 @@
 #' @export
+#' @importFrom ISOweek ISOweek2date
+#' @importFrom lubridate days
+#' @importFrom lubridate years
 #' @title getPeriodType(iso)
 #' 
 #' @description Utility function return a DHIS2 period type from an ISO string

@@ -190,7 +190,7 @@ sims2Parser <-
         for (j in 1:length(duplicated_dates)) {
           this_date<-as.Date(bar$period[duplicated_dates[j]],"%Y%m%d")
           #Which date is closest?
-          date_distance<-as(abs(possible_dates-this_date),"integer")
+          date_distance<-methods::as(abs(possible_dates-this_date),"integer")
           replacement_date_n<-which(date_distance == min(date_distance))
           
           bar$period[duplicated_dates[j]]<-format(possible_dates[replacement_date_n],"%Y%m%d")

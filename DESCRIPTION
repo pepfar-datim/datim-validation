@@ -10,6 +10,6 @@ License: file LICENSE
 Imports: XML, plyr, jsonlite, stringr, httr, digest,
         reshape2,assertthat,rlist,ISOweek,lubridate
 Suggests: rmarkdown,roxygen2, foreach, doMC,
-        knitr,tcltk,testthat
+        knitr,tcltk,testthat, getPass,methods
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

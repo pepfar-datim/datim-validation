@@ -15,4 +15,3 @@ Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID
 \description{
 Utility function to produce a map of valid mechanisms
 }
-

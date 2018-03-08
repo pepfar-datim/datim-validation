@@ -13,4 +13,3 @@ Returns a data frame of validation rules consisting of name, left and right side
 d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
 frame which can be used in subsequent DATIM validation routines
 }
-

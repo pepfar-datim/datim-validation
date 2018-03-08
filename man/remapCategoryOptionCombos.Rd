@@ -24,4 +24,3 @@ It will return a vector of another class as specified with the mode_out paramate
 remapCategoryOptionCombos(foo,"https://www.datim.org","admin","district","code","name")
 will remap categoryOptionCombos specified as codes to their corresponding names.
 }
-

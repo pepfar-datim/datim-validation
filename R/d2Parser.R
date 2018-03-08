@@ -1,4 +1,6 @@
 #' @export
+#' @importFrom utils read.csv
+#' @importFrom utils select.list
 #' @title General purpose parsing function for different formats of DHIS2 data
 #'
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data

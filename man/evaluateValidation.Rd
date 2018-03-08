@@ -22,4 +22,3 @@ Returns a data frame of validation rule evaluations
 evaluationValidation will accept a vector of combis (data elements.category optioncombinations) and values
 and evaluate it against the supplied validation rules
 }
-

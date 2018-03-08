@@ -12,8 +12,3 @@ Returns a data frame of operating units and their UIDs
 \description{
 Utility function which provides a list of valid operating units
 }
-\note{
-getValidOperatingUnits("https://www.datim.org","admin","district")
-will remap organisation units specified as codes to UIDs
-}
-

@@ -12,4 +12,3 @@ Returns a data frame  of id,code,shortName and name
 \description{
 Utility function of extraction of data element ids, codes, shortName and names
 }
-

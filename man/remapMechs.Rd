@@ -26,4 +26,3 @@ along with the other required paramaters. It will return a vector of UIDs.
 remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
 will remap mechanisms specified as codes to UIDs
 }
-
