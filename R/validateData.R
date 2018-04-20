@@ -66,7 +66,7 @@ ous<-getOrganisationUnitMap()
 
 validation.results$mech_code<-plyr::mapvalues(validation.results$attributeOptionCombo,mechs$id,mechs$code,warn_missing = FALSE)
 validation.results$ou_name<-plyr::mapvalues(validation.results$orgUnit,ous$id,ous$shortName,warn_missing = FALSE)
-return(validation.results[,c("period","orgUnit","ou_name","mech_code","name","id","formula")])
+return(validation.results)
 } else
 {
   return( validation.results_empty )
