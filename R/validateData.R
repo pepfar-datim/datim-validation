@@ -84,7 +84,7 @@ vr_rules<-getValidationRules()
 validDataElements<-getValidDataElements(datasets=ds)
 match<-paste(unique(validDataElements$dataelementuid),sep="",collapse="|")
 vr_filter<-vr_rules[grepl(match,vr_rules$leftSide.expression) & grepl(match,vr_rules$rightSide.expression),"id"]
-vr_violations<-validation.results[ vr_violations$id %in% vr_filter,]
+vr_violations<-validation.results[ validation.results$id %in% vr_filter,]
 
 
 return  ( vr_violations ) 
