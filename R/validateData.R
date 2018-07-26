@@ -10,7 +10,19 @@
 #' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
 #' @param parallel Should the rules be evaluated in parallel. 
 #' @return Returns a data frame with validation rule results.
-validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=TRUE) {
+validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=TRUE,datasets=NA) {
+
+    allDataSets<-getDataSets()
+    dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
+    while(!dataSetValid || is.na(dataSetValid) ) {
+      datasets<-selectDataset()
+      if (length(datasets) == 0) {break;}
+      dataSetValid <- Reduce("&",datasets %in% allDataSets$id) 
+    }
+    if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
+
+    print("Processing validation")
+
 if ( is.na(organisationUnit) ) {organisationUnit = getOption("organisationUnit")}
 if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
 
@@ -66,7 +78,16 @@ ous<-getOrganisationUnitMap()
 
 validation.results$mech_code<-plyr::mapvalues(validation.results$attributeOptionCombo,mechs$id,mechs$code,warn_missing = FALSE)
 validation.results$ou_name<-plyr::mapvalues(validation.results$orgUnit,ous$id,ous$shortName,warn_missing = FALSE)
-return(validation.results)
+
+# filter by data sets
+vr_rules<-getValidationRules()
+validDataElements<-getValidDataElements(datasets=ds)
+match<-paste(unique(validDataElements$dataelementuid),sep="",collapse="|")
+vr_filter<-vr_rules[grepl(match,vr_rules$leftSide.expression) & grepl(match,vr_rules$rightSide.expression),"id"]
+vr_violations<-validation.results[ validation.results$id %in% vr_filter,]
+
+
+return  ( vr_violations ) 
 } else
 {
   return( validation.results_empty )
