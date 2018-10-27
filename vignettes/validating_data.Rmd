@@ -80,7 +80,7 @@ When uploading data to DATIM, any data which has an invalid mechanism will be ex
 
 ```{r eval=FALSE}
 #Check for valid mechanisms and simply print those which are not valid
-getInvalidMechanisms(d,ISO="2016Oct")
+getInvalidMechanisms(d)
 ```
 
 
