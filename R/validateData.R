@@ -81,7 +81,7 @@ validation.results$ou_name<-plyr::mapvalues(validation.results$orgUnit,ous$id,ou
 
 # filter by data sets
 vr_rules<-getValidationRules()
-validDataElements<-getValidDataElements(datasets=ds)
+validDataElements<-getValidDataElements(datasets=datasets)
 match<-paste(unique(validDataElements$dataelementuid),sep="",collapse="|")
 vr_filter<-vr_rules[grepl(match,vr_rules$leftSide.expression) & grepl(match,vr_rules$rightSide.expression),"id"]
 vr_violations<-validation.results[ validation.results$id %in% vr_filter,]
