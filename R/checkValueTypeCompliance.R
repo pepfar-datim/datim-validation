@@ -32,24 +32,9 @@ checkValueTypeCompliance<-function(d) {
   
   patterns<-reshape2::melt(patterns)
   names(patterns)<-c("regex","valueType")    
-  url<-URLencode(paste0(getOption("baseurl"),"api/dataElements?fields=id,valueType,optionSet[id],zeroIsSignificant&paging=false"))  
-  sig<-digest::digest(url,algo='md5', serialize = FALSE)
-  des<-getCachedObject(sig)
-  
-  if (is.null(des)){
-    r<-httr::GET(url,httr::timeout(60))
-    if (r$status == 200L ){
-      r<- httr::content(r, "text")
-      des<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
-      des<-merge(des,patterns,by="valueType",all.x=T)
-      saveCachedObject(des,sig)
-    } else {
-      print(paste("Could not retreive data elements",httr::content(r,"text")))
-      stop()
-      des<-NULL
-    } 
-  }
-  
+
+  des<-getDataElementMap()
+  des<-merge(des,patterns,by="valueType",all.x=T)
   d<-merge(d,des,by.x="dataElement",by.y="id")
   
   #Support only valueTypes with a regex
