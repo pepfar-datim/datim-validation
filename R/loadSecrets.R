@@ -83,6 +83,6 @@ loadSecrets <- function(config_path = NA) {
   
   options("baseurl" = s$dhis$baseurl)
   options("secrets" = config_path)
-  
+  options("maxCacheAge"="7 days")
   DHISLogin(s)
 }
