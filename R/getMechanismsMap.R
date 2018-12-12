@@ -14,7 +14,7 @@ getMechanismsMap<-function(organisationUnit=NA) {
   #Determine if we should filter by OU
   ou_filter= !( organisationUnit== "ybg3MO3hcf4"  )
   #Special cases when global OU is used, particularly for SIMS Import
-  url<-paste0(getOption("baseurl"),"api/categoryOptionCombos?filter=categoryCombo.id:eq:wUpfppgjEza&fields=code,name,id,categoryOptions[startDate,endDate]&paging=false")
+  url<-paste0(getOption("baseurl"),"api/",api_version(),"/categoryOptionCombos?filter=categoryCombo.id:eq:wUpfppgjEza&fields=code,name,id,categoryOptions[startDate,endDate]&paging=false")
   if  ( ou_filter ){
     url<-paste0(url,paste0("&filter=categoryOptions.organisationUnits.id:eq:",organisationUnit)) 
   }
