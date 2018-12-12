@@ -8,7 +8,7 @@
 
 getValidationRules<-function() {
   
-url<-paste0(getOption("baseurl"),"api/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
+url<-paste0(getOption("baseurl"),"api/",api_version(),"/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
 sig<-digest::digest(url,algo='md5', serialize = FALSE)
 vr<-getCachedObject(sig)
 
