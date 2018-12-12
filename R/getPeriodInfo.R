@@ -7,7 +7,7 @@
 #' 
 getPeriodInfo <- function(ISO = NA) {
 
-  url <- URLencode(paste0(getOption("baseurl"),"api/sqlViews/TTM90ytCCdY/data.json"))
+  url <- URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/sqlViews/TTM90ytCCdY/data.json"))
   sig <- digest::digest(paste0(url), algo = 'md5', serialize = FALSE)
   p <- getCachedObject(sig)
   
@@ -23,14 +23,12 @@ getPeriodInfo <- function(ISO = NA) {
         p$startdate<-as.Date(p$startdate,"%Y-%m-%d")
         saveCachedObject(p, sig)
       } else {
-        print(paste0("Period with ISO identifier", ISO, "not found"))
-        stop()
+        stop(paste0("Period with ISO identifier", ISO, "not found"))
       } 
       
       }
     else {
-      print("Could not retreive period information")
-      stop()
+      stop("Could not retreive period information")
     }
   }
   if (!is.na(ISO)) {
