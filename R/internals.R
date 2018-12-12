@@ -52,11 +52,11 @@ getCachedObject<-function(sig,wd=paste0(getwd(),"/.R_Cache/")) {
 
 saveCachedObject <-
   function(toCache, sig, wd = paste0(getwd(), "/.R_Cache/")) {
-    if (!file.exists(wd) &&
-        !is.null(getOption("maxCacheAge"))) {
+    if (!is.null(getOption("maxCacheAge"))) {
+    if (!file.exists(wd)) {
       dir.create(wd)
     }
-    saveRDS(toCache, file = paste0(wd, sig))
+    saveRDS(toCache, file = paste0(wd, sig)) }
   }
 
 #' @export
