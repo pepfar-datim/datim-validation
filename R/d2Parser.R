@@ -38,8 +38,7 @@ d2Parser <-
     
     valid_type <- type %in% c("xml", "json", "csv")
     if (!valid_type) {
-      print("ERROR:Not a valid file type")
-      stop()
+      stop("ERROR:Not a valid file type")
     }
     
     header <-
@@ -62,18 +61,18 @@ d2Parser <-
                    row.names = seq(1, XML::xmlSize(XML::xmlRoot(d))))
       #Get all the attributes specified in the
       data.attrs <- XML::xmlAttrs(XML::xmlRoot(d))
-      #Period
-      if (!is.na(data.attrs["period"])) {
+      if ( !is.null(data.attrs) ) {
+      if ( !is.na(data.attrs["period"]) ) {
         data$period <- data.attrs["period"]
       }
-      if (!is.na(data.attrs["orgUnit"])) {
+      if ( !is.na(data.attrs["orgUnit"]) ) {
         data$orgUnit <- data.attrs["orgUnit"]
       }
-      if (!is.na(data.attrs["attributeOptionCombo"])) {
+      if ( !is.na(data.attrs["attributeOptionCombo"]) ) {
         data$attributeOptionCombo <- data.attrs["attributeOptionCombo"]
       }
+      }
     }
-    
     if (type == "csv") {
       data <- read.csv(filename)
       #Get number of columns and assign the header
@@ -103,7 +102,7 @@ d2Parser <-
     
     
     data <- data[, header[header %in% names(data)]]
-    #data$value<-as.numeric(as.character(data$value))
+
     if (orgUnitIdScheme != "id") {
       data$orgUnit <-
         remapOUs(
@@ -139,6 +138,7 @@ d2Parser <-
           is.na(x) || missing(x) || x == ""
         })
       }
+    
     invalid.rows <-
       apply(apply(data, 2, invalid), 1, sum) == 0 #Anything which is not complete.
     if (sum(invalid.rows) != nrow(data)) {
