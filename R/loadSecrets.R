@@ -1,3 +1,61 @@
+#' @title GetCredentialsFromConsole()
+#' @description Obtains the credentials information from the console. 
+#' @return A list of baseurl, username and password
+#'
+GetCredentialsFromConsole <- function() {
+
+  s<-list(dhis=list())
+  s$dhis$username<-readline("Username: ")
+  s$dhis$password<-getPass::getPass()
+  s$dhis$baseurl<-readline("Server URL (ends with /): ")
+  return(s)
+}
+
+#' @title LoadConfig(config_path)
+#'
+#' @description Loads a JSON configuration file to access a DHIS2 instance
+#' @param config_path Path to the DHIS2 credentials file
+#' @return A list of baseurl, username and password
+#'
+LoadConfigFile <- function(config_path = NA) {
+  #Load from a file
+  if (!is.na(config_path)) {
+    if (file.access(config_path, mode = 4) == -1) {
+      stop(paste("Cannot read configuration located at",config_path))
+    }
+    
+    dhis_config <- jsonlite::fromJSON(config_path)
+    options("baseurl" = dhis_config$dhis$baseurl)
+    options("config" = config_path)
+    return(dhis_config)
+  } else {
+    stop("You must specify a credentials file!") }
+}
+
+
+#' @title DHISLogin(config_path)
+#'
+#' @param dhis_config List of DHIS2 credentials
+#'
+#' @return TRUE if you are able to login to the server. 
+#' 
+DHISLogin<-function(dhis_config) {
+  
+  url <- URLencode(URL = paste0(getOption("baseurl"), "api/me"))
+  #Logging in here will give us a cookie to reuse
+  r <- httr::GET(url ,
+                 httr::authenticate(dhis_config$dhis$username, dhis_config$dhis$password),
+                 httr::timeout(60))
+  if(r$status != 200L){
+    stop("Could not authenticate you with the server!")
+  } else {
+    me <- jsonlite::fromJSON(httr::content(r,as = "text"))
+    options("organisationUnit" = me$organisationUnits$id)
+    return(TRUE)
+  }
+}
+
+
 #' @export
 #' @importFrom utils URLencode
 #' @title loadSecrets(secrets)
@@ -12,33 +70,19 @@
 #' }
 #'
 #'
-#' @param secrets Location of the secrets file
+#' @param config_path Location of the configuration file to a DHIS2 server. 
 #' @return Returns a boolean value indicating that the secrets file is valid by accessing /api/me
 #'
-loadSecrets<-function(secrets=NA) {
+loadSecrets <- function(config_path = NA) {
   #Load from a file
-  if (!is.na(secrets) ) {
-  
-    assertthat::assert_that(file.exists(secrets))
-    s<-jsonlite::fromJSON(secrets) 
-    } else {
-    s<-list(dhis=list())
-    s$dhis$username<-readline("Username: ")
-    s$dhis$password<-getPass::getPass()
-    s$dhis$baseurl<-readline("Server URL (ends with /): ")
-}
-  
-  options("baseurl"= s$dhis$baseurl )
-  options("secrets"=secrets)
-  url<-URLencode( URL = paste0(getOption("baseurl"),"api/me") )
-  #Logging in here will give us a cookie to reuse
-  r<-httr::GET(url ,
-               httr::authenticate(s$dhis$username,s$dhis$password),
-               httr::timeout(60))
-  assertthat::assert_that(r$status == 200L)
-  r<- httr::content(r, "text")
-  me<-jsonlite::fromJSON(r)
-  options("organisationUnit" = me$organisationUnits$id)
-  #Set the cache time out in days
-  options("maxCacheAge" = 7)
+  if (is.na(config_path)) {
+    s <- GetCredentialsFromConsole()
+  } else {
+    s <- LoadConfigFile(config_path)
   }
+  
+  options("baseurl" = s$dhis$baseurl)
+  options("secrets" = config_path)
+  
+  DHISLogin(s)
+}
