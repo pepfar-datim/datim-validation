@@ -88,6 +88,8 @@ clearCache <-
     }
   }
 
+api_version<-function() { "29" }
+
 get_password <- function() {
   cat("Password: ")
   system("stty -echo")
