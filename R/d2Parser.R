@@ -84,6 +84,8 @@ d2Parser <-
       data <-
         data.frame(t(sapply(XML::xmlRoot(d) ["dataValue"], XML::xmlAttrs)),
                    row.names = seq(1, XML::xmlSize(XML::xmlRoot(d))))
+
+      
       #Get all the attributes specified in the
       data.attrs <- XML::xmlAttrs(XML::xmlRoot(d))
       if ( !is.null(data.attrs) ) {
@@ -97,7 +99,14 @@ d2Parser <-
         data$attributeOptionCombo <- data.attrs["attributeOptionCombo"]
       }
       }
+      
+      #Names in the XML must correspond exactly
+      if (!Reduce("&",names(data) %in% header)) {
+        stop("XML attributes must be one of the following:", 
+             paste(header,sep="",collapse=",")) }
+      
     }
+    
     if (type == "csv") {
       data <- read.csv(filename,header = csv_header)
       #Get number of columns and assign the header
@@ -113,7 +122,9 @@ d2Parser <-
     
     if (type == "json") {
       j <- jsonlite::fromJSON(txt = filename)
+
       data <- j$dataValues
+    
       if (!is.null(j[["period"]])) {
         data$period <- j$period
       }
@@ -123,8 +134,15 @@ d2Parser <-
       if (!is.null(j[["attributeOptionCombo"]])) {
         data$attributeOptionCombo <- j$attributeOptionComboid
       }
+      
+      #Names in the JSON must correspond exactly
+      if (!Reduce("&",names(data) %in% header)) {
+        stop("JSON attributes must be one of the following:", 
+             paste(header,sep="",collapse=",")) }
+      
     }
     
+
     
     data <- data[, header[header %in% names(data)]]
 

@@ -1,0 +1,28 @@
+{
+    "dataValues": [
+        {
+            "dataElement": "sqvgFXuNWTB",
+            "period": "2017Q1",
+            "orgUnit": "spOvV05GdUT",
+            "categoryOptionCombo": "MBCxSpEpqQ9",
+            "attributeOptionCombo": "sbOyCovT6P2",
+            "value": "183"
+        },
+        {
+            "dataElement": "AhqNYjuc5ug",
+            "period": "2016Oct",
+            "orgUnit": "m5qVRNk0mSx",
+            "disagg": "MD7ummNwSpv",
+            "mechanism": "sbOyCovT6P2",
+            "value": "44"
+        },
+        {
+            "dataElement": "RmWX6tcXxPv",
+            "period": "2015Oct",
+            "orgUnit": "U9CgqkymMSN",
+            "categoryOptionCombo": "YEKOM4PnA2D",
+            "attributeOptionCombo": "WQa4uNduUev",
+            "value": "0"
+        }
+    ]
+}

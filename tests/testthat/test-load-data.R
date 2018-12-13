@@ -73,6 +73,20 @@ test_that("We can read a JSON file coded with IDs", {
   expect_identical(names(d),d_names)
 })})
 
+with_mock_api({
+  test_that("We can error when the JSON attributes are not correct", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    expect_error(d2Parser(filename=test_config("test-json-bad-attributes.json"),
+                          type="json",
+                          organisationUnit = "KKFzPM8LoXs",
+                          dataElementIdScheme = "id",
+                          orgUnitIdScheme = "id",
+                          idScheme = "id",
+                          invalidData = FALSE),"JSON attributes must be one of the following")
+  })})
+
 
 context("Parse XML data")
 
@@ -93,6 +107,21 @@ test_that("We can read an XML file coded with IDs", {
   d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value")
   expect_identical(names(d),d_names)
 })})
+
+
+with_mock_api({
+  test_that("We can error when the XML attributes are not correct", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    expect_error(d2Parser(filename=test_config("test-xml-bad-attributes.xml"),
+                type="xml",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE),"XML attributes must be one of the following")
+  })})
 
 context("Can error on a wrong file type")
 
