@@ -60,7 +60,7 @@ getPeriodFromISO <- function(iso) {
     } else if (q == 4) {
       m <- "10"
     }  else {
-      (stop("Invalid quarter specified."))
+      (stop(paste("Invalid quarter specified in ", iso)))
     }
     add.months= function(date,n) seq(date, by = paste (n, "months"), length = 2)[2]
     startDate<-as.Date(paste0(y,m,"01"),"%Y%m%d")
@@ -87,3 +87,17 @@ getPeriodFromISO <- function(iso) {
     return(period)
 }
 
+
+#' @export
+#' @title checkPeriodIdentifiers(data)
+#' 
+#' @description Expect an error if any invalid period identifiers are supplied in the file.
+#'
+#' @param data A data frame which has been parsed by either d2Parser or sims2Parser
+#' @return TRUE if all periods are valid.
+#' 
+#' 
+checkPeriodIdentifiers<-function(data) { 
+  do.call(rbind.data.frame, lapply(data$period,getPeriodFromISO)) 
+  return(TRUE)
+  }

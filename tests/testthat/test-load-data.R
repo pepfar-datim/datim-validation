@@ -138,3 +138,17 @@ test_that("We can create an error on a bad file type", {
               invalidData = FALSE))
 })})
 
+with_mock_api({
+  test_that("We can create an error on a file with a bad period", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    expect_type(config,"list")
+    d<-d2Parser(filename=test_config("test-data-bad-periods.csv"),
+                          type="csv",
+                          organisationUnit = "KKFzPM8LoXs",
+                          dataElementIdScheme = "id",
+                          orgUnitIdScheme = "id",
+                          idScheme = "id",
+                          invalidData = FALSE)
+   expect_error(checkPeriodIdentifiers(d))
+  })})
+
