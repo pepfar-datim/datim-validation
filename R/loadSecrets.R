@@ -54,6 +54,18 @@ DHISLogin<-function(dhis_config) {
 }
 
 
+
+
+ValidateConfig<-function(dhis_config) {
+  
+  is.baseurl <-function(x) { grepl("^http(?:[s])?://.+/$", x)}
+  is.missing<- function(x) { is.na(x) || missing(x) || x == "" }
+
+  if (is.missing(dhis_config$dhis$username)) {stop("Username cannot by blank.")}
+  if (is.missing(dhis_config$dhis$password)) {stop("Username cannot by blank.")}
+  if (!is.baseurl(dhis_config$dhis$baseurl)) {stop("The base url does not appear to be valid. It should end in /")}
+}
+
 #' @export
 #' @importFrom utils URLencode
 #' @title loadSecrets(secrets)
@@ -78,6 +90,8 @@ loadSecrets <- function(config_path = NA) {
   } else {
     s <- LoadConfigFile(config_path)
   }
+  
+  ValidateConfig(s)
   options("baseurl" = s$dhis$baseurl)
   options("secrets" = config_path)
   options("maxCacheAge"="7 days")
