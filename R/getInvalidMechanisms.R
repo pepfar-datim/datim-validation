@@ -39,7 +39,9 @@ getInvalidMechanisms <-
       data_mechs$endDate_data <= data_mechs$endDate
     
     valid_mechs_ou <- data_mechs$attributeOptionCombo %in% mechs$id
+    
     valid_mechs <- valid_mechs_date & valid_mechs_ou
+    
     valid_mechs[is.na(valid_mechs)] <- FALSE
     
     data_mechs[!(valid_mechs), ]
