@@ -16,6 +16,24 @@ test_that("We can read a CSV file coded with IDs", {
   expect_identical(names(d),d_names)
 })
 
+test_that("We can read a headerless CSV file coded with IDs", {
+  config <- LoadConfigFile(test_config("test-config.json"))
+  expect_type(config,"list")
+  d<-d2Parser(filename=test_config("test-data-no-header.csv"),
+              type="csv",
+              organisationUnit = NA,
+              dataElementIdScheme = "id",
+              orgUnitIdScheme = "id",
+              idScheme = "id",
+              invalidData = FALSE,
+              csv_header = FALSE)
+  expect_type(d,"list")
+  expect_is(d,"data.frame")
+  d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value")
+  expect_identical(names(d),d_names)
+  expect_equal(NROW(d),13)
+})
+
 context("Parse JSON data")
 test_that("We can read a JSON file coded with IDs", {
   config <- LoadConfigFile(test_config("test-config.json"))

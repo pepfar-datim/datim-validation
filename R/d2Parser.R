@@ -15,6 +15,8 @@
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
+#' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
+#' files without a CSV header. 
 #'
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
@@ -28,7 +30,8 @@ d2Parser <-
            dataElementIdScheme = "id",
            orgUnitIdScheme = "id",
            idScheme = "id",
-           invalidData = FALSE) {
+           invalidData = FALSE,
+           csv_header = TRUE) {
     
     
     if (is.na(organisationUnit)) {
@@ -74,7 +77,7 @@ d2Parser <-
       }
     }
     if (type == "csv") {
-      data <- read.csv(filename)
+      data <- read.csv(filename,header = csv_header)
       #Get number of columns and assign the header
       names(data)[1:ncol(data)]<-header[1:ncol(data)] 
       #Data element, period and orgunit must be specified
