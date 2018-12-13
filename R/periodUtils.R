@@ -17,7 +17,7 @@ getPeriodType<-function(iso){
   else if ( grepl("^\\d{4}Q\\d{1}$",iso,perl=TRUE) )  {return("Quarterly") }
   else if ( grepl("^\\d{4}$",iso,perl=TRUE) )  {return("Yearly") }
   else if ( grepl("^\\d{4}Oct$",iso,perl=TRUE) )  {return("FinancialOct") }
-  else {return(NULL)}
+  else {return(NA)}
 }
 
 #' @export
@@ -30,9 +30,10 @@ getPeriodType<-function(iso){
 #' 
 #' 
 getPeriodFromISO <- function(iso) {
+  if(is.na(iso)) {
+    stop("You must supply a period identifier")
+  }
   pt <- getPeriodType(iso)
-  if (is.null(pt)) {return(NULL)}
-  assertthat::noNA(pt)
   startDate <- NA
   endDate <- NA
   if (pt == "Daily") {
@@ -73,7 +74,16 @@ getPeriodFromISO <- function(iso) {
     startDate<-as.Date(paste0(y,"1001"),"%Y%m%d")
     endDate<-startDate + years(1) - days(1)
   }
-  period<-data.frame(iso=iso,startDate=startDate,endDate=endDate,periodType=pt)
-  return(period)
+
+    period<-data.frame(
+      iso = iso,
+      startDate = startDate,
+      endDate = endDate,
+      periodType = pt,
+      stringsAsFactors = FALSE )
+    
+  if ( anyNA(period) || is.null(period) ) {stop(paste0(iso, "is not a valid period."))}
+  
+    return(period)
 }
 
