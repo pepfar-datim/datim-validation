@@ -4,7 +4,6 @@ with_mock_api({
   test_that("We can get a listing of validation rules", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
-    print(getOption("maxCacheAge"))
     test_vrs<-getValidationRules()
     expect_type(test_vrs,"list")
     expect_is(test_vrs,"data.frame")

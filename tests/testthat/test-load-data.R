@@ -1,11 +1,13 @@
 context("Parse CSV data")
 
+with_mock_api({
 test_that("We can read a CSV file coded with IDs", {
   config <- LoadConfigFile(test_config("test-config.json"))
+  options("maxCacheAge"=NULL)
   expect_type(config,"list")
   d<-d2Parser(filename=test_config("test-data.csv"),
               type="csv",
-              organisationUnit = NA,
+              organisationUnit = "KKFzPM8LoXs",
               dataElementIdScheme = "id",
               orgUnitIdScheme = "id",
               idScheme = "id",
@@ -14,14 +16,16 @@ test_that("We can read a CSV file coded with IDs", {
   expect_is(d,"data.frame")
   d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value")
   expect_identical(names(d),d_names)
-})
+})})
 
+with_mock_api({
 test_that("We can read a headerless CSV file coded with IDs", {
   config <- LoadConfigFile(test_config("test-config.json"))
+  options("maxCacheAge"=NULL)
   expect_type(config,"list")
   d<-d2Parser(filename=test_config("test-data-no-header.csv"),
               type="csv",
-              organisationUnit = NA,
+              organisationUnit = "KKFzPM8LoXs",
               dataElementIdScheme = "id",
               orgUnitIdScheme = "id",
               idScheme = "id",
@@ -31,16 +35,34 @@ test_that("We can read a headerless CSV file coded with IDs", {
   expect_is(d,"data.frame")
   d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value")
   expect_identical(names(d),d_names)
-  expect_equal(NROW(d),13)
-})
+  expect_equal(NROW(d),5)
+})})
+
+with_mock_api({
+test_that("We can error when mechanisms are not coded properly", {
+  config <- LoadConfigFile(test_config("test-config.json"))
+  options("maxCacheAge"=NULL)
+  expect_type(config,"list")
+  expect_error(d2Parser(filename=test_config("test-data-bad-mechs.csv"),
+              type="csv",
+              organisationUnit = "KKFzPM8LoXs",
+              dataElementIdScheme = "id",
+              orgUnitIdScheme = "id",
+              idScheme = "id",
+              invalidData = FALSE,
+              csv_header = FALSE))
+})})
 
 context("Parse JSON data")
+
+with_mock_api({
 test_that("We can read a JSON file coded with IDs", {
   config <- LoadConfigFile(test_config("test-config.json"))
+  options("maxCacheAge"=NULL)
   expect_type(config,"list")
   d<-d2Parser(filename=test_config("test-json.json"),
               type="json",
-              organisationUnit = NA,
+              organisationUnit = "KKFzPM8LoXs",
               dataElementIdScheme = "id",
               orgUnitIdScheme = "id",
               idScheme = "id",
@@ -49,16 +71,19 @@ test_that("We can read a JSON file coded with IDs", {
   expect_is(d,"data.frame")
   d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value")
   expect_identical(names(d),d_names)
-})
+})})
 
 
 context("Parse XML data")
+
+with_mock_api({
 test_that("We can read an XML file coded with IDs", {
   config <- LoadConfigFile(test_config("test-config.json"))
+  options("maxCacheAge"=NULL)
   expect_type(config,"list")
   d<-d2Parser(filename=test_config("test-xml.xml"),
               type="xml",
-              organisationUnit = NA,
+              organisationUnit = "KKFzPM8LoXs",
               dataElementIdScheme = "id",
               orgUnitIdScheme = "id",
               idScheme = "id",
@@ -67,18 +92,20 @@ test_that("We can read an XML file coded with IDs", {
   expect_is(d,"data.frame")
   d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value")
   expect_identical(names(d),d_names)
-})
+})})
 
 context("Can error on a wrong file type")
 
+with_mock_api({
 test_that("We can create an error on a bad file type", {
   config <- LoadConfigFile(test_config("test-config.json"))
   expect_type(config,"list")
   expect_error(d2Parser(filename=test_config("test-xml.xml"),
               type="foo",
-              organisationUnit = NA,
+              organisationUnit = "KKFzPM8LoXs",
               dataElementIdScheme = "id",
               orgUnitIdScheme = "id",
               idScheme = "id",
               invalidData = FALSE))
-})
+})})
+

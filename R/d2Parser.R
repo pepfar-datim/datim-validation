@@ -1,3 +1,25 @@
+
+#' @title Utility function to check that the supplied coding scheme is correct
+#'
+#' @description checkCodingScheme will ensure that all indentifiers after parsing are valid UIDs,
+#' or in the case of periods, valid periods. 
+#'
+#' @param data A parse DHIS2 data payload
+#' @return Only returns an error if the 
+checkCodingScheme <- function(data) {
+  #This is a very superficial and quick check, just to be sure that the coding scheme is correct. 
+  #Additional validation will be required to be sure data elements, catcombos and orgunits are properly 
+  #Associated. 
+  data_element_check<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
+  if (length(data_element_check) > 0) {stop("The following data element identifiers could not be found:",paste(data_element_check,sep="",collapse=","))}
+  orgunit_check<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap(organisationUnit = getOption("organisationUnit"))$id)]
+  if (length(orgunit_check) > 0) {stop("The following org unit identifiers could not be found:",paste(orgunit_check,sep="",collapse=","))}
+  coc_check<-unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap()$id)]
+  if (length(coc_check) > 0) {stop("The following category option combo identifiers could not be found:",paste(coc_check,sep="",collapse=","))}
+  acoc_check<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap(organisationUnit = getOption("organisationUnit"))$id)]
+  if (length(acoc_check) > 0) {stop("The following attribute option combo identifiers could not be found:",paste(acoc_check,sep="",collapse=","))}
+}
+
 #' @export
 #' @importFrom utils read.csv
 #' @importFrom utils select.list
@@ -154,6 +176,9 @@ d2Parser <-
     if (!invalidData) {
       data <- data[invalid.rows, ]
     }
+    
+    checkCodingScheme(data)
+    
     return(data)
     
   }

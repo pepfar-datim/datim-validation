@@ -4,7 +4,9 @@ with_mock_api({
   test_that("We can get an mechanism map", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
-    test_mechs<-getMechanismsMap()
+    
+    expect_warning(getMechanismsMap())
+    test_mechs<-getMechanismsMap(organisationUnit="KKFzPM8LoXs")
     expect_type(test_mechs,"list")
     expect_is(test_mechs,"data.frame")
     mech_map_names<-c("name","id","code","startDate","endDate")
