@@ -6,39 +6,54 @@
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
 #' @return Returns a data frame of "data" which was submitted along for a reason of why the data is considered to be invalid.
 
-getDataElementsOrgunits<-function(organisationUnit=NA,datasets=NA) {
-  if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
-  #if ( length(datasets) == 0 || is.na(datasets) ){
-  allDataSets<-getDataSets() 
-  #}
-  
-  dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
-  
-  while(!dataSetValid || is.na(dataSetValid) ) {
-    datasets<-selectDataset()
-    if (length(datasets) == 0) {break;}
-    dataSetValid <- Reduce("&",datasets %in% allDataSets$id) }
-  
-  if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
-  
-  sig<-digest::digest(paste(datasets,organisationUnit,sep="",collapse=""),algo='md5', serialize = FALSE)
-  
-  des_ous.all<-getCachedObject(sig)
-  
-  if (is.null(des_ous.all)){
-    
-      for (i in 1:length(datasets)) {
-      if (i==1) { des_ous.all<-list() }
-      url<-paste0(getOption("baseurl"),"api/organisationUnits?fields=id&paging=false&filter=path:like:",organisationUnit,"&filter=dataSets.id:eq:",datasets[i])
-      r<-httr::GET(url,httr::timeout(60))
-      r<- httr::content(r, "text")
-      ous<-unique(jsonlite::fromJSON(r,flatten=TRUE)$organisationUnits$id)
-      #OUs
-      des<-unique(getValidDataElements(datasets[i])$dataelementuid)
-      des_ous<-list(dataset=datasets[i],list(ous=ous,des=des)) 
-      des_ous.all<-rlist::list.append(des_ous.all,des_ous)
-      } 
+getDataElementsOrgunits <- function(organisationUnit = NA,
+                                    datasets = NA) {
+  if (is.na(organisationUnit)) {
+    organisationUnit = getOption("organisationUnit")
   }
+  
+  allDataSets <- getDataSets()
+  
+  if (is.na(datasets)) {
+    datasets <- selectDataset()
+  }
+  
+  dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
+  
+  if (!dataSetValid) {
+    stop("Invalid dataset")
+  }
+  
+    for (i in seq_along(datasets)) {
+  
+      if (i == 1)  { des_ous.all <- list() }
+      
+      url <-
+        paste0(
+          getOption("baseurl"),
+          "api/organisationUnits?fields=id&paging=false&filter=path:like:",
+          organisationUnit,
+          "&filter=dataSets.id:eq:",
+          datasets[i]
+        )
+      
+      sig <- digest::digest(paste0(url), algo = 'md5', serialize = FALSE)
+      des_ous <- getCachedObject(sig)
+      
+      if (is.null(des_ous)) {
+        r <- httr::GET(url, httr::timeout(60))
+        r <- httr::content(r, "text")
+        ous <-
+          unique(jsonlite::fromJSON(r, flatten = TRUE)$organisationUnits$id)
+        #OUs
+        des <-
+          unique(getValidDataElements(datasets[i])$dataelementuid)
+        des_ous <- list(dataset = datasets[i], list(ous = ous, des = des))
+        saveCachedObject(des_ous, sig)
+      }
+      
+      des_ous.all <- rlist::list.append(des_ous.all, des_ous)
+    }
 
   return(des_ous.all) }
 
