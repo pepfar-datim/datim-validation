@@ -128,6 +128,7 @@ context("Can error on a wrong file type")
 with_mock_api({
 test_that("We can create an error on a bad file type", {
   config <- LoadConfigFile(test_config("test-config.json"))
+  options("maxCacheAge"=NULL)
   expect_type(config,"list")
   expect_error(d2Parser(filename=test_config("test-xml.xml"),
               type="foo",
@@ -138,9 +139,12 @@ test_that("We can create an error on a bad file type", {
               invalidData = FALSE))
 })})
 
+context("Can error on a wrong period identifier")
+
 with_mock_api({
   test_that("We can create an error on a file with a bad period", {
     config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
     expect_type(config,"list")
     d<-d2Parser(filename=test_config("test-data-bad-periods.csv"),
                           type="csv",
@@ -152,3 +156,19 @@ with_mock_api({
    expect_error(checkPeriodIdentifiers(d))
   })})
 
+context("Can error on a bad mechanism/period association")
+
+with_mock_api({
+  test_that("We can create an error for an invalid/mechanism period association", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d<-d2Parser(filename=test_config("test-data-bad-periods-mechanisms.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE)
+    expect_error(checkMechanismPeriodValidity(d),"Invalid mechanisms for periods found: 1973Oct")
+  })})
