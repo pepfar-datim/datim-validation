@@ -14,7 +14,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
   
   allDataSets <- getDataSets()
   
-  if (is.na(datasets)) {
+  if (any(is.na(datasets))) {
     datasets <- selectDataset()
   }
   
@@ -31,7 +31,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       url <-
         paste0(
           getOption("baseurl"),
-          "api/organisationUnits?fields=id&paging=false&filter=path:like:",
+          "api/",api_version(),"/organisationUnits?fields=id&paging=false&filter=path:like:",
           organisationUnit,
           "&filter=dataSets.id:eq:",
           datasets[i]

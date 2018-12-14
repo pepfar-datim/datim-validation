@@ -26,9 +26,9 @@ getValidDataElements<-function(datasets=NA) {
     
     if ( allDataSets[allDataSets$id==datasets[i],"formType"] == "CUSTOM" ) {
       
-      url<-URLencode(paste0(getOption("baseurl"),"api/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",datasets[i],"&paging=false"))
+      url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",datasets[i],"&paging=false"))
       
-    } else { url<-URLencode(paste0(getOption("baseurl"),"api/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",datasets[i],"&paging=false")) }
+    } else { url<-URLencode(paste0(getOption("baseurl"),"api/", api_version(),"/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",datasets[i],"&paging=false")) }
     
     sig<-digest::digest(paste0(url,datasets[i]),algo='md5', serialize = FALSE)
     des<-getCachedObject(sig)
