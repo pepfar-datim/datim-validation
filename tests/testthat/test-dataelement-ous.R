@@ -13,3 +13,23 @@ with_mock_api({
     expect_setequal(names(test_ous_des[[1]][[2]]),c("ous","des"))
   })
 })
+
+
+context("Flag invalid data element orgunit combinations")
+
+with_mock_api({
+  test_that("We flag invalid data element / orgunit associations in the data", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d<-d2Parser(filename=test_config("test-data-bad-periods.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE) 
+  datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
+  expect_warning(test_data<-getInvalidDatasetMembers(d,"KKFzPM8LoXs",datasets))
+  expect_equal(NROW(test_data),1) 
+})})

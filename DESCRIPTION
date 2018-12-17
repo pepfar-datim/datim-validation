@@ -19,7 +19,8 @@ Imports:
     rlist,
     ISOweek,
     lubridate,
-    getPass
+    getPass,
+    dplyr
 Suggests: 
     doMC,
     foreach,

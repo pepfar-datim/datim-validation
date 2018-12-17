@@ -58,68 +58,30 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
   return(des_ous.all) }
 
 
-#' @export
-#' @title getInvalidOrgunitsFromDatasets(data,organisationUnit,datasets)
-#' 
-#' @description Returns a subset of data which exists in the data, but
-#' which do not have corresponding organiation unit assignments
-#' 
-#' @param data D2 compliant data frame
-#' @param organisationUnit Organisation unit. Defaults to user organisation unit if not supplied explicitly.
-#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @return Returns a data frame of "data" which was submitted along for a reason
-#'  of why the data is considered to be invalid.
-getInvalidOrgunitsFromDatasets<-function(data,organisationUnit=NA,datasets=NA) {
-  if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
-  des_ous<-getDataElementsOrgunits(organisationUnit,datasets)
-  all_ous <- c()
-  for(l in des_ous){
-    all_ous <- c(all_ous, l[[2]]$ous)
-  }
-  return(subset(data,!(orgUnit %in% all_ous)))
-}
 
 #' @export
-#' @title getInvalidOrgunitsFromDatasets(data,organisationUnit,datasets)
+#' @title getInvalidDatasetMembers(data,organisationUnit,datasets)
 #' 
 #' @description Returns a data frame invalid data elements which exist in the data 
-#' but not the datasets
+#' but which do not have a valid organistion unit / dataset association. 
 #'
 #' @param data D2 compliant data frame
-#' @param dataElement Should be the UID of the organisation unit ancestor.
+#' @param organisationUnit Should be the UID of the organisation unit ancestor, typically the operating unit. 
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @return Returns a data frame of "data" which was submitted along for a reason of why the 
-#' data is considered to be invalid.
+#' @return Returns subset of data which contains invalid data element / organisation unit associations.
 #' 
 
-getInvalidDataElementFromDatasets<-function(data,dataElement,datasets) {
+getInvalidDatasetMembers<-function(data=NA,organisationUnit,datasets=NA) {
+  
   if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
+  if ( is.na(data) ) {stop("Data cannot be missing!")}
+  if ( is.na(datasets)) {stop("Please specifiy a list of data sets!")}
+  
   des_ous<-getDataElementsOrgunits(organisationUnit,datasets)
-  subset(data,!(dataElement %in% des_ous$des))
+  des_ous_map<-plyr::ldply(des_ous,function(x) expand.grid(dataElement=x[[2]]$des,orgUnit=x[[2]]$ous,stringsAsFactors = FALSE))
+  data_des_ous_map<-unique(data[,c("dataElement","orgUnit")])
+  result_data<-dplyr::anti_join(data,des_ous_map,by=c("dataElement","orgUnit"))
+  if (NROW(result_data > 0 )) {
+    warning("Invalid data element/orgunit associations were detected!")
+    }
 }
-
-getInvalidDatasetMembers<-function(data,organisationUnit,datasets=NA){
-  allDataSets<-getDataSets()
-  dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
-  while(!dataSetValid || is.na(dataSetValid) ) {
-    datasets<-selectDataset()
-    if (length(datasets) == 0) {break;}
-    dataSetValid <- Reduce("&",datasets %in% allDataSets$id) }
-  if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
-  foo=data.frame(dataElement=character(),period=character(),orgUnit=character(),categoryOptionCombo=character(),
-                 attributeOptionCombo=character(),value=character(),type=character())
-  ous<-getInvalidOrgunitsFromDatasets(data,organisationUnit,datasets)
-  if (!is.null(ous) & nrow(ous) > 0) {
-    ous$type="ORGUNIT DOES NOT EXIST IN DATASETS"
-    foo<-rbind(foo,ous)
-  }
-  
-  des<-getInvalidDataElementFromDatasets(data,organisationUnit,datasets)
-  if (!is.null(des) & nrow(des) > 0) {
-    des$type="DATAELEMENT DOES NOT EXIST IN DATASETS"
-    foo<-rbind(foo,des)
-  }
-  
-  return(foo)
-}
-  
