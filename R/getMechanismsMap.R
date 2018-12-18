@@ -21,23 +21,26 @@ getMechanismsMap<-function(organisationUnit=NA) {
   url<-URLencode(url)
   sig<-digest::digest(paste0(url),algo='md5', serialize = FALSE)
   mechs<-getCachedObject(sig)
-  if (!is.null(mechs))  { return(mechs) } else
-  if(is.null(mechs)) {
+    if(is.null(mechs)) {
   
-  r<-httr::GET(url,httr::timeout(60))
-  if (r$status == 200L ){
-  r<- httr::content(r, "text")
-  mechs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
-  #Need to unwind the dates
-  mechs$startDate<-as.Date(sapply(mechs$categoryOptions, function(x) ifelse(is.null(x$startDate),"1900-01-01",x$startDate)),"%Y-%m-%d")
-  mechs$endDate<-as.Date(sapply(mechs$categoryOptions, function(x) ifelse(is.null(x$endDate),"1900-01-01",x$endDate)),"%Y-%m-%d")
-  mechs<-mechs[,-which(names(mechs) == "categoryOptions")]
-  saveCachedObject(mechs,sig) }
-  return( mechs ) } 
+    r <- httr::GET(url, httr::timeout(60))
+    if (r$status == 200L) {
+      r <- httr::content(r, "text")
+      mechs <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
+      #Need to unwind the dates
+      mechs$startDate <-
+        as.Date(sapply(mechs$categoryOptions, function(x)
+          ifelse(is.null(x$startDate), "1900-01-01", x$startDate)),
+          "%Y-%m-%d")
+      mechs$endDate <-
+        as.Date(sapply(mechs$categoryOptions, function(x)
+          ifelse(is.null(x$endDate), "1900-01-01", x$endDate)),
+          "%Y-%m-%d")
+      mechs <- mechs[, -which(names(mechs) == "categoryOptions")]
+      saveCachedObject(mechs, sig)
+    } else { stop(paste("Could not retreive mechanisms",httr::content(r,"text"))) }
+  }
   
-  else {
-      print(paste("Could not retreive mechanisms",httr::content(r,"text")))
-      stop()
-    }
+  return(mechs)
   
 }
