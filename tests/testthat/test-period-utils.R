@@ -93,3 +93,22 @@ test_that("We can parse a financial Oct period", {
                           stringsAsFactors = FALSE)
   expect_identical(test_date,test_result)
 })
+
+test_that("We can error on a bad period", {
+  d<-as.data.frame(matrix(NA,ncol=1,nrow=3))
+  names(d)<-c("period")
+  d$period<-c("2017Q1","2017Q2","2017Q5")
+ expect_error(checkPeriodIdentifiers(d), "Invalid quarter specified in  2017Q5") })
+
+test_that("We can error on a missing period", {
+  d<-as.data.frame(matrix(NA,ncol=1,nrow=3))
+  names(d)<-c("period")
+  d$period<-c("2017Q1","2017Q2",NA)
+  expect_error(checkPeriodIdentifiers(d),"You must supply a period identifier") })
+
+
+test_that("We get true on good periods", {
+  d<-as.data.frame(matrix(NA,ncol=1,nrow=7))
+  names(d)<-c("period")
+  d$period<-c("2018Q3","2017Q1","2017Q2","2017Q4", "2017","2017Oct","2017W2")
+  expect_true(checkPeriodIdentifiers(d)) })
