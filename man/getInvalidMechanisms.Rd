@@ -12,7 +12,7 @@ getInvalidMechanisms(data, organisationUnit = NA)
 \item{organisationUnit}{UID of the operating unit.Defaults to the user organisation unit if left blank}
 }
 \value{
-Returns a vector of non-valid mechanisms
+Returns a data frame of invalid mechanisms
 }
 \description{
 checkValidMechanisms should be supplied a d2Parser compliant data frame along with the operating unit UID

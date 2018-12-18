@@ -1,9 +1,9 @@
 #' @export
-#' @title (checkMechanismPeriodValidity(data)
+#' @title checkMechanismPeriodValidity(data)
 #' 
 #' @description This function will return an object of invalid mechanisms and periods. All data which is reported 
 #' must have a period within the valid start and end dates of the attribute option combination to which it is assigned.
-#'
+#' 
 #' @param data A data frame which has been parsed by either d2Parser or sims2Parser
 #' @return Returns a data frame of invalid period-mechanism combinations. 
 #' 

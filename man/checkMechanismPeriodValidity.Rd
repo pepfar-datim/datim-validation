@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkMechanismPeriodValidity.R
 \name{checkMechanismPeriodValidity}
 \alias{checkMechanismPeriodValidity}
-\title{(checkMechanismPeriodValidity(data)}
+\title{checkMechanismPeriodValidity(data)}
 \usage{
 checkMechanismPeriodValidity(data)
 }

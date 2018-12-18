@@ -4,8 +4,9 @@
 \alias{d2Parser}
 \title{General purpose parsing function for different formats of DHIS2 data}
 \usage{
-d2Parser(filename, type, organisationUnit = NA, dataElementIdScheme = "id",
-  orgUnitIdScheme = "id", idScheme = "id", invalidData = FALSE)
+d2Parser(filename, type, organisationUnit = NA,
+  dataElementIdScheme = "id", orgUnitIdScheme = "id",
+  idScheme = "id", invalidData = FALSE, csv_header = TRUE)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid DHIS2 import file}
@@ -23,6 +24,9 @@ then the organisation units are assumed to be already specififed as UIDs}
 \item{idScheme}{Remapping scheme for category option combos}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
+
+\item{csv_header}{By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
+files without a CSV header.}
 }
 \value{
 Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"

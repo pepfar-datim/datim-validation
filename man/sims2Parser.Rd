@@ -4,9 +4,9 @@
 \alias{sims2Parser}
 \title{Special purpose parsing function for SIMS2 aggregate data with duplicates}
 \usage{
-sims2Parser(filename, dataElementIdScheme = "code", orgUnitIdScheme = "id",
-  idScheme = "id", invalidData = FALSE, hasHeader = TRUE,
-  isoPeriod = NA)
+sims2Parser(filename, dataElementIdScheme = "code",
+  orgUnitIdScheme = "id", idScheme = "id", invalidData = FALSE,
+  hasHeader = TRUE, isoPeriod = NA)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid SIMS2 aggregate file. See the separate spec for details}

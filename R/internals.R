@@ -88,8 +88,20 @@ clearCache <-
     }
   }
 
-api_version<-function() { "29" }
+#' Title
+#'
+#' @return Version of the API
+#' @export
+#'
+#' 
+api_version<-function() { "27" }
 
+#' Title 
+#'
+#' @return Returns a password
+#' @export
+#'
+#' 
 get_password <- function() {
   cat("Password: ")
   system("stty -echo")

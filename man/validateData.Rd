@@ -4,8 +4,8 @@
 \alias{validateData}
 \title{Function which checks the of a DATIM data payload agaist define validation rules}
 \usage{
-validateData(data, organisationUnit = NA, return_violations_only = TRUE,
-  parallel = TRUE)
+validateData(data, organisationUnit = NA,
+  return_violations_only = TRUE, parallel = TRUE, datasets = NA)
 }
 \arguments{
 \item{data}{d2Parser data frame}
