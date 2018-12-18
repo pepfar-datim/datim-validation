@@ -6,9 +6,11 @@
 #' @param d A d2 parsed data frame
 #' @return Returns a data frame of d2 data, with exact duplicates.
 getExactDuplicates<-function(d){
-  d %>% 
+  dups<-d %>% 
     dplyr::group_by(.,dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo) %>% 
-    dplyr::summarise(count=n()) %>% dplyr::filter(n>1)
+    dplyr::summarise(count=n()) %>% dplyr::filter(count>1)
+  if (NROW(d) > 0 ) { warning("Your data contains exact duplicates!"); }
+  return(dups)
 }
 
 #' @export
