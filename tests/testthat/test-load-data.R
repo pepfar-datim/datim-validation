@@ -172,3 +172,19 @@ with_mock_api({
                 invalidData = FALSE)
     expect_error(checkMechanismPeriodValidity(d),"Invalid mechanisms for periods found: 1973Oct")
   })})
+
+context("Can error on an invalid orgunit UID")
+
+with_mock_api({
+  test_that("We can create an error for an invalid organisation unit identifier", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    expect_error(d2Parser(filename=test_config("test-data-bad-ou-uid.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE), "The following org unit identifiers could not be found:SiuNE0ywCW4")
+  })})
