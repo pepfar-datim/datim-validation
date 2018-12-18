@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/jason-p-pickering/datim-validation?branch=master)](https://travis-ci.org/jason-p-pickering/datim-validation)
+[![codecov.io](https://codecov.io/github/jason-p-pickering/datim-validation/coverage.svg?branch=master)](https://codecov.io/github/jason-p-pickering/datim-validation?branch=master)
+
 # datim-validation
 Datim validation scripts
 
