@@ -30,6 +30,7 @@ Suggests:
     rmarkdown,
     roxygen2,
     tcltk,
-    testthat
+    testthat,
+    covr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
