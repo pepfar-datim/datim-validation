@@ -6,10 +6,9 @@
 #' @param d A d2 parsed data frame
 #' @return Returns a data frame of d2 data, with exact duplicates.
 getExactDuplicates<-function(d){
-  foo<-duplicated(d[,c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo")])
-  foo<-unique(d[foo,c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo")])
-  foo<-merge(d,foo,by=c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo"))
-  return(foo)
+  d %>% 
+    dplyr::group_by(.,dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo) %>% 
+    dplyr::summarise(count=n()) %>% dplyr::filter(n>1)
 }
 
 #' @export
