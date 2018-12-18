@@ -9,7 +9,7 @@ getExactDuplicates<-function(d){
   dups<-d %>% 
     dplyr::group_by(.,dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo) %>% 
     dplyr::summarise(count=n()) %>% dplyr::filter(count>1)
-  if (NROW(d) > 0 ) { warning("Your data contains exact duplicates!"); }
+  if ( NROW(dups) > 0 ) { warning("Your data contains exact duplicates!"); }
   return(dups)
 }
 
