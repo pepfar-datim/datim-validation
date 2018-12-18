@@ -4,4 +4,4 @@ test_config <- function(fname) rprojroot::find_testthat_root_file("config", fnam
 
 test_that("We can fail the build", {
   
-  expect_error (NA) })
+  expect_error (error()) })
