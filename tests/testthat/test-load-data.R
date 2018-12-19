@@ -156,10 +156,10 @@ with_mock_api({
    expect_error(checkPeriodIdentifiers(d))
   })})
 
-context("Can error on a bad mechanism/period association")
+context("Can return bad mechanism/period association")
 
 with_mock_api({
-  test_that("We can create an error for an invalid/mechanism period association", {
+  test_that("We can create an warning for an invalid/mechanism period association", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     expect_type(config,"list")
@@ -170,8 +170,31 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE)
-    expect_error(checkMechanismPeriodValidity(d),"Invalid mechanisms for periods found: 1973Oct")
+    expect_warning(bad_mechs<-checkMechanismValidity(d,organisationUnit="KKFzPM8LoXs", return_violations=TRUE),"Invalid mechanisms found!")
+    expect_type(bad_mechs,"list")
+    expect_is(bad_mechs,"data.frame")
+    bad_mechs_names<-c("attributeOptionCombo","period","startDate","endDate","periodType","code","startDate_mech","endDate_mech","is_valid")
+    expect_setequal(names(bad_mechs),bad_mechs_names)
   })})
+
+context("Can warn on bad mechanism/period associations")
+
+with_mock_api({
+  test_that("We can create an warning for an invalid/mechanism period association", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d<-d2Parser(filename=test_config("test-data-bad-periods-mechanisms.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE)
+    expect_warning(bad_mechs<-checkMechanismValidity(d,organisationUnit="KKFzPM8LoXs", return_violations=FALSE),"Invalid mechanisms found!")
+    expect_null(bad_mechs)
+  })})
+
 
 context("Can error on an invalid orgunit UID")
 

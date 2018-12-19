@@ -7,10 +7,12 @@
 #' are not met, the data will be flagged as being invalid. 
 #' 
 #' @param data A data frame which has been parsed by either d2Parser or sims2Parser
+#' @param organisationUnit UID of the operating unit.
+#' @param return_violations Should the function return a list of violations?
 #' @return Returns a data frame of invalid period-mechanism combinations. Returns TRUE if there are no violations. 
 #' 
 #' 
-checkMechanismValidity <- function(data, organisationUnit=NA) {
+checkMechanismValidity <- function(data, organisationUnit=NA, return_violations=TRUE) {
   
   if (is.na(organisationUnit)) {
     organisationUnit = getOption("organisationUnit")
@@ -47,8 +49,9 @@ checkMechanismValidity <- function(data, organisationUnit=NA) {
   if (NROW(data_mechs_periods) > 0) {
     
     warning("Invalid mechanisms found!")
-    return(data_mechs_periods)
-  
+    
+    if (return_violations) {return(data_mechs_periods)}
+    
     } else {
     return(TRUE)
   }
