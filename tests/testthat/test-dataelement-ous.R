@@ -22,7 +22,7 @@ with_mock_api({
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     expect_type(config,"list")
-    d<-d2Parser(filename=test_config("test-data-bad-periods.csv"),
+    d<-d2Parser(filename=test_config("test-data-bad-des-ous.csv"),
                 type="csv",
                 organisationUnit = "KKFzPM8LoXs",
                 dataElementIdScheme = "id",
@@ -30,6 +30,27 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE) 
   datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
-  expect_warning(test_data<-getInvalidDatasetMembers(d,"KKFzPM8LoXs",datasets))
+  expect_warning(test_data<-checkDataElementOrgunitValidity(d,"KKFzPM8LoXs",datasets))
   expect_equal(NROW(test_data),1) 
 })})
+
+
+context("Flag invalid data element disagg combinations")
+
+with_mock_api({
+  test_that("We flag invalid data element / disagg associations in the data", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d<-d2Parser(filename=test_config("test-data-bad-de-disagg.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE) 
+    datasets<-c("i29foJcLY9Y","STL4izfLznL")
+    expect_warning(test_data<-checkDataElementDisaggValidity(d,datasets=datasets,return_violations=TRUE))
+    expect_equal(NROW(test_data),1) 
+    expect_equal(test_data$storedby[1], "BAD")
+  })})

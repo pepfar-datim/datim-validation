@@ -175,24 +175,30 @@ d2Parser <-
     #Data frame needs to be completely flattened to characters
     data <- plyr::colwise(as.character)(data)
     
-    invalid <-
+    notMissing <-
       function(x) {
         sapply(x, function(x) {
-          is.na(x) || missing(x) || x == ""
+          !is.na(x) || !missing(x) || x != ""
         })
+        
       }
     
-    invalid.rows <-
-      apply(apply(data, 2, invalid), 1, sum) == 0 #Anything which is not complete.
-    if (sum(invalid.rows) != nrow(data)) {
-      foo <- nrow(data) - sum(invalid.rows)
+    valid_rows<- data %>% 
+      dplyr::select(dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo,value) %>%
+      dplyr::mutate_all(notMissing) %>% 
+      dplyr::mutate(sum = rowSums(.[1:6])) %>% 
+      dplyr::mutate(is_valid = (sum==6L) ) %>%
+      dplyr::pull(is_valid) 
+    
+    if (sum(valid_rows) != NROW(data)) {
+      foo <- nrow(data) - sum(!valid_rows)
       msg <-
         paste(foo,
               " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
     if (!invalidData) {
-      data <- data[invalid.rows, ]
+      data <- data[valid_rows, ]
     }
     
     checkCodingScheme(data)

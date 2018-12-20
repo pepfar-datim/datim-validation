@@ -14,7 +14,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
   
   allDataSets <- getDataSets()
   
-  if (any(is.na(datasets))) {
+  if ( length(datasets) == 0 | any(is.na(datasets)) ) {
     datasets <- selectDataset()
   }
   
@@ -60,7 +60,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 
 
 #' @export
-#' @title getInvalidDatasetMembers(data,organisationUnit,datasets)
+#' @title checkDataElementOrgunitValidity(data,organisationUnit,datasets)
 #' 
 #' @description Returns a data frame invalid data elements which exist in the data 
 #' but which do not have a valid organistion unit / dataset association. 
@@ -68,14 +68,15 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #' @param data D2 compliant data frame
 #' @param organisationUnit Should be the UID of the organisation unit ancestor, typically the operating unit. 
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @return Returns subset of data which contains invalid data element / organisation unit associations.
+#' @param return_violations Return the invalid data if TRUE
+#'  @return Returns subset of data which contains invalid data element / organisation unit associations.
 #' 
 
-getInvalidDatasetMembers<-function(data=NA,organisationUnit,datasets=NA) {
+checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE) {
   
   if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
-  if ( is.na(data) ) {stop("Data cannot be missing!")}
-  if ( is.na(datasets)) {stop("Please specifiy a list of data sets!")}
+  if ( NROW(data) == 0  ) {stop("Data cannot be missing!")}
+  if ( length(datasets) == 0 | any(is.na(datasets)) ) { stop("Please specifiy a list of data sets!") }
   
   des_ous<-getDataElementsOrgunits(organisationUnit,datasets)
   des_ous_map<-plyr::ldply(des_ous,function(x) expand.grid(dataElement=x[[2]]$des,orgUnit=x[[2]]$ous,stringsAsFactors = FALSE))
@@ -83,5 +84,9 @@ getInvalidDatasetMembers<-function(data=NA,organisationUnit,datasets=NA) {
   result_data<-dplyr::anti_join(data,des_ous_map,by=c("dataElement","orgUnit"))
   if (NROW(result_data > 0 )) {
     warning("Invalid data element/orgunit associations were detected!")
+    if ( return_violations ) {return(result_data)}
+    } else
+    {
+      return(TRUE)
     }
 }
