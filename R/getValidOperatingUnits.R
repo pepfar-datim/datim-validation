@@ -5,10 +5,24 @@
 #' 
 #' @return Returns a data frame of operating units and their UIDs
 
-getValidOperatingUnits<-function() {
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/organisationUnits?level=3&fields=id,name&paging=false")),httr::timeout(60))
-  if (r$status == 200 ) {
-  r<- httr::content(r, "text")
-  sites<-jsonlite::fromJSON(r,flatten=TRUE)$organisationUnits
-  return(sites) } else { print(paste("Could not retreive valid operating units",httr::content(r$status))); stop() }
+getValidOperatingUnits <- function() {
+  r <-
+    httr::GET(URLencode(
+      paste0(
+        getOption("baseurl"),
+        "api/",
+        api_version(),
+        "/organisationUnits?level=3&fields=id,name&paging=false"
+      )
+    ), httr::timeout(60))
+  
+  if (r$status == 200) {
+     httr::content(r, "text") %>% 
+     jsonlite::fromJSON(. , flatten = TRUE) %>%
+     rlist::list.extract(.,"organisationUnits")
+  } else {
+    stop(paste(
+      "Could not retreive valid operating units",
+      httr::content(r$status)))
+  }
 }
