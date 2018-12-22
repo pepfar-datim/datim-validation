@@ -12,6 +12,5 @@
 checkOperatingUnit<-function(organisationUnit=NA) {
   if (is.na(organisationUnit)) {organisationUnit = getOption("organisationunit")}
       sites<-getValidOperatingUnits()
-      isValid<-organisationUnit %in% sites$id
-      return(isValid)       
+      organisationUnit %in% sites$id
 }
