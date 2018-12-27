@@ -76,15 +76,12 @@ validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,para
       dataSetValid <- Reduce("&",datasets %in% allDataSets$id) 
     }
     if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
-
-    print("Processing validation")
-
 if ( is.na(organisationUnit) ) {organisationUnit = getOption("organisationUnit")}
 if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
 
 
 #Calculate the totals  and append to the data frame
-d<-prepDataForValidation(d)
+data<-prepDataForValidation(data)
 
 #Empty data frame
 validation.results_empty<-data.frame(name=character(),id=character(),
