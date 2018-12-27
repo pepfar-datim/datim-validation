@@ -1,3 +1,59 @@
+
+#' @export
+#' @title Internal function which prepares a parsed data frame for validation
+#' 
+#' @param d Data frame parsed by d2Parser
+#'
+#' @return Modifed data object with combis and totals appended
+
+
+prepDataForValidation <- function(d) {
+  header <-
+    c(
+      "dataElement",
+      "period",
+      "orgUnit",
+      "categoryOptionCombo",
+      "attributeOptionCombo",
+      "value")
+  
+  d <- d[, header[header %in% names(d)]]
+  invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })}  
+  d$value<-as.numeric(d$value) #This may throw a warning 
+  notMissing <-
+    function(x) {
+      sapply(x, function(x) {
+        !is.na(x) || !missing(x) || x != ""
+      })
+      
+    }
+  
+  valid_rows<- d %>% 
+    dplyr::select(dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo,value) %>%
+    dplyr::mutate_all(notMissing) %>% 
+    dplyr::mutate(sum = rowSums(.[1:6])) %>% 
+    dplyr::mutate(is_valid = (sum==6L) ) %>%
+    dplyr::pull(is_valid) 
+  
+  if (sum(valid_rows) != NROW(d)) {
+    foo <- nrow(d) - sum(!valid_rows)
+    msg <-
+      paste(foo,
+            " rows are incomplete. Please check your file to ensure its correct.")
+    warning(msg)
+  }
+
+  d <- d[valid_rows, ]
+
+  
+  d$combi<-paste0(d$dataElement,".",d$categoryOptionCombo)
+  data.totals<-aggregate(value ~ dataElement + period + orgUnit + attributeOptionCombo, data = d,FUN=sum)
+  data.totals$combi<-data.totals$dataElement
+  data.totals$categoryOptionCombo<-NA
+  data.totals<-data.totals[,names(d)]
+  rbind(d,data.totals)
+}
+
 #' @export
 #' @importFrom stats aggregate
 #' @importFrom stats complete.cases
@@ -26,31 +82,10 @@ validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,para
 if ( is.na(organisationUnit) ) {organisationUnit = getOption("organisationUnit")}
 if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
 
-  header <-
-    c(
-      "dataElement",
-      "period",
-      "orgUnit",
-      "categoryOptionCombo",
-      "attributeOptionCombo",
-      "value")
-  
-data <- data[, header[header %in% names(data)]]
-invalid<-function(x) { sapply(x, function(x) {is.na(x) || missing(x) || x=="" })}  
-data$value<-as.numeric(data$value) #This may throw a warning 
-invalid.rows<-apply(apply(data,2,invalid),1,sum) == 0 #Filter out anything which is not complete.
-if (sum(invalid.rows) != sum(invalid.rows)) {
-  foo<-nrow(data)-sum(invalid.rows)
-  msg<-paste(foo, " rows are invalid. Please check your data.")
-  warning(msg)}
-data<-data[invalid.rows,]
+
 #Calculate the totals  and append to the data frame
-data$combi<-paste0(data$dataElement,".",data$categoryOptionCombo)
-data.totals<-aggregate(value ~ dataElement + period + orgUnit + attributeOptionCombo, data = data,FUN=sum)
-data.totals$combi<-data.totals$dataElement
-data.totals$categoryOptionCombo<-NA
-data.totals<-data.totals[,names(data)]
-data<-rbind(data,data.totals)
+d<-prepDataForValidation(d)
+
 #Empty data frame
 validation.results_empty<-data.frame(name=character(),id=character(),
                                      periodType=character(),description=character(),
