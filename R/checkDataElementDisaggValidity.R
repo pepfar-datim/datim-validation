@@ -1,13 +1,17 @@
 #' @export
 #' @title checkDataElementDisaggValidity(data,dataset)
-#' 
-#' @description Utility function to produce a data frame of invalid data elements based on current
+#'
+#' @description Utility function to produce a data frame of
+#'invalid data elements based on current
 #' DATIM form specification
 #'
-#' @param data D2 compliant data frame object 
-#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @return Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"
-#' of invalid data elements which are present the the data 
+#' @param data D2 compliant data frame object
+#' @param datasets Should be a character vector of data set UIDs. 
+#' Alternatively, if left missing, user will be promted.
+#' @param return_violations Boolean to return violations only. 
+#'  @return Returns a data frame  of "dataElementName","categoryOptionComboName",
+#' "dataElement","categoryOptionCombo"
+#' of invalid data elements which are present the the data
 #'
 checkDataElementDisaggValidity<-function(data,datasets=NA, return_violations=TRUE){
   

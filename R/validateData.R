@@ -65,6 +65,8 @@ prepDataForValidation <- function(d) {
 #' @param organisationUnit Organisation unit. Defaults to the user organisation unit if not supplied.
 #' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
 #' @param parallel Should the rules be evaluated in parallel. 
+#' @param datasets Vector of dataset UIDs which can  be used to restrict 
+#' the validation rules which will be applied. 
 #' @return Returns a data frame with validation rule results.
 validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=TRUE,datasets=NA) {
 
