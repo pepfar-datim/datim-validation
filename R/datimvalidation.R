@@ -1,5 +1,6 @@
 #' @docType package
 #' @name datimvalidation
+#' @title DATIM Validation
 NULL
 
 
