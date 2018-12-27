@@ -15,6 +15,9 @@ validateData(data, organisationUnit = NA,
 \item{return_violations_only}{Paramater to return only violations or all validation rule evalualtions.}
 
 \item{parallel}{Should the rules be evaluated in parallel.}
+
+\item{datasets}{Vector of dataset UIDs which can  be used to restrict 
+the validation rules which will be applied.}
 }
 \value{
 Returns a data frame with validation rule results.
