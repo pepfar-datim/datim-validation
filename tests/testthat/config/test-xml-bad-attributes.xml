@@ -1,0 +1,7 @@
+<dataValueSet xmlns="http://dhis2.org/schema/dxf/2.0" >
+  <dataValue data_Element="cI3E5LgDZPs" period="2017Q1" orgUnit="oUdX2BkI0ur" categoryOptionCombo="Z6au9xR1fym"  attributeOptionCombo="sbOyCovT6P2" value="12"/>
+  <dataValue dataElement="HClygqtgRlE" period="2016Oct" org_Unit="M1zETnXjMHr" categoryOptionCombo="vjUqq1nD06d" attributeOptionCombo="sbOyCovT6P2" value="14"/>
+  <dataValue dataElement="cfmOmZEfkmj" period="2016Oct" orgUnit="VBPoy9EFe15" category_OptionCombo="FXIAY2TcHsD" attributeOptionCombo="WQa4uNduUev" value="16"/>
+  <dataValue dataElement="TK8BBwaega8" period="2016Oct" orgUnit="qrTKsIyJ3kU" categoryOptionCombo="MdmCNJP0m4l" AttributeOptionCombo="WQa4uNduUev" value="18"/>
+  <dataValue dataElement="TK8BBwaega8" period="2016Oct" orgUnit="qrTKsIyJ3kU" categoryOptionCombo="MdmCNJP0m4l" AttributeOptionCombo="WQa4uNduUev" Value="18"/>
+</dataValueSet>

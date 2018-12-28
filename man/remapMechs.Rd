@@ -4,7 +4,8 @@
 \alias{remapMechs}
 \title{Function which converts mechanism codes, names or shortnames to UIDs}
 \usage{
-remapMechs(mechs_in, organisationUnit, mode_in = "code", mode_out = "id")
+remapMechs(mechs_in, organisationUnit, mode_in = "code",
+  mode_out = "id")
 }
 \arguments{
 \item{mechs_in}{A vector of data element identifiers (codes, names or shortNames)}

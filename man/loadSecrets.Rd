@@ -4,10 +4,10 @@
 \alias{loadSecrets}
 \title{loadSecrets(secrets)}
 \usage{
-loadSecrets(secrets = NA)
+loadSecrets(config_path = NA)
 }
 \arguments{
-\item{secrets}{Location of the secrets file}
+\item{config_path}{Location of the configuration file to a DHIS2 server.}
 }
 \value{
 Returns a boolean value indicating that the secrets file is valid by accessing /api/me

@@ -7,7 +7,7 @@
 
 getCategoryOptionCombosMap<-function() {
   
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/categoryOptionCombos?fields=id,name,shortName,code&paging=false")),
+  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/categoryOptionCombos?fields=id,name,shortName,code&paging=false")),
                httr::timeout(60))
   if (r$status == 200L ){
     r<- httr::content(r, "text")

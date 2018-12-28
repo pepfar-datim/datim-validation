@@ -17,7 +17,7 @@ getPeriodType<-function(iso){
   else if ( grepl("^\\d{4}Q\\d{1}$",iso,perl=TRUE) )  {return("Quarterly") }
   else if ( grepl("^\\d{4}$",iso,perl=TRUE) )  {return("Yearly") }
   else if ( grepl("^\\d{4}Oct$",iso,perl=TRUE) )  {return("FinancialOct") }
-  else {return(NULL)}
+  else {return(NA)}
 }
 
 #' @export
@@ -30,9 +30,10 @@ getPeriodType<-function(iso){
 #' 
 #' 
 getPeriodFromISO <- function(iso) {
+  if(is.na(iso)) {
+    stop("You must supply a period identifier")
+  }
   pt <- getPeriodType(iso)
-  if (is.null(pt)) {return(NULL)}
-  assertthat::noNA(pt)
   startDate <- NA
   endDate <- NA
   if (pt == "Daily") {
@@ -59,7 +60,7 @@ getPeriodFromISO <- function(iso) {
     } else if (q == 4) {
       m <- "10"
     }  else {
-      (stop("Invalid quarter specified."))
+      (stop(paste("Invalid quarter specified in ", iso)))
     }
     add.months= function(date,n) seq(date, by = paste (n, "months"), length = 2)[2]
     startDate<-as.Date(paste0(y,m,"01"),"%Y%m%d")
@@ -73,7 +74,30 @@ getPeriodFromISO <- function(iso) {
     startDate<-as.Date(paste0(y,"1001"),"%Y%m%d")
     endDate<-startDate + years(1) - days(1)
   }
-  period<-data.frame(iso=iso,startDate=startDate,endDate=endDate,periodType=pt)
-  return(period)
+
+    period<-data.frame(
+      iso = iso,
+      startDate = startDate,
+      endDate = endDate,
+      periodType = pt,
+      stringsAsFactors = FALSE )
+    
+  if ( anyNA(period) || is.null(period) ) {stop(paste0(iso, "is not a valid period."))}
+  
+    return(period)
 }
 
+
+#' @export
+#' @title checkPeriodIdentifiers(data)
+#' 
+#' @description Expect an error if any invalid period identifiers are supplied in the file.
+#'
+#' @param data A data frame which has been parsed by either d2Parser or sims2Parser
+#' @return TRUE if all periods are valid.
+#' 
+#' 
+checkPeriodIdentifiers<-function(data) { 
+  do.call(rbind.data.frame, lapply(data$period,getPeriodFromISO)) 
+  return(TRUE)
+  }

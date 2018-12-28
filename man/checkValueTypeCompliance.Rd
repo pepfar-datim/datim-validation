@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkValueTypeCompliance.R
 \name{checkValueTypeCompliance}
 \alias{checkValueTypeCompliance}
-\title{checkValueTypeCompliancep(d)}
+\title{checkValueTypeCompliance(d)}
 \usage{
 checkValueTypeCompliance(d)
 }

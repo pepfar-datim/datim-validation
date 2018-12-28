@@ -8,7 +8,7 @@
 #'
 getDataSets<-function() {
   
-  url<-URLencode(paste0(getOption("baseurl"),"api/dataSets?fields=name,id,formType&paging=false"))
+  url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/dataSets?fields=name,id,formType&paging=false"))
   sig<-digest::digest(paste0(url),algo='md5', serialize = FALSE)
   ds<-getCachedObject(sig)
   if (is.null(ds)) {

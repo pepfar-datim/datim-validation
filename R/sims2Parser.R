@@ -128,15 +128,20 @@ sims2Parser <-
       }
     invalid.rows <-
       apply(apply(data, 2, invalid), 1, sum) != 0 #Anything which is not complete.
-    if ( sum(invalid.rows) ) {
+    
+    
+    if (!invalidData) {
+      data <- data[!invalid.rows, ]
+    }
+    
+    if ( sum(invalid.rows) > 0 ) {
       msg<-paste(sum(invalid.rows),
                  " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
     
-    if (!invalidData) {
-      data <- data[!invalid.rows, ]
-    }
+    
+  
     
     #TODO: End centralization here. 
     #TODO: Functionalize this with dateShifter

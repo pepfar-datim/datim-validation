@@ -1,3 +1,25 @@
+
+#' @title Utility function to check that the supplied coding scheme is correct
+#'
+#' @description checkCodingScheme will ensure that all indentifiers after parsing are valid UIDs,
+#' or in the case of periods, valid periods. 
+#'
+#' @param data A parse DHIS2 data payload
+#' @return Only returns an error if the 
+checkCodingScheme <- function(data) {
+  #This is a very superficial and quick check, just to be sure that the coding scheme is correct. 
+  #Additional validation will be required to be sure data elements, catcombos and orgunits are properly 
+  #Associated. 
+  data_element_check<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
+  if (length(data_element_check) > 0) {stop("The following data element identifiers could not be found:",paste(data_element_check,sep="",collapse=","))}
+  orgunit_check<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap(organisationUnit = getOption("organisationUnit"))$id)]
+  if (length(orgunit_check) > 0) {stop("The following org unit identifiers could not be found:",paste(orgunit_check,sep="",collapse=","))}
+  coc_check<-unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap()$id)]
+  if (length(coc_check) > 0) {stop("The following category option combo identifiers could not be found:",paste(coc_check,sep="",collapse=","))}
+  acoc_check<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap(organisationUnit = getOption("organisationUnit"))$id)]
+  if (length(acoc_check) > 0) {stop("The following attribute option combo identifiers could not be found:",paste(acoc_check,sep="",collapse=","))}
+}
+
 #' @export
 #' @importFrom utils read.csv
 #' @importFrom utils select.list
@@ -15,6 +37,8 @@
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
+#' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
+#' files without a CSV header. 
 #'
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
@@ -28,7 +52,8 @@ d2Parser <-
            dataElementIdScheme = "id",
            orgUnitIdScheme = "id",
            idScheme = "id",
-           invalidData = FALSE) {
+           invalidData = FALSE,
+           csv_header = TRUE) {
     
     
     if (is.na(organisationUnit)) {
@@ -38,8 +63,7 @@ d2Parser <-
     
     valid_type <- type %in% c("xml", "json", "csv")
     if (!valid_type) {
-      print("ERROR:Not a valid file type")
-      stop()
+      stop("ERROR:Not a valid file type")
     }
     
     header <-
@@ -60,22 +84,31 @@ d2Parser <-
       data <-
         data.frame(t(sapply(XML::xmlRoot(d) ["dataValue"], XML::xmlAttrs)),
                    row.names = seq(1, XML::xmlSize(XML::xmlRoot(d))))
+
+      
       #Get all the attributes specified in the
       data.attrs <- XML::xmlAttrs(XML::xmlRoot(d))
-      #Period
-      if (!is.na(data.attrs["period"])) {
+      if ( !is.null(data.attrs) ) {
+      if ( !is.na(data.attrs["period"]) ) {
         data$period <- data.attrs["period"]
       }
-      if (!is.na(data.attrs["orgUnit"])) {
+      if ( !is.na(data.attrs["orgUnit"]) ) {
         data$orgUnit <- data.attrs["orgUnit"]
       }
-      if (!is.na(data.attrs["attributeOptionCombo"])) {
+      if ( !is.na(data.attrs["attributeOptionCombo"]) ) {
         data$attributeOptionCombo <- data.attrs["attributeOptionCombo"]
       }
+      }
+      
+      #Names in the XML must correspond exactly
+      if (!Reduce("&",names(data) %in% header)) {
+        stop("XML attributes must be one of the following:", 
+             paste(header,sep="",collapse=",")) }
+      
     }
     
     if (type == "csv") {
-      data <- read.csv(filename)
+      data <- read.csv(filename,header = csv_header)
       #Get number of columns and assign the header
       names(data)[1:ncol(data)]<-header[1:ncol(data)] 
       #Data element, period and orgunit must be specified
@@ -89,7 +122,9 @@ d2Parser <-
     
     if (type == "json") {
       j <- jsonlite::fromJSON(txt = filename)
+
       data <- j$dataValues
+    
       if (!is.null(j[["period"]])) {
         data$period <- j$period
       }
@@ -99,11 +134,18 @@ d2Parser <-
       if (!is.null(j[["attributeOptionCombo"]])) {
         data$attributeOptionCombo <- j$attributeOptionComboid
       }
+      
+      #Names in the JSON must correspond exactly
+      if (!Reduce("&",names(data) %in% header)) {
+        stop("JSON attributes must be one of the following:", 
+             paste(header,sep="",collapse=",")) }
+      
     }
     
+
     
     data <- data[, header[header %in% names(data)]]
-    #data$value<-as.numeric(as.character(data$value))
+
     if (orgUnitIdScheme != "id") {
       data$orgUnit <-
         remapOUs(
@@ -133,24 +175,34 @@ d2Parser <-
     #Data frame needs to be completely flattened to characters
     data <- plyr::colwise(as.character)(data)
     
-    invalid <-
+    notMissing <-
       function(x) {
         sapply(x, function(x) {
-          is.na(x) || missing(x) || x == ""
+          !is.na(x) || !missing(x) || x != ""
         })
+        
       }
-    invalid.rows <-
-      apply(apply(data, 2, invalid), 1, sum) == 0 #Anything which is not complete.
-    if (sum(invalid.rows) != nrow(data)) {
-      foo <- nrow(data) - sum(invalid.rows)
+    
+    valid_rows<- data %>% 
+      dplyr::select(dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo,value) %>%
+      dplyr::mutate_all(notMissing) %>% 
+      dplyr::mutate(sum = rowSums(.[1:6])) %>% 
+      dplyr::mutate(is_valid = (sum==6L) ) %>%
+      dplyr::pull(is_valid) 
+    
+    if (sum(valid_rows) != NROW(data)) {
+      foo <- nrow(data) - sum(!valid_rows)
       msg <-
         paste(foo,
               " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
     if (!invalidData) {
-      data <- data[invalid.rows, ]
+      data <- data[valid_rows, ]
     }
+    
+    checkCodingScheme(data)
+    
     return(data)
     
   }
