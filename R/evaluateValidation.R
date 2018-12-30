@@ -19,11 +19,25 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
                                  rightSide.ops=integer(),leftSide.ops=integer(),leftSide.count=integer(),
                                  rightSide.count=integer(),formula=character(),result=logical())
   
-  this.des<-vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1))
-  #Get the matching rules to apply
-  matches <-vr[ grepl(paste(this.des,collapse="|"), vr$leftSide.expression) | grepl(paste(this.des,collapse="|"), vr$rightSide.expression),]
+  des_list <- vapply(combis, function(x) {
+      unlist(strsplit(x, "[.]"))[[1]]
+    }, FUN.VALUE = character(1)) %>% 
+    unique(.)
+   
+  vr_in <- function(x,table ) {
+    foo <- pmatch(x,table)
+    ifelse(is.na(foo),FALSE,TRUE)
+  }
+  
+  matches <- vr %>% dplyr::mutate(left_in = vr_in(leftSide.expression,des_list),
+                right_in = vr_in(rightSide.expression,des_list) ) %>%
+    dplyr::filter(left_in | right_in) %>%
+    dplyr::select(-left_in,-right_in)
+
+  
   #Empty data frame
-  if (nrow(matches) == 0) {return(validation.results_empty)}
+  if (nrow(matches) == 0 ) {return(validation.results_empty)}
+  
   #Get the matching rules
   matches$leftSide.expression<-plyr::mapvalues(matches$leftSide.expression,combis,values,warn_missing=FALSE)
   matches$leftSide.count<-stringr::str_count(matches$leftSide.expression,expression.pattern)
@@ -31,32 +45,46 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   matches$rightSide.expression<-plyr::mapvalues(matches$rightSide.expression,combis,values,warn_missing=FALSE)
   matches$rightSide.count<-stringr::str_count(matches$rightSide.expression,expression.pattern)
   matches$rightSide.count<-matches$rightSide.ops-matches$rightSide.count
-  #Keep rules which should  be evaluated
-  keep_these_rules <-
-    (
-      matches$leftSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" &
-        (matches$leftSide.ops != matches$leftSide.count)
-    ) |
-    (
-      matches$rightSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" &
-        (matches$rightSide.ops != matches$rightSide.count)
-    ) |
-    (matches$rightSide.missingValueStrategy == "NEVER_SKIP") |
-    (matches$leftSide.missingValueStrategy == "NEVER_SKIP") |
-    (
-      (matches$rightSide.count == matches$rightSide.ops)  &
-        (
-          matches$rightSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING"
-        )
-    ) |
-    (
-      (matches$leftSide.count == matches$leftSide.ops)  &
-        (
-          matches$leftSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING"
-        )
-    )
+  #Skip rules which should  be evaluated
   
-  matches<-matches[keep_these_rules,]
+  skip_when<-function(strategy,count,ops) {
+    should_skip <- FALSE
+    
+    if (strategy == "NEVER_SKIP") {should_skip <- FALSE}
+    
+    if (strategy == "SKIP_IF_ANY_VALUE_MISSING") {
+      should_skip <- ops == count
+    }
+    
+    if (strategy == "SKIP_IF_ALL_VALUES_MISSING") {
+      should_skip <- count == 0
+    }
+    
+    should_skip
+    
+  }
+  
+  matches <- matches %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      skip_these_rules_right =  Map(
+        f = skip_when,
+        strategy = rightSide.missingValueStrategy,
+        count = rightSide.count,
+        ops = rightSide.ops
+      ),
+      skip_these_rules_left =  Map(
+        f = skip_when,
+        strategy = leftSide.missingValueStrategy,
+        count = leftSide.count,
+        ops = leftSide.ops
+      )) %>%
+    dplyr::mutate(skip_these_rules = skip_these_rules_right | skip_these_rules_left) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!skip_these_rules) %>%
+    dplyr::select(-skip_these_rules,-skip_these_rules_right,-skip_these_rules_left)
+      
+      
   if (nrow(matches) > 0 ) {
    #Special handling for logical operators
    matches_ex<-matches[matches$operator %in% c("|","&"),]
@@ -99,7 +127,7 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
         matches_normal <- validation.results_empty
       }
   
-  matches <- rbind(matches_normal, matches_ex)
+  matches <- dplyr::bind_rows(matches_normal, matches_ex)
   
   
   matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) 
