@@ -17,6 +17,7 @@ with_mock_api({
 })
 
 context("Correctly validate data with validation rules")
+
 with_mock_api({
   test_that("We can fail a never skip rule with data on both sides", {
     config <- LoadConfigFile(test_config("test-config.json"))
@@ -37,7 +38,7 @@ with_mock_api({
 })
 
 with_mock_api({
-  test_that("We can pass a never skip rule with data on both sides", {
+  test_that("We can pass a normal rule with data on both sides", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
@@ -56,7 +57,7 @@ with_mock_api({
 })
 
 with_mock_api({
-  test_that("We can fail a never skip rule with data missing on right", {
+  test_that("We can fail a normal rule with data missing on right", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
@@ -77,7 +78,7 @@ with_mock_api({
 })
 
 with_mock_api({
-  test_that("We can pass a never skip rule with data missing on left", {
+  test_that("We can pass a normal rule with data missing on left", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
@@ -113,7 +114,7 @@ with_mock_api({
                 invalidData = FALSE)
     d<-prepDataForValidation(d)
     vr<-getValidationRules()
-    foo<-evaluateValidation(d$combi,d$value,vr,FALSE)
+    foo<-evaluateValidation(d$combi,d$value,vr,TRUE)
     foo<-foo %>% dplyr::filter(operator=="|")
     expect_false(foo$result)
     expect_equal(foo$rightSide.expression,1)
@@ -123,7 +124,7 @@ with_mock_api({
 
 
 with_mock_api({
-  test_that("We can pass an exclusive rule with data missing on one side", {
+  test_that("We can skip an exclusive rule with data missing on one side", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
@@ -138,10 +139,7 @@ with_mock_api({
     d<-prepDataForValidation(d)
     vr<-getValidationRules()
     foo<-evaluateValidation(d$combi,d$value,vr,FALSE)
-    foo<-foo %>% dplyr::filter(operator=="|")
-    expect_true(foo$result)
-    expect_equal(foo$rightSide.expression,0)
-    expect_equal(foo$leftSide.expression,1)
+    expect_equal(nrow(foo),0)
   })
 })
 

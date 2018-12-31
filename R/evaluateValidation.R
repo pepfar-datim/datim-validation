@@ -17,7 +17,7 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
                                  operator=character(),leftSide.expression=numeric(),
                                  leftSide.missingValueStrategy=character(),rightSide.expression=numeric(),
                                  rightSide.ops=integer(),leftSide.ops=integer(),leftSide.count=integer(),
-                                 rightSide.count=integer(),formula=character(),result=logical())
+                                 rightSide.count=integer(),formula=character(),result=logical(),stringsAsFactors = FALSE)
   
   des_list <- vapply(combis, function(x) {
       unlist(strsplit(x, "[.]"))[[1]]
@@ -106,10 +106,13 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   matches_normal<-matches[!(matches$operator %in% c("&","|")),]
   
   if (nrow(matches_normal > 0)) {
+    
     matches_normal$leftSide.expression <-
       gsub(expression.pattern, "0", matches_normal$leftSide.expression)
+    
     matches_normal$rightSide.expression <-
       gsub(expression.pattern, "0", matches_normal$rightSide.expression)
+    
     matches_normal$leftSide.expression <-
       sapply(matches_normal$leftSide.expression, function(x) {
         eval(parse(text = x))
@@ -127,11 +130,15 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
         matches_normal <- validation.results_empty
       }
   
-  matches <- dplyr::bind_rows(matches_normal, matches_ex)
   
   
-  matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) 
-  if (return_violations_only == TRUE) { matches<-matches[!matches$result,] } 
-  return( matches) } else
-  { return(validation.results_empty) }
+  if ( nrow(matches_normal) > 0 | nrow(matches_normal) > 0 ) {
+    matches <- rbind(matches_normal, matches_ex)
+    matches$result<-vapply(matches$formula,function(x) {eval(parse(text=x))},FUN.VALUE=logical(1)) }
+    if (return_violations_only ) { matches<-matches[!matches$result,] } 
+    matches
+   } else {
+    validation.results_empty
+  }
+
 }
