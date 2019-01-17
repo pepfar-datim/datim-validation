@@ -34,3 +34,18 @@ with_mock_api({
     expect_equal(NROW(checkValueTypeCompliance(d)), 1)
   })
 })
+
+with_mock_api({
+  test_that("We can flag negative values in non-dedupe mechanisms", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    d<-d2Parser(filename=test_config("test-data-neg-values.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE)
+    expect_equal(NROW(checkNegativeValues(d)), 2)
+  })
+})
