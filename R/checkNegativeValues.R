@@ -8,7 +8,7 @@
 #' @param data D2 compliant data frame object
 #' @return A filtered D2 compliant data frame of invalid values, otherwise, returns NA. 
 #'
-checkNegativeValues<-function(d){
+checkNegativeValues<-function(data){
   
   numeric_types<-c("INTEGER","INTEGER_ZERO_OR_POSITIVE","PERCENTAGE","NUMBER","INTEGER_POSITIVE")
   dedupe_mechs<-c("X8hrDf6bLDC","YGT1o7UxfFu")
@@ -18,11 +18,11 @@ checkNegativeValues<-function(d){
     dplyr::filter( valueType %in% numeric_types ) %>%
     dplyr::pull(id)
   
-  value_is_negative<-grepl("^-",stringr::str_trim(d$value))
-  mech_is_dedupe<-d$attributeOptionCombo %in% dedupe_mechs
+  value_is_negative<-grepl("^-",stringr::str_trim(data$value))
+  mech_is_dedupe<-data$attributeOptionCombo %in% dedupe_mechs
   is_invalid<-value_is_negative & !mech_is_dedupe
   
-  d_bad<-d[is_invalid,]
+  d_bad<-data[is_invalid,]
   
   if (NROW(d_bad) > 0) {
     
