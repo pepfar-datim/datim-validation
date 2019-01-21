@@ -109,7 +109,7 @@ d2Parser <-
     
     if (type == "csv") {
       data <- read.csv(filename,header = csv_header,stringsAsFactors = FALSE)
-      data<-plyr::colwise(stringr::str_trim)(data)
+      data[] <- lapply(data, stringr::str_trim)
       #Get number of columns and assign the header
       names(data)[1:ncol(data)]<-header[1:ncol(data)] 
       #Data element, period and orgunit must be specified
