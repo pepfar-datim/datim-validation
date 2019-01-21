@@ -49,3 +49,18 @@ with_mock_api({
     expect_equal(NROW(checkNegativeValues(d)), 2)
   })
 })
+
+with_mock_api({
+  test_that("We import CSV files which contain spaces in the fields", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    d<-d2Parser(filename=test_config("test-data-with-spaces.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE)
+    expect_equal(NROW(d), 2)
+  })
+})
