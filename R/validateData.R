@@ -45,12 +45,12 @@ prepDataForValidation <- function(d) {
 
   d <- d[valid_rows, ]
 
-  
   d$combi<-paste0(d$dataElement,".",d$categoryOptionCombo)
   data.totals<-aggregate(value ~ dataElement + period + orgUnit + attributeOptionCombo, data = d,FUN=sum)
   data.totals$combi<-data.totals$dataElement
   data.totals$categoryOptionCombo<-NA
   data.totals<-data.totals[,names(d)]
+  data.totals$value<-as.character(data.totals$value)
   rbind(d,data.totals)
 }
 
