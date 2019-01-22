@@ -10,6 +10,7 @@ checkCodingScheme <- function(data) {
   #This is a very superficial and quick check, just to be sure that the coding scheme is correct.
   #Additional validation will be required to be sure data elements, catcombos and orgunits are properly
   #Associated.
+  is_valid<-TRUE
   data_element_check <-
     unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
   if (length(data_element_check) > 0) {
@@ -17,6 +18,7 @@ checkCodingScheme <- function(data) {
       "The following data element identifiers could not be found:",
       paste(data_element_check, sep = "", collapse = ",")
     )
+    is_valid<-FALSE
   }
   orgunit_check <-
     unique(data$orgUnit)[!(
@@ -27,6 +29,7 @@ checkCodingScheme <- function(data) {
       "The following org unit identifiers could not be found:",
       paste(orgunit_check, sep = "", collapse = ",")
     )
+    is_valid<-FALSE
   }
   coc_check <-
     unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap()$id)]
@@ -35,6 +38,7 @@ checkCodingScheme <- function(data) {
       "The following category option combo identifiers could not be found:",
       paste(coc_check, sep = "", collapse = ",")
     )
+    is_valid<-FALSE
   }
   acoc_check <-
     unique(data$attributeOptionCombo)[!(
@@ -45,12 +49,14 @@ checkCodingScheme <- function(data) {
       "The following attribute option combo identifiers could not be found:",
       paste(acoc_check, sep = "", collapse = ",")
     )
+    is_valid<-FALSE
   }
   
     list("dataElement"=data_element_check,
        "orgUnit"=orgunit_check,
        "categoryOptionCombo"=coc_check,
-       "attributeOptionCombo"=acoc_check
+       "attributeOptionCombo"=acoc_check,
+       "is_valid"=is_valid
        
        )
 }
