@@ -82,7 +82,7 @@ checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=N
   des_ous_map<-plyr::ldply(des_ous,function(x) expand.grid(dataElement=x[[2]]$des,orgUnit=x[[2]]$ous,stringsAsFactors = FALSE))
   data_des_ous_map<-unique(data[,c("dataElement","orgUnit")])
   result_data<-dplyr::anti_join(data,des_ous_map,by=c("dataElement","orgUnit"))
-  if (NROW(result_data > 0 )) {
+  if ( NROW(result_data) > 0 ) {
     warning("Invalid data element/orgunit associations were detected!")
     if ( return_violations ) {return(result_data)}
     } else
