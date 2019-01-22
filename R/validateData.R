@@ -106,25 +106,42 @@ validation.results<-plyr::ddply(data,plyr::.(period,attributeOptionCombo,orgUnit
                                     .inform=TRUE)
 
 if ( nrow(validation.results) > 0 ) {
-validation.results<-plyr::colwise(as.character)(validation.results) 
-mechs<-getMechanismsMap()
-ous<-getOrganisationUnitMap()
-
-validation.results$mech_code<-plyr::mapvalues(validation.results$attributeOptionCombo,mechs$id,mechs$code,warn_missing = FALSE)
-validation.results$ou_name<-plyr::mapvalues(validation.results$orgUnit,ous$id,ous$shortName,warn_missing = FALSE)
-
-# filter by data sets
-vr_rules<-getValidationRules()
-validDataElements<-getValidDataElements(datasets=datasets)
-match<-paste(unique(validDataElements$dataelementuid),sep="",collapse="|")
-vr_filter<-vr_rules[grepl(match,vr_rules$leftSide.expression) & grepl(match,vr_rules$rightSide.expression),"id"]
-vr_violations<-validation.results[ validation.results$id %in% vr_filter,]
-
-
-return  ( vr_violations ) 
+  validation.results <- plyr::colwise(as.character)(validation.results)
+  mechs <- getMechanismsMap(organisationUnit = organisationUnit)
+  ous <- getOrganisationUnitMap(organisationUnit = organisationUnit)
+  
+  validation.results$mech_code <-
+    plyr::mapvalues(validation.results$attributeOptionCombo,
+                    mechs$id,
+                    mechs$code,
+                    warn_missing = FALSE)
+  
+  validation.results$ou_name <-
+    plyr::mapvalues(validation.results$orgUnit,
+                    ous$id,
+                    ous$shortName,
+                    warn_missing = FALSE)
+  
+  # filter by data sets
+  vr_rules <- getValidationRules()
+  
+  validDataElements <- getValidDataElements(datasets = datasets)
+  
+  match <-
+    paste(unique(validDataElements$dataelementuid),
+          sep = "",
+          collapse = "|")
+  
+  vr_filter <-
+    vr_rules[grepl(match, vr_rules$leftSide.expression) &
+               grepl(match, vr_rules$rightSide.expression), "id"]
+  
+    validation.results[validation.results$id %in% vr_filter, ]
+  
+ 
 } else
 {
-  return( validation.results_empty )
+  validation.results_empty
 }
 
 }
