@@ -1,4 +1,5 @@
 #' @export
+#' @importFrom stringi stri_replace_all_fixed
 #' @title Utility function for evaluating validation rules 
 #' 
 #' @description evaluationValidation will accept a vector of combis (data elements.category optioncombinations) and values
@@ -22,13 +23,22 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   this.des<-vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1))
   #Get the matching rules to apply
   matches <-vr[ grepl(paste(this.des,collapse="|"), vr$leftSide.expression) | grepl(paste(this.des,collapse="|"), vr$rightSide.expression),]
+
+  
   #Empty data frame
   if (nrow(matches) == 0) {return(validation.results_empty)}
-  #Get the matching rules
-  matches$leftSide.expression<-plyr::mapvalues(matches$leftSide.expression,combis,values,warn_missing=FALSE)
+  
+  values<-as.character(values)
+
+    matches$leftSide.expression<-stringi::stri_replace_all_fixed(matches$leftSide.expression,
+                           combis, values, vectorize_all=FALSE)
+
+    matches$rightSide.expression<-stringi::stri_replace_all_fixed(matches$rightSide.expression,
+                                                                 combis, values, vectorize_all=FALSE)
+
   matches$leftSide.count<-stringr::str_count(matches$leftSide.expression,expression.pattern)
   matches$leftSide.count<-matches$leftSide.ops-matches$leftSide.count
-  matches$rightSide.expression<-plyr::mapvalues(matches$rightSide.expression,combis,values,warn_missing=FALSE)
+
   matches$rightSide.count<-stringr::str_count(matches$rightSide.expression,expression.pattern)
   matches$rightSide.count<-matches$rightSide.ops-matches$rightSide.count
   #Keep rules which should  be evaluated
@@ -57,6 +67,7 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
     )
   
   matches<-matches[keep_these_rules,]
+  
   if (nrow(matches) > 0 ) {
    #Special handling for logical operators
    matches_ex<-matches[matches$operator %in% c("|","&"),]
