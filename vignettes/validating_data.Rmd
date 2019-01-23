@@ -10,7 +10,7 @@ vignette: >
 ---
 
 
-##Using the datimvalidation package
+## Using the datimvalidation package
 
 DATIM is based on the [DHIS2](https://dhis2.org/) software, and is therefore capable of importing different types of data, including
 CSV, JSON, XML as well as ADX formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
@@ -25,7 +25,7 @@ The `datavalidation` library provides an abstraction layer to the various valida
 you to determine if your data contains invalid data elements, incorrect disaggregations, and inactive mechanisms. Each function is documented in seperate sections of the package. 
 
 
-##Getting started
+## Getting started
 
 In order to get started, you will need to have installed the R package "datimvalidation". The source code for this library can be found [here](https://github.com/jason-p-pickering/datim-validation). 
 
@@ -53,7 +53,7 @@ loadSecrets(secrets)
 ```
 
 
-##Parsing your data
+## Parsing your data
 
 Next, we will use the `d2Parser` function, which is a general purpose function to load the different formats of data which 
 DATIM accepts and to standardize this so that we can use other validation functions on the data. 
@@ -62,11 +62,6 @@ In addition to your username and password, you will need to specific the `type` 
 You will also need to know the identification scheme of the file. The easiest way is to open the file in a text editor, and see what id scheme
 the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
 
-
-##Mechanism validation
-
-Depending on the size of the datasets and the objects which need to be recoded, this operation could take serveral minutes. 
-
 ```{r eval=FALSE}
 d<-d2Parser(file=filename,type = "csv",
             dataElementIdScheme = "code",orgUnitIdScheme = "id",
@@ -74,17 +69,19 @@ d<-d2Parser(file=filename,type = "csv",
             ,invalidData = TRUE )
 ```
 
-Now, we have loaded our data payload into the object `d`, we can proceed to validate it. The `getInvalidMechanisms` function will check that all mechanisms present in the payload are currently active in DATIM. You must supply the period for which you want to validate the mechanisms over, for instance "2016Oct", which would correspond to the period October 2016-September 2017. If any data is not contained within that period, or the mechanism is not active for that period, it will be returned as an invalid mechanism. 
+Note , this operation could take several minutes, so please be patient. 
 
-When uploading data to DATIM, any data which has an invalid mechanism will be excluded from the upload.
+## Mechanism validation
+
+Now, we have loaded our data payload into the object `d`, we can proceed to validate it. The `checkMechanismValidity` function will check that all mechanisms present in the payload are currently active in DATIM. Data values must associated with a period whose start date and end date are within the COP planning periods for which the mechanism is active. 
 
 ```{r eval=FALSE}
 #Check for valid mechanisms and simply print those which are not valid
-getInvalidMechanisms(d)
+checkMechanismValidity(d)
 ```
 
 
-##Data element  and disaggregation validation
+## Data element  and disaggregation validation
 
 Depending on the type of payload you are submitting, there may be multiple data sets which are bundled together. There are strict controls in DATIM regarding the submission of data elements to given organisaion units. For instance, community data should not be submitted for facility sites, and vice versa. It can be difficult to determine for a given data payload whether certain data should be submitted for a given 
 
@@ -92,7 +89,7 @@ Next, we can check the indicators and disaggregations for validity against the c
 
 
 ```{r eval=FALSE}
-getInvalidDataElements(d)
+checkDataElementDisaggValidity(d)
 ```
 
 ##Value type validation
@@ -133,3 +130,25 @@ vr_violations<-validateData(data = d,
 ```
 
 A list of validation rule violations will be returned to the `vr_violations`object.
+
+
+### A complete example
+
+A basic script which combines all of the validation checks is supplied below. 
+
+You should of course adjust the specifics of the script, such as where your credentials are stored. If your security paramaters do not allow you to store credentials on your machine, then you should leave the `loadSecrets` function blank and enter them in the dialog.  You can change the `datafile` variable to point to your import file, and then run the the script in your *R* enviroment. 
+
+If any of the functions return errors, warnings, or non-empty data frames, 
+```
+require(datimvalidation)
+secrets<-"/home/littebobbytables/.secrets/datim.json"
+loadSecrets(secrets)
+datafile<-"/home/littebobbytables/mydata.csv"
+d<-d2Parser(filename = datafile ,type = "csv")
+checkDataElementOrgunitValidity(data = d,organisationUnit = "f5RoebaDLMx",datasets = c("zUoy5hk8r0q","KWRj80vEfHU"))
+checkValueTypeCompliance(d)
+checkNegativeValues(d)
+validateData(data = d, datasets = c("zUoy5hk8r0q","KWRj80vEfHU"),
+ return_violations_only = TRUE,
+ parallel =parallel )
+```
