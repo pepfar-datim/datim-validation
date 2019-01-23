@@ -138,7 +138,8 @@ A basic script which combines all of the validation checks is supplied below.
 
 You should of course adjust the specifics of the script, such as where your credentials are stored. If your security paramaters do not allow you to store credentials on your machine, then you should leave the `loadSecrets` function blank and enter them in the dialog.  You can change the `datafile` variable to point to your import file, and then run the the script in your *R* enviroment. 
 
-If any of the functions return errors, warnings, or non-empty data frames, 
+If any of the functions return errors, warnings, or non-empty data frames, you should investigate and resolve the issues prior to submitting your data file for import into DATIM. 
+
 ```
 require(datimvalidation)
 secrets<-"/home/littebobbytables/.secrets/datim.json"
