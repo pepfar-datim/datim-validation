@@ -91,7 +91,7 @@ getOptionSetMap<-function() {
       r<- httr::content(r, "text")
       r<- jsonlite::fromJSON(r,flatten = TRUE)
       option_sets<-as.data.frame(r$optionSets)
-      saveCachedObject(ds,sig)}
+      saveCachedObject(option_sets,sig)}
     
     else {print("Could not get a list of option sets"); stop()}
   }
