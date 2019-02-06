@@ -50,8 +50,7 @@ prepDataForValidation <- function(d) {
   data.totals$combi<-data.totals$dataElement
   data.totals$categoryOptionCombo<-NA
   data.totals<-data.totals[,names(d)]
-  data.totals$value<-as.character(data.totals$value)
-  rbind(d,data.totals)
+  dplyr::bind_rows(d,data.totals)
 }
 
 #' @export
