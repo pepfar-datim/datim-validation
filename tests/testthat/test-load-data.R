@@ -249,3 +249,19 @@ with_mock_api({
     expect_false(foo$is_valid)
     expect_type(foo,"list")
   })})
+
+context("Can warn on a missing values")
+
+with_mock_api({
+  test_that("Can warn on a missing data value", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    expect_warning(foo<-d2Parser(filename=test_config("test-data-missing-value.csv"),
+                                 type="csv",
+                                 organisationUnit = "KKFzPM8LoXs",
+                                 dataElementIdScheme = "id",
+                                 orgUnitIdScheme = "id",
+                                 idScheme = "id",
+                                 invalidData = FALSE), "1 rows are incomplete. Please check your file to ensure its correct.")
+  })})
