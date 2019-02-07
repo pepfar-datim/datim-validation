@@ -27,6 +27,7 @@ if (getRversion() >= "2.15.1")
       "optionSet.id",
       "startDate",
       "startDate_mech",
-      "value"
+      "value",
+      "valueType"
     )
   )
