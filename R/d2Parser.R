@@ -243,8 +243,12 @@ d2Parser <-
       data <- data[valid_rows, ]
     }
     
-    checkCodingScheme(data)
+    code_scheme_check<-checkCodingScheme(data)
     
-    return(data)
+    if (!code_scheme_check$is_valid) {
+      return(code_scheme_check)
+    } else{
+      data
+    }
     
   }
