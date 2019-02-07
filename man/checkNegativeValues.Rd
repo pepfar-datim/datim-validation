@@ -4,7 +4,7 @@
 \alias{checkNegativeValues}
 \title{checkNegativeValues(data)}
 \usage{
-checkNegativeValues(d)
+checkNegativeValues(data)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}

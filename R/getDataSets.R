@@ -26,13 +26,13 @@ getDataSets<-function() {
   return(ds) }
 
 #' @export
-#' @title getCurrentDataSets(type)
+#' @title getCurrentMERDataSets(type)
 #' 
 #' @description Get a list of MER datasets which are currently open for data entry. 
 #' @param type Should be either RESULTS or TARGETS
 #' @return Returns a list of dataset UIDs of the given type.
 #'
-getCurrentDataSets<-function(type="RESULTS") {
+getCurrentMERDataSets<-function(type="RESULTS") {
   
   ds<-getDataSets()  
   

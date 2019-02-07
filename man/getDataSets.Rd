@@ -2,7 +2,7 @@
 % Please edit documentation in R/getDataSets.R
 \name{getDataSets}
 \alias{getDataSets}
-\title{getAvailableDataSets()}
+\title{getDataSets()}
 \usage{
 getDataSets()
 }
