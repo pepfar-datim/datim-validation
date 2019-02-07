@@ -1,5 +1,5 @@
 #' @export
-#' @title getAvailableDataSets()
+#' @title getDataSets()
 #' 
 #' @description Utility function to produce a data frame of valid data elements based on current
 #' DATIM form specification
@@ -24,3 +24,32 @@ getDataSets<-function() {
   }
   
   return(ds) }
+
+#' @export
+#' @title getCurrentDataSets(type)
+#' 
+#' @description Get a list of MER datasets which are currently open for data entry. 
+#' @param type Should be either RESULTS or TARGETS
+#' @return Returns a list of dataset UIDs of the given type.
+#'
+getCurrentDataSets<-function(type="RESULTS") {
+  
+  ds<-getDataSets()  
+  
+  if ( type == "RESULTS" ) {
+  want <-
+    c(
+      "MER Results: Facility Based",
+      "MER Results: Community Based",
+      "MER Results: Community Based - DoD ONLY",
+      "MER Results: Medical Store"
+    ) } else if (type == "TARGETS") {
+    want <- c(
+      "MER Targets: Community Based",
+      "MER Targets: Facility Based"
+    )
+    } else {
+      stop("Unknown dataset group. Must be one of RESULTS, TARGETS")
+    }
+ ds[ds$name %in% want,"id"]
+}
