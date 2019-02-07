@@ -43,7 +43,7 @@ test_that("We can error when mechanisms are not coded properly", {
   config <- LoadConfigFile(test_config("test-config.json"))
   options("maxCacheAge"=NULL)
   expect_type(config,"list")
-  expect_error(d2Parser(filename=test_config("test-data-bad-mechs.csv"),
+  expect_warning(d2Parser(filename=test_config("test-data-bad-mechs.csv"),
               type="csv",
               organisationUnit = "KKFzPM8LoXs",
               dataElementIdScheme = "id",
@@ -203,13 +203,15 @@ with_mock_api({
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     expect_type(config,"list")
-    expect_error(d2Parser(filename=test_config("test-data-bad-ou-uid.csv"),
+    expect_warning(foo<-d2Parser(filename=test_config("test-data-bad-ou-uid.csv"),
                 type="csv",
                 organisationUnit = "KKFzPM8LoXs",
                 dataElementIdScheme = "id",
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE), "The following org unit identifiers could not be found:SiuNE0ywCW4")
+    expect_false(foo$is_valid)
+    expect_type(foo,"list")
   })})
 
 context("Can error on an invalid data element UID")
@@ -219,13 +221,15 @@ with_mock_api({
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     expect_type(config,"list")
-    expect_error(d2Parser(filename=test_config("test-data-bad-de-uid.csv"),
+    expect_warning(foo<-d2Parser(filename=test_config("test-data-bad-de-uid.csv"),
                           type="csv",
                           organisationUnit = "KKFzPM8LoXs",
                           dataElementIdScheme = "id",
                           orgUnitIdScheme = "id",
                           idScheme = "id",
                           invalidData = FALSE), "The following data element identifiers could not be found:SiuNE0ywCW4")
+    expect_false(foo$is_valid)
+    expect_type(foo,"list")
   })})
 
 context("Can error on an invalid attribute option combo UID")
@@ -235,11 +239,13 @@ with_mock_api({
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     expect_type(config,"list")
-    expect_error(d2Parser(filename=test_config("test-data-bad-acoc-uid.csv"),
+    expect_warning(foo<-d2Parser(filename=test_config("test-data-bad-acoc-uid.csv"),
                           type="csv",
                           organisationUnit = "KKFzPM8LoXs",
                           dataElementIdScheme = "id",
                           orgUnitIdScheme = "id",
                           idScheme = "id",
                           invalidData = FALSE), "The following attribute option combo identifiers could not be found:SiuNE0ywCW4")
+    expect_false(foo$is_valid)
+    expect_type(foo,"list")
   })})
