@@ -46,7 +46,8 @@ getCurrentDataSets<-function(type="RESULTS") {
     ) } else if (type == "TARGETS") {
     want <- c(
       "MER Targets: Community Based",
-      "MER Targets: Facility Based"
+      "MER Targets: Facility Based",
+      "MER Targets: Community Based - DoD ONLY"
     )
     } else {
       stop("Unknown dataset group. Must be one of RESULTS, TARGETS")
