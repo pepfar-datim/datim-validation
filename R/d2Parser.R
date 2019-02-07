@@ -220,25 +220,25 @@ d2Parser <-
     notMissing <-
       function(x) {
         sapply(x, function(x) {
-          !is.na(x) || !missing(x) || x != ""
+          x != "" & !is.na(x) & !missing(x)
         })
         
       }
     
-    valid_rows<- data %>% 
-      dplyr::select(dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo,value) %>%
-      dplyr::mutate_all(notMissing) %>% 
-      dplyr::mutate(sum = rowSums(.[1:6])) %>% 
-      dplyr::mutate(is_valid = (sum==6L) ) %>%
-      dplyr::pull(is_valid) 
+    if (NROW(data) == 1 ) { 
+      valid_rows <- sum(sapply(data,notMissing)) == 6L
+       } else {
+         valid_rows <- rowSums(apply(data[,1:6], 2, notMissing)) == 6L
+      }
     
-    if (sum(valid_rows) != NROW(data)) {
-      foo <- nrow(data) - sum(!valid_rows)
+    if ( sum(valid_rows) != NROW(data) ) {
+      foo <- NROW(data) - sum(!valid_rows)
       msg <-
-        paste(foo,
+        paste0(foo,
               " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
+    
     if (!invalidData) {
       data <- data[valid_rows, ]
     }
