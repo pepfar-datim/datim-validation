@@ -265,3 +265,65 @@ with_mock_api({
                                  idScheme = "id",
                                  invalidData = FALSE), "1 rows are incomplete. Please check your file to ensure its correct.")
   })})
+
+
+context("Can parse SIMS data")
+
+with_mock_api({
+  test_that("Can load SIMS data with d2Parser", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d<-d2Parser(filename=test_config("data_sims_sample.csv"),
+                                 type="csv",
+                                 organisationUnit = "KKFzPM8LoXs",
+                                 dataElementIdScheme = "name",
+                                 orgUnitIdScheme = "id",
+                                 idScheme = "id",
+                                 invalidData = FALSE,
+                                 mode="SIMS")
+  })})
+
+
+with_mock_api({
+  test_that("Can load SIMS data with sims2Parser", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d<-sims2Parser(filename=test_config("data_sims_sample.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "name",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE)
+  })})
+
+with_mock_api({
+  test_that("Can date shift SIMS data", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_type(config,"list")
+    d_raw<-read.csv(file=test_config("data_sims_sample_collisions.csv"),
+                header = TRUE,
+                stringsAsFactors = FALSE)
+    expect_equal(length(unique(d_raw[,c("period","orgUnit","attributeOptionCombo")])[["period"]]),1)
+    expect_equal(length(unique(d_raw[,"assessmentid"])),2)
+    
+    d<-d2Parser(filename=test_config("data_sims_sample_collisions.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "name",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE,
+                mode="SIMS")
+    expect_type(d,"list")
+    expect_is(d,"data.frame")
+    d_names<-c("dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value","storedby","timestamp","comment")
+    expect_identical(names(d),d_names)
+    expect_equal(length(unique(d[,c("period","orgUnit","attributeOptionCombo")])[["period"]]),2)
+    expect_equal(length(unique(d[,"comment"])),2)
+    expect_setequal(unique(d[,"comment"]),unique(d_raw[,"assessmentid"]))
+    
+  })})

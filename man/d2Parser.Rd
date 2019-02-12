@@ -6,7 +6,8 @@
 \usage{
 d2Parser(filename, type, organisationUnit = NA,
   dataElementIdScheme = "id", orgUnitIdScheme = "id",
-  idScheme = "id", invalidData = FALSE, csv_header = TRUE)
+  idScheme = "id", invalidData = FALSE, csv_header = TRUE,
+  mode = "NORMAL", isoPeriod = NA)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid DHIS2 import file}
@@ -25,8 +26,13 @@ then the organisation units are assumed to be already specififed as UIDs}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
-\item{csv_header}{By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
+\item{csv_header}{By default, CSV files are assumed to have a header, otherwise FALSE will allow for
 files without a CSV header.}
+
+\item{mode}{be either "NORMAL" or "SIMS".}
+
+\item{isoPeriod}{period to be used for date shift boundaries. If not provided,
+no boundaries are set. Only relevant for SIMS data}
 }
 \value{
 Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"

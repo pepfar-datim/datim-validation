@@ -61,6 +61,129 @@ checkCodingScheme <- function(data) {
        )
 }
 
+
+shiftSIMSData <- function(data,isoPeriod) {
+  #The column afer the value column is used for storing the assessment
+  data<-data[,1:7]
+  
+  names(data)<-
+    c(
+      "dataElement",
+      "period",
+      "orgUnit",
+      "categoryOptionCombo",
+      "attributeOptionCombo",
+      "value",
+      "assessmentid"
+    )
+  
+  #if period is provided, use it for boundaries
+  if(!is.na(isoPeriod)){
+    period<-getPeriodFromISO(isoPeriod);
+  } else {
+    period<-NA
+  }
+  
+  #Start to shift the data
+  data_shifted<-data[0,]
+  assessments<-unique(data[,c("period","orgUnit","attributeOptionCombo","assessmentid")])
+  #Are there any assessment ids which occur on different dates?
+  #This should not be possible
+  if ( sum(duplicated(assessments$assessmentid)) != 0 ) {stop("Duplicate assessment IDS were found.")}
+  assessments_ou_acoc<-aggregate(. ~ orgUnit + attributeOptionCombo,data=assessments[,-4],length)
+  #Possible collisions
+  assessments_ou_acoc_dups<-assessments_ou_acoc[assessments_ou_acoc$period > 1,]
+  asessments_collisions<-assessments[0,]
+  if (nrow(assessments_ou_acoc_dups)> 0 ) {
+    for (i in 1:nrow(assessments_ou_acoc_dups)) {
+      foo<-assessments_ou_acoc_dups[i,]
+      bar<-assessments[assessments$orgUnit==foo$orgUnit & assessments$attributeOptionCombo==foo$attributeOptionCombo,]
+      #Are there any duplicated dates?
+      
+      if (sum(duplicated(bar$period)) > 0) {
+        dates<-as.Date(unique(strptime(bar$period,"%Y%m%d",tz = "UTC")))
+        start_date<-min(dates)
+        end_date<-max(dates)
+        #We need a minumum pool of dates
+        if ( (start_date - end_date) < nrow(bar) ) {
+          end_date<-start_date + nrow(bar)
+        }
+        #make sure end date does not go beyond boundaries
+        if(!is.na(period)){
+          if(end_date > period$endDate){
+            start_date = start_date - (end_date - period$endDate)
+          }
+          if(start_date < period$startDate){
+            warning("Shifting results in periods outside of the defined isoPeriod")
+          }
+        }
+        
+        possible_dates<-seq(start_date,end_date,by="day")
+        #Remove any dates which are already used
+        possible_dates<-possible_dates[!(possible_dates %in% dates)]
+        
+        duplicated_dates<-which(duplicated(bar$period))
+        for (j in 1:length(duplicated_dates)) {
+          this_date<-as.Date(bar$period[duplicated_dates[j]],"%Y%m%d")
+          #Which date is closest?
+          date_distance<-methods::as(abs(possible_dates-this_date),"integer")
+          replacement_date_n<-which(date_distance == min(date_distance))
+          
+          bar$period[duplicated_dates[j]]<-format(possible_dates[replacement_date_n],"%Y%m%d")
+          #Remove it from the pool
+          possible_dates<-possible_dates[-replacement_date_n]
+        }
+      }
+      asessments_collisions<-rbind(asessments_collisions,bar) }
+    #Non-collisions
+    
+    data_clear <-
+      merge(data,
+            assessments_ou_acoc[assessments_ou_acoc$period == 1, c("orgUnit", "attributeOptionCombo")],
+            by = c("orgUnit", "attributeOptionCombo"))
+    data_not_clear <- merge(
+      data,
+      asessments_collisions,
+      by = c("orgUnit", "attributeOptionCombo", "assessmentid")
+    )
+    data_not_clear <-
+      data_not_clear[, c(
+        "orgUnit",
+        "attributeOptionCombo",
+        "dataElement",
+        "period.y",
+        "categoryOptionCombo",
+        "value",
+        "assessmentid"
+      )]
+    names(data_not_clear) <- names(data_clear)
+    data_shifted <- rbind(data_clear, data_not_clear)
+    assertthat::assert_that(nrow(data) == nrow(data_shifted))
+    data_shifted$comment <- data_shifted$assessmentid
+    data_shifted$storedby <- NA
+    data_shifted$timestamp <- NA
+  } else {
+    data_shifted <- data
+    data_shifted$storedby <- NA
+    data_shifted$timestamp <- NA
+    data_shifted$comment <- data_shifted$assessmentid
+  }
+  
+  header_final <-
+    c(
+      "dataElement",
+      "period",
+      "orgUnit",
+      "categoryOptionCombo",
+      "attributeOptionCombo",
+      "value",
+      "storedby",
+      "timestamp",
+      "comment"
+    )
+  data_shifted[, header_final[header_final %in% names(data_shifted)]]
+}
+
 #' @export
 #' @importFrom utils read.csv
 #' @importFrom utils select.list
@@ -78,8 +201,11 @@ checkCodingScheme <- function(data) {
 #' then the organisation units are assumed to be already specififed as UIDs
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
-#' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
-#' files without a CSV header. 
+#' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for
+#' files without a CSV header.
+#' @param mode be either "NORMAL" or "SIMS".
+#' @param isoPeriod period to be used for date shift boundaries. If not provided,
+#'  no boundaries are set. Only relevant for SIMS data
 #'
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
@@ -94,7 +220,9 @@ d2Parser <-
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE,
-           csv_header = TRUE) {
+           csv_header = TRUE,
+           mode="NORMAL",
+           isoPeriod=NA) {
     
     
     if (is.na(organisationUnit)) {
@@ -105,6 +233,11 @@ d2Parser <-
     valid_type <- type %in% c("xml", "json", "csv")
     if (!valid_type) {
       stop("ERROR:Not a valid file type")
+    }
+    
+    valid_mode <- mode %in% c("NORMAL","SIMS") 
+      if (!valid_mode ) {
+        stop("ERROR:Not a valid parsing mode")
     }
     
     header <-
@@ -247,8 +380,25 @@ d2Parser <-
     
     if (!code_scheme_check$is_valid) {
       return(code_scheme_check)
-    } else{
-      data
+    } 
+    
+    if (mode=="SIMS") {
+     data <- shiftSIMSData(data=data,isoPeriod=isoPeriod)
     }
     
+    data
+  
   }
+
+#' Title
+#'
+#' @param ... Same paramaters as d2Parser, except the mode is set to "SIMS"
+#'
+#' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
+#' @export
+#' @seealso d2Parser
+
+sims2Parser<-function(...) {
+  
+  d2Parser(...,mode="SIMS")
+}
