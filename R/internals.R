@@ -94,7 +94,7 @@ clearCache <-
 #' @export
 #'
 #' 
-api_version<-function() { "27" }
+api_version<-function() { "29" }
 
 #' Title 
 #'
