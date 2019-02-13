@@ -32,7 +32,6 @@ Suggests:
     tcltk,
     testthat,
     covr,
-    stringi,
-    httptest
+    stringi
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
