@@ -13,12 +13,12 @@ Once you have installed that, you can proceed to try and load the `datim-validat
 
 ```R
 library(devtools)
-install_github("jason-p-pickering/datim-validation")
+install_git('https://github.com/jason-p-pickering/datim-validation")
 ```
 
 If you prefer, you can download the source of the package with the vignettes and build these as well (reccomended for new users).
 ```R
-devtools::install_github('jason-p-pickering/datim-validation',build_vignettes = TRUE)
+devtools::install_github('https://github.com/jason-p-pickering/datim-validation',build_vignettes = TRUE)
 ```
 
 
