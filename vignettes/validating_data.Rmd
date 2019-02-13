@@ -15,7 +15,7 @@ vignette: >
 DATIM is based on the [DHIS2](https://dhis2.org/) software, and is therefore capable of importing different types of data, including
 CSV, JSON, XML as well as ADX formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
 the various formats which DHIS2 supports and the syntax of each of these. The DHIS2 development team has provided extensive technical
-documetnation on the various formats [here](http://dhis2.github.io/dhis2-docs/master/en/developer/html/webapi_data_values.html). 
+documetnation on the various formats [here](https://docs.dhis2.org/master/en/developer/html/webapi_data_values.html#webapi_data_values_csv). 
 
 In addition to the general DHIS2 documentation, a series of DATIM specific resources is available [here](https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange). These guides provide more detailed information on the data import process into DATIM, including code listings for indicators and disaggregations. 
 
