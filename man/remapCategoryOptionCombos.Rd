@@ -22,8 +22,7 @@ It will return a vector of another class as specified with the mode_out paramate
 }
 \examples{
 \dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-#Add a new column with category option (disagg) codes
-d$coc_codes<-remapOUs(d$categoryOptionCombos,mode_in="id",mode_out="code")
+    d<-d2Parser("myfile.csv",type="csv")
+    d$coc_codes<-remapOUs(d$categoryOptionCombos,mode_in="id",mode_out="code")
 }
 }

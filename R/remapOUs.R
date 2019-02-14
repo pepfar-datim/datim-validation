@@ -11,8 +11,7 @@
 #' @return Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs
 #' @examples \dontrun{
 #' d<-d2Parser("myfile.csv",type="csv")
-#' #Add a new column with mechanism codes.
-#' d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+#'     d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 #' }
 #' 
 remapOUs <-

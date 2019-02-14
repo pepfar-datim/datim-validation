@@ -16,8 +16,8 @@ Returns nothing. Only errors if the file is not valid.
 ValidateConfig(dhis_config)
 }
 \examples{
- \dontrun{
- ValidatConfig("/home/littlebobbytables/creds.json")
+\dontrun{
+     ValidatConfig("/home/littlebobbytables/creds.json")
  }
 
 }

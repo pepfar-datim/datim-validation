@@ -22,8 +22,7 @@ along with the other required paramaters. It will return a vector of identifiers
 }
 \examples{
 \dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-#Add a new column with data element codes
-d$de_codes<-remapOUs(d$dataElements,mode_in="id",mode_out="code")
+    d<-d2Parser("myfile.csv",type="csv")
+    d$de_codes<-remapOUs(d$dataElements,mode_in="id",mode_out="code")
 }
 }

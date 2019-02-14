@@ -30,9 +30,9 @@ are not met, the data will be flagged as being invalid.
 }
 \examples{
 \dontrun{
- d<-d2Parser("myfile.csv",type="csv")
- ds<-getCurrentMERDataSets(type="RESULTS")
- checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
+     d<-d2Parser("myfile.csv",type="csv")
+     ds<-getCurrentMERDataSets(type="RESULTS")
+     checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
 }
 
 }

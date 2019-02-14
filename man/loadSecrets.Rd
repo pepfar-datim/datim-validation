@@ -25,6 +25,6 @@ dhis": {
 }
 \examples{
  \dontrun{
- loadSecrets("/home/littlebobbytables/creds.json")
+     loadSecrets("/home/littlebobbytables/creds.json")
  }
 }

@@ -25,8 +25,7 @@ along with the other required paramaters. It will return a vector of to another 
 \examples{
 \dontrun{
 d<-d2Parser("myfile.csv",type="csv")
-#Add a new column with mechanism codes.
-d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+    d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 }
 
 }

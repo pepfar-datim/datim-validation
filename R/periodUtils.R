@@ -103,8 +103,8 @@ getPeriodFromISO <- function(iso) {
 #' @param data A data frame which has been parsed by either d2Parser or sims2Parser
 #' @return TRUE if all periods are valid.
 #' @examples \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#' checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
+#'     d<-d2Parser("myfile.csv",type="csv")
+#'     checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
 #' }
 #' 
 checkPeriodIdentifiers<-function(data) { 

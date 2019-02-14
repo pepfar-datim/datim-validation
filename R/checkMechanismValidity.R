@@ -17,9 +17,9 @@
 #' Returns TRUE if there are no violations. 
 #' 
 #' @examples \dontrun{
-#'  d<-d2Parser("myfile.csv",type="csv")
-#'  ds<-getCurrentMERDataSets(type="RESULTS")
-#'  checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
+#'      d<-d2Parser("myfile.csv",type="csv")
+#'      ds<-getCurrentMERDataSets(type="RESULTS")
+#'      checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
 #' }
 #' 
 checkMechanismValidity <- function(data, organisationUnit=NA, return_violations=TRUE) {

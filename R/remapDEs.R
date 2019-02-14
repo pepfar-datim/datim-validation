@@ -10,9 +10,8 @@
 #' @param mode_out Should be one of code,name, shortName or id. This is the class we are mapping to.
 #' @return Returns a vector of DATIM uids for each data element which needs to be remapped.
 #' @examples \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#' #Add a new column with data element codes
-#' d$de_codes<-remapOUs(d$dataElements,mode_in="id",mode_out="code")
+#'     d<-d2Parser("myfile.csv",type="csv")
+#'     d$de_codes<-remapOUs(d$dataElements,mode_in="id",mode_out="code")
 #' }
 remapDEs <- function(des_in,
                      mode_in = "code",

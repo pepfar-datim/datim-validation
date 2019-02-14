@@ -63,9 +63,8 @@ DHISLogin<-function(dhis_config) {
 #' @return Returns nothing. Only errors if the file is not valid. 
 #' @export
 #'
-#' @examples
-#'  \dontrun{
-#'  ValidatConfig("/home/littlebobbytables/creds.json")
+#' @examples \dontrun{
+#'      ValidatConfig("/home/littlebobbytables/creds.json")
 #'  }
 #' 
 ValidateConfig <- function(dhis_config) {
@@ -107,7 +106,7 @@ ValidateConfig <- function(dhis_config) {
 #' 
 #' @examples 
 #'  \dontrun{
-#'  loadSecrets("/home/littlebobbytables/creds.json")
+#'      loadSecrets("/home/littlebobbytables/creds.json")
 #'  }
 loadSecrets <- function(config_path = NA) {
   #Load from a file

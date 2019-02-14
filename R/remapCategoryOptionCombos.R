@@ -10,9 +10,8 @@
 #' @param mode_out Should be one of code,name,shortName or id. This is the class we are mapping to..
 #' @return Returns a vector of category option combos of the mode_out type.
 #' @examples \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#' #Add a new column with category option (disagg) codes
-#' d$coc_codes<-remapOUs(d$categoryOptionCombos,mode_in="id",mode_out="code")
+#'     d<-d2Parser("myfile.csv",type="csv")
+#'     d$coc_codes<-remapOUs(d$categoryOptionCombos,mode_in="id",mode_out="code")
 #' }
 remapCategoryOptionCombos<-function(cocs_in,mode_in,mode_out) {
   

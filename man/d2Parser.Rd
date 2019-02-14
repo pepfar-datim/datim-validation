@@ -41,9 +41,9 @@ Note that all values will be returned as characters.
 }
 \examples{
 \dontrun{
-d<-d2Parser("myfile.csv",type="csv",header=TRUE)
-d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
-d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
+    d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+    d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
+    d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
 }
 
 }
