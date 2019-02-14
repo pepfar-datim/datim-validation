@@ -27,10 +27,10 @@ validateData should be supplied a d2Parser compliant data frame.
 The data frame is checked dynamically against validation rules defined in the DATIM server.
 }
 \examples{
-\dontrun {
+\dontrun{
   d<-d2Parser("myfile.csv",type="csv")
   vr_rules<-validateData(d)
-  doMC::registerDoMC(cores=4) # or however many cores you have access to
+  doMC::registerDoMC(cores=4)
   vr_rules<-validateData(d,parallel=TRUE)
   ds<-getCurrentMERDataSets()
   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)

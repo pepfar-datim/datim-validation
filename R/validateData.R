@@ -1,4 +1,3 @@
-
 #' @export
 #' @title Internal function which prepares a parsed data frame for validation
 #' 
@@ -67,10 +66,10 @@ prepDataForValidation <- function(d) {
 #' @param datasets Vector of dataset UIDs which can  be used to restrict 
 #' the validation rules which will be applied. 
 #' @return Returns a data frame with validation rule results.
-#' @examples \dontrun {
+#' @examples \dontrun{
 #'   d<-d2Parser("myfile.csv",type="csv")
 #'   vr_rules<-validateData(d)
-#'   doMC::registerDoMC(cores=4) # or however many cores you have access to
+#'   doMC::registerDoMC(cores=4)
 #'   vr_rules<-validateData(d,parallel=TRUE)
 #'   ds<-getCurrentMERDataSets()
 #'   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
