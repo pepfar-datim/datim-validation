@@ -14,6 +14,7 @@ Warnings are issued if the coding scheme is not
 congruent with what has been supplied as a paramater.
 }
 \description{
-checkCodingScheme will ensure that all indentifiers after parsing are valid UIDs,
+checkCodingScheme will ensure that all indentifiers 
+after parsing are valid UIDs,
 or in the case of periods, valid periods.
 }

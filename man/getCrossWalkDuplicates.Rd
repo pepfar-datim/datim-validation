@@ -12,11 +12,14 @@ getCrossWalkDuplicates(d)
 \value{
 Returns a data frame of all crosswalk mechanism values,
  along with default de-deudplication adjustments.
- @examples 
-  \dontrun{
-    cw_dups<-getCrossWalkDuplicates(d)
- }
 }
 \description{
 Utility function which returns the crosswalk mechanism UID
+}
+\examples{
+\dontrun{
+    cw_dups<-getCrossWalkDuplicates(d)
+ }
+
+
 }

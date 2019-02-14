@@ -8,11 +8,13 @@ getCrosswalkMap()
 }
 \value{
 Returns a map of DSD/TA data element UIDs.
- @examples 
-  \dontrun{
-    cw_map<-getCrosswalkMap()
- }
 }
 \description{
 Utility function which returns a map of DSD / TA data elements UIDs
+}
+\examples{
+\dontrun{
+    cw_map<-getCrosswalkMap()
+ }
+
 }

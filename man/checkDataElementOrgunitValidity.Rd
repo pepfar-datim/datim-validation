@@ -28,7 +28,7 @@ Returns a data frame invalid data elements which exist in the data
 but which do not have a valid organistion unit / dataset association.
 }
 \examples{
- \dontrun{
+\dontrun{
  d<-d2Parser("myfile.csv",type="csv")
  ds<-getCurrentMERDataSets(type="RESULTS")
  checkDataElementOrgunitValidity(data=d,datasets=ds)

@@ -13,8 +13,7 @@
 #' "dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data, if any. 
 #' If there are no violations, a boolean TRUE is returned. 
-#' @examples 
-#'  \dontrun{
+#' @examples \dontrun{
 #'   d<-d2Parser("myfile.csv",type="csv")
 #'   ds<-getCurrentMERDataSets(type="RESULTS")
 #'   checkDataElementDisaggValidity(d,ds)

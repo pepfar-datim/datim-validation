@@ -27,7 +27,7 @@ invalid data elements based on current
 DATIM form specification.
 }
 \examples{
- \dontrun{
+\dontrun{
   d<-d2Parser("myfile.csv",type="csv")
   ds<-getCurrentMERDataSets(type="RESULTS")
   checkDataElementDisaggValidity(d,ds)

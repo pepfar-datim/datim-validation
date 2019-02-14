@@ -84,8 +84,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #' @return Returns subset of data which contains
 #'   invalid data element / organisation unit associations. If no violations are found, a boolean
 #'   TRUE value is returned. 
-#' @examples 
-#'  \dontrun{
+#' @examples \dontrun{
 #'  d<-d2Parser("myfile.csv",type="csv")
 #'  ds<-getCurrentMERDataSets(type="RESULTS")
 #'  checkDataElementOrgunitValidity(data=d,datasets=ds)

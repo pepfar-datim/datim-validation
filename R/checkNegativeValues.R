@@ -8,8 +8,7 @@
 #' returns TRUE if there are no violations. A warning will also be issued if 
 #' there are any negative values found in non-dedupe mechanisms. 
 #'
-#' @examples 
-#'  \dontrun{
+#' @examples \dontrun{
 #'  d<-d2Parser("myfile.csv",type="csv")
 #'  checkNegativeValues(data=d)
 #' }

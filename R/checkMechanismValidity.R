@@ -16,8 +16,7 @@
 #' also be issued. 
 #' Returns TRUE if there are no violations. 
 #' 
-#' @examples 
-#'  \dontrun{
+#' @examples \dontrun{
 #'  d<-d2Parser("myfile.csv",type="csv")
 #'  ds<-getCurrentMERDataSets(type="RESULTS")
 #'  checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")

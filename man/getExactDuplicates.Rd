@@ -18,7 +18,7 @@ Returns a listing of exact duplicates by dataElement,
 period,orgunit,categoryOptionCombo and attributeOptionCombo
 }
 \examples{
- \dontrun{
+\dontrun{
  d<-d2Parser("myfile.csv",type="csv",header=TRUE)
  dups<-getExactDuplicates(d)
  dups

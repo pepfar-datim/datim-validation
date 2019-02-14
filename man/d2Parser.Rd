@@ -38,10 +38,12 @@ frame which can be used in subsequent DATIM validation routines
 \note{
 function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
 Note that all values will be returned as characters.
-#' @examples 
+}
+\examples{
 \dontrun{
 d<-d2Parser("myfile.csv",type="csv",header=TRUE)
 d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
 d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
 }
+
 }

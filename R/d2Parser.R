@@ -1,7 +1,8 @@
 
 #' @title Utility function to check that the supplied coding scheme is correct
 #'
-#' @description checkCodingScheme will ensure that all indentifiers after parsing are valid UIDs,
+#' @description checkCodingScheme will ensure that all indentifiers 
+#' after parsing are valid UIDs,
 #' or in the case of periods, valid periods. 
 #'
 #' @param data A parsed DHIS2 data payload from d2parser
@@ -88,8 +89,7 @@ checkCodingScheme <- function(data) {
 #'
 #' @note function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
 #' Note that all values will be returned as characters.
-#'#' @examples 
-#' \dontrun{
+#' @examples \dontrun{
 #' d<-d2Parser("myfile.csv",type="csv",header=TRUE)
 #' d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
 #' d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")

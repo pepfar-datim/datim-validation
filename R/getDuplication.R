@@ -7,8 +7,8 @@
 #' @param d A d2 parsed data frame
 #' @return Returns a data frame of d2 data, with exact duplicates.
 #'   A warning will be issued if duplicates are detected. 
-#' @examples 
-#'  \dontrun{
+#' 
+#' @examples \dontrun{
 #'  d<-d2Parser("myfile.csv",type="csv",header=TRUE)
 #'  dups<-getExactDuplicates(d)
 #'  dups
@@ -39,8 +39,7 @@ getExactDuplicates <- function(d) {
 #' 
 #' @param d A d2 parsed data frame
 #' @return Returns a data frame of d2 data, with pure duplicates used for de-duplication purposes.
-#'  @examples 
-#'   \dontrun{
+#' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv",header=TRUE)
 #'     dups<-getPureDuplicates(d)
 #'     dups
@@ -62,8 +61,7 @@ getPureDuplicates<-function(d){
 #' @description Utility function which returns a map of DSD / TA data elements UIDs
 #'
 #' @return Returns a map of DSD/TA data element UIDs.
-#'  @examples 
-#'   \dontrun{
+#' @examples \dontrun{
 #'     cw_map<-getCrosswalkMap()
 #'  }
 #' 
@@ -87,8 +85,7 @@ getCrosswalkMap<-function(){
 #' @description Utility function which returns the crosswalk mechanism UID
 #' 
 #' @return Returns a UID of the crosswalk de-duplication mechanism
-#'  @examples 
-#'   \dontrun{
+#' @examples \dontrun{
 #'     cw_uid<-getCrosswalkMechanism()
 #'  }
 #' 
@@ -112,8 +109,7 @@ getCrosswalkMechanism<-function(){
 #' @param d A d2 parsed data frame of data.
 #' @return Returns a data frame of all crosswalk mechanism values,
 #'  along with default de-deudplication adjustments.
-#'  @examples 
-#'   \dontrun{
+#' @examples \dontrun{
 #'     cw_dups<-getCrossWalkDuplicates(d)
 #'  }
 #' 
