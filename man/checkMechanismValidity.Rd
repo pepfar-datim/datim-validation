@@ -12,14 +12,27 @@ checkMechanismValidity(data, organisationUnit = NA,
 
 \item{organisationUnit}{UID of the operating unit.}
 
-\item{return_violations}{Should the function return a list of violations?}
+\item{return_violations}{Should the function return a list of violations only.}
 }
 \value{
-Returns a data frame of invalid period-mechanism combinations. Returns TRUE if there are no violations.
+Returns a data frame of invalid period-mechanism combinations. A warning will 
+also be issued. 
+Returns TRUE if there are no violations.
 }
 \description{
-This function will return an object of invalid mechanisms and periods. All data which is reported 
-must have a period within the valid start and end dates of the attribute option combination to which it is assigned. 
-The mechanism must also be associated with the operating unit. If either of these two conditions 
+This function will return an object of invalid mechanisms and periods. 
+All data which is reported 
+must have a period within the valid start and end dates of the
+attribute option combination to which it is assigned. 
+The mechanism must also be associated with the operating unit. 
+If either of these two conditions 
 are not met, the data will be flagged as being invalid.
+}
+\examples{
+\dontrun{
+d<-d2Parser("myfile.csv",type="csv")
+ds<-getCurrentMERDataSets(type="RESULTS")
+checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
+}
+
 }

@@ -13,5 +13,18 @@ checkValueTypeCompliance(d)
 Returns a data frame of invalid data only
 }
 \description{
-Utility function of extraction of data element ids, codes, shortName and names
+This function will check data to ensure that its value matches
+a given pattern based on its value type. As an example, if the data element
+which is being validated should only accept positive integers, any values
+which are not positive integers will be flagged. For values which are composed
+of option sets, any values which do not correspond so one of the option set 
+value codes, will also be flagged. Additionally ,any values which are zero
+for which the data element is not zero significant will also be flagged.
+}
+\examples{
+\dontrun{
+d<-d2Parser("myfile.csv",type="csv")
+checkValueTypeCompliance(d)
+}
+
 }
