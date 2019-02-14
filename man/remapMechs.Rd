@@ -12,9 +12,9 @@ remapMechs(mechs_in, organisationUnit, mode_in = "code",
 
 \item{organisationUnit}{The UID of the operating unit.}
 
-\item{mode_in}{Should be one of code, name or id. This is the class we are mapping from.}
+\item{mode_in}{Should be one of code, name or id. This is the type we are mapping from.}
 
-\item{mode_out}{Should be one of code,name or id. This is the class we are mapping to.}
+\item{mode_out}{Should be one of code,name or id. This is the type we are mapping to.}
 }
 \value{
 Returns a vector of mechanism UIDs
@@ -23,7 +23,10 @@ Returns a vector of mechanism UIDs
 remapMechs should be supplied a vector of data mechanisms (names,codes or shortnames)
 along with the other required paramaters. It will return a vector of UIDs.
 }
-\note{
-remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
-will remap mechanisms specified as codes to UIDs
+\examples{
+\dontrun{
+d<-d2Parser("myfile.csv",type="csv")
+#Add a new column with organisation unit short names. 
+d$mech_names<-remapMechs(d$attributeOptionCombo,mode_in="id",mode_out="code")
+}
 }

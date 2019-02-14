@@ -4,8 +4,8 @@
 #' 
 #' @param d Data frame parsed by d2Parser
 #'
-#' @return Modifed data object with combis and totals appended
-
+#' @return Modifed data object with combis and totals appended. 
+#  
 
 prepDataForValidation <- function(d) {
   header <-
@@ -63,11 +63,19 @@ prepDataForValidation <- function(d) {
 #' @param data d2Parser data frame
 #' @param organisationUnit Organisation unit. Defaults to the user organisation unit if not supplied.
 #' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
-#' @param parallel Should the rules be evaluated in parallel. 
+#' @param parallel Should the rules be evaluated in parallel. Default is to not evaluate in parallel. 
 #' @param datasets Vector of dataset UIDs which can  be used to restrict 
 #' the validation rules which will be applied. 
 #' @return Returns a data frame with validation rule results.
-validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=TRUE,datasets=NA) {
+#' @examples \dontrun {
+#'   d<-d2Parser("myfile.csv",type="csv")
+#'   vr_rules<-validateData(d)
+#'   doMC::registerDoMC(cores=4) # or however many cores you have access to
+#'   vr_rules<-validateData(d,parallel=TRUE)
+#'   ds<-getCurrentMERDataSets()
+#'   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
+#' }
+validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=FALSE,datasets=NA) {
 
     allDataSets<-getDataSets()
     dataSetValid<-Reduce("&",datasets %in% allDataSets$id)

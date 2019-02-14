@@ -8,10 +8,13 @@
 #' @param organisationUnit UID of the Operating Unit/Country
 #' @param mode_in Should be one of code, name, shortName or id. This is the class we are mapping from.
 #' @param mode_out Should be on of code,name,shortName or id. This is the class we are mapping to.
-#' @return Returns a vector of organisation unit UIDs
-#' @note
-#' remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
-#' will remap organisation units specified as codes to UIDs
+#' @return Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs
+#' @examples \dontrun{
+#' d<-d2Parser("myfile.csv",type="csv")
+#' #Add a new column with mechanism codes.
+#' d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+#' }
+#' 
 remapOUs <-
   function(ous_in,
            organisationUnit,
@@ -26,6 +29,7 @@ remapOUs <-
     } else {
       sites <-
         getOrganisationUnitMap(organisationUnit)
+      #TODO Get rid of this method and use stringi instead. 
       cmd <-
         paste0(
           "plyr::mapvalues(ous_in,sites$",

@@ -1,7 +1,7 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.0.12
+Version: 1.0.13
 Date: 2019-02-14
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
@@ -11,6 +11,8 @@ Description: This package can be used to validate data payloads prior
         Full validation of the data including by validation rules are
         also supported.
 License: BSD_3_clause + file LICENSE
+BugReports:
+        https://github.com/jason-p-pickering/datim-validation/issues
 Encoding: UTF-8
 Imports: XML, plyr, jsonlite, stringr, httr, digest, reshape2,
         assertthat, rlist, ISOweek, lubridate, getPass, dplyr

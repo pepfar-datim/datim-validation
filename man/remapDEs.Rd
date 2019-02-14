@@ -20,7 +20,10 @@ Returns a vector of DATIM uids for each data element which needs to be remapped.
 remapDes should be supplied a vector of data elements (names,codes or shortnames)
 along with the other required paramaters. It will return a vector of identifiers of a different class.
 }
-\note{
-remapDes(foo,"https://www.datim.org","admin","district","code")
-will remap data elements specified as codes to UIDs
+\examples{
+\dontrun{
+d<-d2Parser("myfile.csv",type="csv")
+#Add a new column with data element codes
+d$de_codes<-remapOUs(d$dataElements,mode_in="id",mode_out="code")
+}
 }
