@@ -10,9 +10,17 @@ getPureDuplicates(d)
 \item{d}{A d2 parsed data frame}
 }
 \value{
-Returns a data frame of d2 data, with pure duplicates.
+Returns a data frame of d2 data, with pure duplicates used for de-duplication purposes.
+ @examples 
+  \dontrun{
+    d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+    dups<-getPureDuplicates(d)
+    dups
+ }
 }
 \description{
-Returns a listing of pure duplicates by dataElement,period,orgunit,categoryOptionCombo. 
-For the purposes of de-duplication, these are considered to be pure duplicates (only the attributeOptionCombo differ)
+Returns a listing of pure duplicates by dataElement,period,orgunit,
+categoryOptionCombo. 
+For the purposes of de-duplication, these are considered to be pure 
+duplicates (only the attributeOptionCombo differ).
 }

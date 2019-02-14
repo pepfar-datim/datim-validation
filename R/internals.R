@@ -67,7 +67,10 @@ saveCachedObject <-
 #' @param cache_dir Cache directory path. By default, working directory + ".R_Cache"
 #' @param force Boolean (default FALSE) to clear cache without asking the user
 #' @return Nothing.
-#'
+#' @examples 
+#'  \dontrun{
+#'   clearCache(force=TRUE)
+#' }
 clearCache <-
   function(cache_dir = paste0(getwd(), "/.R_Cache/"),
            force = NA) {
@@ -88,18 +91,19 @@ clearCache <-
     }
   }
 
-#' Title
-#'
-#' @return Version of the API
 #' @export
+#' @title api_version()
+#'
+#' @description Internal utility function to get the current API version of the DATIM server
+#' @return Version of the API. 
 #'
 #' 
 api_version<-function() { "29" }
 
-#' Title 
-#'
-#' @return Returns a password
 #' @export
+#' @title api_version()
+#'
+#' @return Returns a password from a prompt. 
 #'
 #' 
 get_password <- function() {

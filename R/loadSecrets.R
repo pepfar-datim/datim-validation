@@ -56,14 +56,35 @@ DHISLogin<-function(dhis_config) {
 
 
 
-ValidateConfig<-function(dhis_config) {
+#' @title ValidateConfig(dhis_config)
+#'
+#' @param dhis_config Path to a configuration file. 
+#'
+#' @return Returns nothing. Only errors if the file is not valid. 
+#' @export
+#'
+#' @examples
+#'  \dontrun{
+#'  ValidatConfig("/home/littlebobbytables/creds.json")
+#'  }
+#' 
+ValidateConfig <- function(dhis_config) {
+  isBaseURL <- function(x) {
+    grepl("^http(?:[s])?://.+/$", x)
+  }
+  isMissing <- function(x) {
+    is.na(x) || missing(x) || x == ""
+  }
   
-  is.baseurl <-function(x) { grepl("^http(?:[s])?://.+/$", x)}
-  is.missing<- function(x) { is.na(x) || missing(x) || x == "" }
-
-  if (is.missing(dhis_config$dhis$username)) {stop("Username cannot by blank.")}
-  if (is.missing(dhis_config$dhis$password)) {stop("Username cannot by blank.")}
-  if (!is.baseurl(dhis_config$dhis$baseurl)) {stop("The base url does not appear to be valid. It should end in /")}
+  if (isMissing(dhis_config$dhis$username)) {
+    stop("Username cannot by blank.")
+  }
+  if (isMissing(dhis_config$dhis$password)) {
+    stop("Username cannot by blank.")
+  }
+  if (!isBaseURL(dhis_config$dhis$baseurl)) {
+    stop("The base url does not appear to be valid. It should end in /")
+  }
 }
 
 #' @export
@@ -81,8 +102,13 @@ ValidateConfig<-function(dhis_config) {
 #'
 #'
 #' @param config_path Location of the configuration file to a DHIS2 server. 
-#' @return Returns a boolean value indicating that the secrets file is valid by accessing /api/me
-#'
+#' @return Returns a boolean value indicating the user was able ot successfully 
+#' login to the system
+#' 
+#' @examples 
+#'  \dontrun{
+#'  loadSecrets("/home/littlebobbytables/creds.json")
+#'  }
 loadSecrets <- function(config_path = NA) {
   #Load from a file
   if (is.na(config_path)) {

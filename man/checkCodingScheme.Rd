@@ -7,10 +7,11 @@
 checkCodingScheme(data)
 }
 \arguments{
-\item{data}{A parse DHIS2 data payload}
+\item{data}{A parsed DHIS2 data payload from d2parser}
 }
 \value{
-Only returns an error if the
+Warnings are issued if the coding scheme is not 
+congruent with what has been supplied as a paramater.
 }
 \description{
 checkCodingScheme will ensure that all indentifiers after parsing are valid UIDs,

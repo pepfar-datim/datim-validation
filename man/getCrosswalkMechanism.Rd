@@ -8,6 +8,10 @@ getCrosswalkMechanism()
 }
 \value{
 Returns a UID of the crosswalk de-duplication mechanism
+ @examples 
+  \dontrun{
+    cw_uid<-getCrosswalkMechanism()
+ }
 }
 \description{
 Utility function which returns the crosswalk mechanism UID
