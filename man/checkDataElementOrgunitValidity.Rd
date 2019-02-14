@@ -21,15 +21,16 @@ Alternatively, if left missing, user will be promted.}
 \value{
 Returns subset of data which contains
   invalid data element / organisation unit associations. If no violations are found, a boolean
-  TRUE value is returned. 
- @examples 
-\dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-ds<-getCurrentMERDataSets(type="RESULTS")
-checkDataElementOrgunitValidity(data=d,datasets=ds)
-}
+  TRUE value is returned.
 }
 \description{
 Returns a data frame invalid data elements which exist in the data 
 but which do not have a valid organistion unit / dataset association.
+}
+\examples{
+ \dontrun{
+ d<-d2Parser("myfile.csv",type="csv")
+ ds<-getCurrentMERDataSets(type="RESULTS")
+ checkDataElementOrgunitValidity(data=d,datasets=ds)
+}
 }

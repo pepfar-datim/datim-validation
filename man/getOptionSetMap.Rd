@@ -9,13 +9,12 @@ getOptionSetMap()
 \value{
 Returns a data frame structure composed of option set names, UIDs, and a data frame for 
 each of these with individual options present in the option set.
-
-#' \dontrun{
-
-op_set_map<-getOptionSetMap()
-
-}
 }
 \description{
 Utility function to fetch a list of optionsets and possible values within them
+}
+\examples{
+ \dontrun{
+  op_set_map<-getOptionSetMap()
+}
 }

@@ -46,7 +46,8 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE)
-    expect_equal(NROW(checkNegativeValues(d)), 2)
+    expect_warning(foo<-checkNegativeValues(d))
+    expect_equal(NROW(foo), 2)
   })
 })
 

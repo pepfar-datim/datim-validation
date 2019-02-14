@@ -90,11 +90,9 @@ checkValueTypeCompliance<-function(d) {
 #'
 #' @return Returns a data frame structure composed of option set names, UIDs, and a data frame for 
 #' each of these with individual options present in the option set.
-#' 
-#' #' \dontrun{
-#' 
-#' op_set_map<-getOptionSetMap()
-#' 
+#' @examples 
+#'  \dontrun{
+#'   op_set_map<-getOptionSetMap()
 #' }
 getOptionSetMap<-function() {
 
@@ -125,10 +123,10 @@ getOptionSetMap<-function() {
 #'
 #' @return Returns a data frame of invalid values validated against their option set.
 #' 
-#' #' #' \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#' checkOptionSetCompliance(d)
-#' 
+#' @examples 
+#'  \dontrun{
+#'   d<-d2Parser("myfile.csv",type="csv")
+#'   checkOptionSetCompliance(d)
 #' }
 checkOptionSetCompliance<-function(d) {
   

@@ -18,9 +18,9 @@ there are any negative values found in non-dedupe mechanisms.
 In general, data values which are negative will not be imported.
 }
 \examples{
-\dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-checkNegativeValues(data=d)
+ \dontrun{
+ d<-d2Parser("myfile.csv",type="csv")
+ checkNegativeValues(data=d)
 }
 
 }

@@ -16,14 +16,14 @@ if left missing, user will be promted.}
 \value{
 A named list of data frames, each consisting of two columns (des) representing
 data elements and (ous) representing organisation unit UIDs
-
-#' @examples 
-\dontrun{
-ds<-getCurrentMERDataSets(type="RESULTS")
-de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
-}
 }
 \description{
 Returns a map of lists consisting of data elements and orgunits
  for a dataset (or datasets) for a given organisationUnit
+}
+\examples{
+ \dontrun{
+ ds<-getCurrentMERDataSets(type="RESULTS")
+ de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
+}
 }

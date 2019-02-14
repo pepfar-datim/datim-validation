@@ -11,13 +11,13 @@ checkOptionSetCompliance(d)
 }
 \value{
 Returns a data frame of invalid values validated against their option set.
-
-#' #' \dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-checkOptionSetCompliance(d)
-
-}
 }
 \description{
 Internal function for validation of data which have option sets
+}
+\examples{
+ \dontrun{
+  d<-d2Parser("myfile.csv",type="csv")
+  checkOptionSetCompliance(d)
+}
 }

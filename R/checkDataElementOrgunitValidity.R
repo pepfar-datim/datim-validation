@@ -10,10 +10,10 @@
 #' @return A named list of data frames, each consisting of two columns (des) representing
 #' data elements and (ous) representing organisation unit UIDs
 #' 
-#' #' @examples 
-#' \dontrun{
-#' ds<-getCurrentMERDataSets(type="RESULTS")
-#' de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
+#' @examples 
+#'  \dontrun{
+#'  ds<-getCurrentMERDataSets(type="RESULTS")
+#'  de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
 #' }
 
 getDataElementsOrgunits <- function(organisationUnit = NA,
@@ -84,11 +84,11 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #' @return Returns subset of data which contains
 #'   invalid data element / organisation unit associations. If no violations are found, a boolean
 #'   TRUE value is returned. 
-#'  @examples 
-#' \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#' ds<-getCurrentMERDataSets(type="RESULTS")
-#' checkDataElementOrgunitValidity(data=d,datasets=ds)
+#' @examples 
+#'  \dontrun{
+#'  d<-d2Parser("myfile.csv",type="csv")
+#'  ds<-getCurrentMERDataSets(type="RESULTS")
+#'  checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 
 checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE) {

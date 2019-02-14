@@ -9,9 +9,9 @@
 #' there are any negative values found in non-dedupe mechanisms. 
 #'
 #' @examples 
-#' \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#' checkNegativeValues(data=d)
+#'  \dontrun{
+#'  d<-d2Parser("myfile.csv",type="csv")
+#'  checkNegativeValues(data=d)
 #' }
 #'
 checkNegativeValues<-function(data){
