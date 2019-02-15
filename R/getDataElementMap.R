@@ -4,7 +4,9 @@
 #' @description Utility function of extraction of data element ids, codes, shortName and names
 #'
 #' @return Returns a data frame  of id,code,shortName and name
-#' 
+#' #' @examples \dontrun{
+#' de_map<-getDataElementMap()
+#' }
 
 getDataElementMap<-function() {
   url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/dataElements?fields=id,code,shortName,name,valueType,optionSet[id],zeroIsSignificant&paging=false"))

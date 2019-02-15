@@ -12,3 +12,8 @@ Returns a data frame  of code,name,id and shortName of all categoryOptionCombos
 \description{
 Utility function to produce a map of category option combos
 }
+\examples{
+\dontrun{
+coc_map<-getCategoryOptionCombosMap()
+}
+}
