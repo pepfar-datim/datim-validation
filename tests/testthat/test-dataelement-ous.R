@@ -50,6 +50,7 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE) 
     datasets<-c("i29foJcLY9Y","STL4izfLznL")
+    skip_on_cran()
     expect_warning(test_data<-checkDataElementDisaggValidity(d,datasets=datasets,return_violations=TRUE))
     expect_equal(NROW(test_data),1) 
     expect_equal(test_data$storedby[1], "BAD")
