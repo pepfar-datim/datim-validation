@@ -76,18 +76,30 @@ prepDataForValidation <- function(d) {
 #' }
 validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=FALSE,datasets=NA) {
 
-    allDataSets<-getDataSets()
-    dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
-    while(!dataSetValid || is.na(dataSetValid) ) {
-      datasets<-selectDataset()
-      if (length(datasets) == 0) {break;}
-      dataSetValid <- Reduce("&",datasets %in% allDataSets$id) 
+  if (nrow(data) == 0 ||
+      is.null(data)) {
+    stop("Data values cannot be empty!")
+  }
+  
+  if (is.na(organisationUnit)) {
+    organisationUnit = getOption("organisationUnit")
+  }
+  
+  allDataSets <- getDataSets()
+  dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
+  while (!dataSetValid || is.na(dataSetValid)) {
+    datasets <- selectDataset()
+    if (length(datasets) == 0) {
+      break
     }
-    if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
-if ( is.na(organisationUnit) ) {organisationUnit = getOption("organisationUnit")}
-if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
-
-
+    dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
+  }
+  
+  if (!dataSetValid) {
+    stop("Invalid dataset")
+    
+  }
+  
 #Calculate the totals  and append to the data frame
 data<-prepDataForValidation(data)
 
