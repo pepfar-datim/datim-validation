@@ -12,7 +12,7 @@ vignette: >
 
 ## Using the datimvalidation package
 
-DATIM is based on the [DHIS2](https://dhis2.org/) software, and is therefore capable of importing different types of data, including
+DATIM is based on the [DHIS2](https://www.dhis2.org/) software, and is therefore capable of importing different types of data, including
 CSV, JSON, XML as well as ADX formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
 the various formats which DHIS2 supports and the syntax of each of these. The DHIS2 development team has provided extensive technical
 documetnation on the various formats [here](https://docs.dhis2.org/master/en/developer/html/webapi_data_values.html#webapi_data_values_csv). 
