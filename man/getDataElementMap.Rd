@@ -8,10 +8,12 @@ getDataElementMap()
 }
 \value{
 Returns a data frame  of id,code,shortName and name
-#' @examples \dontrun{
-de_map<-getDataElementMap()
-}
 }
 \description{
 Utility function of extraction of data element ids, codes, shortName and names
+}
+\examples{
+\dontrun{
+de_map<-getDataElementMap()
+}
 }
