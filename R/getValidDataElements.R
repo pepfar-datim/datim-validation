@@ -11,16 +11,24 @@
 getValidDataElements<-function(datasets=NA) {
   allDataSets<-getDataSets()
   dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
-  while(!dataSetValid || is.na(dataSetValid) ) {
+  while( !dataSetValid || is.na(dataSetValid) ) {
     datasets<-selectDataset()
     if (length(datasets) == 0) {break;}
     dataSetValid <- Reduce("&",datasets %in% allDataSets$id) }
-  if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
+  if (length(datasets) == 0 || any(is.na(datasets))) { stop("Invalid dataset"); }
   #Valid data set assignments against the dataset
   #Custom forms
-  des.all<-data.frame(dataset=character(),dataelement=character(),shortname=character(),code=character(),dataelementuid=character(),
-                      categoryoptioncombo=character(),categoryoptioncombouid=character())
-
+  des.all <-
+    data.frame(
+      dataset = character(),
+      dataelement = character(),
+      shortname = character(),
+      code = character(),
+      dataelementuid = character(),
+      categoryoptioncombo = character(),
+      categoryoptioncombouid = character()
+    )
+  
   
   for (i in seq_along(datasets)) {
     

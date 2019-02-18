@@ -40,7 +40,6 @@ context("Flag invalid data element disagg combinations")
 
 with_mock_api({
   test_that("We flag invalid data element / disagg associations in the data", {
-    skip("Test failure on development version of Windows R")
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
     expect_type(config,"list")
