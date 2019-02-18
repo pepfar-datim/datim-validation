@@ -11,27 +11,33 @@
 #'  
 #' 
 checkCodingScheme <- function(data) {
-  #This is a very superficial and quick check, just to be sure that the coding scheme is correct.
-  #Additional validation will be required to be sure data elements, catcombos and orgunits are properly
-  #Associated.
-  is_valid<-TRUE
+  #This is a very superficial and quick check,
+  #just to be sure that the coding scheme is correct.
+  #Additional validation will be required to be sure data elements,
+  #catcombos and orgunits are properly associated
+  
+  is_valid <- TRUE
   data_element_check <-
-    unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
+    unique(data$dataElement)[!(unique(data$dataElement) 
+                               %in%
+                                 getDataElementMap()$id)]
   if (length(data_element_check) > 0) {
     warning(
       "The following data element identifiers could not be found:",
       paste(data_element_check, sep = "", collapse = ",")
     )
-    is_valid<-FALSE
+    is_valid <- FALSE
   }
   orgunit_check <-
     unique(data$orgUnit)[!(
-      unique(data$orgUnit) %in% getOrganisationUnitMap(organisationUnit = getOption("organisationUnit"))$id
+      unique(data$orgUnit) 
+      %in% 
+      getOrganisationUnitMap(organisationUnit = getOption("organisationUnit"))$id
     )]
   if (length(orgunit_check) > 0) {
     warning(
       "The following org unit identifiers could not be found:",
-      paste(orgunit_check, sep = "", collapse = ",")
+      paste( orgunit_check, sep = "", collapse = "," )
     )
     is_valid<-FALSE
   }
@@ -187,13 +193,10 @@ d2Parser <-
       }
       
       #Names in the JSON must correspond exactly
-      if (!Reduce("&",names(data) %in% header)) {
-        stop("JSON attributes must be one of the following:", 
+      if ( !Reduce("&", names( data ) %in% header ) ) {
+        stop("JSON attributes must be one of the following:",
              paste(header,sep="",collapse=",")) }
-      
     }
-    
-
     
     data <- data[, header[header %in% names(data)]]
 
@@ -231,12 +234,12 @@ d2Parser <-
         sapply(x, function(x) {
           x != "" & !is.na(x) & !missing(x)
         })
-        
       }
     
     if (NROW(data) == 1 ) { 
       valid_rows <- sum(sapply(data,notMissing)) == 6L
        } else {
+         
          valid_rows <- rowSums(apply(data[,1:6], 2, notMissing)) == 6L
       }
     
