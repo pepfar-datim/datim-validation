@@ -15,12 +15,9 @@ checkCodingScheme <- function(data) {
   #just to be sure that the coding scheme is correct.
   #Additional validation will be required to be sure data elements,
   #catcombos and orgunits are properly associated
-  
   is_valid <- TRUE
-  data_element_check <-
-    unique(data$dataElement)[!(unique(data$dataElement) 
-                               %in%
-                                 getDataElementMap()$id)]
+  data_element_check_v <- unique(data$dataElement) %in% getDataElementMap()$id
+  data_element_check <- unique(data$dataElement)[!data_element_check_v]
   if (length(data_element_check) > 0) {
     warning(
       "The following data element identifiers could not be found:",
@@ -30,7 +27,7 @@ checkCodingScheme <- function(data) {
   }
   orgunit_check <-
     unique(data$orgUnit)[!(
-      unique(data$orgUnit) 
+      unique(data$orgUnit)
       %in% 
       getOrganisationUnitMap(organisationUnit = getOption("organisationUnit"))$id
     )]
@@ -39,7 +36,7 @@ checkCodingScheme <- function(data) {
       "The following org unit identifiers could not be found:",
       paste( orgunit_check, sep = "", collapse = "," )
     )
-    is_valid<-FALSE
+    is_valid <- FALSE
   }
   coc_check <-
     unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap()$id)]
@@ -48,7 +45,7 @@ checkCodingScheme <- function(data) {
       "The following category option combo identifiers could not be found:",
       paste(coc_check, sep = "", collapse = ",")
     )
-    is_valid<-FALSE
+    is_valid <- FALSE
   }
   acoc_check <-
     unique(data$attributeOptionCombo)[!(
@@ -59,16 +56,14 @@ checkCodingScheme <- function(data) {
       "The following attribute option combo identifiers could not be found:",
       paste(acoc_check, sep = "", collapse = ",")
     )
-    is_valid<-FALSE
+    is_valid <- FALSE
   }
   
-    list("dataElement"=data_element_check,
-       "orgUnit"=orgunit_check,
-       "categoryOptionCombo"=coc_check,
-       "attributeOptionCombo"=acoc_check,
-       "is_valid"=is_valid
-       
-       )
+    list("dataElement" = data_element_check,
+       "orgUnit" = orgunit_check,
+       "categoryOptionCombo" = coc_check,
+       "attributeOptionCombo" = acoc_check,
+       "is_valid" = is_valid )
 }
 
 #' @export
@@ -110,13 +105,10 @@ d2Parser <-
            idScheme = "id",
            invalidData = FALSE,
            csv_header = TRUE) {
-    
-    
     if (is.na(organisationUnit)) {
       #Get the users organisation unit if not specified 
       organisationUnit <- getOption("organisationUnit")
     }
-    
     valid_type <- type %in% c("xml", "json", "csv")
     if (!valid_type) {
       stop("ERROR:Not a valid file type")
