@@ -15,3 +15,9 @@ Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID
 \description{
 Utility function to produce a map of valid mechanisms
 }
+\examples{
+\dontrun{
+    ou_map<-getOrganisationUnitMap("KKFzPM8LoXs") #For a specific operating unit
+    ou_map_mine<-getOrganisationUnitMap() #Based on your login credentials
+}
+}

@@ -1,10 +1,14 @@
 #' @export
 #' @title selectDataSet()
 #' 
-#' @description Utility function to produce a vector of data set UIDs from user input
+#' @description Utility function to produce a vector of data set UIDs from user input. 
 #'
-#' @return Returns a data frame  of "dataElementName","categoryOptionComboName","dataElement","categoryOptionCombo"
+#' @return Returns a data frame  of "dataElementName","categoryOptionComboName",
+#' "dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data 
+#' @examples \dontrun{
+#'   ds<-selectDataset()
+#' }
 selectDataset<-function() {
   ds<-getDataSets()
   promptText<-paste0("Please select the dataset [1-",nrow(ds),"]:")

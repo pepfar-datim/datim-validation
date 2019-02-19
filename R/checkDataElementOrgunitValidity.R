@@ -1,10 +1,20 @@
 #' @export
 #' @title getDataElementsOrgunits(data,organisationUnit,datasets)
 #' 
-#' @description Returns a map of lists consisting of data elements and orgunits for a dataset (or datasets) for a given organisationUnit
-#' @param organisationUnit Organisation unit. Defaults to user organisation unit if not supplied explicitly.
-#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @return Returns a data frame of "data" which was submitted along for a reason of why the data is considered to be invalid.
+#' @description Returns a map of lists consisting of data elements and orgunits
+#'  for a dataset (or datasets) for a given organisationUnit
+#' @param organisationUnit Organisation unit. Defaults to user organisation
+#'  unit if not supplied explicitly.
+#' @param datasets Should be a character vector of data set UIDs. Alternatively, 
+#' if left missing, user will be promted.
+#' @return A named list of data frames, each consisting of two columns (des) representing
+#' data elements and (ous) representing organisation unit UIDs
+#' 
+#' @examples 
+#'  \dontrun{
+#'  ds<-getCurrentMERDataSets(type="RESULTS")
+#'  de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
+#' }
 
 getDataElementsOrgunits <- function(organisationUnit = NA,
                                     datasets = NA) {
@@ -66,11 +76,19 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #' but which do not have a valid organistion unit / dataset association. 
 #'
 #' @param data D2 compliant data frame
-#' @param organisationUnit Should be the UID of the organisation unit ancestor, typically the operating unit. 
-#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
+#' @param organisationUnit Should be the UID of the organisation unit ancestor, 
+#' typically the operating unit. 
+#' @param datasets Should be a character vector of data set UIDs. 
+#' Alternatively, if left missing, user will be promted.
 #' @param return_violations Return the invalid data if TRUE
-#'  @return Returns subset of data which contains invalid data element / organisation unit associations.
-#' 
+#' @return Returns subset of data which contains
+#'   invalid data element / organisation unit associations. If no violations are found, a boolean
+#'   TRUE value is returned. 
+#' @examples \dontrun{
+#'      d<-d2Parser("myfile.csv",type="csv")
+#'      ds<-getCurrentMERDataSets(type="RESULTS")
+#'      checkDataElementOrgunitValidity(data=d,datasets=ds)
+#' }
 
 checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE) {
   

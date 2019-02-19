@@ -1,12 +1,17 @@
 #' @export
 #' @title checkNegativeValues(data)
 #'
-#' @description In general, we should never accept data values
-#' for numeric data elements which are negative, unless they are 
-#' deduplication data, whose import is currently not supported. 
-#'
+#' @description In general, data values which are negative will not be imported. 
+#' 
 #' @param data D2 compliant data frame object
-#' @return A filtered D2 compliant data frame of invalid values, otherwise, returns NA. 
+#' @return A filtered D2 compliant data frame of invalid values, otherwise, 
+#' returns TRUE if there are no violations. A warning will also be issued if 
+#' there are any negative values found in non-dedupe mechanisms. 
+#'
+#' @examples \dontrun{
+#'  d<-d2Parser("myfile.csv",type="csv")
+#'  checkNegativeValues(data=d)
+#' }
 #'
 checkNegativeValues<-function(data){
   
@@ -26,7 +31,7 @@ checkNegativeValues<-function(data){
   
   if (NROW(d_bad) > 0) {
     
-    warning("Negative values found in dedupe mechanisms!")
+    warning("Negative values found in non-dedupe mechanisms!")
     d_bad
     
   } else {

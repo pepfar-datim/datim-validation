@@ -10,10 +10,17 @@ checkNegativeValues(data)
 \item{data}{D2 compliant data frame object}
 }
 \value{
-A filtered D2 compliant data frame of invalid values, otherwise, returns NA.
+A filtered D2 compliant data frame of invalid values, otherwise, 
+returns TRUE if there are no violations. A warning will also be issued if 
+there are any negative values found in non-dedupe mechanisms.
 }
 \description{
-In general, we should never accept data values
-for numeric data elements which are negative, unless they are 
-deduplication data, whose import is currently not supported.
+In general, data values which are negative will not be imported.
+}
+\examples{
+\dontrun{
+ d<-d2Parser("myfile.csv",type="csv")
+ checkNegativeValues(data=d)
+}
+
 }

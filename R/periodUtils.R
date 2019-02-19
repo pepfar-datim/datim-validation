@@ -8,7 +8,12 @@
 #'
 #' @param iso String which identifies the period, such as 2016Q1 or 2016Q2
 #' @return Returns a a character of the period, like "Monthly"
-#' 
+#' @examples 
+#' getPeriodType("2018Q3")
+#' getPeriodType("2018")
+#' getPeriodType("19730221")
+#' getPeriodType("201904")
+#' getPeriodType("2018Q4")
 #' 
 getPeriodType<-function(iso){
   if ( grepl("^\\d{8}$",iso,perl=TRUE)  ) {return("Daily") }
@@ -27,8 +32,10 @@ getPeriodType<-function(iso){
 #'
 #' @param iso String which identifies the period, such as 2016Q1 or 2016Q2
 #' @return Returns a data frame consisting of iso (character),startDate (Date),endDate (Date) and period type (character)
-#' 
-#' 
+#' @examples 
+#'  getPeriodFromISO("2018Q1")
+#'  getPeriodFromISO("201801")
+#'  getPeriodFromISO("20180901")
 getPeriodFromISO <- function(iso) {
   if(is.na(iso)) {
     stop("You must supply a period identifier")
@@ -95,7 +102,10 @@ getPeriodFromISO <- function(iso) {
 #'
 #' @param data A data frame which has been parsed by either d2Parser or sims2Parser
 #' @return TRUE if all periods are valid.
-#' 
+#' @examples \dontrun{
+#'     d<-d2Parser("myfile.csv",type="csv")
+#'     checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
+#' }
 #' 
 checkPeriodIdentifiers<-function(data) { 
   do.call(rbind.data.frame, lapply(data$period,getPeriodFromISO)) 

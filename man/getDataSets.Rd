@@ -7,9 +7,15 @@
 getDataSets()
 }
 \value{
-Returns a data frame  of
+Returns a data frame  of name, id and formtype of all datasets.
 }
 \description{
-Utility function to produce a data frame of valid data elements based on current
-DATIM form specification
+Utility function to produce a data frame of
+ datasets.
+}
+\examples{
+ \dontrun{
+ ds<-getDataSets()
+ }
+
 }

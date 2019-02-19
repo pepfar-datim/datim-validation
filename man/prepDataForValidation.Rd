@@ -10,7 +10,7 @@ prepDataForValidation(d)
 \item{d}{Data frame parsed by d2Parser}
 }
 \value{
-Modifed data object with combis and totals appended
+Modifed data object with combis and totals appended.
 }
 \description{
 Internal function which prepares a parsed data frame for validation

@@ -6,16 +6,35 @@
 #' 
 #'
 #' @param mechs_in A vector of data element identifiers (codes, names or shortNames)
-#' @param mode_in Should be one of code, name or id. This is the class we are mapping from.
-#' @param mode_out Should be one of code,name or id. This is the class we are mapping to.
+#' @param mode_in Should be one of code, name or id. This is the type we are mapping from.
+#' @param mode_out Should be one of code,name or id. This is the type we are mapping to.
 #' @param organisationUnit The UID of the operating unit.
 #' @return Returns a vector of mechanism UIDs
-#' @note
-#' remapMechs(foo,"https://www.datim.org","admin","district","code","Ab12345678")
-#' will remap mechanisms specified as codes to UIDs
-remapMechs<-function(mechs_in,organisationUnit,mode_in="code",mode_out="id") {
-  is_valid_mode<- (mode_in %in% c("code","name","id") ) & (mode_out %in% c("code","name","id") )
-  if ( is_valid_mode == FALSE )  { print("Not a valid mode. Must be one of code,name or id"); stop() }
-  mechs<-getMechanismsMap(organisationUnit)
-  cmd<-paste("plyr::mapvalues(mechs_in,mechs$",mode_in,",mechs$",mode_out,",warn_missing = FALSE)")
-  as.character(eval(parse(text=cmd))) }
+#' @examples \dontrun{
+#' d<-d2Parser("myfile.csv",type="csv")
+#' #Add a new column with organisation unit short names. 
+#' d$mech_names<-remapMechs(d$attributeOptionCombo,mode_in="id",mode_out="code")
+#' }
+remapMechs <-
+  function(mechs_in,
+           organisationUnit,
+           mode_in = "code",
+           mode_out = "id") {
+    is_valid_mode <-
+      (mode_in %in% c("code", "name", "id")) &
+      (mode_out %in% c("code", "name", "id"))
+    if (is_valid_mode == FALSE)  {
+      print("Not a valid mode. Must be one of code,name or id")
+      stop()
+    }
+    mechs <- getMechanismsMap(organisationUnit)
+    cmd <-
+      paste(
+        "plyr::mapvalues(mechs_in,mechs$",
+        mode_in,
+        ",mechs$",
+        mode_out,
+        ",warn_missing = FALSE)"
+      )
+    as.character(eval(parse(text = cmd)))
+  }

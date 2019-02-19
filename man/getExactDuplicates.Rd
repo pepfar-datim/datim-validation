@@ -11,7 +11,16 @@ getExactDuplicates(d)
 }
 \value{
 Returns a data frame of d2 data, with exact duplicates.
+  A warning will be issued if duplicates are detected.
 }
 \description{
-Returns a listing of exact duplicates by dataElement,period,orgunit,categoryOptionCombo and attributeOptionCombo
+Returns a listing of exact duplicates by dataElement,
+period,orgunit,categoryOptionCombo and attributeOptionCombo
+}
+\examples{
+\dontrun{
+ d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+ dups<-getExactDuplicates(d)
+ dups
+ }
 }

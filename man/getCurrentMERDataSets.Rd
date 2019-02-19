@@ -15,3 +15,8 @@ Returns a list of dataset UIDs of the given type.
 \description{
 Get a list of MER datasets which are currently open for data entry.
 }
+\examples{
+ \dontrun{
+ ds<-getCurrentMERDataSets(type="RESULTS")
+ }
+}

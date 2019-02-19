@@ -15,3 +15,8 @@ Returns a data frame consisting of iso (character),startDate (Date),endDate (Dat
 \description{
 Utility function return a data frame of a periods start date, end date, ISO character and periodtype
 }
+\examples{
+ getPeriodFromISO("2018Q1")
+ getPeriodFromISO("201801")
+ getPeriodFromISO("20180901")
+}

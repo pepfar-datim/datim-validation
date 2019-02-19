@@ -14,7 +14,7 @@ with_mock_api({
                 invalidData = FALSE)
     expect_equal(NROW(checkValueTypeCompliance(d)), 3) 
     d$value<-5
-    expect_equal(NROW(checkValueTypeCompliance(d)), 0)
+    expect_equal(checkValueTypeCompliance(d), TRUE)
   })
 })
 
@@ -46,7 +46,8 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE)
-    expect_equal(NROW(checkNegativeValues(d)), 2)
+    expect_warning(foo<-checkNegativeValues(d))
+    expect_equal(NROW(foo), 2)
   })
 })
 

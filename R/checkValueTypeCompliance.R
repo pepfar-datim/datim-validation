@@ -2,10 +2,21 @@
 #' @importFrom dplyr %>%
 #' @title checkValueTypeCompliance(d)
 #' 
-#' @description Utility function of extraction of data element ids, codes, shortName and names
+#' @description This function will check data to ensure that its value matches
+#' a given pattern based on its value type. As an example, if the data element
+#' which is being validated should only accept positive integers, any values
+#' which are not positive integers will be flagged. For values which are composed
+#' of option sets, any values which do not correspond so one of the option set 
+#' value codes, will also be flagged. Additionally ,any values which are zero
+#' for which the data element is not zero significant will also be flagged. 
 #'
 #' @param d A D2Parsed data frame
 #' @return Returns a data frame of invalid data only
+#' @examples 
+#' \dontrun{
+#' d<-d2Parser("myfile.csv",type="csv")
+#' checkValueTypeCompliance(d)
+#' }
 #' 
 checkValueTypeCompliance<-function(d) {
   
@@ -67,8 +78,13 @@ checkValueTypeCompliance<-function(d) {
   #Deal with data of type option sets
   d_option_sets<-checkOptionSetCompliance(d)
   #Return anything which is not valid
-  dplyr::bind_rows(d_regex_validation,d_option_sets)
-}
+  d<-dplyr::bind_rows(d_regex_validation,d_option_sets)
+  if ( NROW(d) > 0 ) {
+    d
+  } else {
+    TRUE
+  }
+  }
 
 
 
@@ -77,8 +93,12 @@ checkValueTypeCompliance<-function(d) {
 #' 
 #' @description Utility function to fetch a list of optionsets and possible values within them
 #'
-#' @return Returns a list of option sets values per option set
-#' 
+#' @return Returns a data frame structure composed of option set names, UIDs, and a data frame for 
+#' each of these with individual options present in the option set.
+#' @examples 
+#'  \dontrun{
+#'   op_set_map<-getOptionSetMap()
+#' }
 getOptionSetMap<-function() {
 
   
@@ -108,7 +128,11 @@ getOptionSetMap<-function() {
 #'
 #' @return Returns a data frame of invalid values validated against their option set.
 #' 
-#' 
+#' @examples 
+#'  \dontrun{
+#'   d<-d2Parser("myfile.csv",type="csv")
+#'   checkOptionSetCompliance(d)
+#' }
 checkOptionSetCompliance<-function(d) {
   
   option_sets_des<-getDataElementMap() %>% 

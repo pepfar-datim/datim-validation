@@ -10,14 +10,27 @@ checkDataElementOrgunitValidity(data = NA, organisationUnit = NA,
 \arguments{
 \item{data}{D2 compliant data frame}
 
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor, typically the operating unit.}
+\item{organisationUnit}{Should be the UID of the organisation unit ancestor, 
+typically the operating unit.}
 
-\item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
+\item{datasets}{Should be a character vector of data set UIDs. 
+Alternatively, if left missing, user will be promted.}
 
-\item{return_violations}{Return the invalid data if TRUE
-@return Returns subset of data which contains invalid data element / organisation unit associations.}
+\item{return_violations}{Return the invalid data if TRUE}
+}
+\value{
+Returns subset of data which contains
+  invalid data element / organisation unit associations. If no violations are found, a boolean
+  TRUE value is returned.
 }
 \description{
 Returns a data frame invalid data elements which exist in the data 
 but which do not have a valid organistion unit / dataset association.
+}
+\examples{
+\dontrun{
+     d<-d2Parser("myfile.csv",type="csv")
+     ds<-getCurrentMERDataSets(type="RESULTS")
+     checkDataElementOrgunitValidity(data=d,datasets=ds)
+}
 }

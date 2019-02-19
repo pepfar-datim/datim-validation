@@ -10,7 +10,8 @@ loadSecrets(config_path = NA)
 \item{config_path}{Location of the configuration file to a DHIS2 server.}
 }
 \value{
-Returns a boolean value indicating that the secrets file is valid by accessing /api/me
+Returns a boolean value indicating the user was able ot successfully 
+login to the system
 }
 \description{
 Load a DHIS secrets file which should be a JSON file as below
@@ -21,4 +22,9 @@ dhis": {
  "password": "district"
  }
 }
+}
+\examples{
+ \dontrun{
+     loadSecrets("/home/littlebobbytables/creds.json")
+ }
 }

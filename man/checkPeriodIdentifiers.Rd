@@ -15,3 +15,10 @@ TRUE if all periods are valid.
 \description{
 Expect an error if any invalid period identifiers are supplied in the file.
 }
+\examples{
+\dontrun{
+    d<-d2Parser("myfile.csv",type="csv")
+    checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
+}
+
+}

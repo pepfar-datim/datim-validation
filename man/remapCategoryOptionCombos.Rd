@@ -20,7 +20,9 @@ Returns a vector of category option combos of the mode_out type.
 remapCategoryOptionCombos should be supplied a vector of category option combos (names,codes,uids or shortnames)
 It will return a vector of another class as specified with the mode_out paramater
 }
-\note{
-remapCategoryOptionCombos(foo,"https://www.datim.org","admin","district","code","name")
-will remap categoryOptionCombos specified as codes to their corresponding names.
+\examples{
+\dontrun{
+    d<-d2Parser("myfile.csv",type="csv")
+    d$coc_codes<-remapOUs(d$categoryOptionCombos,mode_in="id",mode_out="code")
+}
 }

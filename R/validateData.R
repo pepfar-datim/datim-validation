@@ -1,11 +1,10 @@
-
 #' @export
 #' @title Internal function which prepares a parsed data frame for validation
 #' 
 #' @param d Data frame parsed by d2Parser
 #'
-#' @return Modifed data object with combis and totals appended
-
+#' @return Modifed data object with combis and totals appended. 
+#  
 
 prepDataForValidation <- function(d) {
   header <-
@@ -63,24 +62,44 @@ prepDataForValidation <- function(d) {
 #' @param data d2Parser data frame
 #' @param organisationUnit Organisation unit. Defaults to the user organisation unit if not supplied.
 #' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
-#' @param parallel Should the rules be evaluated in parallel. 
+#' @param parallel Should the rules be evaluated in parallel. Default is to not evaluate in parallel. 
 #' @param datasets Vector of dataset UIDs which can  be used to restrict 
 #' the validation rules which will be applied. 
 #' @return Returns a data frame with validation rule results.
-validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=TRUE,datasets=NA) {
+#' @examples \dontrun{
+#'   d<-d2Parser("myfile.csv",type="csv")
+#'   vr_rules<-validateData(d)
+#'   doMC::registerDoMC(cores=4)
+#'   vr_rules<-validateData(d,parallel=TRUE)
+#'   ds<-getCurrentMERDataSets()
+#'   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
+#' }
+validateData<-function(data,organisationUnit=NA,return_violations_only=TRUE,parallel=FALSE,datasets=NA) {
 
-    allDataSets<-getDataSets()
-    dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
-    while(!dataSetValid || is.na(dataSetValid) ) {
-      datasets<-selectDataset()
-      if (length(datasets) == 0) {break;}
-      dataSetValid <- Reduce("&",datasets %in% allDataSets$id) 
+  if (nrow(data) == 0 ||
+      is.null(data)) {
+    stop("Data values cannot be empty!")
+  }
+  
+  if (is.na(organisationUnit)) {
+    organisationUnit = getOption("organisationUnit")
+  }
+  
+  allDataSets <- getDataSets()
+  dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
+  while (!dataSetValid || is.na(dataSetValid)) {
+    datasets <- selectDataset()
+    if (length(datasets) == 0) {
+      break
     }
-    if (length(datasets) == 0 || is.na(datasets)) { stop("Invalid dataset"); }
-if ( is.na(organisationUnit) ) {organisationUnit = getOption("organisationUnit")}
-if (nrow(data) == 0 || is.null(data) ) {stop("Data values cannot be empty!")}
-
-
+    dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
+  }
+  
+  if (!dataSetValid) {
+    stop("Invalid dataset")
+    
+  }
+  
 #Calculate the totals  and append to the data frame
 data<-prepDataForValidation(data)
 

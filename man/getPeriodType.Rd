@@ -15,3 +15,11 @@ Returns a a character of the period, like "Monthly"
 \description{
 Utility function return a DHIS2 period type from an ISO string
 }
+\examples{
+getPeriodType("2018Q3")
+getPeriodType("2018")
+getPeriodType("19730221")
+getPeriodType("201904")
+getPeriodType("2018Q4")
+
+}

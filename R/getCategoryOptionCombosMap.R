@@ -4,6 +4,9 @@
 #' @description Utility function to produce a map of category option combos
 #'
 #' @return Returns a data frame  of code,name,id and shortName of all categoryOptionCombos
+#' @examples \dontrun{
+#' coc_map<-getCategoryOptionCombosMap()
+#' }
 
 getCategoryOptionCombosMap<-function() {
   

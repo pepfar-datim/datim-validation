@@ -17,3 +17,8 @@ Nothing.
 \description{
 Internal utility function to clear the object cache.
 }
+\examples{
+ \dontrun{
+  clearCache(force=TRUE)
+}
+}
