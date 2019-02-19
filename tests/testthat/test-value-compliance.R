@@ -14,7 +14,7 @@ with_mock_api({
                 invalidData = FALSE)
     expect_equal(NROW(checkValueTypeCompliance(d)), 3) 
     d$value<-5
-    expect_equal(NROW(checkValueTypeCompliance(d)), 0)
+    expect_equal(checkValueTypeCompliance(d), TRUE)
   })
 })
 

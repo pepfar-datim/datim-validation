@@ -79,7 +79,7 @@ checkValueTypeCompliance<-function(d) {
   d_option_sets<-checkOptionSetCompliance(d)
   #Return anything which is not valid
   d<-dplyr::bind_rows(d_regex_validation,d_option_sets)
-  if ( NROW(d)> 0 ) {
+  if ( NROW(d) > 0 ) {
     d
   } else {
     TRUE
