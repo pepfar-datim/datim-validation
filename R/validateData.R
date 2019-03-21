@@ -49,7 +49,8 @@ prepDataForValidation <- function(d) {
   data.totals$combi<-data.totals$dataElement
   data.totals$categoryOptionCombo<-NA
   data.totals<-data.totals[,names(d)]
-  dplyr::bind_rows(d,data.totals)
+  dplyr::bind_rows(d,data.totals) %>%
+    dplyr::filter(value != 0 )
 }
 
 #' @export
