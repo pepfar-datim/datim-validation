@@ -11,7 +11,9 @@
 #' @param return_violations_only Only return validation rule violations
 #' @return Returns a data frame of validation rule evaluations
 evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
+  
   expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
+  
   validation.results_empty<-data.frame(name=character(),id=character(),
                                  periodType=character(),description=character(),
                                  operator=character(),leftSide.expression=numeric(),
@@ -19,10 +21,19 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
                                  rightSide.ops=integer(),leftSide.ops=integer(),leftSide.count=integer(),
                                  rightSide.count=integer(),formula=character(),result=logical())
   
-  this.des<-unique(vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1)))
-  #Get the matching rules to apply
-  matches <-vr[ grepl(paste(this.des,collapse="|"), vr$leftSide.expression) | grepl(paste(this.des,collapse="|"), vr$rightSide.expression),]
-
+  this.des <-
+    unique(vapply(combis, function(x) {
+      unlist(strsplit(x, "[.]"))[[1]]
+    }, FUN.VALUE = character(1)))
+  
+  matches_vr_rule <- function(x) {
+    stringr::str_detect(x, vr$leftSide.expression) |
+      stringr::str_detect(x, vr$rightSide.expression)
+    
+  }
+  
+  matches_v <- lapply(this.des,matches_vr_rule) %>% Reduce("|",.)
+  matches <- vr[matches_v,]
   
   #Empty data frame
   if (nrow(matches) == 0) {return(validation.results_empty)}
@@ -87,7 +98,7 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   #Normal operators
   matches_normal<-matches[!(matches$operator %in% c("&","|")),]
   
-  if (nrow(matches_normal > 0)) {
+  if ( nrow(matches_normal) > 0 ) {
     matches_normal$leftSide.expression <-
       gsub(expression.pattern, "0", matches_normal$leftSide.expression)
     matches_normal$rightSide.expression <-
