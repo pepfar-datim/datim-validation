@@ -19,7 +19,7 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
                                  rightSide.ops=integer(),leftSide.ops=integer(),leftSide.count=integer(),
                                  rightSide.count=integer(),formula=character(),result=logical())
   
-  this.des<-vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1))
+  this.des<-unique(vapply(combis,function(x){unlist(strsplit(x,"[.]"))[[1]]},FUN.VALUE=character(1)))
   #Get the matching rules to apply
   matches <-vr[ grepl(paste(this.des,collapse="|"), vr$leftSide.expression) | grepl(paste(this.des,collapse="|"), vr$rightSide.expression),]
 
