@@ -236,9 +236,9 @@ d2Parser <-
       }
     
     if ( sum(valid_rows) != NROW(data) ) {
-      foo <- NROW(data) - sum(!valid_rows)
+      foo <-  sum(!valid_rows)
       msg <-
-        paste0(foo,
+        paste0(foo, sum(!valid_rows),
               " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
