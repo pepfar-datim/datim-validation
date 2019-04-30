@@ -11,7 +11,7 @@
 #' }
 getOrganisationUnitMap<-function(organisationUnit=NA) {
   if ( is.na(organisationUnit) ) { organisationUnit<-getOption("organisationUnit") }
-  url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/organisationUnits.json?&filter=path:like:",organisationUnit,"&fields=id,code,name,shortName&paging=false"))
+  url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/organisationUnits.json?&filter=ancestors.id:in:[",organisationUnit,"]&fields=id,code,name,shortName&paging=false"))
   sig<-digest::digest(url,algo='md5', serialize = FALSE)
   sites<-getCachedObject(sig)
   if (is.null(sites)){

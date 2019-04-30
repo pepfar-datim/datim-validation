@@ -41,8 +41,10 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       url <-
         paste0(
           getOption("baseurl"),
-          "api/",api_version(),"/organisationUnits?fields=id&paging=false&filter=path:like:",
+          "api/",api_version(),
+          "/organisationUnits?fields=id&paging=false&filter=ancestors.id:in:[",
           organisationUnit,
+          "]",
           "&filter=dataSets.id:eq:",
           datasets[i]
         )
