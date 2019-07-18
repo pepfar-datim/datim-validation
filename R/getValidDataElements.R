@@ -46,8 +46,8 @@ getValidDataElements<-function(datasets=NA) {
       if (r$status == 200L ){
         r<- httr::content(r, "text")
         r<- jsonlite::fromJSON(r)
-        des<-as.data.frame(r$rows,stringsAsFactors=FALSE)
-        foo<-r$header
+        des<-as.data.frame(r$listGrid$rows,stringsAsFactors=FALSE)
+        foo<-r$listGrid$header
         names(des)<-as.character(foo$name)
         #Select only the columns we are interested in
         des<-des[,names(des.all)]
