@@ -1,7 +1,7 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.0.64
+Version: 1.0.65
 Date: 2019-07-19
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
