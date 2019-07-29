@@ -60,13 +60,15 @@ getCurrentMERDataSets<-function(type="RESULTS") {
     c(
       "MER Results: Facility Based",
       "MER Results: Community Based",
+      "MER Results: Medical Store",
       "MER Results: Community Based - DoD ONLY",
-      "MER Results: Medical Store"
+      "MER Results: Facility Based - DoD ONLY"
     ) } else if (type == "TARGETS") {
     want <- c(
       "MER Targets: Community Based",
       "MER Targets: Facility Based",
-      "MER Targets: Community Based - DoD ONLY"
+      "MER Targets: Community Based - DoD ONLY",
+      "MER Targets: Facility Based - DoD ONLY"
     )
     } else {
       stop("Unknown dataset group. Must be one of RESULTS, TARGETS")
