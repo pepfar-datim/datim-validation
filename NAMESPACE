@@ -2,6 +2,7 @@
 
 export(ValidateConfig)
 export(api_version)
+export(checkDataElementCadence)
 export(checkDataElementDisaggValidity)
 export(checkDataElementOrgunitValidity)
 export(checkMechanismValidity)
