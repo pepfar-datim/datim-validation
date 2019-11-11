@@ -36,7 +36,7 @@ checkValueTypeCompliance<-function(d) {
          INTEGER_NEGATIVE = "^-[1-9]\\d*$",
          ZERO_PATTERN = "^0(\\.0*)?$",
          BOOLEAN="^(true|false|True|False|0|1)$",
-         TRUE_ONLY="^true|True|1$",
+         TRUE_ONLY="^(true|True|1)$",
          PERCENTAGE="^([0-9]|[1-9][0-9]|100)(\\.[0-9]+)?$",
          UNIT_INTERVAL="^(0(\\.[0-9]+)?)$|^1$",
          DATE="^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
