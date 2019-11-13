@@ -84,7 +84,9 @@ checkCodingScheme <- function(data) {
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
 #' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
-#' files without a CSV header. 
+#' files without a CSV header.
+#' @param strictCodingScheme When set to TRUE, the coding scheme check will return a list of coding scheme problems. 
+#' When set to FALSE, these will be displayed as a warning on the console only.  
 #'
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
@@ -104,7 +106,9 @@ d2Parser <-
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE,
-           csv_header = TRUE) {
+           csv_header = TRUE,
+           strictCodingScheme = TRUE
+           ) {
     if (is.na(organisationUnit)) {
       #Get the users organisation unit if not specified 
       organisationUnit <- getOption("organisationUnit")
@@ -243,10 +247,14 @@ d2Parser <-
     
     code_scheme_check<-checkCodingScheme(data)
     
-    if (!code_scheme_check$is_valid) {
+    if (!code_scheme_check$is_valid & strictCodingScheme ) {
       return(code_scheme_check)
-    } else{
-      data
+    } else  if (!code_scheme_check$is_valid & !strictCodingScheme ) {
+      warning("Potential coding scheme issues were found!")
+      print(code_scheme_check)
+      return(data)
+    } else {
+      return(data)
     }
     
   }
