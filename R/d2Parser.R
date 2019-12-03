@@ -221,25 +221,19 @@ d2Parser <-
     #Data frame needs to be completely flattened to characters
     data <- plyr::colwise(as.character)(data)
     
-    notMissing <-
-      function(x) {
-        sapply(x, function(x) {
-          x != "" & !is.na(x) & !missing(x)
-        })
-      }
-    
+    isMissing<-function(x) { x == "" | is.na(x) }
+
     if (NROW(data) == 1 ) { 
-      valid_rows <- sum(sapply(data,notMissing)) == 6L
+      valid_rows <- sum(sapply(data,isMissing)) == 0L
        } else {
          
-         valid_rows <- rowSums(apply(data[,1:6], 2, notMissing)) == 6L
+         valid_rows <- purrr::reduce(purrr::map(data, isMissing), `+`) == 0L
       }
     
     if ( sum(valid_rows) != NROW(data) ) {
-      foo <- NROW(data) - sum(!valid_rows)
+      
       msg <-
-        paste0(foo,
-              " rows are incomplete. Please check your file to ensure its correct.")
+        paste0( sum(!valid_rows), " rows are incomplete. Please check your file to ensure its correct.")
       warning(msg)
     }
     

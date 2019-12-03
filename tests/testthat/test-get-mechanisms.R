@@ -19,3 +19,11 @@ with_mock_api({
     expect_identical(col_types$endDate,"double")
   })
 })
+
+with_mock_api({
+  test_that("We can error on an empty list of mechanisms", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    expect_null(getMechanismsMap(organisationUnit="RKoVudgb05Y"))
+  })
+})

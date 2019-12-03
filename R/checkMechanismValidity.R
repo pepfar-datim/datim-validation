@@ -38,8 +38,12 @@ checkMechanismValidity <- function(data, organisationUnit=NA, return_violations=
   data_mechs_periods <- merge(data_mechs_periods, period_info, by.x = "period", by.y = "iso")
   
   mechanism_map <-
-    getMechanismsMap(organisationUnit = organisationUnit)%>%
+    getMechanismsMap(organisationUnit = organisationUnit) %>%
     dplyr::select(id,code,startDate,endDate)
+  
+  if (is.null(mechanism_map)) {
+    stop("No valid mechanisms were found!")
+  }
   
   names(mechanism_map) <-
     c("attributeOptionCombo",

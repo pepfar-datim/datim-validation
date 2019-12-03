@@ -24,9 +24,12 @@ getMechanismsMap<-function(organisationUnit=NA) {
     if(is.null(mechs)) {
   
     r <- httr::GET(url, httr::timeout(60))
-    if (r$status == 200L) {
+    if (r$status_code == 200L) {
       r <- httr::content(r, "text")
       mechs <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
+      if (length(mechs) == 0 ) {
+        return(NULL)
+      }
       #Need to unwind the dates
       mechs$startDate <-
         as.Date(sapply(mechs$categoryOptions, function(x)

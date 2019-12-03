@@ -20,6 +20,23 @@ with_mock_api({
 
 
 with_mock_api({
+  test_that("We can identify bad values for true only data elements", {
+    config <- LoadConfigFile(test_config("test-config.json"))
+    options("maxCacheAge"=NULL)
+    datasets<-c("tz1bQ3ZwUKJ")
+    d<-d2Parser(filename=test_config("test-data-bad-true-only-value.csv"),
+                type="csv",
+                organisationUnit = "KKFzPM8LoXs",
+                dataElementIdScheme = "id",
+                orgUnitIdScheme = "id",
+                idScheme = "id",
+                invalidData = FALSE)
+    expect_equal(NROW(checkValueTypeCompliance(d)), 9) 
+  })
+})
+
+
+with_mock_api({
   test_that("We can identify bad values for option set elements", {
     config <- LoadConfigFile(test_config("test-config.json"))
     options("maxCacheAge"=NULL)
