@@ -27,8 +27,8 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
     }, FUN.VALUE = character(1)))
   
   matches_vr_rule <- function(x) {
-    stringr::str_detect(x, vr$leftSide.expression) |
-      stringr::str_detect(x, vr$rightSide.expression)
+    grepl(x, vr$leftSide.expression) |
+      grepl(x, vr$rightSide.expression)
     
   }
   
