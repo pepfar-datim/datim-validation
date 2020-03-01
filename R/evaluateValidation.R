@@ -27,6 +27,7 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
     }, FUN.VALUE = character(1)))
   
   matches_vr_rule <- function(x) {
+    
     agrepl(x, vr$leftSide.expression) |
       agrepl(x, vr$rightSide.expression)
   }
