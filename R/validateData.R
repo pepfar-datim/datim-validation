@@ -39,7 +39,7 @@ prepDataForValidation <- function(d) {
   }
   
   #Calculate the totals
-  d$combi <- paste0(d$dataElement, ".", d$categoryOptionCombo)
+  d$combi <- paste0(d$dataElement, "\\.", d$categoryOptionCombo)
   data.totals <-
     aggregate(
       value ~ dataElement + period + orgUnit + attributeOptionCombo,

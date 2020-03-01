@@ -23,13 +23,12 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   
   this.des <-
     unique(vapply(combis, function(x) {
-      unlist(strsplit(x, "[.]"))[[1]]
+      unlist(strsplit(x, "[\\.]"))[[1]]
     }, FUN.VALUE = character(1)))
   
   matches_vr_rule <- function(x) {
-    stringr::str_detect(x, vr$leftSide.expression) |
-      stringr::str_detect(x, vr$rightSide.expression)
-    
+    agrepl(x, vr$leftSide.expression) |
+      agrepl(x, vr$rightSide.expression)
   }
   
   matches_v <- lapply(this.des,matches_vr_rule) %>% Reduce("|",.)
