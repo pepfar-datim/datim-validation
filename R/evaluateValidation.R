@@ -12,7 +12,6 @@
 #' @return Returns a data frame of validation rule evaluations
 evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   
-  expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
   
   validation.results_empty<-data.frame(name=character(),id=character(),
                                  periodType=character(),description=character(),
@@ -22,9 +21,17 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
                                  rightSide.count=integer(),formula=character(),result=logical())
   
   this.des <-
-    unique(vapply(combis, function(x) {
-      unlist(strsplit(x, "[\\.]"))[[1]]
-    }, FUN.VALUE = character(1)))
+    vapply(combis, function(x) {
+      unlist(strsplit(x, "\\."))[[1]]
+    }, FUN.VALUE = character(1))
+  
+  #Calculate the totals for later use
+  
+  totals_df<-data.frame(exp = this.des,values=values,stringsAsFactors = FALSE) %>% 
+    dplyr::group_by(exp) %>% 
+    dplyr::summarise(values = sum(values)) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::mutate(exp=paste0(exp,"}"))
   
   matches_vr_rule <- function(x) {
     
@@ -32,25 +39,48 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
       agrepl(x, vr$rightSide.expression)
   }
   
+  this.des<-unique(this.des)  
   matches_v <- lapply(this.des,matches_vr_rule) %>% Reduce("|",.)
   matches <- vr[matches_v,]
   
   #Empty data frame
   if (nrow(matches) == 0) {return(validation.results_empty)}
   
-  values<-as.character(values)
+  #TODO: Functionalize this for both sides to remove repetitive code
 
+    values<-as.character(values)
+  
     matches$leftSide.expression<-stringi::stri_replace_all_fixed(matches$leftSide.expression,
                            combis, values, vectorize_all=FALSE)
 
     matches$rightSide.expression<-stringi::stri_replace_all_fixed(matches$rightSide.expression,
-                                                                 combis, values, vectorize_all=FALSE)
+                                                                  combis, values, 
+                                                                  vectorize_all=FALSE)
+    
+    #Substitute totals
+    matches$leftSide.expression<-stringi::stri_replace_all_fixed(matches$leftSide.expression,
+                                                                 totals_df$exp, totals_df$values, vectorize_all=FALSE)
+    
+    matches$rightSide.expression<-stringi::stri_replace_all_fixed(matches$rightSide.expression,
+                                                                  totals_df$exp, totals_df$values,
+                                                                  vectorize_all=FALSE)
+    
+    #We should have exact matches now
+    expression.pattern<-"#\\{[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?\\}"
+    left_side_misses<-stringr::str_count(matches$leftSide.expression,expression.pattern)
+    right_side_misses<-stringr::str_count(matches$rightSide.expression,expression.pattern)
+    
+    matches$leftSide.count<-matches$leftSide.ops - left_side_misses
+    matches$rightSide.count<-matches$rightSide.ops- right_side_misses
+    
+    #We need to zero out anything with a category option combo at this point,
+    #as there is no exact match
+    matches$leftSide.expression <-
+      gsub(expression.pattern, "0", matches$leftSide.expression)
+    matches$rightSide.expression <-
+      gsub(expression.pattern, "0", matches$rightSide.expression)
+  
 
-  matches$leftSide.count<-stringr::str_count(matches$leftSide.expression,expression.pattern)
-  matches$leftSide.count<-matches$leftSide.ops-matches$leftSide.count
-
-  matches$rightSide.count<-stringr::str_count(matches$rightSide.expression,expression.pattern)
-  matches$rightSide.count<-matches$rightSide.ops-matches$rightSide.count
   #Keep rules which should  be evaluated
   keep_these_rules <-
     (

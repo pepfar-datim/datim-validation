@@ -6,7 +6,7 @@
 #'
 #' @return Returns a data frame of validation rules consisting of name, left and right side operators and strategies
 
-getValidationRules<-function() {
+getValidationRules<-function(remove_decoration = FALSE) {
   
 url<-paste0(getOption("baseurl"),"api/",api_version(),"/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
 sig<-digest::digest(url,algo='md5', serialize = FALSE)
@@ -25,14 +25,24 @@ op.map<-data.frame(x=c("greater_than_or_equal_to","greater_than","equal_to","not
 strat.map<-data.frame(x=c("SKIP_IF_ANY_VALUE_MISSING","SKIP_IF_ALL_VALUES_MISSING","NEVER_SKIP"))
 #Remap the operators
 vr$operator<-plyr::mapvalues(vr$operator,op.map$x,op.map$y,warn_missing=FALSE)
-#Remove decorations
-vr$leftSide.expression<-gsub("[#{}]","",vr$leftSide.expression)
-vr$rightSide.expression<-gsub("[#{}]","",vr$rightSide.expression)
+
+
+
 #Count the left and right side operators
 vr$rightSide.ops<-stringr::str_count(vr$rightSide.expression,expression.pattern)
 vr$leftSide.ops<-stringr::str_count(vr$leftSide.expression,expression.pattern)
+
+if (remove_decoration) {
+  
+  #Remove decorations
+  vr$leftSide.expression <- gsub("[#{}]", "", vr$leftSide.expression)
+  vr$rightSide.expression <- gsub("[#{}]", "", vr$rightSide.expression)
+  
+}
+
 saveCachedObject(vr,sig)
-  }
+
+}
 
 return(vr) 
 }

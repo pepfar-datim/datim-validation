@@ -39,18 +39,20 @@ prepDataForValidation <- function(d) {
   }
   
   #Calculate the totals
-  d$combi <- paste0(d$dataElement, "\\.", d$categoryOptionCombo)
-  data.totals <-
-    aggregate(
-      value ~ dataElement + period + orgUnit + attributeOptionCombo,
-      data = d,
-      FUN = sum
-    )
-  data.totals$combi <- data.totals$dataElement
-  data.totals$categoryOptionCombo <- NA
-  data.totals <- data.totals[, names(d)]
-  dplyr::bind_rows(d, data.totals) %>%
-    dplyr::filter(value != 0)
+  d$combi <- paste0("#{",d$dataElement,".", d$categoryOptionCombo,"}")
+  # data.totals <-
+  #   aggregate(
+  #     value ~ dataElement + period + orgUnit + attributeOptionCombo,
+  #     data = d,
+  #     FUN = sum
+  #   )
+  # data.totals$combi <- data.totals$dataElement
+  # data.totals$categoryOptionCombo <- NA
+  # data.totals <- data.totals[, names(d)]
+  # dplyr::bind_rows(d, data.totals) %>%
+  #   dplyr::filter(value != 0)
+  
+  d
 }
 
 #' @export
@@ -75,8 +77,7 @@ prepDataForValidation <- function(d) {
 #'   ds<-getCurrentMERDataSets()
 #'   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
 #' }
-validateData <-
-  function(data,
+validateData <-function(data,
            organisationUnit = NA,
            return_violations_only = TRUE,
            parallel = FALSE,
