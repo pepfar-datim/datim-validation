@@ -32,6 +32,11 @@ vr$operator<-plyr::mapvalues(vr$operator,op.map$x,op.map$y,warn_missing=FALSE)
 vr$rightSide.ops<-stringr::str_count(vr$rightSide.expression,expression.pattern)
 vr$leftSide.ops<-stringr::str_count(vr$leftSide.expression,expression.pattern)
 
+#Remove any line breaks
+
+vr$leftSide.expression<-stringr::str_replace(vr$leftSide.expression,pattern = "\n","")
+vr$rightSide.expression<-stringr::str_replace(vr$rightSide.expression,pattern = "\n","")
+
 if (remove_decoration) {
   
   #Remove decorations
