@@ -65,10 +65,9 @@ getCurrentMERDataSets<-function(type="RESULTS") {
       "MER Results: Facility Based - DoD ONLY"
     ) } else if (type == "TARGETS") {
     want <- c(
-      "MER Targets: Community Based",
-      "MER Targets: Facility Based",
-      "MER Targets: Community Based - DoD ONLY",
-      "MER Targets: Facility Based - DoD ONLY"
+      "Host Country Targets: COP Prioritization SNU (USG)",
+      "MER Target Setting: PSNU (Facility and Community Combined)",
+      "MER Target Setting: PSNU (Facility and Community Combined) - DoD ONLY"
     )
     } else {
       stop("Unknown dataset group. Must be one of RESULTS, TARGETS")
