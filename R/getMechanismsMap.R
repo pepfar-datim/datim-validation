@@ -23,7 +23,7 @@ getMechanismsMap<-function(organisationUnit=NA) {
   mechs<-getCachedObject(sig)
     if(is.null(mechs)) {
   
-    r <- httr::GET(url, httr::timeout(60))
+    r <- httr::GET(url, httr::timeout(300))
     if (r$status_code == 200L) {
       r <- httr::content(r, "text")
       mechs <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]

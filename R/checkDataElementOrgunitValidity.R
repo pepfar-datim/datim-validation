@@ -51,7 +51,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       des_ous <- getCachedObject(sig)
       
       if (is.null(des_ous)) {
-        r <- httr::GET(url, httr::timeout(60))
+        r <- httr::GET(url, httr::timeout(300))
         r <- httr::content(r, "text")
         ous <-
           unique(jsonlite::fromJSON(r, flatten = TRUE)$organisationUnits$id)

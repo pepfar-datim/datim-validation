@@ -13,7 +13,7 @@ getDataElementMap<-function() {
   sig<-digest::digest(url,algo='md5', serialize = FALSE)
   des<-getCachedObject(sig)
   if (is.null(des)){
-  r<-httr::GET(url,httr::timeout(60))
+  r<-httr::GET(url,httr::timeout(300))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     des<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]

@@ -23,7 +23,7 @@ getDataSets <- function() {
   sig <- digest::digest(paste0(url), algo = 'md5', serialize = FALSE)
   ds <- getCachedObject(sig)
   if (is.null(ds)) {
-    r <- httr::GET(url , httr::timeout(60))
+    r <- httr::GET(url , httr::timeout(300))
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       r <- jsonlite::fromJSON(r)
