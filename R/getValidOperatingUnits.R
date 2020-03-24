@@ -14,7 +14,7 @@ getValidOperatingUnits <- function() {
         api_version(),
         "/organisationUnits?level=3&fields=id,name&paging=false"
       )
-    ), httr::timeout(60))
+    ), httr::timeout(300))
   
   if (r$status == 200) {
      httr::content(r, "text") %>% 

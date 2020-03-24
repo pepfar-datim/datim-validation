@@ -22,7 +22,7 @@ checkValueTypeCompliance<-function(d) {
   
   #There are differences in the API version, so first, we need to know which version we are dealing with
   url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/system/info"))
-  r<-httr::GET(url,httr::timeout(60))
+  r<-httr::GET(url,httr::timeout(300))
   r<- httr::content(r, "text")
   sysInfo<-jsonlite::fromJSON(r,flatten=TRUE)
   version<-as.numeric(strsplit(sysInfo$version,"\\.")[[1]][2])
@@ -106,7 +106,7 @@ getOptionSetMap<-function() {
   sig<-digest::digest(paste0(url),algo='md5', serialize = FALSE)
   option_sets<-getCachedObject(sig)
   if (is.null(option_sets)) {
-    r<-httr::GET(url ,httr::timeout(60))
+    r<-httr::GET(url ,httr::timeout(300))
     if (r$status == 200L ){
       r<- httr::content(r, "text")
       r<- jsonlite::fromJSON(r,flatten = TRUE)

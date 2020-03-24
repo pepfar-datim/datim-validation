@@ -67,7 +67,7 @@ getPureDuplicates<-function(d){
 #' 
 getCrosswalkMap<-function(){
   
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/sqlViews/UTlIicJBZFg/data.json&paging=false")),httr::timeout(60))
+  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/sqlViews/UTlIicJBZFg/data.json&paging=false")),httr::timeout(300))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     r<-jsonlite::fromJSON(r,flatten=TRUE)
@@ -91,7 +91,7 @@ getCrosswalkMap<-function(){
 #' 
 #' 
 getCrosswalkMechanism<-function(){
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/categoryOptionCombos?filter=name:like:00001")),httr::timeout(60))
+  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/categoryOptionCombos?filter=name:like:00001")),httr::timeout(300))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     r<-jsonlite::fromJSON(r,flatten=TRUE)

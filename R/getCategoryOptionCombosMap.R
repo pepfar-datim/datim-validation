@@ -11,7 +11,7 @@
 getCategoryOptionCombosMap<-function() {
   
   r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/categoryOptionCombos?fields=id,name,shortName,code&paging=false")),
-               httr::timeout(60))
+               httr::timeout(300))
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     cocs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]

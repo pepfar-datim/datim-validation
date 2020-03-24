@@ -12,7 +12,7 @@ getPeriodInfo <- function(ISO = NA) {
   p <- getCachedObject(sig)
   
   if (is.null(p)) {
-    r <- httr::GET(url , httr::timeout(60))
+    r <- httr::GET(url , httr::timeout(300))
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       r <- jsonlite::fromJSON(r)

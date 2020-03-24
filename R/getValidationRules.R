@@ -15,7 +15,7 @@ vr<-getCachedObject(sig)
 if (is.null(vr)) {
 expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 #Get a copy of the metadata from the server
-r<-httr::GET(url,httr::timeout(60))
+r<-httr::GET(url,httr::timeout(300))
 r<- httr::content(r, "text")
 vr<-jsonlite::fromJSON(r,flatten=TRUE)$validationRules
 #Static predefined map of operators

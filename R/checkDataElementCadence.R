@@ -52,7 +52,7 @@ getDataElementCadenceMapForPeriod <- function(period) {
   sig <- digest::digest(url, algo = 'md5', serialize = FALSE)
   cadence_map <- getCachedObject(sig)
   if (is.null(cadence_map)) {
-    r <- httr::GET(url , httr::timeout(60))
+    r <- httr::GET(url , httr::timeout(300))
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       cadence_map <- jsonlite::fromJSON(r)
