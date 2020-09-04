@@ -13,6 +13,7 @@ Description: A range of function for validation of the structure of the
         'PEPFAR' data exchange community in order to validate their
         prospective data payloads prior to submission for import.
 License: BSD_3_clause + file LICENSE
+URL: https://github.com/jason-p-pickering/datim-validation
 BugReports:
         https://github.com/jason-p-pickering/datim-validation/issues
 Encoding: UTF-8
