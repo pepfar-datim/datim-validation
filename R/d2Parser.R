@@ -128,25 +128,12 @@ d2Parser <-
       )
     
     if (type == "xml") {
-      d <- XML::xmlTreeParse(filename, useInternalNode = TRUE)
-      data <-
-        data.frame(t(sapply(XML::xmlRoot(d) ["dataValue"], XML::xmlAttrs)),
-                   row.names = seq(1, XML::xmlSize(XML::xmlRoot(d))))
-
       
-      #Get all the attributes specified in the
-      data.attrs <- XML::xmlAttrs(XML::xmlRoot(d))
-      if ( !is.null(data.attrs) ) {
-      if ( !is.na(data.attrs["period"]) ) {
-        data$period <- data.attrs["period"]
-      }
-      if ( !is.na(data.attrs["orgUnit"]) ) {
-        data$orgUnit <- data.attrs["orgUnit"]
-      }
-      if ( !is.na(data.attrs["attributeOptionCombo"]) ) {
-        data$attributeOptionCombo <- data.attrs["attributeOptionCombo"]
-      }
-      }
+      data <- xml2::read_xml(filename) %>%
+        xml2::xml_children() %>% 
+        purrr::map(.,xml2::xml_attrs) %>% 
+        purrr::map_df(~(as.list(.)))
+      
       
       #Names in the XML must correspond exactly
       if (!Reduce("&",names(data) %in% header)) {
