@@ -60,7 +60,7 @@ checkValueTypeCompliance<-function(d) {
            as.character(d_regex_validation$value))
   
   #Validation of zero significance. If the value is zero and the the 
-  #data elemement is not zero signficant, then flag it. 
+  #data element is not zero significant, then flag it. 
   #TRUE on Non-zeros and valid zeros. False on invalid zeros
   d_regex_validation$is_valid_zero<- !(d_regex_validation$value == "0" & !d_regex_validation$zeroIsSignificant)
   d_regex_validation$is_valid_value <- d_regex_validation$is_valid_pattern  &  d_regex_validation$is_valid_zero
