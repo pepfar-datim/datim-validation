@@ -21,7 +21,7 @@ getExactDuplicates <- function(d) {
                     orgUnit,
                     categoryOptionCombo,
                     attributeOptionCombo) %>%
-    dplyr::summarise(count = n()) %>% dplyr::filter(count > 1)
+    dplyr::summarise(count = dplyr::n()) %>% dplyr::filter(count > 1)
   if (NROW(dups) > 0) {
     warning("Your data contains exact duplicates!")
     
@@ -52,7 +52,7 @@ getPureDuplicates<-function(d){
                     period,
                     orgUnit,
                     categoryOptionCombo) %>%
-    dplyr::summarise(count = n()) %>% dplyr::filter(count > 1)
+    dplyr::summarise(count = dplyr::n()) %>% dplyr::filter(count > 1)
 }
 
 #' @export
