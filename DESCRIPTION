@@ -1,8 +1,8 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.0.89
-Date: 2020-09-08
+Version: 1.0.90
+Date: 2020-09-10
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
 Description: A range of function for validation of the structure of the
@@ -13,6 +13,7 @@ Description: A range of function for validation of the structure of the
         'PEPFAR' data exchange community in order to validate their
         prospective data payloads prior to submission for import.
 License: BSD_3_clause + file LICENSE
+SystemRequirements: Active user account on <https://www.datim.org>
 URL: https://github.com/jason-p-pickering/datim-validation
 BugReports:
         https://github.com/jason-p-pickering/datim-validation/issues

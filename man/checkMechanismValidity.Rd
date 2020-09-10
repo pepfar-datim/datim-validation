@@ -4,8 +4,7 @@
 \alias{checkMechanismValidity}
 \title{checkMechanismPeriodValidity(data,organisationUnit)}
 \usage{
-checkMechanismValidity(data, organisationUnit = NA,
-  return_violations = TRUE)
+checkMechanismValidity(data, organisationUnit = NA, return_violations = TRUE)
 }
 \arguments{
 \item{data}{A data frame which has been parsed by either d2Parser or sims2Parser}

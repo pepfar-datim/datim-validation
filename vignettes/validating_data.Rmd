@@ -12,17 +12,19 @@ vignette: >
 
 ## Using the datimvalidation package
 
+This package is provided for use by the PEPFAR Data Exchange community in order to provide more stringent validation 
+of data payloads which are intended to be imported into DATIM. To help data importers to prepare their files for submission to DATIM, this R package has been created to help validate the data prior to importing it into the system. This package will help you to validate your data payload and validate it against the business logic of DATIM, prior to  attempting to import it into the system. This approach is useful, as it will allow you to interactively correct mistakes in the payload prior to submission of the data for import. 
+
+These scripts, to a large extent, emulate the logic of the server. Basic functions are exposed to allow
+you to determine if your data contains invalid data elements, incorrect disaggregations, and inactive mechanisms. Each function is documented in separate sections of the package. 
+
 DATIM is based on the [DHIS2](https://www.dhis2.org/) software, and is therefore capable of importing different types of data, including
 CSV, JSON, XML as well as ADX formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with 
 the various formats which DHIS2 supports and the syntax of each of these. The DHIS2 development team has provided extensive technical
-documetnation on the various formats [here](https://docs.dhis2.org/master/en/developer/html/webapi_data_values.html#webapi_data_values_csv). 
+documentation on the various formats [here](https://docs.dhis2.org/master/en/developer/html/webapi_data_values.html#webapi_data_values_csv). 
 
 In addition to the general DHIS2 documentation, a series of DATIM specific resources is available [here](https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange). These guides provide more detailed information on the data import process into DATIM, including code listings for indicators and disaggregations. 
 
-DATIM has strict controls on data imports, including the requirement to adhere to the numerous validation rules of the system. To help data importers to prepare their files for submission to DATIM, this R package has been created to help validate the data prior to importing it into the system. This pacakge will help you to load your data payload and validate it against the business logic of DATIM, prior to  attempting to import it into the system. This approach is useful, as it will allow you to interactively correct mistakes in the payload prior to submission of the data for import. 
-
-The `datavalidation` library provides an abstraction layer to the various validation routines which are necessary to import data into DATIM. These scripts, to a large extent, emulate the logic of the server. Basic functions are exposed to allow
-you to determine if your data contains invalid data elements, incorrect disaggregations, and inactive mechanisms. Each function is documented in seperate sections of the package. 
 
 
 ## Getting started
@@ -30,9 +32,9 @@ you to determine if your data contains invalid data elements, incorrect disaggre
 In order to get started, you will need to have installed the R package "datimvalidation". The source code for this library can be found [here](https://github.com/jason-p-pickering/datim-validation). 
 
 
-You will need an active internet connection and an active DATIM user name in order to utilize the `datimvalidation` package. Meta-data will be retrieved from the DATIM server, using your username and password , and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. By default, cached objects are stored for a week and then invalidated. 
+You will need an active internet connection and an active DATIM user name in order to utilize the `datimvalidation` package. Meta-data will be retrieved from the DATIM server, using your user name and password , and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. By default, cached objects are stored for a week and then invalidated. 
 
-To get started, you should create a "secrets" file, which will contain the authentication information required to access DATIM. You should keep this in a secure place on your computer, as it will require storing the username and password you access DATIM as a file on your disk. If you are unable to securely store this file, you can also enter your username and password through a dialog. A secrets file should a single JSON file which looks like this: 
+To get started, you should create a "secrets" file, which will contain the authentication information required to access DATIM. You should keep this in a secure place on your computer, as it will require storing the user name and password you access DATIM as a file on your disk. If you are unable to securely store this file, you can also enter your user name and password through a dialog. A secrets file should a single JSON file which looks like this: 
 
 ```json
 {
@@ -58,7 +60,7 @@ loadSecrets(secrets)
 Next, we will use the `d2Parser` function, which is a general purpose function to load the different formats of data which 
 DATIM accepts and to standardize this so that we can use other validation functions on the data. 
 
-In addition to your username and password, you will need to specific the `type` of the file. This should be one of 'json','csv',or 'xml'. 
+In addition to your user name and password, you will need to specific the `type` of the file. This should be one of 'json','csv',or 'xml'. 
 You will also need to know the identification scheme of the file. The easiest way is to open the file in a text editor, and see what id scheme
 the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
 
@@ -91,6 +93,18 @@ Next, we can check the indicators and disaggregations for validity against the c
 ```{r eval=FALSE}
 checkDataElementDisaggValidity(d)
 ```
+
+##Data element/period validation
+
+Certain MER data elements are collected only in certain quarters. Quarterly data elements are collected each quarter, SAPR data elements are collected in quarters 2 and 4, and APR data elements are collected only in quarter 4. 
+In order to ensure that no data values are submitted for the wrong periods, you can check the "cadence" of the data elements to be sure that only the correct data elements are submitted for a particular time period. 
+
+
+```r
+#Check for valid data element-period combinations and  print those which are not valid
+checkDataElementCadence(d)
+```
+
 
 ##Value type validation
 

@@ -75,12 +75,12 @@ checkCodingScheme <- function(data) {
 #' frame which can be used in subsequent DATIM validation routines
 #'
 #' @param filename Location of the payload to be imported. Should be a valid DHIS2 import file
-#' @param type Type of the file. Should be either xml, json or csv
-#' @param organisationUnit Organisation unit UID of the operating unit. If left blank, assumed to be global.
-#' @param dataElementIdScheme Should be one of either code, name, shortName or id. If this paramater is "id",
-#' then the Data elements are assumed to be already specififed as UIDs.
-#' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this paramater is "id",
-#' then the organisation units are assumed to be already specififed as UIDs
+#' @param type Type of the file. Should be one of  xml, json or csv.
+#' @param organisationUnit Organization unit UID of the operating unit. If left blank, assumed to be global.
+#' @param dataElementIdScheme Should be one of either code, name, shortName or id. If this parameter is "id",
+#' then the Data elements are assumed to be already specified as UIDs.
+#' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this parameter is "id",
+#' then the organization units are assumed to be already specified as UIDs
 #' @param idScheme Remapping scheme for category option combos
 #' @param invalidData Exclude any (NA or missing) data from the parsed file?
 #' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
@@ -91,8 +91,13 @@ checkCodingScheme <- function(data) {
 #' @note function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
 #' Note that all values will be returned as characters.
 #' @examples \dontrun{
+#'     #Be sure to login to DATIM first
+#'     loadSecrets()
+#'     #Load a CSV file
 #'     d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+#'     #Load a JSON file
 #'     d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
+#'     #Load an XML file
 #'     d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
 #' }
 #' 

@@ -3,6 +3,7 @@
 #' 
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
 #' frame which can be used in subsequent DATIM validation routines
+#' @param remove_decoration Remove decoration of curly braces present in the raw validation metadata. 
 #'
 #' @return Returns a data frame of validation rules consisting of name, left and right side operators and strategies
 

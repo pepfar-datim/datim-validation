@@ -4,8 +4,13 @@
 \alias{validateData}
 \title{Function which checks the of a DATIM data payload agaist define validation rules}
 \usage{
-validateData(data, organisationUnit = NA,
-  return_violations_only = TRUE, parallel = FALSE, datasets = NA)
+validateData(
+  data,
+  organisationUnit = NA,
+  return_violations_only = TRUE,
+  parallel = FALSE,
+  datasets = NA
+)
 }
 \arguments{
 \item{data}{d2Parser data frame}
@@ -16,7 +21,7 @@ validateData(data, organisationUnit = NA,
 
 \item{parallel}{Should the rules be evaluated in parallel. Default is to not evaluate in parallel.}
 
-\item{datasets}{Vector of dataset UIDs which can  be used to restrict 
+\item{datasets}{Vector of dataset UIDs which can  be used to restrict
 the validation rules which will be applied.}
 }
 \value{
