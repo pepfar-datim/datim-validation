@@ -10,13 +10,14 @@ getCurrentMERDataSets(type = "RESULTS")
 \item{type}{Should be either RESULTS or TARGETS}
 }
 \value{
-Returns a list of dataset UIDs of the given type.
+Returns a list of dataset UIDs of the given type
 }
 \description{
-Get a list of MER datasets which are currently open for data entry.
+getCurrentMERDataSets(type)
 }
 \examples{
- \dontrun{
+  \dontrun{
  ds<-getCurrentMERDataSets(type="RESULTS")
  }
+ 
 }

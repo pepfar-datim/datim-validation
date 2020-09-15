@@ -74,7 +74,7 @@ prepDataForValidation <- function(d) {
 #'   vr_rules<-validateData(d)
 #'   doMC::registerDoMC(cores=4)
 #'   vr_rules<-validateData(d,parallel=TRUE)
-#'   ds<-getCurrentMERDataSets()
+#'   ds<-getCurrentMERDataSets(type="RESULTS")
 #'   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
 #' }
 validateData <-function(data,

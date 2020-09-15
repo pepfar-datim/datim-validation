@@ -37,7 +37,7 @@ The data frame is checked dynamically against validation rules defined in the DA
   vr_rules<-validateData(d)
   doMC::registerDoMC(cores=4)
   vr_rules<-validateData(d,parallel=TRUE)
-  ds<-getCurrentMERDataSets()
+  ds<-getCurrentMERDataSets(type="RESULTS")
   vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
 }
 }

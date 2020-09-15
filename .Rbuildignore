@@ -13,3 +13,6 @@ Makefile
 ^packrat/
 ^\.Rprofile$
 ^\.R_Cache$
+^\.RData$
+^\.Rhistory$
+^\.gitignore$
