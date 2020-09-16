@@ -5,12 +5,13 @@ Version: 1.0.99
 Date: 2020-09-16
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
-Description: A comprehensive toolset to validate data payloads intended
-        for import into 'DATIM' <https://www.datim.org/>. DATIM is the
-        'PEPFAR' <https://www.state.gov/pepfar/> specific instance of
-        'DHIS2' <https://www.dhis2.org/>. These scripts are provided
-        for the 'PEPFAR' data exchange community in order to validate
-        their prospective data payloads prior to submission for import.
+Description: A comprehensive set of tools to validate data payloads
+        intended for import into 'DATIM' <https://www.datim.org/>.
+        DATIM is the 'PEPFAR' <https://www.state.gov/pepfar/> specific
+        instance of 'DHIS2' <https://www.dhis2.org/>. These scripts are
+        provided for the 'PEPFAR' data exchange community in order to
+        validate their prospective data payloads prior to submission
+        for import.
 License: BSD_3_clause + file LICENSE
 SystemRequirements: Active user account on 'DATIM'
         <https://www.datim.org/>
