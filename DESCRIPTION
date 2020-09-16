@@ -7,7 +7,7 @@ Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
 Description: A comprehensive toolset to validate data payloads intended
         for import into 'DATIM' <https://www.datim.org/>. DATIM is the
-        'PEPFAR' <https://www.state.gov/pepfar/)> specific instance of
+        'PEPFAR' <https://www.state.gov/pepfar/> specific instance of
         'DHIS2' <https://www.dhis2.org/>. These scripts are provided
         for the 'PEPFAR' data exchange community in order to validate
         their prospective data payloads prior to submission for import.
