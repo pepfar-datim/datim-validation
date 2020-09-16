@@ -2,14 +2,14 @@ Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
 Version: 1.0.93
-Date: 2020-09-15
+Date: 2020-09-16
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
-Description: A range of function for validation of the structure of the
-        payload of 'JSON', CSV and XML payloads intended for import
-        into 'DATIM' <https://www.datim.org>. DATIM is the 'PEPFAR'
-        <https://pepfar.gov> specific instance of 'DHIS2'
-        <https://www.dhis2.org>. These scripts are provided for the
+Description: This package provides utility functions to validate data
+        payloads intended for import into 'DATIM'
+        <https://www.datim.org/>. DATIM is the 'PEPFAR'
+        <https://www.state.gov/pepfar/)> specific instance of 'DHIS2'
+        <https://www.dhis2.org/>. These scripts are provided for the
         'PEPFAR' data exchange community in order to validate their
         prospective data payloads prior to submission for import.
 License: BSD_3_clause + file LICENSE
