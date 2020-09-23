@@ -40,16 +40,21 @@ getDataSets <- function() {
   ds
 }
 
-#' @export
+
+
 #' @title getCurrentMERDataSets(type)
 #' 
-#' @description Get a list of MER datasets which are currently open for data entry. 
+#'
 #' @param type Should be either RESULTS or TARGETS
-#' @return Returns a list of dataset UIDs of the given type.
-#' @examples 
-#'  \dontrun{
+#'
+#' @return Returns a list of dataset UIDs of the given type
+#' @export
+#'
+#' @examples
+#'   \dontrun{
 #'  ds<-getCurrentMERDataSets(type="RESULTS")
 #'  }
+#'  
 getCurrentMERDataSets<-function(type="RESULTS") {
   
   if ( !(type %in% c("RESULTS","TARGETS"))) {stop("Type must be either RESULTS or TARGETS")}

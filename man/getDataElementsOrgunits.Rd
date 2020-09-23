@@ -23,6 +23,8 @@ Returns a map of lists consisting of data elements and orgunits
 }
 \examples{
  \dontrun{
+ #Be sure you login to DATIM first
+ loadSecrets()
  ds<-getCurrentMERDataSets(type="RESULTS")
  de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
 }

@@ -4,22 +4,29 @@
 \alias{d2Parser}
 \title{General purpose parsing function for different formats of DHIS2 data}
 \usage{
-d2Parser(filename, type, organisationUnit = NA,
-  dataElementIdScheme = "id", orgUnitIdScheme = "id",
-  idScheme = "id", invalidData = FALSE, csv_header = TRUE)
+d2Parser(
+  filename,
+  type,
+  organisationUnit = NA,
+  dataElementIdScheme = "id",
+  orgUnitIdScheme = "id",
+  idScheme = "id",
+  invalidData = FALSE,
+  csv_header = TRUE
+)
 }
 \arguments{
 \item{filename}{Location of the payload to be imported. Should be a valid DHIS2 import file}
 
-\item{type}{Type of the file. Should be either xml, json or csv}
+\item{type}{Type of the file. Should be one of  xml, json or csv.}
 
-\item{organisationUnit}{Organisation unit UID of the operating unit. If left blank, assumed to be global.}
+\item{organisationUnit}{Organization unit UID of the operating unit. If left blank, assumed to be global.}
 
-\item{dataElementIdScheme}{Should be one of either code, name, shortName or id. If this paramater is "id",
-then the Data elements are assumed to be already specififed as UIDs.}
+\item{dataElementIdScheme}{Should be one of either code, name, shortName or id. If this parameter is "id",
+then the Data elements are assumed to be already specified as UIDs.}
 
-\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id. If this paramater is "id",
-then the organisation units are assumed to be already specififed as UIDs}
+\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id. If this parameter is "id",
+then the organization units are assumed to be already specified as UIDs}
 
 \item{idScheme}{Remapping scheme for category option combos}
 
@@ -41,8 +48,13 @@ Note that all values will be returned as characters.
 }
 \examples{
 \dontrun{
+    #Be sure to login to DATIM first
+    loadSecrets()
+    #Load a CSV file
     d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+    #Load a JSON file
     d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
+    #Load an XML file
     d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
 }
 

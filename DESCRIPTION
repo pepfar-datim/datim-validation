@@ -1,28 +1,30 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.0.89
-Date: 2020-09-08
+Version: 1.0.100
+Date: 2020-09-16
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
-Description: A range of function for validation of the structure of the
-        payload of 'JSON', CSV and XML payloads intended for import
-        into 'DATIM' <https://www.datim.org>. DATIM is the 'PEPFAR'
-        <https://pepfar.gov> specific instance of 'DHIS2'
-        <https://www.dhis2.org>. These scripts are provided for the
-        'PEPFAR' data exchange community in order to validate their
-        prospective data payloads prior to submission for import.
+Description: A comprehensive set of tools to validate data payloads
+        intended for import into 'DATIM' <https://www.datim.org/>.
+        DATIM is the 'PEPFAR' <https://www.state.gov/pepfar/> specific
+        instance of 'DHIS2' <https://www.dhis2.org/>. These scripts are
+        provided for the 'PEPFAR' data exchange community in order to
+        validate their prospective data payloads prior to submission
+        for import.
 License: BSD_3_clause + file LICENSE
+SystemRequirements: Active user account on 'DATIM'
+        <https://www.datim.org/>
 URL: https://github.com/jason-p-pickering/datim-validation
 BugReports:
         https://github.com/jason-p-pickering/datim-validation/issues
 Encoding: UTF-8
 Depends: R (>= 3.6)
-Imports: magrittr (>= 1.5), xml2 (>= 1.3.2), plyr (>= 1.8.4), jsonlite
-        (>= 1.6), stringr (>= 1.4.0), httr (>= 1.4.0), digest (>=
-        0.6.18), reshape2 (>= 1.4.3), assertthat (>= 0.2.0), rlist (>=
-        0.4.6.1), ISOweek (>= 0.6-2), lubridate (>= 1.7.4), getPass (>=
-        0.2-2), purrr (>= 0.3.2), dplyr (>= 0.8.3)
+Imports: xml2 (>= 1.3.2), plyr (>= 1.8.4), jsonlite (>= 1.6), stringr
+        (>= 1.4.0), httr (>= 1.4.0), digest (>= 0.6.18), reshape2 (>=
+        1.4.3), assertthat (>= 0.2.0), rlist (>= 0.4.6.1), ISOweek (>=
+        0.6-2), lubridate (>= 1.7.4), getPass (>= 0.2-2), purrr (>=
+        0.3.2), dplyr (>= 0.8.3)
 Suggests: doMC (>= 1.3.5), foreach (>= 1.4.4), httptest (>= 3.2.2),
         knitr (>= 1.21), methods, rmarkdown (>= 1.11), roxygen2 (>=
         6.1.1), tcltk, testthat (>= 2.0.1), covr (>= 3.2.1), stringi

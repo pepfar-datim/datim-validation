@@ -4,8 +4,7 @@
 \alias{checkDataElementDisaggValidity}
 \title{checkDataElementDisaggValidity(data,dataset)}
 \usage{
-checkDataElementDisaggValidity(data, datasets = NA,
-  return_violations = TRUE)
+checkDataElementDisaggValidity(data, datasets = NA, return_violations = TRUE)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}

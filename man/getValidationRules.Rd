@@ -4,7 +4,10 @@
 \alias{getValidationRules}
 \title{Utility function for getting validation rules dynamically from DHIS2 and parsing them into a data frame}
 \usage{
-getValidationRules()
+getValidationRules(remove_decoration = FALSE)
+}
+\arguments{
+\item{remove_decoration}{Remove decoration of curly braces present in the raw validation metadata.}
 }
 \value{
 Returns a data frame of validation rules consisting of name, left and right side operators and strategies

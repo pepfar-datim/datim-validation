@@ -4,8 +4,12 @@
 \alias{checkDataElementOrgunitValidity}
 \title{checkDataElementOrgunitValidity(data,organisationUnit,datasets)}
 \usage{
-checkDataElementOrgunitValidity(data = NA, organisationUnit = NA,
-  datasets = NA, return_violations = TRUE)
+checkDataElementOrgunitValidity(
+  data = NA,
+  organisationUnit = NA,
+  datasets = NA,
+  return_violations = TRUE
+)
 }
 \arguments{
 \item{data}{D2 compliant data frame}
