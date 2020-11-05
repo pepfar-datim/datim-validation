@@ -6,17 +6,18 @@
 #' or in the case of periods, valid periods. 
 #'
 #' @param data A parsed DHIS2 data payload from d2parser
+#' @param creds DHIS Login credentials from DHISLogin
 #' @return Warnings are issued if the coding scheme is not 
 #' congruent with what has been supplied as a paramater.
 #'  
 #' 
-checkCodingScheme <- function(data) {
+checkCodingScheme <- function(data,creds) {
   #This is a very superficial and quick check,
   #just to be sure that the coding scheme is correct.
   #Additional validation will be required to be sure data elements,
   #catcombos and orgunits are properly associated
   is_valid <- TRUE
-  data_element_check_v <- unique(data$dataElement) %in% getDataElementMap()$id
+  data_element_check_v <- unique(data$dataElement) %in% getDataElementMap(creds = creds)$id
   data_element_check <- unique(data$dataElement)[!data_element_check_v]
   if (length(data_element_check) > 0) {
     warning(
@@ -29,7 +30,7 @@ checkCodingScheme <- function(data) {
     unique(data$orgUnit)[!(
       unique(data$orgUnit)
       %in% 
-      getOrganisationUnitMap(organisationUnit = getOption("organisationUnit"))$id
+      getOrganisationUnitMap(creds = creds)$id
     )]
   if (length(orgunit_check) > 0) {
     warning(
@@ -39,7 +40,7 @@ checkCodingScheme <- function(data) {
     is_valid <- FALSE
   }
   coc_check <-
-    unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap()$id)]
+    unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap(creds = creds)$id)]
   if (length(coc_check) > 0) {
     warning(
       "The following category option combo identifiers could not be found:",
@@ -49,7 +50,7 @@ checkCodingScheme <- function(data) {
   }
   acoc_check <-
     unique(data$attributeOptionCombo)[!(
-      unique(data$attributeOptionCombo) %in% getMechanismsMap(organisationUnit = getOption("organisationUnit"))$id
+      unique(data$attributeOptionCombo) %in% getMechanismsMap(creds = creds)$id
     )]
   if (length(acoc_check) > 0) {
     warning(
@@ -109,10 +110,11 @@ d2Parser <-
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE,
-           csv_header = TRUE) {
+           csv_header = TRUE,
+           creds) {
     if (is.na(organisationUnit)) {
       #Get the users organisation unit if not specified 
-      organisationUnit <- getOption("organisationUnit")
+      organisationUnit <- creds$user_orgunit
     }
     valid_type <- type %in% c("xml", "json", "csv")
     if (!valid_type) {
@@ -190,7 +192,8 @@ d2Parser <-
           data$orgUnit,
           organisationUnit,
           mode_in = orgUnitIdScheme,
-          mode_out = "id"
+          mode_out = "id", 
+          creds = creds
         )
     }
     if (dataElementIdScheme != "id") {
@@ -198,7 +201,8 @@ d2Parser <-
         remapDEs(
           data$dataElement,
           mode_in = dataElementIdScheme,
-          mode_out = "id"
+          mode_out = "id",
+          creds = creds
         )
     }
     if (idScheme != "id") {
@@ -206,7 +210,8 @@ d2Parser <-
         data$attributeOptionCombo,
         organisationUnit = organisationUnit,
         mode_in = idScheme,
-        mode_out = "id"
+        mode_out = "id",
+        creds = creds
       )
     }
     
@@ -233,7 +238,7 @@ d2Parser <-
       data <- data[valid_rows, ]
     }
     
-    code_scheme_check<-checkCodingScheme(data)
+    code_scheme_check<-checkCodingScheme(data, creds = creds)
     
     if (!code_scheme_check$is_valid) {
       return(code_scheme_check)

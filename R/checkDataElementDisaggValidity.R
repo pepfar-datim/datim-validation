@@ -9,6 +9,7 @@
 #' @param datasets Should be a character vector of data set UIDs. 
 #' Alternatively, if left missing, user will be promted to choose from a list.
 #' @param return_violations Boolean to return violations only. 
+#' @param creds DHISLogin object
 #' @return Returns a data frame  of "dataElementName","categoryOptionComboName",
 #' "dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data, if any. 
@@ -18,9 +19,9 @@
 #'   ds<-getCurrentMERDataSets(type="RESULTS")
 #'   checkDataElementDisaggValidity(d,ds)
 #' }
-checkDataElementDisaggValidity<-function(data,datasets=NA, return_violations=TRUE){
+checkDataElementDisaggValidity<-function(data,datasets=NA, return_violations=TRUE, creds ){
   
-  des<-getValidDataElements(datasets) %>%
+  des<-getValidDataElements(datasets, creds = creds) %>%
     dplyr::select(dataElement= dataelementuid,categoryOptionCombo=categoryoptioncombouid)
 
   data_des_cocs_bad<-dplyr::anti_join(data,des,by=c("dataElement","categoryOptionCombo"))

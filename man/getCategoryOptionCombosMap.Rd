@@ -4,7 +4,10 @@
 \alias{getCategoryOptionCombosMap}
 \title{getCategoryOptionCombosMap()}
 \usage{
-getCategoryOptionCombosMap()
+getCategoryOptionCombosMap(handle = handle)
+}
+\arguments{
+\item{HTTP}{handle returned from DHISLogin.}
 }
 \value{
 Returns a data frame  of code,name,id and shortName of all categoryOptionCombos

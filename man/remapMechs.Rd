@@ -4,7 +4,13 @@
 \alias{remapMechs}
 \title{Function which converts mechanism codes, names or shortnames to UIDs}
 \usage{
-remapMechs(mechs_in, organisationUnit, mode_in = "code", mode_out = "id")
+remapMechs(
+  mechs_in,
+  organisationUnit,
+  mode_in = "code",
+  mode_out = "id",
+  creds
+)
 }
 \arguments{
 \item{mechs_in}{A vector of data element identifiers (codes, names or shortNames)}
@@ -14,6 +20,8 @@ remapMechs(mechs_in, organisationUnit, mode_in = "code", mode_out = "id")
 \item{mode_in}{Should be one of code, name or id. This is the type we are mapping from.}
 
 \item{mode_out}{Should be one of code,name or id. This is the type we are mapping to.}
+
+\item{creds}{DHIS Login credentials object}
 }
 \value{
 Returns a vector of mechanism UIDs

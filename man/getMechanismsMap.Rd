@@ -4,10 +4,12 @@
 \alias{getMechanismsMap}
 \title{getMechanismsMap()}
 \usage{
-getMechanismsMap(organisationUnit = NA)
+getMechanismsMap(organisationUnit = NA, creds)
 }
 \arguments{
 \item{organisationUnit}{Operating unit in question specified as a UID. If not specified, assume to be Global.}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest) along with start and endDates of the mechanisms

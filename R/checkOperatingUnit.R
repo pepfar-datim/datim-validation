@@ -5,12 +5,13 @@
 #' 
 #' @param organisationUnit Should be a UID of an operating unit. Defaults to the 
 #' user organisation unit if not supplied
+#' @param creds DHISLogin object
 #' @return Returns a vector of organisation unit UIDs
 #' @note
 #' remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
 #' will remap organisation units specified as codes to UIDs
-checkOperatingUnit<-function(organisationUnit=NA) {
-  if (is.na(organisationUnit)) {organisationUnit = getOption("organisationunit")}
+checkOperatingUnit<-function(organisationUnit=NA, creds ) {
+  if (is.na(organisationUnit)) {organisationUnit = creds$user_orgunit}
       sites<-getValidOperatingUnits()
       organisationUnit %in% sites$id
 }

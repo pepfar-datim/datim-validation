@@ -8,7 +8,8 @@ checkDataElementOrgunitValidity(
   data = NA,
   organisationUnit = NA,
   datasets = NA,
-  return_violations = TRUE
+  return_violations = TRUE,
+  creds
 )
 }
 \arguments{

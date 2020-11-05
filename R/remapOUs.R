@@ -18,7 +18,8 @@ remapOUs <-
   function(ous_in,
            organisationUnit,
            mode_in = "code",
-           mode_out = "id") {
+           mode_out = "id" ,
+           creds) {
     is_valid_mode <-
       (mode_in %in% c("code", "name", "shortName", "id"))  &
       (mode_out %in% c("code", "name", "shortName", "id"))
@@ -27,7 +28,7 @@ remapOUs <-
       stop()
     } else {
       sites <-
-        getOrganisationUnitMap(organisationUnit)
+        getOrganisationUnitMap(organisationUnit, creds = creds)
       #TODO Get rid of this method and use stringi instead. 
       cmd <-
         paste0(

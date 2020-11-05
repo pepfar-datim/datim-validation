@@ -12,7 +12,8 @@ d2Parser(
   orgUnitIdScheme = "id",
   idScheme = "id",
   invalidData = FALSE,
-  csv_header = TRUE
+  csv_header = TRUE,
+  creds
 )
 }
 \arguments{

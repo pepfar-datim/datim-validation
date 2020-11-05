@@ -4,10 +4,12 @@
 \alias{checkDataElementCadence}
 \title{checkDataElementCadence(data)}
 \usage{
-checkDataElementCadence(data)
+checkDataElementCadence(data, creds)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
+
+\item{DHIS2}{Login object}
 }
 \value{
 Returns a data frame  of "dataElement","period",

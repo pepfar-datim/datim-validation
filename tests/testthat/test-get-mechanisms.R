@@ -2,11 +2,11 @@ context("Get a list of mechanisms")
 
 with_mock_api({
   test_that("We can get an mechanism map", {
-    config <- LoadConfigFile(test_config("test-config.json"))
-    options("maxCacheAge"=NULL)
-    
-    expect_warning(getMechanismsMap())
-    test_mechs<-getMechanismsMap(organisationUnit="KKFzPM8LoXs")
+    my_creds <- DHISLogin$new(test_config("test-config.json"))
+    my_creds$maxCacheAge<-NULL
+    my_creds$handle<-NULL
+    expect_warning(getMechanismsMap(creds = my_creds))
+    test_mechs<-getMechanismsMap(organisationUnit="KKFzPM8LoXs", creds = my_creds)
     expect_type(test_mechs,"list")
     expect_is(test_mechs,"data.frame")
     mech_map_names<-c("name","id","code","startDate","endDate")
@@ -22,8 +22,9 @@ with_mock_api({
 
 with_mock_api({
   test_that("We can error on an empty list of mechanisms", {
-    config <- LoadConfigFile(test_config("test-config.json"))
-    options("maxCacheAge"=NULL)
-    expect_null(getMechanismsMap(organisationUnit="RKoVudgb05Y"))
+    my_creds <- DHISLogin$new(test_config("test-config.json"))
+    my_creds$maxCacheAge<-NULL
+    my_creds$handle<-NULL
+    expect_null(getMechanismsMap(organisationUnit="RKoVudgb05Y", creds = my_creds))
   })
 })

@@ -8,6 +8,7 @@
 #' @param des_in A vector of data element identifiers (codes, names or shortNames)
 #' @param mode_in Should be one of code, name or shortName. This is the class we are mapping from to UIDs.
 #' @param mode_out Should be one of code,name, shortName or id. This is the class we are mapping to.
+#' @param creds DHIS2 credentials (DHISLogin object)
 #' @return Returns a vector of DATIM uids for each data element which needs to be remapped.
 #' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv")
@@ -15,7 +16,8 @@
 #' }
 remapDEs <- function(des_in,
                      mode_in = "code",
-                     mode_out = "id") {
+                     mode_out = "id",
+                     creds) {
   is_valid_mode <-
     (mode_in %in% c("code", "name", "shortName", "id"))  &
     (mode_out %in% c("code", "name", "shortName", "id"))
@@ -23,7 +25,7 @@ remapDEs <- function(des_in,
     print("Not a valid mode. Must be one of code,name,shortName or id")
     stop()
   } else {
-    des <- getDataElementMap()
+    des <- getDataElementMap(creds = creds)
     cmd <-
       paste0(
         "plyr::mapvalues(des_in,des$",

@@ -2,16 +2,19 @@
 #' @title getCategoryOptionCombosMap()
 #' 
 #' @description Utility function to produce a map of category option combos
-#'
+#' @param HTTP handle returned from DHISLogin.
+#' 
 #' @return Returns a data frame  of code,name,id and shortName of all categoryOptionCombos
 #' @examples \dontrun{
 #' coc_map<-getCategoryOptionCombosMap()
 #' }
 
-getCategoryOptionCombosMap<-function() {
+getCategoryOptionCombosMap<-function( creds ) {
   
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/categoryOptionCombos?fields=id,name,shortName,code&paging=false")),
-               httr::timeout(300))
+  url<-URLencode(paste0(creds$baseurl,"api/",api_version(),"/categoryOptionCombos?fields=id,name,shortName,code&paging=false"))
+  r<-httr::GET(url,
+               httr::timeout(300), 
+               handle = creds$handle)
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     cocs<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]

@@ -4,10 +4,12 @@
 \alias{checkCodingScheme}
 \title{Utility function to check that the supplied coding scheme is correct}
 \usage{
-checkCodingScheme(data)
+checkCodingScheme(data, creds)
 }
 \arguments{
 \item{data}{A parsed DHIS2 data payload from d2parser}
+
+\item{creds}{DHIS Login credentials from DHISLogin}
 }
 \value{
 Warnings are issued if the coding scheme is not 

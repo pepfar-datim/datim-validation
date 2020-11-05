@@ -9,6 +9,7 @@
 #' 
 #'
 #' @param data D2 compliant data frame object
+#' @param DHIS2 Login object
 #' @return Returns a data frame  of "dataElement","period",
 #' of invalid data elements which are present the the data, if any. 
 #' If there are no violations, a boolean TRUE is returned. 
@@ -16,7 +17,7 @@
 #'   d<-d2Parser("myfile.csv",type="csv")
 #'   checkDataElementCadence(d)
 #' }
-checkDataElementCadence<-function(data){
+checkDataElementCadence<-function(data,creds){
   
   
   #Get a listing of periods which are present in the data
@@ -38,7 +39,7 @@ checkDataElementCadence<-function(data){
 }
 
 
-getDataElementCadenceMapForPeriod <- function(period) {
+getDataElementCadenceMapForPeriod <- function(period,creds) {
   url <-
     URLencode(
       paste0(
@@ -52,7 +53,7 @@ getDataElementCadenceMapForPeriod <- function(period) {
   sig <- digest::digest(url, algo = 'md5', serialize = FALSE)
   cadence_map <- getCachedObject(sig)
   if (is.null(cadence_map)) {
-    r <- httr::GET(url , httr::timeout(300))
+    r <- httr::GET(url , httr::timeout(300), handle = creds$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       cadence_map <- jsonlite::fromJSON(r)

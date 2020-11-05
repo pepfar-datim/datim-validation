@@ -3,10 +3,12 @@
 #' 
 #' @description Returns a map of lists consisting of data elements and orgunits
 #'  for a dataset (or datasets) for a given organisationUnit
+
 #' @param organisationUnit Organisation unit. Defaults to user organisation
 #'  unit if not supplied explicitly.
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, 
-#' if left missing, user will be promted.
+#' if left missing, user will be prompted.
+#' @param creds DHISLogin object
 #' @return A named list of data frames, each consisting of two columns (des) representing
 #' data elements and (ous) representing organisation unit UIDs
 #' 
@@ -18,16 +20,18 @@
 #'  de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
 #' }
 
-getDataElementsOrgunits <- function(organisationUnit = NA,
-                                    datasets = NA) {
+getDataElementsOrgunits <- function(
+                                    organisationUnit = NA,
+                                    datasets = NA,
+                                    creds) {
   if (is.na(organisationUnit)) {
-    organisationUnit = getOption("organisationUnit")
+    organisationUnit = creds$user_orgunit
   }
   
-  allDataSets <- getDataSets()
+  allDataSets <- getDataSets(creds = creds)
   
   if ( length(datasets) == 0 | any(is.na(datasets)) ) {
-    datasets <- selectDataset()
+    datasets <- selectDataset(creds)
   }
   
   dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
@@ -42,7 +46,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       
       url <-
         paste0(
-          getOption("baseurl"),
+          creds$baseurl,
           "api/",api_version(),"/organisationUnits?fields=id&paging=false&filter=path:like:",
           organisationUnit,
           "&filter=dataSets.id:eq:",
@@ -53,13 +57,13 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       des_ous <- getCachedObject(sig)
       
       if (is.null(des_ous)) {
-        r <- httr::GET(url, httr::timeout(300))
+        r <- httr::GET(url, httr::timeout(300), handle = creds$handle)
         r <- httr::content(r, "text")
         ous <-
           unique(jsonlite::fromJSON(r, flatten = TRUE)$organisationUnits$id)
         #OUs
         des <-
-          unique(getValidDataElements(datasets[i])$dataelementuid)
+          unique(getValidDataElements(datasets = datasets[i], creds = creds)$dataelementuid)
         des_ous <- list(dataset = datasets[i], list(ous = ous, des = des))
         saveCachedObject(des_ous, sig)
       }
@@ -92,13 +96,13 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 
-checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE) {
+checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE, creds) {
   
-  if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
+  if (is.na(organisationUnit)) { organisationUnit = creds$user_orgunit}
   if ( NROW(data) == 0  ) {stop("Data cannot be missing!")}
   if ( length(datasets) == 0 | any(is.na(datasets)) ) { stop("Please specifiy a list of data sets!") }
   
-  des_ous<-getDataElementsOrgunits(organisationUnit,datasets)
+  des_ous<-getDataElementsOrgunits(organisationUnit,datasets,creds = creds)
   des_ous_map<-plyr::ldply(des_ous,function(x) expand.grid(dataElement=x[[2]]$des,orgUnit=x[[2]]$ous,stringsAsFactors = FALSE))
   data_des_ous_map<-unique(data[,c("dataElement","orgUnit")])
   result_data<-dplyr::anti_join(data,des_ous_map,by=c("dataElement","orgUnit"))

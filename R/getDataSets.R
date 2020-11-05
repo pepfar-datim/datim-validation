@@ -1,20 +1,20 @@
 #' @export
-#' @title getDataSets()
+#' @title getDataSets(creds)
 #' 
 #' @description Utility function to produce a data frame of
 #'  datasets. 
-#'  
+#'  @param creds DHISLogin object.
 #' @return Returns a data frame  of name, id and formtype of all datasets.
 #' @examples 
 #'  \dontrun{
 #'  ds<-getDataSets()
 #'  }
 #'
-getDataSets <- function() {
+getDataSets <- function(creds) {
   url <-
     URLencode(
       paste0(
-        getOption("baseurl"),
+        creds$baseurl,
         "api/",
         api_version(),
         "/dataSets?fields=name,id,formType&paging=false"
@@ -23,7 +23,7 @@ getDataSets <- function() {
   sig <- digest::digest(paste0(url), algo = 'md5', serialize = FALSE)
   ds <- getCachedObject(sig)
   if (is.null(ds)) {
-    r <- httr::GET(url , httr::timeout(300))
+    r <- httr::GET(url , httr::timeout(300), handle = creds$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       r <- jsonlite::fromJSON(r)
@@ -46,19 +46,20 @@ getDataSets <- function() {
 #' 
 #'
 #' @param type Should be either RESULTS or TARGETS
-#'
+#' 
+#' @param creds DHISLogin object.  
 #' @return Returns a list of dataset UIDs of the given type
 #' @export
 #'
 #' @examples
 #'   \dontrun{
-#'  ds<-getCurrentMERDataSets(type="RESULTS")
+#'  ds<-getCurrentMERDataSets(type="RESULTS", creds = creds)
 #'  }
 #'  
-getCurrentMERDataSets<-function(type="RESULTS") {
+getCurrentMERDataSets<-function(type="RESULTS", creds) {
   
   if ( !(type %in% c("RESULTS","TARGETS"))) {stop("Type must be either RESULTS or TARGETS")}
-  ds<-getDataSets()  
+  ds<-getDataSets(creds = creds)  
   
   if ( type == "RESULTS" ) {
   want <-

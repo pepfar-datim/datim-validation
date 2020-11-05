@@ -2,9 +2,10 @@ context("Get a list of category option combos")
 
 with_mock_api({
   test_that("We can get an category option combo map", {
-    config <- LoadConfigFile(test_config("test-config.json"))
-    options("maxCacheAge"=NULL)
-    test_cocs<-getCategoryOptionCombosMap()
+    my_creds <- DHISLogin$new(test_config("test-config.json"))
+    my_creds$maxCacheAge<-NULL
+    my_creds$handle<-NULL
+    test_cocs<-getCategoryOptionCombosMap(creds = my_creds)
     expect_type(test_cocs,"list")
     expect_is(test_cocs,"data.frame")
     coc_map_names<-c("name","id","code","shortName")

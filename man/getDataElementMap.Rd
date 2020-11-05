@@ -4,7 +4,10 @@
 \alias{getDataElementMap}
 \title{getDataElementMap()}
 \usage{
-getDataElementMap()
+getDataElementMap(creds)
+}
+\arguments{
+\item{creds}{DHISLogin object.}
 }
 \value{
 Returns a data frame  of id,code,shortName and name
@@ -14,6 +17,6 @@ Utility function of extraction of data element ids, codes, shortName and names
 }
 \examples{
 \dontrun{
-de_map<-getDataElementMap()
+de_map<-getDataElementMap(creds = my_creds)
 }
 }

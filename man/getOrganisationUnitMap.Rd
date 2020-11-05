@@ -4,10 +4,12 @@
 \alias{getOrganisationUnitMap}
 \title{getOrganisationUnitMap(operatingUnit)}
 \usage{
-getOrganisationUnitMap(organisationUnit = NA)
+getOrganisationUnitMap(organisationUnit = NA, creds)
 }
 \arguments{
 \item{organisationUnit}{of question specified as a UID}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)

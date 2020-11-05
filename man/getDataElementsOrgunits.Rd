@@ -4,14 +4,16 @@
 \alias{getDataElementsOrgunits}
 \title{getDataElementsOrgunits(data,organisationUnit,datasets)}
 \usage{
-getDataElementsOrgunits(organisationUnit = NA, datasets = NA)
+getDataElementsOrgunits(organisationUnit = NA, datasets = NA, creds)
 }
 \arguments{
 \item{organisationUnit}{Organisation unit. Defaults to user organisation
 unit if not supplied explicitly.}
 
 \item{datasets}{Should be a character vector of data set UIDs. Alternatively, 
-if left missing, user will be promted.}
+if left missing, user will be prompted.}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 A named list of data frames, each consisting of two columns (des) representing

@@ -2,18 +2,18 @@
 #' @title getDataElementMap()
 #' 
 #' @description Utility function of extraction of data element ids, codes, shortName and names
-#'
+#' @param creds DHISLogin object. 
 #' @return Returns a data frame  of id,code,shortName and name
 #' @examples \dontrun{
-#' de_map<-getDataElementMap()
+#' de_map<-getDataElementMap(creds = my_creds)
 #' }
 
-getDataElementMap<-function() {
-  url<-URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/dataElements?fields=id,code,shortName,name,valueType,optionSet[id],zeroIsSignificant&paging=false"))
+getDataElementMap<-function(creds) {
+  url<-URLencode(paste0(creds$baseurl,"api/",api_version(),"/dataElements?fields=id,code,shortName,name,valueType,optionSet[id],zeroIsSignificant&paging=false"))
   sig<-digest::digest(url,algo='md5', serialize = FALSE)
   des<-getCachedObject(sig)
   if (is.null(des)){
-  r<-httr::GET(url,httr::timeout(300))
+  r<-httr::GET(url,httr::timeout(300), handle=creds$handle)
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     des<-jsonlite::fromJSON(r,flatten=TRUE)[[1]]
