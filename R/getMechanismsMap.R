@@ -6,7 +6,7 @@
 #' @param organisationUnit Operating unit in question specified as a UID. If not specified, assume to be Global.
 #' @return Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest) along with start and endDates of the mechanisms
 #' 
-getMechanismsMap<-function(organisationUnit=NA, creds) {
+getMechanismsMap<-function(organisationUnit=NA, creds = NULL) {
   if ( is.na(organisationUnit) ) { 
     organisationUnit<-creds$user_orgunit
     warning( paste("No organisation unit specified. Using orgunit",organisationUnit) )

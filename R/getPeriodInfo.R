@@ -3,16 +3,17 @@
 #' @description Get information like start date, end date and period type from an ISO period string
 #'
 #' @param ISO Formatted string such as 2016Q1. Refer to DHIS2 documentation for details.
+#' @param creds DHIS2Login object
 #' @return Returns a data frame of  ISO, startDate,endDate,and periodtype
 #' 
-getPeriodInfo <- function(ISO = NA) {
+getPeriodInfo <- function(ISO = NA, creds) {
 
   url <- URLencode(paste0(getOption("baseurl"),"api/",api_version(),"/sqlViews/TTM90ytCCdY/data.json"))
   sig <- digest::digest(paste0(url), algo = 'md5', serialize = FALSE)
   p <- getCachedObject(sig)
   
   if (is.null(p)) {
-    r <- httr::GET(url , httr::timeout(300))
+    r <- httr::GET(url , httr::timeout(300), handle = creds$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       r <- jsonlite::fromJSON(r)

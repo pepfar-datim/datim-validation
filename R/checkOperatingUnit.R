@@ -12,6 +12,6 @@
 #' will remap organisation units specified as codes to UIDs
 checkOperatingUnit<-function(organisationUnit=NA, creds ) {
   if (is.na(organisationUnit)) {organisationUnit = creds$user_orgunit}
-      sites<-getValidOperatingUnits()
+      sites<-getValidOperatingUnits(creds = creds)
       organisationUnit %in% sites$id
 }
