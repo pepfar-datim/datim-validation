@@ -164,7 +164,7 @@ if ( nrow(validation.results) > 0 ) {
                     warn_missing = FALSE)
   
   # filter by data sets
-  vr_rules <- getValidationRules()
+  vr_rules <- getValidationRules( creds = creds )
   
   validDataElements <- getValidDataElements(datasets = datasets, creds = creds)
   
