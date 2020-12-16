@@ -4,7 +4,10 @@
 \alias{getOptionSetMap}
 \title{getOptionSetMap()}
 \usage{
-getOptionSetMap()
+getOptionSetMap(creds)
+}
+\arguments{
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame structure composed of option set names, UIDs, and a data frame for 

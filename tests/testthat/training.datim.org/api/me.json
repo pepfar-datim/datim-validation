@@ -1,0 +1,101 @@
+{
+    "lastUpdated": "2017-05-06T06:25:53.319",
+    "id": "EqkAI5z9rhD",
+    "created": "2017-05-06T06:25:53.209",
+    "name": "Parrot IP 1001 Demoland USAID Parrot IM",
+    "displayName": "Parrot IP 1001 Demoland USAID Parrot IM",
+    "externalAccess": false,
+    "surname": "1001 Demoland USAID Parrot IM",
+    "firstName": "Parrot IP",
+    "userCredentials": {
+        "lastUpdated": "2018-12-11T17:11:54.300",
+        "id": "A7i8oynZ4te",
+        "created": "2017-05-06T06:25:53.167",
+        "name": "Parrot IP 1001 Demoland USAID Parrot IM",
+        "lastLogin": "2018-12-11T17:11:54.296",
+        "displayName": "Parrot IP 1001 Demoland USAID Parrot IM",
+        "externalAuth": false,
+        "externalAccess": false,
+        "disabled": false,
+        "passwordLastUpdated": "2017-05-06T06:25:53.215",
+        "invitation": false,
+        "selfRegistered": false,
+        "username": "demo_parrot_ip",
+        "userInfo": {
+            "id": "EqkAI5z9rhD"
+        },
+        "lastUpdatedBy": {
+            "id": "EqkAI5z9rhD"
+        },
+        "user": {
+            "id": "EqkAI5z9rhD"
+        },
+        "cogsDimensionConstraints": [
+
+        ],
+        "catDimensionConstraints": [
+            {
+                "id": "SH885jaRe0o"
+            }
+        ],
+        "translations": [
+
+        ],
+        "userGroupAccesses": [
+
+        ],
+        "attributeValues": [
+
+        ],
+        "userRoles": [
+            {
+                "id": "k7BWFXkG6zt"
+            },
+            {
+                "id": "n777lf1THwQ"
+            },
+            {
+                "id": "b2uHwX9YLhu"
+            }
+        ],
+        "userAccesses": [
+
+        ]
+    },
+    "teiSearchOrganisationUnits": [
+
+    ],
+    "translations": [
+
+    ],
+    "organisationUnits": [
+        {
+            "id": "KKFzPM8LoXs"
+        }
+    ],
+    "dataViewOrganisationUnits": [
+        {
+            "id": "KKFzPM8LoXs"
+        }
+    ],
+    "userGroupAccesses": [
+
+    ],
+    "attributeValues": [
+
+    ],
+    "userGroups": [
+        {
+            "id": "c6hGi8GEZot"
+        },
+        {
+            "id": "x3nINdvySHz"
+        },
+        {
+            "id": "HruyQTNGwDE"
+        }
+    ],
+    "userAccesses": [
+
+    ]
+}

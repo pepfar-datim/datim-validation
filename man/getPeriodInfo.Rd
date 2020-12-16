@@ -4,10 +4,12 @@
 \alias{getPeriodInfo}
 \title{getPeriodInfo(ISO)}
 \usage{
-getPeriodInfo(ISO = NA)
+getPeriodInfo(ISO = NA, creds)
 }
 \arguments{
 \item{ISO}{Formatted string such as 2016Q1. Refer to DHIS2 documentation for details.}
+
+\item{creds}{DHIS2Login object}
 }
 \value{
 Returns a data frame of  ISO, startDate,endDate,and periodtype

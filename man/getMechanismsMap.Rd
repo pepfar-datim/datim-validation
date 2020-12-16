@@ -4,7 +4,7 @@
 \alias{getMechanismsMap}
 \title{getMechanismsMap()}
 \usage{
-getMechanismsMap(organisationUnit = NA, creds)
+getMechanismsMap(organisationUnit = NA, creds = NULL)
 }
 \arguments{
 \item{organisationUnit}{Operating unit in question specified as a UID. If not specified, assume to be Global.}

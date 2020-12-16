@@ -4,7 +4,12 @@
 \alias{checkDataElementDisaggValidity}
 \title{checkDataElementDisaggValidity(data,dataset)}
 \usage{
-checkDataElementDisaggValidity(data, datasets = NA, return_violations = TRUE)
+checkDataElementDisaggValidity(
+  data,
+  datasets = NA,
+  return_violations = TRUE,
+  creds
+)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
@@ -13,6 +18,8 @@ checkDataElementDisaggValidity(data, datasets = NA, return_violations = TRUE)
 Alternatively, if left missing, user will be promted to choose from a list.}
 
 \item{return_violations}{Boolean to return violations only.}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName",

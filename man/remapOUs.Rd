@@ -4,7 +4,7 @@
 \alias{remapOUs}
 \title{Function which converts mechanism codes, names or shortnames to to another class of identifiers}
 \usage{
-remapOUs(ous_in, organisationUnit, mode_in = "code", mode_out = "id")
+remapOUs(ous_in, organisationUnit, mode_in = "code", mode_out = "id", creds)
 }
 \arguments{
 \item{ous_in}{A vector of organisation unit identifiers (codes, names or shortNames)}

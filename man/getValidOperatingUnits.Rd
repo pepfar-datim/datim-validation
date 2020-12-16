@@ -4,7 +4,10 @@
 \alias{getValidOperatingUnits}
 \title{Utility function which provides a list of valid operating units}
 \usage{
-getValidOperatingUnits()
+getValidOperatingUnits(creds)
+}
+\arguments{
+\item{creds}{DHIS Login object}
 }
 \value{
 Returns a data frame of operating units and their UIDs

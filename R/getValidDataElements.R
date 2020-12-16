@@ -5,15 +5,15 @@
 #' DATIM form specification
 #'
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @param creds DHISLogin object
+#' @param d2session d2session object
 #' @return Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"
 #' 
 #'
-getValidDataElements<-function(datasets=NA, creds) {
-  allDataSets<-getDataSets(creds)
+getValidDataElements<-function(datasets=NA, d2session) {
+  allDataSets<-getDataSets(d2session = d2session)
   dataSetValid<-Reduce("&",datasets %in% allDataSets$id)
   while( !dataSetValid || is.na(dataSetValid) ) {
-    datasets<-selectDataset(creds = creds)
+    datasets<-selectDataset(d2session = d2session)
     if (length(datasets) == 0) {break;}
     dataSetValid <- Reduce("&",datasets %in% allDataSets$id) }
   if (length(datasets) == 0 || any(is.na(datasets))) { stop("Invalid dataset"); }
@@ -35,15 +35,15 @@ getValidDataElements<-function(datasets=NA, creds) {
     
     if ( allDataSets[allDataSets$id==datasets[i],"formType"] == "CUSTOM" ) {
       
-      url<-URLencode(paste0(creds$baseurl,"api/",api_version(),"/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",datasets[i],"&paging=false"))
+      url<-URLencode(paste0(d2session$base_url,"api/",api_version(),"/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",datasets[i],"&paging=false"))
       
-    } else { url<-URLencode(paste0(creds$baseurl,"api/", api_version(),"/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",datasets[i],"&paging=false")) }
+    } else { url<-URLencode(paste0(d2session$base_url,"api/", api_version(),"/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",datasets[i],"&paging=false")) }
     
     sig<-digest::digest(paste0(url,datasets[i]),algo='md5', serialize = FALSE)
     des<-getCachedObject(sig)
     
     if (is.null(des)) {
-      r<-httr::GET(url ,httr::timeout(300), handle = creds$handle)
+      r<-httr::GET(url ,httr::timeout(300), handle = d2session$handle)
       if (r$status == 200L ){
         r<- httr::content(r, "text")
         r<- jsonlite::fromJSON(r)

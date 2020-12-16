@@ -4,10 +4,12 @@
 \alias{checkNegativeValues}
 \title{checkNegativeValues(data)}
 \usage{
-checkNegativeValues(data)
+checkNegativeValues(data, creds)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 A filtered D2 compliant data frame of invalid values, otherwise, 
@@ -20,7 +22,7 @@ In general, data values which are negative will not be imported.
 \examples{
 \dontrun{
  d<-d2Parser("myfile.csv",type="csv")
- checkNegativeValues(data=d)
+ checkNegativeValues(data=d, creds = my_creds)
 }
 
 }

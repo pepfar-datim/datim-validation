@@ -4,7 +4,10 @@
 \alias{selectDataset}
 \title{selectDataSet()}
 \usage{
-selectDataset()
+selectDataset(creds)
+}
+\arguments{
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName",

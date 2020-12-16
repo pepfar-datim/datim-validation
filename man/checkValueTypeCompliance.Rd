@@ -4,10 +4,12 @@
 \alias{checkValueTypeCompliance}
 \title{checkValueTypeCompliance(d)}
 \usage{
-checkValueTypeCompliance(d)
+checkValueTypeCompliance(d, creds)
 }
 \arguments{
 \item{d}{A D2Parsed data frame}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame of invalid data only

@@ -4,7 +4,7 @@
 \alias{getCategoryOptionCombosMap}
 \title{getCategoryOptionCombosMap()}
 \usage{
-getCategoryOptionCombosMap(handle = handle)
+getCategoryOptionCombosMap(creds)
 }
 \arguments{
 \item{HTTP}{handle returned from DHISLogin.}

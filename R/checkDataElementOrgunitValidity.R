@@ -1,5 +1,5 @@
 #' @export
-#' @title getDataElementsOrgunits(data,organisationUnit,datasets)
+#' @title getDataElementsOrgunits(data,organisationUnit,datasets,d2session)
 #' 
 #' @description Returns a map of lists consisting of data elements and orgunits
 #'  for a dataset (or datasets) for a given organisationUnit
@@ -8,14 +8,14 @@
 #'  unit if not supplied explicitly.
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, 
 #' if left missing, user will be prompted.
-#' @param creds DHISLogin object
+#' @param d2_session d2_session object
 #' @return A named list of data frames, each consisting of two columns (des) representing
 #' data elements and (ous) representing organisation unit UIDs
 #' 
 #' @examples 
 #'  \dontrun{
 #'  #Be sure you login to DATIM first
-#'  loadSecrets()
+#'  loginToDATIM()
 #'  ds<-getCurrentMERDataSets(type="RESULTS")
 #'  de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
 #' }
@@ -23,15 +23,15 @@
 getDataElementsOrgunits <- function(
                                     organisationUnit = NA,
                                     datasets = NA,
-                                    creds) {
+                                    d2session = d2_default_session) {
   if (is.na(organisationUnit)) {
-    organisationUnit = creds$user_orgunit
+    organisationUnit = d2session$user_orgunit
   }
   
-  allDataSets <- getDataSets(creds = creds)
+  allDataSets <- getDataSets(d2session = d2session)
   
   if ( length(datasets) == 0 | any(is.na(datasets)) ) {
-    datasets <- selectDataset(creds)
+    datasets <- selectDataset(d2session = d2session)
   }
   
   dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
@@ -46,7 +46,7 @@ getDataElementsOrgunits <- function(
       
       url <-
         paste0(
-          creds$baseurl,
+          d2session$base_url,
           "api/",api_version(),"/organisationUnits?fields=id&paging=false&filter=path:like:",
           organisationUnit,
           "&filter=dataSets.id:eq:",
@@ -57,13 +57,13 @@ getDataElementsOrgunits <- function(
       des_ous <- getCachedObject(sig)
       
       if (is.null(des_ous)) {
-        r <- httr::GET(url, httr::timeout(300), handle = creds$handle)
+        r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
         r <- httr::content(r, "text")
         ous <-
           unique(jsonlite::fromJSON(r, flatten = TRUE)$organisationUnits$id)
         #OUs
         des <-
-          unique(getValidDataElements(datasets = datasets[i], creds = creds)$dataelementuid)
+          unique(getValidDataElements(datasets = datasets[i],d2session = d2session)$dataelementuid)
         des_ous <- list(dataset = datasets[i], list(ous = ous, des = des))
         saveCachedObject(des_ous, sig)
       }
@@ -76,7 +76,7 @@ getDataElementsOrgunits <- function(
 
 
 #' @export
-#' @title checkDataElementOrgunitValidity(data,organisationUnit,datasets)
+#' @title checkDataElementOrgunitValidity(data,organisationUnit,datasets,d2session)
 #' 
 #' @description Returns a data frame invalid data elements which exist in the data 
 #' but which do not have a valid organistion unit / dataset association. 
@@ -96,13 +96,17 @@ getDataElementsOrgunits <- function(
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 
-checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE, creds) {
+checkDataElementOrgunitValidity<-function(data=NA,
+                                          organisationUnit=NA,
+                                          datasets=NA,
+                                          return_violations=TRUE, 
+                                          d2session = d2_default_session) {
   
-  if (is.na(organisationUnit)) { organisationUnit = creds$user_orgunit}
+  if (is.na(organisationUnit)) { organisationUnit = d2session$user_orgunit}
   if ( NROW(data) == 0  ) {stop("Data cannot be missing!")}
   if ( length(datasets) == 0 | any(is.na(datasets)) ) { stop("Please specifiy a list of data sets!") }
   
-  des_ous<-getDataElementsOrgunits(organisationUnit,datasets,creds = creds)
+  des_ous<-getDataElementsOrgunits(organisationUnit,datasets,d2session = d2session)
   des_ous_map<-plyr::ldply(des_ous,function(x) expand.grid(dataElement=x[[2]]$des,orgUnit=x[[2]]$ous,stringsAsFactors = FALSE))
   data_des_ous_map<-unique(data[,c("dataElement","orgUnit")])
   result_data<-dplyr::anti_join(data,des_ous_map,by=c("dataElement","orgUnit"))

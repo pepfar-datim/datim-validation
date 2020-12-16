@@ -4,10 +4,12 @@
 \alias{checkOptionSetCompliance}
 \title{checkOptionSetCompliance()}
 \usage{
-checkOptionSetCompliance(d)
+checkOptionSetCompliance(d, creds)
 }
 \arguments{
 \item{d}{D2Parsed data frame}
+
+\item{creds}{DHISLogin object}
 }
 \value{
 Returns a data frame of invalid values validated against their option set.

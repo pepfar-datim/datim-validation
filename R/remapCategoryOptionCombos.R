@@ -8,7 +8,6 @@
 #' @param cocs_in A vector of category option combinations
 #' @param mode_in Should be one of code, name,shortName or id. This is the class we are mapping from.
 #' @param mode_out Should be one of code,name,shortName or id. This is the class we are mapping to.
-#' @creds DHIS2 Login object
 #' @return Returns a vector of category option combos of the mode_out type.
 #' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv")

@@ -9,7 +9,8 @@ validateData(
   organisationUnit = NA,
   return_violations_only = TRUE,
   parallel = FALSE,
-  datasets = NA
+  datasets = NA,
+  creds
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ validateData(
 
 \item{datasets}{Vector of dataset UIDs which can  be used to restrict
 the validation rules which will be applied.}
+
+\item{creds}{DHIS login object}
 }
 \value{
 Returns a data frame with validation rule results.
