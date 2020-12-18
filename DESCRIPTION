@@ -1,7 +1,7 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.0.106
+Version: 1.0.107
 Date: 2020-12-18
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
@@ -13,6 +13,7 @@ Description: A comprehensive set of tools to validate data payloads
         validate their prospective data payloads prior to submission
         for import.
 License: BSD_3_clause + file LICENSE
+Remotes: pepfar-datim/datimutils
 SystemRequirements: Active user account on 'DATIM'
         <https://www.datim.org/>
 URL: https://github.com/jason-p-pickering/datim-validation
