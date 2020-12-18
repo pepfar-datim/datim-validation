@@ -2,17 +2,19 @@
 % Please edit documentation in R/getDataSets.R
 \name{getDataSets}
 \alias{getDataSets}
-\title{getDataSets(creds)}
+\title{getDataSets()}
 \usage{
-getDataSets(creds)
+getDataSets(d2session = d2_default_session)
+}
+\arguments{
+\item{d2session}{datimutils login session object}
 }
 \value{
 Returns a data frame  of name, id and formtype of all datasets.
 }
 \description{
 Utility function to produce a data frame of
- datasets. 
- @param creds DHISLogin object.
+ datasets.
 }
 \examples{
  \dontrun{

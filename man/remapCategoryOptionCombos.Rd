@@ -4,14 +4,21 @@
 \alias{remapCategoryOptionCombos}
 \title{Function which converts category option combos from identifier to another}
 \usage{
-remapCategoryOptionCombos(cocs_in, mode_in, mode_out)
+remapCategoryOptionCombos(
+  cocs_in,
+  mode_in,
+  mode_out,
+  d2session = d2_default_session
+)
 }
 \arguments{
 \item{cocs_in}{A vector of category option combinations}
 
 \item{mode_in}{Should be one of code, name,shortName or id. This is the class we are mapping from.}
 
-\item{mode_out}{Should be one of code,name,shortName or id. This is the class we are mapping to..}
+\item{mode_out}{Should be one of code,name,shortName or id. This is the class we are mapping to.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a vector of category option combos of the mode_out type.

@@ -9,7 +9,7 @@ remapMechs(
   organisationUnit,
   mode_in = "code",
   mode_out = "id",
-  creds
+  d2session = d2_default_session
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ remapMechs(
 
 \item{mode_out}{Should be one of code,name or id. This is the type we are mapping to.}
 
-\item{creds}{DHIS Login credentials object}
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a vector of mechanism UIDs

@@ -2,9 +2,9 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrosswalkMechanism}
 \alias{getCrosswalkMechanism}
-\title{getCrosswalkMechanism()}
+\title{getCrosswalkMechanism(d2session = d2_default_session)}
 \usage{
-getCrosswalkMechanism()
+getCrosswalkMechanism(d2session = d2_default_session)
 }
 \value{
 Returns a UID of the crosswalk de-duplication mechanism

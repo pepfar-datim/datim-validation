@@ -4,7 +4,12 @@
 \alias{remapDEs}
 \title{Function which converts data element codes, names or shortnames to another class of identifiers}
 \usage{
-remapDEs(des_in, mode_in = "code", mode_out = "id", creds)
+remapDEs(
+  des_in,
+  mode_in = "code",
+  mode_out = "id",
+  d2session = d2_default_session
+)
 }
 \arguments{
 \item{des_in}{A vector of data element identifiers (codes, names or shortNames)}
@@ -13,7 +18,7 @@ remapDEs(des_in, mode_in = "code", mode_out = "id", creds)
 
 \item{mode_out}{Should be one of code,name, shortName or id. This is the class we are mapping to.}
 
-\item{creds}{DHIS2 credentials (DHISLogin object)}
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a vector of DATIM uids for each data element which needs to be remapped.

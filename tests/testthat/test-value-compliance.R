@@ -2,9 +2,8 @@ context("Check value type compliance")
 
 with_mock_api({
   test_that("We can identify bad values for integer data elements", {
-    my_creds <- DHISLogin$new(test_config("test-config.json"))
-    my_creds$maxCacheAge<-NULL
-    my_creds$handle<-NULL
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
     d<-d2Parser(filename=test_config("test-data-bad-value.csv"),
                 type="csv",
@@ -12,19 +11,18 @@ with_mock_api({
                 dataElementIdScheme = "id",
                 orgUnitIdScheme = "id",
                 idScheme = "id",
-                invalidData = FALSE, creds = my_creds)
-    expect_equal(NROW(checkValueTypeCompliance(d, creds = my_creds)), 3) 
+                invalidData = FALSE, d2session  = d2_default_session)
+    expect_equal(NROW(checkValueTypeCompliance(d, d2session  = d2_default_session)), 3) 
     d$value<-"5"
-    expect_equal(checkValueTypeCompliance(d,creds = my_creds), TRUE)
+    expect_equal(checkValueTypeCompliance(d,d2session  = d2_default_session), TRUE)
   })
 })
 
 
 with_mock_api({
   test_that("We can identify bad values for true only data elements", {
-    my_creds <- DHISLogin$new(test_config("test-config.json"))
-    my_creds$maxCacheAge<-NULL
-    my_creds$handle<-NULL
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
     datasets<-c("tz1bQ3ZwUKJ")
     d<-d2Parser(filename=test_config("test-data-bad-true-only-value.csv"),
                 type="csv",
@@ -33,17 +31,16 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE,
-                creds = my_creds)
-    expect_equal(NROW(checkValueTypeCompliance(d, creds = my_creds)), 9) 
+                d2session  = d2_default_session)
+    expect_equal(NROW(checkValueTypeCompliance(d, d2session  = d2_default_session)), 9) 
   })
 })
 
 
 with_mock_api({
   test_that("We can identify bad values for option set elements", {
-    my_creds <- DHISLogin$new(test_config("test-config.json"))
-    my_creds$maxCacheAge<-NULL
-    my_creds$handle<-NULL
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
     d<-d2Parser(filename=test_config("test-data-bad-value-option-sets.csv"),
                 type="csv",
@@ -52,16 +49,15 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE,
-                creds = my_creds)
-    expect_equal(NROW(checkValueTypeCompliance(d,creds = my_creds)), 1)
+                d2session  = d2_default_session)
+    expect_equal(NROW(checkValueTypeCompliance(d,d2session  = d2_default_session)), 1)
   })
 })
 
 with_mock_api({
   test_that("We can flag negative values in non-dedupe mechanisms", {
-    my_creds <- DHISLogin$new(test_config("test-config.json"))
-    my_creds$maxCacheAge<-NULL
-    my_creds$handle<-NULL
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
     d<-d2Parser(filename=test_config("test-data-neg-values.csv"),
                 type="csv",
                 organisationUnit = "KKFzPM8LoXs",
@@ -69,17 +65,16 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE,
-                creds = my_creds)
-    expect_warning(foo<-checkNegativeValues(data = d, creds = my_creds))
+                d2session  = d2_default_session)
+    expect_warning(foo<-checkNegativeValues(data = d, d2session  = d2_default_session))
     expect_equal(NROW(foo), 2)
   })
 })
 
 with_mock_api({
   test_that("We import CSV files which contain spaces in the fields", {
-    my_creds <- DHISLogin$new(test_config("test-config.json"))
-    my_creds$maxCacheAge<-NULL
-    my_creds$handle<-NULL
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
     d<-d2Parser(filename=test_config("test-data-with-spaces.csv"),
                 type="csv",
                 organisationUnit = "KKFzPM8LoXs",
@@ -87,7 +82,7 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE,
-                creds = my_creds)
+                d2session  = d2_default_session)
     expect_equal(NROW(d), 2)
   })
 })

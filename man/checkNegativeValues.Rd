@@ -4,10 +4,12 @@
 \alias{checkNegativeValues}
 \title{checkNegativeValues(data)}
 \usage{
-checkNegativeValues(data)
+checkNegativeValues(data, d2session = d2_default_session)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 A filtered D2 compliant data frame of invalid values, otherwise, 

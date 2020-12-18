@@ -4,7 +4,13 @@
 \alias{remapOUs}
 \title{Function which converts mechanism codes, names or shortnames to to another class of identifiers}
 \usage{
-remapOUs(ous_in, organisationUnit, mode_in = "code", mode_out = "id")
+remapOUs(
+  ous_in,
+  organisationUnit,
+  mode_in = "code",
+  mode_out = "id",
+  d2session = d2_default_session
+)
 }
 \arguments{
 \item{ous_in}{A vector of organisation unit identifiers (codes, names or shortNames)}
@@ -14,6 +20,8 @@ remapOUs(ous_in, organisationUnit, mode_in = "code", mode_out = "id")
 \item{mode_in}{Should be one of code, name, shortName or id. This is the class we are mapping from.}
 
 \item{mode_out}{Should be on of code,name,shortName or id. This is the class we are mapping to.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs

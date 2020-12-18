@@ -9,7 +9,7 @@
 #' 
 #'
 #' @param data D2 compliant data frame object
-#' @param DHIS2 Login object
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame  of "dataElement","period",
 #' of invalid data elements which are present the the data, if any. 
 #' If there are no violations, a boolean TRUE is returned. 
@@ -17,12 +17,12 @@
 #'   d<-d2Parser("myfile.csv",type="csv")
 #'   checkDataElementCadence(d)
 #' }
-checkDataElementCadence<-function(data,creds){
+checkDataElementCadence<-function(data,d2session = d2_default_session){
   
   
   #Get a listing of periods which are present in the data
   des_periods<-unique(data[,c("period","dataElement")])
-  cadence_maps<-purrr::map_dfr(unique(des_periods$period),getDataElementCadenceMapForPeriod) %>% 
+  cadence_maps<-purrr::map_dfr(unique(des_periods$period),getDataElementCadenceMapForPeriod(.,d2session = d2session)) %>% 
     dplyr::select(period,dataElement=uid)
   
   data_des_periods_bad<-dplyr::anti_join(des_periods,cadence_maps,by=c("period","dataElement"))
@@ -39,11 +39,11 @@ checkDataElementCadence<-function(data,creds){
 }
 
 
-getDataElementCadenceMapForPeriod <- function(period,creds) {
+getDataElementCadenceMapForPeriod <- function(period,d2session = d2_default_session) {
   url <-
     URLencode(
       paste0(
-        getOption("baseurl"),
+        d2session$baseurl,
         "api/",
         api_version(),
         "/dataStore/dataElementCadence/",
@@ -53,7 +53,7 @@ getDataElementCadenceMapForPeriod <- function(period,creds) {
   sig <- digest::digest(url, algo = 'md5', serialize = FALSE)
   cadence_map <- getCachedObject(sig)
   if (is.null(cadence_map)) {
-    r <- httr::GET(url , httr::timeout(300), handle = creds$handle)
+    r <- httr::GET(url , httr::timeout(300), handle = d2session$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       cadence_map <- jsonlite::fromJSON(r)

@@ -65,9 +65,9 @@ getPureDuplicates<-function(d){
 #'     cw_map<-getCrosswalkMap()
 #'  }
 #' 
-getCrosswalkMap<-function(){
+getCrosswalkMap<-function(d2session = d2_default_session){
   
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/sqlViews/UTlIicJBZFg/data.json&paging=false")),httr::timeout(300))
+  r<-httr::GET(URLencode(paste0(d2session$base_url,"api/sqlViews/UTlIicJBZFg/data.json&paging=false")),httr::timeout(300), handle = d2session$handle)
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     r<-jsonlite::fromJSON(r,flatten=TRUE)
@@ -80,7 +80,7 @@ getCrosswalkMap<-function(){
 }
 
 #' @export
-#' @title getCrosswalkMechanism()
+#' @title getCrosswalkMechanism(d2session = d2_default_session)
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
 #' 
@@ -90,8 +90,8 @@ getCrosswalkMap<-function(){
 #'  }
 #' 
 #' 
-getCrosswalkMechanism<-function(){
-  r<-httr::GET(URLencode(paste0(getOption("baseurl"),"api/categoryOptionCombos?filter=name:like:00001")),httr::timeout(300))
+getCrosswalkMechanism<-function(d2session = d2_default_session){
+  r<-httr::GET(URLencode(paste0(d2session$base_url,"api/categoryOptionCombos?filter=name:like:00001")),httr::timeout(300),handle = d2session$handle)
   if (r$status == 200L ){
     r<- httr::content(r, "text")
     r<-jsonlite::fromJSON(r,flatten=TRUE)
@@ -107,6 +107,7 @@ getCrosswalkMechanism<-function(){
 #' @description Utility function which returns the crosswalk mechanism UID
 #' 
 #' @param d A d2 parsed data frame of data.
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame of all crosswalk mechanism values,
 #'  along with default de-deudplication adjustments.
 #' @examples \dontrun{
@@ -114,8 +115,8 @@ getCrosswalkMechanism<-function(){
 #'  }
 #' 
 #'
-getCrossWalkDuplicates<-function(d){
-  cw<-getCrosswalkMap()
+getCrossWalkDuplicates<-function(d,d2session = d2_default_session){
+  cw<-getCrosswalkMap(d2session = d2session)
   #TA values
   ta<-merge(d,cw,by.x="dataElement",by.y="ta_de_uid")
   ta<-ta[ , -which(names(ta) %in% c("dsd_de_uid"))]
@@ -132,7 +133,7 @@ getCrossWalkDuplicates<-function(d){
   dupes<-merge(ta,dsd,by=c("dataElement","period","orgUnit","categoryOptionCombo"))
   
   dsd.ta.agg<-function(x,y) { ifelse(y >= x,-x,-y) }
-  dupes$crosswalk_mechanism<-getCrosswalkMechanism()
+  dupes$crosswalk_mechanism<-getCrosswalkMechanism(d2session = d2session)
   dupes$auto_resolve<-mapply(dsd.ta.agg,as.numeric(dupes$value_dsd),as.numeric(dupes$value_ta))
   return(dupes)
 }

@@ -4,7 +4,10 @@
 \alias{getValidOperatingUnits}
 \title{Utility function which provides a list of valid operating units}
 \usage{
-getValidOperatingUnits()
+getValidOperatingUnits(d2session = d2_default_session)
+}
+\arguments{
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of operating units and their UIDs

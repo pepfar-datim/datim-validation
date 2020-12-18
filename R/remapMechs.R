@@ -9,7 +9,7 @@
 #' @param mode_in Should be one of code, name or id. This is the type we are mapping from.
 #' @param mode_out Should be one of code,name or id. This is the type we are mapping to.
 #' @param organisationUnit The UID of the operating unit.
-#' @param creds DHIS Login credentials object
+#' @param d2session datimutils d2session object
 #' @return Returns a vector of mechanism UIDs
 #' @examples \dontrun{
 #' d<-d2Parser("myfile.csv",type="csv")
@@ -21,7 +21,7 @@ remapMechs <-
            organisationUnit,
            mode_in = "code",
            mode_out = "id",
-           creds) {
+           d2session = d2_default_session) {
     is_valid_mode <-
       (mode_in %in% c("code", "name", "id")) &
       (mode_out %in% c("code", "name", "id"))
@@ -29,7 +29,7 @@ remapMechs <-
       print("Not a valid mode. Must be one of code,name or id")
       stop()
     }
-    mechs <- getMechanismsMap(organisationUnit, creds = creds)
+    mechs <- getMechanismsMap(organisationUnit, d2session = d2session)
     cmd <-
       paste(
         "plyr::mapvalues(mechs_in,mechs$",

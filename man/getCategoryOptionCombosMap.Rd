@@ -4,10 +4,10 @@
 \alias{getCategoryOptionCombosMap}
 \title{getCategoryOptionCombosMap()}
 \usage{
-getCategoryOptionCombosMap(handle = handle)
+getCategoryOptionCombosMap(d2session = d2_default_session)
 }
 \arguments{
-\item{HTTP}{handle returned from DHISLogin.}
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame  of code,name,id and shortName of all categoryOptionCombos

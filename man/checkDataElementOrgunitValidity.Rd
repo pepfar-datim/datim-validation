@@ -9,7 +9,7 @@ checkDataElementOrgunitValidity(
   organisationUnit = NA,
   datasets = NA,
   return_violations = TRUE,
-  creds
+  d2session
 )
 }
 \arguments{
@@ -22,6 +22,8 @@ typically the operating unit.}
 Alternatively, if left missing, user will be promted.}
 
 \item{return_violations}{Return the invalid data if TRUE}
+
+\item{d2session}{datimutils d2session object @param d2session datimutils d2session object}
 }
 \value{
 Returns subset of data which contains

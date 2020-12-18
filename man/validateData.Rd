@@ -9,7 +9,8 @@ validateData(
   organisationUnit = NA,
   return_violations_only = TRUE,
   parallel = FALSE,
-  datasets = NA
+  datasets = NA,
+  d2session = d2_default_session
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ validateData(
 
 \item{datasets}{Vector of dataset UIDs which can  be used to restrict
 the validation rules which will be applied.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame with validation rule results.

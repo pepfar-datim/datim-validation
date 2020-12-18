@@ -4,10 +4,10 @@
 \alias{getDataElementMap}
 \title{getDataElementMap()}
 \usage{
-getDataElementMap(creds)
+getDataElementMap(d2session = d2_default_session)
 }
 \arguments{
-\item{creds}{DHISLogin object.}
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame  of id,code,shortName and name
@@ -17,6 +17,6 @@ Utility function of extraction of data element ids, codes, shortName and names
 }
 \examples{
 \dontrun{
-de_map<-getDataElementMap(creds = my_creds)
+de_map<-getDataElementMap()
 }
 }

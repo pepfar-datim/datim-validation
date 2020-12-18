@@ -11,7 +11,7 @@
 #' for which the data element is not zero significant will also be flagged. 
 #'
 #' @param d A D2Parsed data frame
-#' @param creds DHISLogin object
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame of invalid data only
 #' @examples 
 #' \dontrun{
@@ -19,15 +19,13 @@
 #' checkValueTypeCompliance(d)
 #' }
 #' 
-checkValueTypeCompliance<-function(d, creds) {
+checkValueTypeCompliance<-function(d, d2session = d2_default_session) {
   
   #There are differences in the API version, so first, we need to know which version we are dealing with
-  url<-URLencode(paste0(creds$baseurl,"api/",api_version(),"/system/info"))
-  r<-httr::GET(url,httr::timeout(300),handle = creds$handle)
+  url<-URLencode(paste0(d2session$base_url,"api/",api_version(),"/system/info"))
+  r<-httr::GET(url,httr::timeout(300),handle = d2session$handle)
   r<- httr::content(r, "text")
-  sysInfo<-jsonlite::fromJSON(r,flatten=TRUE)
-  version<-as.numeric(strsplit(sysInfo$version,"\\.")[[1]][2])
-  if ( version < 21 ) { print("API version not supported. Aborting."); stop() }
+
 
   patterns<-
     list(NUMBER="^(-?[0-9]+)(\\.[0-9]+)?$",
@@ -46,7 +44,7 @@ checkValueTypeCompliance<-function(d, creds) {
   patterns<-reshape2::melt(patterns)
   names(patterns)<-c("regex","valueType")    
 
-  des<-getDataElementMap(creds = creds)
+  des<-getDataElementMap(d2session = d2session)
   des<-merge(des,patterns,by="valueType",all.x=T)
   d<-merge(d,des,by.x="dataElement",by.y="id")
   
@@ -77,7 +75,7 @@ checkValueTypeCompliance<-function(d, creds) {
                                      stringsAsFactors = FALSE)
     }
   #Deal with data of type option sets
-  d_option_sets<-checkOptionSetCompliance(d, creds = creds)
+  d_option_sets<-checkOptionSetCompliance(d, d2session = d2session)
   #Return anything which is not valid
   d<-dplyr::bind_rows(d_regex_validation,d_option_sets)
   if ( NROW(d) > 0 ) {
@@ -93,28 +91,28 @@ checkValueTypeCompliance<-function(d, creds) {
 #' @title getOptionSetMap()
 #' 
 #' @description Utility function to fetch a list of optionsets and possible values within them
-#' @param creds DHISLogin object
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame structure composed of option set names, UIDs, and a data frame for 
 #' each of these with individual options present in the option set.
 #' @examples 
 #'  \dontrun{
 #'   op_set_map<-getOptionSetMap()
 #' }
-getOptionSetMap<-function(creds) {
+getOptionSetMap<-function(d2session = d2_default_session) {
 
   
-  url<-URLencode(paste0(creds$baseurl,"api/",api_version(),"/optionSets?fields=id,name,options[code]&paging=false"))
+  url<-URLencode(paste0(d2session$base_url,"api/",api_version(),"/optionSets?fields=id,name,options[code]&paging=false"))
   sig<-digest::digest(paste0(url),algo='md5', serialize = FALSE)
   option_sets<-getCachedObject(sig)
   if (is.null(option_sets)) {
-    r<-httr::GET(url ,httr::timeout(300), handle = creds$handle)
+    r<-httr::GET(url ,httr::timeout(300), handle = d2session$handle)
     if (r$status == 200L ){
       r<- httr::content(r, "text")
       r<- jsonlite::fromJSON(r,flatten = TRUE)
       option_sets<-as.data.frame(r$optionSets)
       saveCachedObject(option_sets,sig)}
     
-    else {print("Could not get a list of option sets"); stop()}
+    else {stop("Could not get a list of option sets")}
   }
   
   return(option_sets)
@@ -125,7 +123,7 @@ getOptionSetMap<-function(creds) {
 #' @title checkOptionSetCompliance()
 #' 
 #' @param d D2Parsed data frame
-#' @param creds DHISLogin object
+#' @param d2session datimutils d2session object
 #' @description Internal function for validation of data which have option sets
 #'
 #' @return Returns a data frame of invalid values validated against their option set.
@@ -135,9 +133,9 @@ getOptionSetMap<-function(creds) {
 #'   d<-d2Parser("myfile.csv",type="csv")
 #'   checkOptionSetCompliance(d)
 #' }
-checkOptionSetCompliance<-function(d, creds) {
+checkOptionSetCompliance<-function(d, d2session = d2_default_session) {
   
-  option_sets_des<-getDataElementMap(creds = creds) %>% 
+  option_sets_des<-getDataElementMap(d2session = d2session) %>% 
     dplyr::filter(!is.na(optionSet.id)) %>%
     dplyr::select(dataElement=id,optionSetID=optionSet.id) %>%
     dplyr::distinct()
@@ -156,7 +154,7 @@ checkOptionSetCompliance<-function(d, creds) {
     return(foo)
   }
   
-  option_set_map<-getOptionSetMap(creds = creds)
+  option_set_map<-getOptionSetMap(d2session = d2session)
   
   getOptionSetValues<-function(x) {
     list_index<-which(option_set_map$id == x)

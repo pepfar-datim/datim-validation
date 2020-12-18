@@ -4,7 +4,10 @@
 \alias{selectDataset}
 \title{selectDataSet()}
 \usage{
-selectDataset()
+selectDataset(d2session = d2_default_session)
+}
+\arguments{
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName",

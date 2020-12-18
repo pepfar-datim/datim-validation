@@ -4,12 +4,12 @@
 \alias{getValidDataElements}
 \title{getInvalidDataElements(datasets)}
 \usage{
-getValidDataElements(datasets = NA, creds)
+getValidDataElements(datasets = NA, d2session = d2_default_session)
 }
 \arguments{
 \item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
 
-\item{creds}{DHISLogin object}
+\item{d2session}{datimutils login session object}
 }
 \value{
 Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"
