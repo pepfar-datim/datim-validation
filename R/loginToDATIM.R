@@ -1,25 +1,3 @@
-#' @importFrom datimutils d2Session
-#' @name d2Session
-NULL
-
-#' @importFrom datimutils loadConfigFile
-#' @title LoadConfig(config_path)
-#' @name loadConfigFile
-#' @description Loads a JSON configuration file to access a DHIS2 instance
-#' @param config_path Path to the DHIS2 credentials file
-#' @return A parsed list of the configuration file.
-#'
-NULL
-
-
-#' @importFrom datimutils getCredentialsFromKeyring
-#' @title getCredentialsFromKeyring(ring, service, username)
-#' @name getCredentialsFromKeyring
-#' @description retrieves username, service, and password from keyring
-#' @param ring keyring name
-#' @return a list containing entries called password, baseurl, and username
-#'
-NULL
 
 #' @importFrom datimutils loginToDATIM
 #' @name loginToDATIM
