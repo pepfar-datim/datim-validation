@@ -4,10 +4,12 @@
 \alias{getCrossWalkDuplicates}
 \title{getCrossWalkDuplicates(d)}
 \usage{
-getCrossWalkDuplicates(d)
+getCrossWalkDuplicates(d, d2session = d2_default_session)
 }
 \arguments{
 \item{d}{A d2 parsed data frame of data.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of all crosswalk mechanism values,

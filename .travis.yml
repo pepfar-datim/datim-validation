@@ -6,3 +6,4 @@ apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
  - libcurl3
+ - libsodium-dev 

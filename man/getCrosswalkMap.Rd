@@ -4,7 +4,7 @@
 \alias{getCrosswalkMap}
 \title{getCrosswalkMap()}
 \usage{
-getCrosswalkMap()
+getCrosswalkMap(d2session = d2_default_session)
 }
 \value{
 Returns a map of DSD/TA data element UIDs.

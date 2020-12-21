@@ -68,6 +68,7 @@ prepDataForValidation <- function(d) {
 #' @param parallel Should the rules be evaluated in parallel. Default is to not evaluate in parallel.
 #' @param datasets Vector of dataset UIDs which can  be used to restrict
 #' the validation rules which will be applied.
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame with validation rule results.
 #' @examples \dontrun{
 #'   d<-d2Parser("myfile.csv",type="csv")
@@ -81,7 +82,7 @@ validateData <-function(data,
            organisationUnit = NA,
            return_violations_only = TRUE,
            parallel = FALSE,
-           datasets = NA) {
+           datasets = NA, d2session = d2_default_session) {
     
   if (nrow(data) == 0 ||
       is.null(data)) {
@@ -89,13 +90,13 @@ validateData <-function(data,
   }
   
   if (is.na(organisationUnit)) {
-    organisationUnit = getOption("organisationUnit")
+    organisationUnit = d2session$user_orgunit
   }
   
-  allDataSets <- getDataSets()
+  allDataSets <- getDataSets(d2session = d2session)
   dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
   while (!dataSetValid || is.na(dataSetValid)) {
-    datasets <- selectDataset()
+    datasets <- selectDataset(d2session = d2session)
     if (length(datasets) == 0) {
       break
     }
@@ -130,7 +131,7 @@ validation.results_empty <- data.frame(
 validation.results <- validation.results_empty
 
 #Check the data against the validation rules
-vr <- getValidationRules()
+vr <- getValidationRules(d2session = d2session)
 if (Sys.info()[['sysname']] == "Windows") {
   if (parallel == TRUE)  {
     warning("Parallel execution is not supported on Windows")
@@ -147,8 +148,8 @@ validation.results <-
 
 if ( nrow(validation.results) > 0 ) {
   validation.results <- plyr::colwise(as.character)(validation.results)
-  mechs <- getMechanismsMap(organisationUnit = organisationUnit)
-  ous <- getOrganisationUnitMap(organisationUnit = organisationUnit)
+  mechs <- getMechanismsMap(organisationUnit = organisationUnit, d2session = d2session)
+  ous <- getOrganisationUnitMap(organisationUnit = organisationUnit, d2session = d2session)
   
   validation.results$mech_code <-
     plyr::mapvalues(validation.results$attributeOptionCombo,
@@ -163,9 +164,9 @@ if ( nrow(validation.results) > 0 ) {
                     warn_missing = FALSE)
   
   # filter by data sets
-  vr_rules <- getValidationRules()
+  vr_rules <- getValidationRules( d2session = d2session )
   
-  validDataElements <- getValidDataElements(datasets = datasets)
+  validDataElements <- getValidDataElements(datasets = datasets, d2session = d2session)
   
   match <-
     paste(unique(validDataElements$dataelementuid),

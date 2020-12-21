@@ -4,10 +4,12 @@
 \alias{getOrganisationUnitMap}
 \title{getOrganisationUnitMap(operatingUnit)}
 \usage{
-getOrganisationUnitMap(organisationUnit = NA)
+getOrganisationUnitMap(organisationUnit = NA, d2session = d2_default_session)
 }
 \arguments{
 \item{organisationUnit}{of question specified as a UID}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)

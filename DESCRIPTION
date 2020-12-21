@@ -1,8 +1,8 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.0.100
-Date: 2020-09-16
+Version: 1.0.112
+Date: 2020-12-18
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
 Description: A comprehensive set of tools to validate data payloads
@@ -13,6 +13,7 @@ Description: A comprehensive set of tools to validate data payloads
         validate their prospective data payloads prior to submission
         for import.
 License: BSD_3_clause + file LICENSE
+Remotes: pepfar-datim/datimutils
 SystemRequirements: Active user account on 'DATIM'
         <https://www.datim.org/>
 URL: https://github.com/jason-p-pickering/datim-validation
@@ -24,7 +25,7 @@ Imports: xml2 (>= 1.3.2), plyr (>= 1.8.4), jsonlite (>= 1.6), stringr
         (>= 1.4.0), httr (>= 1.4.0), digest (>= 0.6.18), reshape2 (>=
         1.4.3), assertthat (>= 0.2.0), rlist (>= 0.4.6.1), ISOweek (>=
         0.6-2), lubridate (>= 1.7.4), getPass (>= 0.2-2), purrr (>=
-        0.3.2), dplyr (>= 0.8.3)
+        0.3.2), dplyr (>= 0.8.3), R6 (>= 2.4.1), datimutils (>= 0.1.0)
 Suggests: doMC (>= 1.3.5), foreach (>= 1.4.4), httptest (>= 3.2.2),
         knitr (>= 1.21), methods, rmarkdown (>= 1.11), roxygen2 (>=
         6.1.1), tcltk, testthat (>= 2.0.1), covr (>= 3.2.1), stringi

@@ -4,7 +4,10 @@
 \alias{getDataSets}
 \title{getDataSets()}
 \usage{
-getDataSets()
+getDataSets(d2session = d2_default_session)
+}
+\arguments{
+\item{d2session}{datimutils login session object}
 }
 \value{
 Returns a data frame  of name, id and formtype of all datasets.

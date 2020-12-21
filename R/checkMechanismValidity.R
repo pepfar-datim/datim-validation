@@ -12,6 +12,7 @@
 #' @param data A data frame which has been parsed by either d2Parser or sims2Parser
 #' @param organisationUnit UID of the operating unit.
 #' @param return_violations Should the function return a list of violations only. 
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame of invalid period-mechanism combinations. A warning will 
 #' also be issued. 
 #' Returns TRUE if there are no violations. 
@@ -22,10 +23,10 @@
 #'      checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
 #' }
 #' 
-checkMechanismValidity <- function(data, organisationUnit=NA, return_violations=TRUE) {
+checkMechanismValidity <- function(data, organisationUnit=NA, return_violations=TRUE, d2session = d2_default_session) {
   
   if (is.na(organisationUnit)) {
-    organisationUnit = getOption("organisationUnit")
+    organisationUnit = d2session$user_orgunit
   }
   
   data_mechs_periods <- data %>%
@@ -38,7 +39,8 @@ checkMechanismValidity <- function(data, organisationUnit=NA, return_violations=
   data_mechs_periods <- merge(data_mechs_periods, period_info, by.x = "period", by.y = "iso")
   
   mechanism_map <-
-    getMechanismsMap(organisationUnit = organisationUnit) %>%
+    getMechanismsMap(organisationUnit = organisationUnit,
+                     d2session = d2session) %>%
     dplyr::select(id,code,startDate,endDate)
   
   if (is.null(mechanism_map)) {

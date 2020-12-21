@@ -98,7 +98,7 @@ clearCache <-
 #' @return Version of the API. 
 #'
 #' 
-api_version<-function() { "30" }
+api_version<-function() { "33" }
 
 #' @export
 #' @title api_version()

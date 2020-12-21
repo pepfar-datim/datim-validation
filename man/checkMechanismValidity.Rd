@@ -4,7 +4,12 @@
 \alias{checkMechanismValidity}
 \title{checkMechanismPeriodValidity(data,organisationUnit)}
 \usage{
-checkMechanismValidity(data, organisationUnit = NA, return_violations = TRUE)
+checkMechanismValidity(
+  data,
+  organisationUnit = NA,
+  return_violations = TRUE,
+  d2session = d2_default_session
+)
 }
 \arguments{
 \item{data}{A data frame which has been parsed by either d2Parser or sims2Parser}
@@ -12,6 +17,8 @@ checkMechanismValidity(data, organisationUnit = NA, return_violations = TRUE)
 \item{organisationUnit}{UID of the operating unit.}
 
 \item{return_violations}{Should the function return a list of violations only.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of invalid period-mechanism combinations. A warning will 

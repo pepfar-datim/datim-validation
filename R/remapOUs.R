@@ -8,6 +8,7 @@
 #' @param organisationUnit UID of the Operating Unit/Country
 #' @param mode_in Should be one of code, name, shortName or id. This is the class we are mapping from.
 #' @param mode_out Should be on of code,name,shortName or id. This is the class we are mapping to.
+#' @param d2session datimutils d2session object
 #' @return Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs
 #' @examples \dontrun{
 #' d<-d2Parser("myfile.csv",type="csv")
@@ -18,7 +19,8 @@ remapOUs <-
   function(ous_in,
            organisationUnit,
            mode_in = "code",
-           mode_out = "id") {
+           mode_out = "id" ,
+           d2session = d2_default_session) {
     is_valid_mode <-
       (mode_in %in% c("code", "name", "shortName", "id"))  &
       (mode_out %in% c("code", "name", "shortName", "id"))
@@ -27,7 +29,7 @@ remapOUs <-
       stop()
     } else {
       sites <-
-        getOrganisationUnitMap(organisationUnit)
+        getOrganisationUnitMap(organisationUnit, d2session = d2session)
       #TODO Get rid of this method and use stringi instead. 
       cmd <-
         paste0(

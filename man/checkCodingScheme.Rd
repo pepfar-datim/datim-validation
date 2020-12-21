@@ -4,10 +4,12 @@
 \alias{checkCodingScheme}
 \title{Utility function to check that the supplied coding scheme is correct}
 \usage{
-checkCodingScheme(data)
+checkCodingScheme(data, d2session = d2_default_session)
 }
 \arguments{
 \item{data}{A parsed DHIS2 data payload from d2parser}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Warnings are issued if the coding scheme is not 

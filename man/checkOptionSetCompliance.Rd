@@ -4,10 +4,12 @@
 \alias{checkOptionSetCompliance}
 \title{checkOptionSetCompliance()}
 \usage{
-checkOptionSetCompliance(d)
+checkOptionSetCompliance(d, d2session = d2_default_session)
 }
 \arguments{
 \item{d}{D2Parsed data frame}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of invalid values validated against their option set.

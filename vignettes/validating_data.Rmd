@@ -29,29 +29,17 @@ In addition to the general DHIS2 documentation, a series of DATIM specific resou
 
 ## Getting started
 
-In order to get started, you will need to have installed the R package "datimvalidation". The source code for this library can be found [here](https://github.com/jason-p-pickering/datim-validation). 
-
+In order to get started, you will need to have installed the R packages ["datimvalidation"](https://github.com/jason-p-pickering/datim-validation) and ["datimutils"](https://github.com/pepfar-datim/datimutils). 
 
 You will need an active internet connection and an active DATIM user name in order to utilize the `datimvalidation` package. Meta-data will be retrieved from the DATIM server, using your user name and password , and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. By default, cached objects are stored for a week and then invalidated. 
 
-To get started, you should create a "secrets" file, which will contain the authentication information required to access DATIM. You should keep this in a secure place on your computer, as it will require storing the user name and password you access DATIM as a file on your disk. If you are unable to securely store this file, you can also enter your user name and password through a dialog. A secrets file should a single JSON file which looks like this: 
 
-```json
-{
-  "dhis": {
-    "baseurl": "http://dev-de.datim.org",
-    "username": "admin",
-    "password": "district"
-  }
-}
-```
-
-To get started, we will load the package and provide a location of our secrets file
+The "datimvalidation" package relies on "datimutils" to handle authentication with DATIM. There are several different ways which you can authenticate. Please refer to the "datimutils" package for details on setting up a means to connect your local R enviornment to the DATIM server. 
 
 ```{r eval=FALSE}
+require(datimutils)
 require(datimvalidation)
-secrets<-"/home/littebobbytables/.secrets/datim.json"
-loadSecrets(secrets)
+loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
 ```
 
 
@@ -155,9 +143,9 @@ You should of course adjust the specifics of the script, such as where your cred
 If any of the functions return errors, warnings, or non-empty data frames, you should investigate and resolve the issues prior to submitting your data file for import into DATIM. 
 
 ```
+require(datimutils)
 require(datimvalidation)
-secrets<-"/home/littebobbytables/.secrets/datim.json"
-loadSecrets(secrets)
+loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
 datafile<-"/home/littebobbytables/mydata.csv"
 d<-d2Parser(filename = datafile ,type = "csv")
 checkDataElementOrgunitValidity(data = d,organisationUnit = "f5RoebaDLMx",datasets = c("zUoy5hk8r0q","KWRj80vEfHU"))

@@ -4,19 +4,19 @@
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
 #' frame which can be used in subsequent DATIM validation routines
 #' @param remove_decoration Remove decoration of curly braces present in the raw validation metadata. 
-#'
+#' @param d2session datimutils d2session object
 #' @return Returns a data frame of validation rules consisting of name, left and right side operators and strategies
 
-getValidationRules<-function(remove_decoration = FALSE) {
+getValidationRules<-function(remove_decoration = FALSE, d2session = d2_default_session) {
   
-url<-paste0(getOption("baseurl"),"api/",api_version(),"/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
+url<-paste0(d2session$base_url,"api/",api_version(),"/validationRules.json?fields=id,name,description,leftSide[expression,missingValueStrategy],rightSide[expression,missingValueStrategy],operator,periodType&paging=false")
 sig<-digest::digest(url,algo='md5', serialize = FALSE)
 vr<-getCachedObject(sig)
 
 if (is.null(vr)) {
 expression.pattern<-"[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 #Get a copy of the metadata from the server
-r<-httr::GET(url,httr::timeout(300))
+r<-httr::GET(url,httr::timeout(300), handle = d2session$handle)
 r<- httr::content(r, "text")
 vr<-jsonlite::fromJSON(r,flatten=TRUE)$validationRules
 #Static predefined map of operators

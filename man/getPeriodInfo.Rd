@@ -4,10 +4,12 @@
 \alias{getPeriodInfo}
 \title{getPeriodInfo(ISO)}
 \usage{
-getPeriodInfo(ISO = NA)
+getPeriodInfo(ISO = NA, d2session = d2_default_session)
 }
 \arguments{
 \item{ISO}{Formatted string such as 2016Q1. Refer to DHIS2 documentation for details.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of  ISO, startDate,endDate,and periodtype

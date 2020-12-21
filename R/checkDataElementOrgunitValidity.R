@@ -3,10 +3,12 @@
 #' 
 #' @description Returns a map of lists consisting of data elements and orgunits
 #'  for a dataset (or datasets) for a given organisationUnit
+
 #' @param organisationUnit Organisation unit. Defaults to user organisation
 #'  unit if not supplied explicitly.
 #' @param datasets Should be a character vector of data set UIDs. Alternatively, 
-#' if left missing, user will be promted.
+#' if left missing, user will be prompted.
+#' @param d2session datimutils login session object
 #' @return A named list of data frames, each consisting of two columns (des) representing
 #' data elements and (ous) representing organisation unit UIDs
 #' 
@@ -18,16 +20,18 @@
 #'  de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
 #' }
 
-getDataElementsOrgunits <- function(organisationUnit = NA,
-                                    datasets = NA) {
+getDataElementsOrgunits <- function(
+                                    organisationUnit = NA,
+                                    datasets = NA,
+                                    d2session) {
   if (is.na(organisationUnit)) {
-    organisationUnit = getOption("organisationUnit")
+    organisationUnit = d2session$user_orgunit
   }
   
-  allDataSets <- getDataSets()
+  allDataSets <- getDataSets(d2session = d2session)
   
   if ( length(datasets) == 0 | any(is.na(datasets)) ) {
-    datasets <- selectDataset()
+    datasets <- selectDataset(d2session)
   }
   
   dataSetValid <- Reduce("&", datasets %in% allDataSets$id)
@@ -42,7 +46,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       
       url <-
         paste0(
-          getOption("baseurl"),
+          d2session$base_url,
           "api/",api_version(),"/organisationUnits?fields=id&paging=false&filter=path:like:",
           organisationUnit,
           "&filter=dataSets.id:eq:",
@@ -53,13 +57,13 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       des_ous <- getCachedObject(sig)
       
       if (is.null(des_ous)) {
-        r <- httr::GET(url, httr::timeout(300))
+        r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
         r <- httr::content(r, "text")
         ous <-
           unique(jsonlite::fromJSON(r, flatten = TRUE)$organisationUnits$id)
         #OUs
         des <-
-          unique(getValidDataElements(datasets[i])$dataelementuid)
+          unique(getValidDataElements(datasets = datasets[i], d2session = d2session)$dataelementuid)
         des_ous <- list(dataset = datasets[i], list(ous = ous, des = des))
         saveCachedObject(des_ous, sig)
       }
@@ -83,6 +87,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #' @param datasets Should be a character vector of data set UIDs. 
 #' Alternatively, if left missing, user will be promted.
 #' @param return_violations Return the invalid data if TRUE
+#' @param d2session datimutils d2session object @param d2session datimutils d2session object
 #' @return Returns subset of data which contains
 #'   invalid data element / organisation unit associations. If no violations are found, a boolean
 #'   TRUE value is returned. 
@@ -92,13 +97,13 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 
-checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE) {
+checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE, d2session) {
   
-  if (is.na(organisationUnit)) { organisationUnit = getOption("organisationUnit") }
+  if (is.na(organisationUnit)) { organisationUnit = d2session$user_orgunit}
   if ( NROW(data) == 0  ) {stop("Data cannot be missing!")}
   if ( length(datasets) == 0 | any(is.na(datasets)) ) { stop("Please specifiy a list of data sets!") }
   
-  des_ous<-getDataElementsOrgunits(organisationUnit,datasets)
+  des_ous<-getDataElementsOrgunits(organisationUnit,datasets,d2session = d2session)
   des_ous_map<-plyr::ldply(des_ous,function(x) expand.grid(dataElement=x[[2]]$des,orgUnit=x[[2]]$ous,stringsAsFactors = FALSE))
   data_des_ous_map<-unique(data[,c("dataElement","orgUnit")])
   result_data<-dplyr::anti_join(data,des_ous_map,by=c("dataElement","orgUnit"))

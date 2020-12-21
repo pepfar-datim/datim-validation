@@ -4,10 +4,12 @@
 \alias{getCurrentMERDataSets}
 \title{getCurrentMERDataSets(type)}
 \usage{
-getCurrentMERDataSets(type = "RESULTS")
+getCurrentMERDataSets(type = "RESULTS", d2session = d2_default_session)
 }
 \arguments{
 \item{type}{Should be either RESULTS or TARGETS}
+
+\item{d2session}{datimutils login session object}
 }
 \value{
 Returns a list of dataset UIDs of the given type
@@ -17,7 +19,7 @@ getCurrentMERDataSets(type)
 }
 \examples{
   \dontrun{
- ds<-getCurrentMERDataSets(type="RESULTS")
+ ds<-getCurrentMERDataSets(type="RESULTS", d2session = d2session)
  }
  
 }

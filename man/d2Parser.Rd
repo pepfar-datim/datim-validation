@@ -12,7 +12,8 @@ d2Parser(
   orgUnitIdScheme = "id",
   idScheme = "id",
   invalidData = FALSE,
-  csv_header = TRUE
+  csv_header = TRUE,
+  d2session = d2_default_session
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ then the organization units are assumed to be already specified as UIDs}
 
 \item{csv_header}{By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
 files without a CSV header.}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
@@ -49,7 +52,7 @@ Note that all values will be returned as characters.
 \examples{
 \dontrun{
     #Be sure to login to DATIM first
-    loadSecrets()
+    datimutils::loginToDATIM(config_path = "/home/me/datim-test.json")
     #Load a CSV file
     d<-d2Parser("myfile.csv",type="csv",header=TRUE)
     #Load a JSON file

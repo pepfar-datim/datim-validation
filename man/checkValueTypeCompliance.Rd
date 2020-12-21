@@ -4,10 +4,12 @@
 \alias{checkValueTypeCompliance}
 \title{checkValueTypeCompliance(d)}
 \usage{
-checkValueTypeCompliance(d)
+checkValueTypeCompliance(d, d2session = d2_default_session)
 }
 \arguments{
 \item{d}{A D2Parsed data frame}
+
+\item{d2session}{datimutils d2session object}
 }
 \value{
 Returns a data frame of invalid data only
