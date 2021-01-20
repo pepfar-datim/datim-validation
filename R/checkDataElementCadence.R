@@ -22,7 +22,7 @@ checkDataElementCadence<-function(data,d2session = d2_default_session){
   
   #Get a listing of periods which are present in the data
   des_periods<-unique(data[,c("period","dataElement")])
-  cadence_maps<-purrr::map_dfr(unique(des_periods$period),getDataElementCadenceMapForPeriod(.,d2session = d2session)) %>% 
+  cadence_maps<-purrr::map_dfr(unique(des_periods$period),~getDataElementCadenceMapForPeriod(.,d2session = d2session)) %>% 
     dplyr::select(period,dataElement=uid)
   
   data_des_periods_bad<-dplyr::anti_join(des_periods,cadence_maps,by=c("period","dataElement"))
@@ -43,7 +43,7 @@ getDataElementCadenceMapForPeriod <- function(period,d2session = d2_default_sess
   url <-
     URLencode(
       paste0(
-        d2session$baseurl,
+        d2session$base_url,
         "api/",
         api_version(),
         "/dataStore/dataElementCadence/",
@@ -56,15 +56,15 @@ getDataElementCadenceMapForPeriod <- function(period,d2session = d2_default_sess
     r <- httr::GET(url , httr::timeout(300), handle = d2session$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
-      cadence_map <- jsonlite::fromJSON(r)
-      cadence_map_df<-cadence_map$dataElements
-      cadence_map_df$period<-cadence_map$period
-      saveCachedObject(cadence_map_df, sig)
+      cadence_map_json <- jsonlite::fromJSON(r)
+      cadence_map<-cadence_map_json$dataElements
+      cadence_map$period<-cadence_map_json$period
+      saveCachedObject(cadence_map, sig)
     } else {
       stop("Could not retreive data element cadence map for period ",
            period)
     }
   }
-  return(cadence_map_df)
+  return(cadence_map)
 }
   
