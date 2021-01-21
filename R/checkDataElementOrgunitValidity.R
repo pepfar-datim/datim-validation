@@ -97,7 +97,7 @@ getDataElementsOrgunits <- function(
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 
-checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE, d2session) {
+checkDataElementOrgunitValidity<-function(data=NA,organisationUnit=NA,datasets=NA,return_violations=TRUE, d2session = d2_default_session) {
   
   if (is.na(organisationUnit)) { organisationUnit = d2session$user_orgunit}
   if ( NROW(data) == 0  ) {stop("Data cannot be missing!")}
