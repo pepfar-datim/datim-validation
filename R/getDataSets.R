@@ -68,7 +68,8 @@ getCurrentMERDataSets<-function(type="RESULTS", d2session = d2_default_session) 
       "MER Results: Community Based",
       "MER Results: Medical Store",
       "MER Results: Community Based - DoD ONLY",
-      "MER Results: Facility Based - DoD ONLY"
+      "MER Results: Facility Based - DoD ONLY",
+      "Host Country Results: Facility (USG)"
     ) } else if (type == "TARGETS") {
     want <- c(
       "Host Country Targets: COP Prioritization SNU (USG)",
