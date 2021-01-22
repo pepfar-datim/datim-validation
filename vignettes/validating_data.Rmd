@@ -37,6 +37,7 @@ You will need an active internet connection and an active DATIM user name in ord
 The "datimvalidation" package relies on "datimutils" to handle authentication with DATIM. There are several different ways which you can authenticate. Please refer to the "datimutils" package for details on setting up a means to connect your local R enviornment to the DATIM server. 
 
 ```{r eval=FALSE}
+options(scipen=999) #Turn of any scientific notation
 require(datimutils)
 require(datimvalidation)
 loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
