@@ -9,7 +9,7 @@ checkDataElementOrgunitValidity(
   organisationUnit = NA,
   datasets = NA,
   return_violations = TRUE,
-  d2session
+  d2session = d2_default_session
 )
 }
 \arguments{

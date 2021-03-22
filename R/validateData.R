@@ -63,11 +63,12 @@ prepDataForValidation <- function(d) {
 #' @description validateData should be supplied a d2Parser compliant data frame.
 #'The data frame is checked dynamically against validation rules defined in the DATIM server.
 #' @param data d2Parser data frame
-#' @param organisationUnit Organisation unit. Defaults to the user organisation unit if not supplied.
-#' @param return_violations_only Paramater to return only violations or all validation rule evalualtions.
+#' @param organisationUnit Organization unit. Defaults to the user organization unit if not supplied.
+#' @param return_violations_only Parameter to return only violations or all validation rule evaluations.
 #' @param parallel Should the rules be evaluated in parallel. Default is to not evaluate in parallel.
 #' @param datasets Vector of dataset UIDs which can  be used to restrict
 #' the validation rules which will be applied.
+#' @param vr Data frame of validation rules from getValidationRules, or a custom filtered data frame. 
 #' @param d2session datimutils d2session object
 #' @return Returns a data frame with validation rule results.
 #' @examples \dontrun{
@@ -83,7 +84,7 @@ validateData <-function(data,
            return_violations_only = TRUE,
            parallel = FALSE,
            datasets = NA, 
-           validation_rules = NULL,
+           vr = NULL,
            d2session = d2_default_session) {
     
   if (nrow(data) == 0 ||
