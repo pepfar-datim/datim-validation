@@ -82,27 +82,17 @@ evaluateValidation<-function(combis,values,vr,return_violations_only=TRUE) {
   
 
   #Keep rules which should  be evaluated
-  keep_these_rules <-
-    (
-      matches$leftSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" &
-        (matches$leftSide.ops != matches$leftSide.count)
-    ) |
-    (
-      matches$rightSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" &
-        (matches$rightSide.ops != matches$rightSide.count)
-    ) |
-    (matches$rightSide.missingValueStrategy == "NEVER_SKIP") |
-    (matches$leftSide.missingValueStrategy == "NEVER_SKIP") |
-    (
-      (matches$rightSide.count == matches$rightSide.ops)  &
+    keep_these_rules <- (
+      (
+        matches$leftSide.missingValueStrategy == "NEVER_SKIP" |
+          (matches$leftSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" & matches$leftSide.ops != matches$leftSide.count) |
+          (matches$leftSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING" & matches$leftSide.count != 0)
+      )
+      &
         (
-          matches$rightSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING"
-        )
-    ) |
-    (
-      (matches$leftSide.count == matches$leftSide.ops)  &
-        (
-          matches$leftSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING"
+          matches$rightSide.missingValueStrategy == "NEVER_SKIP" |
+            (matches$rightSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" & matches$rightSide.ops != matches$rightSide.count) |
+            (matches$rightSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING" & matches$rightSide.count != 0)
         )
     )
   

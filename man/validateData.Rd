@@ -10,20 +10,23 @@ validateData(
   return_violations_only = TRUE,
   parallel = FALSE,
   datasets = NA,
+  vr = NULL,
   d2session = d2_default_session
 )
 }
 \arguments{
 \item{data}{d2Parser data frame}
 
-\item{organisationUnit}{Organisation unit. Defaults to the user organisation unit if not supplied.}
+\item{organisationUnit}{Organization unit. Defaults to the user organization unit if not supplied.}
 
-\item{return_violations_only}{Paramater to return only violations or all validation rule evalualtions.}
+\item{return_violations_only}{Parameter to return only violations or all validation rule evaluations.}
 
 \item{parallel}{Should the rules be evaluated in parallel. Default is to not evaluate in parallel.}
 
 \item{datasets}{Vector of dataset UIDs which can  be used to restrict
 the validation rules which will be applied.}
+
+\item{vr}{Data frame of validation rules from getValidationRules, or a custom filtered data frame.}
 
 \item{d2session}{datimutils d2session object}
 }
