@@ -82,7 +82,9 @@ validateData <-function(data,
            organisationUnit = NA,
            return_violations_only = TRUE,
            parallel = FALSE,
-           datasets = NA, d2session = d2_default_session) {
+           datasets = NA, 
+           validation_rules = NULL,
+           d2session = d2_default_session) {
     
   if (nrow(data) == 0 ||
       is.null(data)) {
@@ -130,8 +132,11 @@ validation.results_empty <- data.frame(
 )
 validation.results <- validation.results_empty
 
-#Check the data against the validation rules
-vr <- getValidationRules(d2session = d2session)
+#Load validation rules from the server if none are supplied.
+if (is.null(vr)) {
+  vr <- getValidationRules(d2session = d2session)
+}
+
 if (Sys.info()[['sysname']] == "Windows") {
   if (parallel == TRUE)  {
     warning("Parallel execution is not supported on Windows")
