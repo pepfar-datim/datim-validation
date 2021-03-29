@@ -41,6 +41,7 @@ options(scipen=999) #Turn of any scientific notation
 require(datimutils)
 require(datimvalidation)
 loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
+options("maxCacheAge"="7 days")
 ```
 
 
