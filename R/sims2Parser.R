@@ -29,8 +29,9 @@ sims2Parser <-
            idScheme = "id",
            invalidData = FALSE,
            hasHeader=TRUE,
-           isoPeriod=NA) {
-    
+           isoPeriod=NA, 
+           d2session=d2_default_session) {
+
     header <-
       c(
         "dataElement",
@@ -76,7 +77,7 @@ sims2Parser <-
     }
 
     #Filter out any thing which does not correspond to the orgUnit mapping scheme
-    ou_non_match<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap()$id)]
+    ou_non_match<-unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap(d2session=d2session)$id)]
     if ( length(ou_non_match) > 0 ) {
       msg<-paste0("The following orgunits are not valid and will be removed",paste(ou_non_match,sep="",collapse=","))
       warning(msg)
@@ -89,11 +90,12 @@ sims2Parser <-
         remapDEs(
           data$dataElement,
           mode_in = dataElementIdScheme,
-          mode_out = "id"
+          mode_out = "id",
+          d2session=d2session
         )
     }
 
-    de_non_match<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap()$id)]
+    de_non_match<-unique(data$dataElement)[!(unique(data$dataElement) %in% getDataElementMap(d2session = d2session)$id)]
     if ( length(de_non_match) > 0 )  {
       msg<-paste0("The following data elements are not valid and will be removed: ",paste(de_non_match,sep="",collapse=" , "))
       warning(msg)
@@ -110,7 +112,7 @@ sims2Parser <-
       )
     }
 
-    mechs_non_match<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap()$id)]
+    mechs_non_match<-unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in% getMechanismsMap(d2session=d2session)$id)]
     if ( length(mechs_non_match) > 0 ) {
       msg<-paste0("The following mechanisms are not valid and will be removed: ",paste(mechs_non_match,sep="",collapse=" , "))
       warning(msg)
