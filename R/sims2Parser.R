@@ -108,7 +108,8 @@ sims2Parser <-
         data$attributeOptionCombo,
         organisationUnit = organisationUnit,
         mode_in = idScheme,
-        mode_out = "id"
+        mode_out = "id",
+        d2session = d2session
       )
     }
 
