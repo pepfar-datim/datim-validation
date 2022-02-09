@@ -1,14 +1,11 @@
 #' @export
 #' @title getDataElementsOrgunits(data,organisationUnit,datasets)
-#' 
+#'
 #' @description Returns a map of lists consisting of data elements and orgunits
-#'  for a dataset (or datasets) for a given organisationUnit
-
-#' @param organisationUnit Organisation unit. Defaults to user organisation
-#'  unit if not supplied explicitly.
-#' @param datasets Should be a character vector of data set UIDs. Alternatively, 
-#' if left missing, user will be prompted.
-#' @param d2session datimutils login session object
+#' for a dataset (or datasets) for a given organisationUnit
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return A named list of data frames, each consisting of two columns (des) representing
 #' data elements and (ous) representing organisation unit UIDs
 #' 
@@ -79,15 +76,10 @@ getDataElementsOrgunits <- function(
 #' @title checkDataElementOrgunitValidity(data,organisationUnit,datasets)
 #' 
 #' @description Returns a data frame invalid data elements which exist in the data 
-#' but which do not have a valid organistion unit / dataset association. 
+#' but which do not have a valid organistion unit / dataset association.
 #'
-#' @param data D2 compliant data frame
-#' @param organisationUnit Should be the UID of the organisation unit ancestor, 
-#' typically the operating unit. 
-#' @param datasets Should be a character vector of data set UIDs. 
-#' Alternatively, if left missing, user will be promted.
-#' @param return_violations Return the invalid data if TRUE
-#' @param d2session datimutils d2session object @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns subset of data which contains
 #'   invalid data element / organisation unit associations. If no violations are found, a boolean
 #'   TRUE value is returned. 

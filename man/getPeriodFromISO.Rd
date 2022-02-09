@@ -19,4 +19,5 @@ Utility function return a data frame of a periods start date, end date, ISO char
  getPeriodFromISO("2018Q1")
  getPeriodFromISO("201801")
  getPeriodFromISO("20180901")
+
 }

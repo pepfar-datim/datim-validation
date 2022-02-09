@@ -12,13 +12,16 @@ remapDEs(
 )
 }
 \arguments{
-\item{des_in}{A vector of data element identifiers (codes, names or shortNames)}
+\item{des_in}{A vector of data element identifiers (codes, names, or
+shortNames).}
 
-\item{mode_in}{Should be one of code, name or shortName. This is the class we are mapping from to UIDs.}
+\item{mode_in}{Should be one of code, name,shortName or id. This is the class
+we are mapping from.}
 
-\item{mode_out}{Should be one of code,name, shortName or id. This is the class we are mapping to.}
+\item{mode_out}{Should be one of code,name,shortName or id. This is the class
+we are mapping to.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a vector of DATIM uids for each data element which needs to be remapped.

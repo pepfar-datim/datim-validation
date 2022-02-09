@@ -1,14 +1,11 @@
 #' @export
 #' @title Function which converts category option combos from identifier to another 
-#' 
+#'
 #' @description remapCategoryOptionCombos should be supplied a vector of category option combos (names,codes,uids or shortnames)
 #' It will return a vector of another class as specified with the mode_out paramater
-#' 
 #'
-#' @param cocs_in A vector of category option combinations
-#' @param mode_in Should be one of code, name,shortName or id. This is the class we are mapping from.
-#' @param mode_out Should be one of code,name,shortName or id. This is the class we are mapping to.
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a vector of category option combos of the mode_out type.
 #' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv")

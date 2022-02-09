@@ -7,9 +7,9 @@
 checkOptionSetCompliance(d, d2session = d2_default_session)
 }
 \arguments{
-\item{d}{D2Parsed data frame}
+\item{d}{D2 Parsed data frame}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of invalid values validated against their option set.
@@ -22,4 +22,5 @@ Internal function for validation of data which have option sets
   d<-d2Parser("myfile.csv",type="csv")
   checkOptionSetCompliance(d)
 }
+
 }

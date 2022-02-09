@@ -1,6 +1,8 @@
 #' @export
 #' @title Utility function which provides a list of valid operating units
-#' @param d2session datimutils d2session object
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @description Utility function which provides a list of valid operating units
 #' 
 #' @return Returns a data frame of operating units and their UIDs

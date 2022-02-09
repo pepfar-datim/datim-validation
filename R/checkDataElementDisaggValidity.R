@@ -5,11 +5,8 @@
 #' invalid data elements based on current
 #' DATIM form specification. 
 #'
-#' @param data D2 compliant data frame object
-#' @param datasets Should be a character vector of data set UIDs. 
-#' Alternatively, if left missing, user will be promted to choose from a list.
-#' @param return_violations Boolean to return violations only. 
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#' 
 #' @return Returns a data frame  of "dataElementName","categoryOptionComboName",
 #' "dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data, if any. 

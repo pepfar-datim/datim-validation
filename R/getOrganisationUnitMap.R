@@ -2,8 +2,9 @@
 #' @title getOrganisationUnitMap(operatingUnit)
 #' 
 #' @description Utility function to produce a map of valid mechanisms
-#' @param d2session datimutils d2session object
-#' @param organisationUnit of question specified as a UID
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)
 #' @examples \dontrun{
 #'     ou_map<-getOrganisationUnitMap("KKFzPM8LoXs") #For a specific operating unit

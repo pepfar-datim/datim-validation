@@ -4,8 +4,8 @@
 #' @description Utility function to produce a data frame of valid data elements based on current
 #' DATIM form specification
 #'
-#' @param datasets Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.
-#' @param d2session datimutils login session object  
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"
 #' 
 #'

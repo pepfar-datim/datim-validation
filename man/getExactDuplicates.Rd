@@ -7,7 +7,7 @@
 getExactDuplicates(d)
 }
 \arguments{
-\item{d}{A d2 parsed data frame}
+\item{d}{D2 Parsed data frame}
 }
 \value{
 Returns a data frame of d2 data, with exact duplicates.

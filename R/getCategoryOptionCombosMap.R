@@ -2,8 +2,9 @@
 #' @title getCategoryOptionCombosMap()
 #' 
 #' @description Utility function to produce a map of category option combos
-#' @param d2session datimutils d2session object
-#' 
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of code,name,id and shortName of all categoryOptionCombos
 #' @examples \dontrun{
 #' coc_map<-getCategoryOptionCombosMap()

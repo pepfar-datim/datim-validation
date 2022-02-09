@@ -7,7 +7,7 @@
 getDataSets(d2session = d2_default_session)
 }
 \arguments{
-\item{d2session}{datimutils login session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame  of name, id and formtype of all datasets.

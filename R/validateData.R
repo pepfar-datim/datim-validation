@@ -1,11 +1,10 @@
 #' @export
 #' @title Internal function which prepares a parsed data frame for validation
 #'
-#' @param d Data frame parsed by d2Parser
+#' @inheritParams datim_validation_params
 #'
 #' @return Modifed data object with combis and totals appended.
 #
-
 prepDataForValidation <- function(d) {
   header <-
     c(
@@ -62,12 +61,10 @@ prepDataForValidation <- function(d) {
 #'
 #' @description validateData should be supplied a d2Parser compliant data frame.
 #'The data frame is checked dynamically against validation rules defined in the DATIM server.
-#' @param data d2Parser data frame
-#' @param organisationUnit Organization unit. Defaults to the user organization unit if not supplied.
-#' @param return_violations_only Parameter to return only violations or all validation rule evaluations.
+#'
 #' @param parallel Should the rules be evaluated in parallel. Default is to not evaluate in parallel.
-#' @param vr Data frame of validation rules from getValidationRules, or a custom filtered data frame of the same format.
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame with validation rule results.
 #' @examples \dontrun{
 #'   d<-d2Parser("myfile.csv",type="csv")

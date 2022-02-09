@@ -13,17 +13,16 @@ checkDataElementOrgunitValidity(
 )
 }
 \arguments{
-\item{data}{D2 compliant data frame}
+\item{data}{D2 compliant data frame object}
 
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor, 
-typically the operating unit.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
 \item{datasets}{Should be a character vector of data set UIDs. 
-Alternatively, if left missing, user will be promted.}
+Alternatively, if left missing, user will be promted to choose from a list.}
 
-\item{return_violations}{Return the invalid data if TRUE}
+\item{return_violations}{Boolean to return violations only.}
 
-\item{d2session}{datimutils d2session object @param d2session datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns subset of data which contains

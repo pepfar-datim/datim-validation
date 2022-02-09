@@ -8,11 +8,9 @@
 #' The mechanism must also be associated with the operating unit. 
 #' If either of these two conditions 
 #' are not met, the data will be flagged as being invalid. 
-#' 
-#' @param data A data frame which has been parsed by either d2Parser or sims2Parser
-#' @param organisationUnit UID of the operating unit.
-#' @param return_violations Should the function return a list of violations only. 
-#' @param d2session datimutils d2session object
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame of invalid period-mechanism combinations. A warning will 
 #' also be issued. 
 #' Returns TRUE if there are no violations. 

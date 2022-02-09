@@ -1,8 +1,10 @@
 #' @export
 #' @title selectDataSet()
 #' 
-#' @description Utility function to produce a vector of data set UIDs from user input. 
-#' @param d2session datimutils d2session object
+#' @description Utility function to produce a vector of data set UIDs from user input.
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of "dataElementName","categoryOptionComboName",
 #' "dataElement","categoryOptionCombo"
 #' of invalid data elements which are present the the data 

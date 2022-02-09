@@ -7,12 +7,13 @@
 getPeriodInfo(ISO = NA, d2session = d2_default_session)
 }
 \arguments{
-\item{ISO}{Formatted string such as 2016Q1. Refer to DHIS2 documentation for details.}
+\item{ISO}{Formatted string such as 2016Q1. Refer to DHIS2 documentation for
+details.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of  ISO, startDate,endDate,and periodtype
+Returns a data frame of  ISO, startDate, endDate,and periodtype.
 }
 \description{
 Get information like start date, end date and period type from an ISO period string

@@ -7,9 +7,9 @@
 checkCodingScheme(data, d2session = d2_default_session)
 }
 \arguments{
-\item{data}{A parsed DHIS2 data payload from d2parser}
+\item{data}{D2 compliant data frame object}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Warnings are issued if the coding scheme is not 

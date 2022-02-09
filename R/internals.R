@@ -20,10 +20,10 @@ isValidCachedObject <- function(x){
 #' @export
 #' @title getCachedObject(sig,wd)
 #'
-#' @description Internal utility function to retreive a cached object.
+#' @description Internal utility function to retrieve a cached object.
 #'
-#' @param sig MD5 hash of the objects URL reference
-#' @param wd By default, the .R_Cache directory in the working directory.
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a cached data object.
 #'
 getCachedObject<-function(sig,wd=paste0(getwd(),"/.R_Cache/")) {

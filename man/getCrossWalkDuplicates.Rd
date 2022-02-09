@@ -7,9 +7,9 @@
 getCrossWalkDuplicates(d, d2session = d2_default_session)
 }
 \arguments{
-\item{d}{A d2 parsed data frame of data.}
+\item{d}{D2 Parsed data frame}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of all crosswalk mechanism values,

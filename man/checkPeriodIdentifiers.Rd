@@ -7,7 +7,7 @@
 checkPeriodIdentifiers(data)
 }
 \arguments{
-\item{data}{A data frame which has been parsed by either d2Parser or sims2Parser}
+\item{data}{D2 compliant data frame object}
 }
 \value{
 TRUE if all periods are valid.

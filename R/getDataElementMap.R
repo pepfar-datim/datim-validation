@@ -2,7 +2,9 @@
 #' @title getDataElementMap()
 #' 
 #' @description Utility function of extraction of data element ids, codes, shortName and names
-#' @param d2session datimutils d2session object 
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of id,code,shortName and name
 #' @examples \dontrun{
 #' de_map<-getDataElementMap()

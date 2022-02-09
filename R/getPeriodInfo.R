@@ -2,9 +2,9 @@
 #' @title getPeriodInfo(ISO)
 #' @description Get information like start date, end date and period type from an ISO period string
 #'
-#' @param ISO Formatted string such as 2016Q1. Refer to DHIS2 documentation for details.
-#' @param d2session datimutils d2session object
-#' @return Returns a data frame of  ISO, startDate,endDate,and periodtype
+#' @inheritParams datim_validation_params
+#'
+#' @return Returns a data frame of  ISO, startDate, endDate,and periodtype.
 #' 
 getPeriodInfo <- function(ISO = NA, d2session = d2_default_session) {
 

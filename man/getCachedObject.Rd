@@ -15,5 +15,5 @@ getCachedObject(sig, wd = paste0(getwd(), "/.R_Cache/"))
 Returns a cached data object.
 }
 \description{
-Internal utility function to retreive a cached object.
+Internal utility function to retrieve a cached object.
 }

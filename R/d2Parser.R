@@ -1,12 +1,11 @@
-
 #' @title Utility function to check that the supplied coding scheme is correct
 #'
 #' @description checkCodingScheme will ensure that all indentifiers 
 #' after parsing are valid UIDs,
 #' or in the case of periods, valid periods. 
 #'
-#' @param data A parsed DHIS2 data payload from d2parser
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Warnings are issued if the coding scheme is not 
 #' congruent with what has been supplied as a paramater.
 #'  
@@ -75,18 +74,8 @@ checkCodingScheme <- function(data,d2session = d2_default_session) {
 #' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
 #' frame which can be used in subsequent DATIM validation routines
 #'
-#' @param filename Location of the payload to be imported. Should be a valid DHIS2 import file
 #' @param type Type of the file. Should be one of  xml, json or csv.
-#' @param organisationUnit Organization unit UID of the operating unit. If left blank, assumed to be global.
-#' @param dataElementIdScheme Should be one of either code, name, shortName or id. If this parameter is "id",
-#' then the Data elements are assumed to be already specified as UIDs.
-#' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this parameter is "id",
-#' then the organization units are assumed to be already specified as UIDs
-#' @param idScheme Remapping scheme for category option combos
-#' @param invalidData Exclude any (NA or missing) data from the parsed file?
-#' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
-#' files without a CSV header. 
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
 #'
 #' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'

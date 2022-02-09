@@ -2,8 +2,10 @@
 #' @title getDataSets()
 #' 
 #' @description Utility function to produce a data frame of
-#'  datasets. 
-#' @param d2session datimutils login session object
+#'  datasets.
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of name, id and formtype of all datasets.
 #' @examples 
 #'  \dontrun{
@@ -46,8 +48,8 @@ getDataSets <- function(d2session = d2_default_session) {
 #' 
 #'
 #' @param type Should be either RESULTS or TARGETS
-#' 
-#' @param d2session datimutils login session object  
+#' @inheritParams datim_validation_params
+#'  
 #' @return Returns a list of dataset UIDs of the given type
 #' @export
 #'

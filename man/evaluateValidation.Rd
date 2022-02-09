@@ -13,7 +13,8 @@ evaluateValidation(combis, values, vr, return_violations_only = TRUE)
 
 \item{vr}{Validation rule object}
 
-\item{return_violations_only}{Only return validation rule violations}
+\item{return_violations_only}{Parameter to return only violations or all
+validation rule evaluations.}
 }
 \value{
 Returns a data frame of validation rule evaluations

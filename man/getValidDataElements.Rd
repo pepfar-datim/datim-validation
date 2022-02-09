@@ -7,9 +7,10 @@
 getValidDataElements(datasets = NA, d2session = d2_default_session)
 }
 \arguments{
-\item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
+\item{datasets}{Should be a character vector of data set UIDs. 
+Alternatively, if left missing, user will be promted to choose from a list.}
 
-\item{d2session}{datimutils login session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"

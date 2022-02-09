@@ -3,12 +3,9 @@
 #' 
 #' @description remapDes should be supplied a vector of data elements (names,codes or shortnames)
 #' along with the other required paramaters. It will return a vector of identifiers of a different class.
-#' 
-#' 
-#' @param des_in A vector of data element identifiers (codes, names or shortNames)
-#' @param mode_in Should be one of code, name or shortName. This is the class we are mapping from to UIDs.
-#' @param mode_out Should be one of code,name, shortName or id. This is the class we are mapping to.
-#' @param d2session datimutils d2session object
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a vector of DATIM uids for each data element which needs to be remapped.
 #' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv")

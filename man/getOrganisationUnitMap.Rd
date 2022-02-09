@@ -7,9 +7,9 @@
 getOrganisationUnitMap(organisationUnit = NA, d2session = d2_default_session)
 }
 \arguments{
-\item{organisationUnit}{of question specified as a UID}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)

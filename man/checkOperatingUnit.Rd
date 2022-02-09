@@ -7,10 +7,9 @@
 checkOperatingUnit(organisationUnit = NA, d2session = d2_default_session)
 }
 \arguments{
-\item{organisationUnit}{Should be a UID of an operating unit. Defaults to the 
-user organisation unit if not supplied}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{d2session}{datimutils login session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a vector of organisation unit UIDs

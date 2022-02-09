@@ -17,26 +17,29 @@ d2Parser(
 )
 }
 \arguments{
-\item{filename}{Location of the payload to be imported. Should be a valid DHIS2 import file}
+\item{filename}{Location of the payload to be imported. Should be a valid
+import file.}
 
 \item{type}{Type of the file. Should be one of  xml, json or csv.}
 
-\item{organisationUnit}{Organization unit UID of the operating unit. If left blank, assumed to be global.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{dataElementIdScheme}{Should be one of either code, name, shortName or id. If this parameter is "id",
-then the Data elements are assumed to be already specified as UIDs.}
+\item{dataElementIdScheme}{Should be one of either code, name, shortName,
+or id. If this paramater is "id", then the Data elements are assumed to be
+already specififed as UIDs.}
 
-\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id. If this parameter is "id",
-then the organization units are assumed to be already specified as UIDs}
+\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id.
+If this paramater is "id", then the organisation units are assumed to be
+already specififed as UIDs}
 
-\item{idScheme}{Remapping scheme for category option combos}
+\item{idScheme}{Remapping scheme for category option combos.}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
-\item{csv_header}{By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
-files without a CSV header.}
+\item{csv_header}{By default, CSV files are assumed to have a header,
+otherwise FALSE will allow for files without a CSV header.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"

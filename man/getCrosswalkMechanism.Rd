@@ -6,6 +6,9 @@
 \usage{
 getCrosswalkMechanism(d2session = d2_default_session)
 }
+\arguments{
+\item{d2session}{DHIS2 Session id}
+}
 \value{
 Returns a UID of the crosswalk de-duplication mechanism
 }
@@ -16,6 +19,5 @@ Utility function which returns the crosswalk mechanism UID
 \dontrun{
     cw_uid<-getCrosswalkMechanism()
  }
-
 
 }

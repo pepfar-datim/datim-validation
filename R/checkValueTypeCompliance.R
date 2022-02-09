@@ -10,8 +10,8 @@
 #' value codes, will also be flagged. Additionally ,any values which are zero
 #' for which the data element is not zero significant will also be flagged. 
 #'
-#' @param d A D2Parsed data frame
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame of invalid data only
 #' @examples 
 #' \dontrun{
@@ -91,7 +91,9 @@ checkValueTypeCompliance<-function(d, d2session = d2_default_session) {
 #' @title getOptionSetMap()
 #' 
 #' @description Utility function to fetch a list of optionsets and possible values within them
-#' @param d2session datimutils d2session object
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame structure composed of option set names, UIDs, and a data frame for 
 #' each of these with individual options present in the option set.
 #' @examples 
@@ -121,9 +123,9 @@ getOptionSetMap<-function(d2session = d2_default_session) {
 
 #' @export
 #' @title checkOptionSetCompliance()
-#' 
-#' @param d D2Parsed data frame
-#' @param d2session datimutils d2session object
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @description Internal function for validation of data which have option sets
 #'
 #' @return Returns a data frame of invalid values validated against their option set.

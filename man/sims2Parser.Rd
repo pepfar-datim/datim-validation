@@ -15,21 +15,26 @@ sims2Parser(
 )
 }
 \arguments{
-\item{filename}{Location of the payload to be imported. Should be a valid SIMS2 aggregate file. See the separate spec for details}
+\item{filename}{Location of the payload to be imported. Should be a valid
+import file.}
 
-\item{dataElementIdScheme}{Should be one of either code, name, shortName or id. The default is "code". If this paramater is "id",
-then the Data elements are assumed to be already specififed as UIDs.}
+\item{dataElementIdScheme}{Should be one of either code, name, shortName,
+or id. If this paramater is "id", then the Data elements are assumed to be
+already specififed as UIDs.}
 
-\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id. If this paramater is "id",
-then the organisation units are assumed to be already specififed as UIDs}
+\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id.
+If this paramater is "id", then the organisation units are assumed to be
+already specififed as UIDs}
 
-\item{idScheme}{Remapping scheme for category option combos}
+\item{idScheme}{Remapping scheme for category option combos.}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
-\item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not contain header information.}
+\item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not
+contain header information.}
 
-\item{isoPeriod}{period to be used for date shift boundaries. If not provided, no boundaries are set.}
+\item{isoPeriod}{period to be used for date shift boundaries. If not
+provided, no boundaries are set.}
 }
 \value{
 Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"

@@ -6,7 +6,8 @@
 #' 
 #' @description Utility function return a DHIS2 period type from an ISO string
 #'
-#' @param iso String which identifies the period, such as 2016Q1 or 2016Q2
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a a character of the period, like "Monthly"
 #' @examples 
 #' getPeriodType("2018Q3")
@@ -30,12 +31,14 @@ getPeriodType<-function(iso){
 #' 
 #' @description Utility function return a data frame of a periods start date, end date, ISO character and periodtype
 #'
-#' @param iso String which identifies the period, such as 2016Q1 or 2016Q2
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame consisting of iso (character),startDate (Date),endDate (Date) and period type (character)
 #' @examples 
 #'  getPeriodFromISO("2018Q1")
 #'  getPeriodFromISO("201801")
 #'  getPeriodFromISO("20180901")
+#'
 getPeriodFromISO <- function(iso) {
   if(is.na(iso)) {
     stop("You must supply a period identifier")
@@ -100,7 +103,8 @@ getPeriodFromISO <- function(iso) {
 #' 
 #' @description Expect an error if any invalid period identifiers are supplied in the file.
 #'
-#' @param data A data frame which has been parsed by either d2Parser or sims2Parser
+#' @inheritParams datim_validation_params
+#'
 #' @return TRUE if all periods are valid.
 #' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv")

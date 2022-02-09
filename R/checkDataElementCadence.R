@@ -6,10 +6,9 @@
 #' Quarterly data elements can be submitted each quarter. 
 #' SAPR data elements should only be submiteted in FYQ2 and FYQ4. 
 #' APR data elements should only be submitted in FYQ4. 
-#' 
 #'
-#' @param data D2 compliant data frame object
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame  of "dataElement","period",
 #' of invalid data elements which are present the the data, if any. 
 #' If there are no violations, a boolean TRUE is returned. 

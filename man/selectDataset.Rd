@@ -7,7 +7,7 @@
 selectDataset(d2session = d2_default_session)
 }
 \arguments{
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName",

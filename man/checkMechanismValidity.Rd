@@ -12,13 +12,13 @@ checkMechanismValidity(
 )
 }
 \arguments{
-\item{data}{A data frame which has been parsed by either d2Parser or sims2Parser}
+\item{data}{D2 compliant data frame object}
 
-\item{organisationUnit}{UID of the operating unit.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{return_violations}{Should the function return a list of violations only.}
+\item{return_violations}{Boolean to return violations only.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of invalid period-mechanism combinations. A warning will 

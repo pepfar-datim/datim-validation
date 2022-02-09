@@ -6,6 +6,9 @@
 \usage{
 getCrosswalkMap(d2session = d2_default_session)
 }
+\arguments{
+\item{d2session}{DHIS2 Session id}
+}
 \value{
 Returns a map of DSD/TA data element UIDs.
 }

@@ -2,10 +2,9 @@
 #' @title Function which checks that the organisation unit provided is valid
 #' 
 #' @description Validates that the supplied UID is a valid operating unit UID
-#' 
-#' @param organisationUnit Should be a UID of an operating unit. Defaults to the 
-#' user organisation unit if not supplied
-#' @param d2session datimutils login session object  
+#'
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a vector of organisation unit UIDs
 #' @note
 #' remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")

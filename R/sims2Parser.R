@@ -7,16 +7,8 @@
 #' used to deduplicate visits which occur at the same site + mechanism + date combination. This function
 #' will automatically decollide these types of visits 
 #'
-#' @param filename Location of the payload to be imported. Should be a valid SIMS2 aggregate file. See the separate spec for details
-#' @param dataElementIdScheme Should be one of either code, name, shortName or id. The default is "code". If this paramater is "id",
-#' then the Data elements are assumed to be already specififed as UIDs.
-#' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this paramater is "id",
-#' then the organisation units are assumed to be already specififed as UIDs
-#' @param idScheme Remapping scheme for category option combos
-#' @param invalidData Exclude any (NA or missing) data from the parsed file?
-#' @param hasHeader TRUE by default. Should be set to FALSE if the file does not contain header information.
-#' @param isoPeriod period to be used for date shift boundaries. If not provided, no boundaries are set.
-#' 
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
 #'
 #' @note function(filename="/home/me/foo.csv",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id",invalidData=FALSE)

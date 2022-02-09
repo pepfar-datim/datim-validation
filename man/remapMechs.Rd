@@ -13,15 +13,18 @@ remapMechs(
 )
 }
 \arguments{
-\item{mechs_in}{A vector of data element identifiers (codes, names or shortNames)}
+\item{mechs_in}{A vector of data element identifiers (codes, names, or
+shortNames).}
 
-\item{organisationUnit}{The UID of the operating unit.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{mode_in}{Should be one of code, name or id. This is the type we are mapping from.}
+\item{mode_in}{Should be one of code, name,shortName or id. This is the class
+we are mapping from.}
 
-\item{mode_out}{Should be one of code,name or id. This is the type we are mapping to.}
+\item{mode_out}{Should be one of code,name,shortName or id. This is the class
+we are mapping to.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a vector of mechanism UIDs

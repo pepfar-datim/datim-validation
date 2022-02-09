@@ -4,7 +4,8 @@
 #' @description Returns a listing of exact duplicates by dataElement,
 #' period,orgunit,categoryOptionCombo and attributeOptionCombo
 #' 
-#' @param d A d2 parsed data frame
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame of d2 data, with exact duplicates.
 #'   A warning will be issued if duplicates are detected. 
 #' 
@@ -37,7 +38,8 @@ getExactDuplicates <- function(d) {
 #' For the purposes of de-duplication, these are considered to be pure 
 #' duplicates (only the attributeOptionCombo differ). 
 #' 
-#' @param d A d2 parsed data frame
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame of d2 data, with pure duplicates used for de-duplication purposes.
 #' @examples \dontrun{
 #'     d<-d2Parser("myfile.csv",type="csv",header=TRUE)
@@ -59,6 +61,8 @@ getPureDuplicates<-function(d){
 #' @title getCrosswalkMap()
 #' 
 #' @description Utility function which returns a map of DSD / TA data elements UIDs
+#'
+#' @inheritParams datim_validation_params
 #'
 #' @return Returns a map of DSD/TA data element UIDs.
 #' @examples \dontrun{
@@ -83,6 +87,8 @@ getCrosswalkMap<-function(d2session = d2_default_session){
 #' @title getCrosswalkMechanism(d2session = d2_default_session)
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
+#'
+#' @inheritParams datim_validation_params
 #' 
 #' @return Returns a UID of the crosswalk de-duplication mechanism
 #' @examples \dontrun{
@@ -106,8 +112,8 @@ getCrosswalkMechanism<-function(d2session = d2_default_session){
 #' 
 #' @description Utility function which returns the crosswalk mechanism UID
 #' 
-#' @param d A d2 parsed data frame of data.
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
+#'
 #' @return Returns a data frame of all crosswalk mechanism values,
 #'  along with default de-deudplication adjustments.
 #' @examples \dontrun{

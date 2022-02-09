@@ -9,7 +9,7 @@ getValidationRules(remove_decoration = FALSE, d2session = d2_default_session)
 \arguments{
 \item{remove_decoration}{Remove decoration of curly braces present in the raw validation metadata.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of validation rules consisting of name, left and right side operators and strategies

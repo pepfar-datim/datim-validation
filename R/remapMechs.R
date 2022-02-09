@@ -3,13 +3,9 @@
 #' 
 #' @description remapMechs should be supplied a vector of data mechanisms (names,codes or shortnames)
 #' along with the other required paramaters. It will return a vector of UIDs.
-#' 
 #'
-#' @param mechs_in A vector of data element identifiers (codes, names or shortNames)
-#' @param mode_in Should be one of code, name or id. This is the type we are mapping from.
-#' @param mode_out Should be one of code,name or id. This is the type we are mapping to.
-#' @param organisationUnit The UID of the operating unit.
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params 
+#'
 #' @return Returns a vector of mechanism UIDs
 #' @examples \dontrun{
 #' d<-d2Parser("myfile.csv",type="csv")

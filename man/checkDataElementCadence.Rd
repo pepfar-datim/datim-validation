@@ -9,7 +9,7 @@ checkDataElementCadence(data, d2session = d2_default_session)
 \arguments{
 \item{data}{D2 compliant data frame object}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame  of "dataElement","period",
