@@ -2,7 +2,7 @@
 % Please edit documentation in R/periodUtils.R
 \name{getPeriodFromISO}
 \alias{getPeriodFromISO}
-\title{getPeriodFromISO(iso)}
+\title{Get Period from ISO}
 \usage{
 getPeriodFromISO(iso)
 }
@@ -10,7 +10,8 @@ getPeriodFromISO(iso)
 \item{iso}{String which identifies the period, such as 2016Q1 or 2016Q2}
 }
 \value{
-Returns a data frame consisting of iso (character),startDate (Date),endDate (Date) and period type (character)
+Returns a data frame consisting of iso (character), startDate (Date),
+endDate (Date) and period type (character)
 }
 \description{
 Utility function return a data frame of a periods start date, end date, ISO character and periodtype

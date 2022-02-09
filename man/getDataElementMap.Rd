@@ -2,9 +2,9 @@
 % Please edit documentation in R/getDataElementMap.R
 \name{getDataElementMap}
 \alias{getDataElementMap}
-\title{getDataElementMap()}
+\title{Get Data Element Map}
 \usage{
-getDataElementMap(d2session = d2_default_session)
+getDataElementMap(d2session = dynGet("d2_default_session", inherits = TRUE))
 }
 \arguments{
 \item{d2session}{DHIS2 Session id}
@@ -17,6 +17,6 @@ Utility function of extraction of data element ids, codes, shortName and names
 }
 \examples{
 \dontrun{
-de_map<-getDataElementMap()
+de_map <- getDataElementMap()
 }
 }

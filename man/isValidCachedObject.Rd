@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{isValidCachedObject}
 \alias{isValidCachedObject}
-\title{isValidCachedObject(sig,wd)}
+\title{Is Valid Cached Object}
 \usage{
 isValidCachedObject(x)
 }

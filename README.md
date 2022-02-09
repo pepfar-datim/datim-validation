@@ -34,12 +34,12 @@ Consult the vignette in the package documentation on how to use the library. A v
 require(datimvalidation)
 
 #Adjust this to the location of your own credentials file. 
-secrets<-"/home/littebobbytables/.secrets/datim.json"
+secrets <- "/home/littebobbytables/.secrets/datim.json"
 loadSecrets(secrets)
 
 #Adjust this to point to the location of your data payload. 
-datafile<-"/home/littebobbytables/mydata.csv"
-d<-d2Parser(filename = datafile ,type = "csv")
+datafile <- "/home/littebobbytables/mydata.csv"
+d <- d2Parser(filename = datafile ,type = "csv")
 
 #You may need to adjust the datasets to match those which you are submitting data for. 
 #If you get non-empty data frames here, then your data has issues. 

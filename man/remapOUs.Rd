@@ -9,7 +9,7 @@ remapOUs(
   organisationUnit,
   mode_in = "code",
   mode_out = "id",
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
@@ -35,8 +35,8 @@ along with the other required paramaters. It will return a vector of to another 
 }
 \examples{
 \dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-    d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+d <- d2Parser("myfile.csv",type="csv")
+    d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 }
 
 }

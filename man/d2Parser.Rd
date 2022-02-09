@@ -13,7 +13,7 @@ d2Parser(
   idScheme = "id",
   invalidData = FALSE,
   csv_header = TRUE,
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
@@ -42,14 +42,16 @@ otherwise FALSE will allow for files without a CSV header.}
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
+Returns a data frame of at least "dataElement", "period", "orgUnit",
+"categoryOptionCombo", "attributeOptionCombo", "value"
 }
 \description{
 d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
 frame which can be used in subsequent DATIM validation routines
 }
 \note{
-function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
+function(filename = "/home/me/foo.xml", type = "xml",
+dataElementIdScheme = "code", orgUnitIdScheme = "code", idScheme = "id")
 Note that all values will be returned as characters.
 }
 \examples{
@@ -57,11 +59,11 @@ Note that all values will be returned as characters.
     #Be sure to login to DATIM first
     datimutils::loginToDATIM(config_path = "/home/me/datim-test.json")
     #Load a CSV file
-    d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+    d <- d2Parser("myfile.csv",type="csv",header=TRUE)
     #Load a JSON file
-    d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
+    d <- d2Parser("myfile.json",type="json",dataElementIdScheme="code")
     #Load an XML file
-    d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
+    d <- d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
 }
 
 }

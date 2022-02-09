@@ -2,7 +2,7 @@
 % Please edit documentation in R/getDuplication.R
 \name{getPureDuplicates}
 \alias{getPureDuplicates}
-\title{getPureDuplicates(data)}
+\title{Get Pure Duplicates}
 \usage{
 getPureDuplicates(d)
 }
@@ -14,15 +14,15 @@ Returns a data frame of d2 data, with pure duplicates used for de-duplication pu
 }
 \description{
 Returns a listing of pure duplicates by dataElement,period,orgunit,
-categoryOptionCombo. 
-For the purposes of de-duplication, these are considered to be pure 
+categoryOptionCombo.
+For the purposes of de-duplication, these are considered to be pure
 duplicates (only the attributeOptionCombo differ).
 }
 \examples{
 \dontrun{
-    d<-d2Parser("myfile.csv",type="csv",header=TRUE)
-    dups<-getPureDuplicates(d)
+    d <- d2Parser("myfile.csv",type="csv",header=TRUE)
+    dups <- getPureDuplicates(d)
     dups
  }
- 
+
 }

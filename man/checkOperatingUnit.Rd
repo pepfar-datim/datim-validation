@@ -4,7 +4,10 @@
 \alias{checkOperatingUnit}
 \title{Function which checks that the organisation unit provided is valid}
 \usage{
-checkOperatingUnit(organisationUnit = NA, d2session = d2_default_session)
+checkOperatingUnit(
+  organisationUnit = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{organisationUnit}{Organisation unit ancestor.}

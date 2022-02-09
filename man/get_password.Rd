@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{get_password}
 \alias{get_password}
-\title{api_version()}
+\title{Get Password}
 \usage{
 get_password()
 }
@@ -10,5 +10,5 @@ get_password()
 Returns a password from a prompt.
 }
 \description{
-api_version()
+Get Password
 }

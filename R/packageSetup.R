@@ -12,7 +12,7 @@
 #' @param dataElementIdScheme Should be one of either code, name, shortName,
 #' or id. If this paramater is "id", then the Data elements are assumed to be
 #' already specififed as UIDs.
-#' @param datasets Should be a character vector of data set UIDs. 
+#' @param datasets Should be a character vector of data set UIDs.
 #' Alternatively, if left missing, user will be promted to choose from a list.
 #' @param filename Location of the payload to be imported. Should be a valid
 #' import file.
@@ -78,7 +78,7 @@ datim_validation_params <- function(csv_header,
                                     wd,
                                     d2session,
                                     d2_session) {
-  
+
   # This function should return something
   #Return its own argument names
   #rlang::fn_fmls_names(fn = datim_validation_params)

@@ -4,7 +4,9 @@
 \alias{getValidOperatingUnits}
 \title{Utility function which provides a list of valid operating units}
 \usage{
-getValidOperatingUnits(d2session = d2_default_session)
+getValidOperatingUnits(
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{d2session}{DHIS2 Session id}

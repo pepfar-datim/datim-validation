@@ -2,7 +2,7 @@
 % Please edit documentation in R/getDuplication.R
 \name{getExactDuplicates}
 \alias{getExactDuplicates}
-\title{getExactDuplicates(data)}
+\title{Get Exact Duplicates}
 \usage{
 getExactDuplicates(d)
 }
@@ -19,8 +19,8 @@ period,orgunit,categoryOptionCombo and attributeOptionCombo
 }
 \examples{
 \dontrun{
- d<-d2Parser("myfile.csv",type="csv",header=TRUE)
- dups<-getExactDuplicates(d)
+ d <- d2Parser("myfile.csv",type="csv",header=TRUE)
+ dups <- getExactDuplicates(d)
  dups
  }
 }

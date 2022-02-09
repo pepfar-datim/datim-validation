@@ -2,9 +2,12 @@
 % Please edit documentation in R/checkDataElementCadence.R
 \name{checkDataElementCadence}
 \alias{checkDataElementCadence}
-\title{checkDataElementCadence(data)}
+\title{Check Data Element Cadence}
 \usage{
-checkDataElementCadence(data, d2session = d2_default_session)
+checkDataElementCadence(
+  data,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
@@ -12,20 +15,20 @@ checkDataElementCadence(data, d2session = d2_default_session)
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of "dataElement","period",
-of invalid data elements which are present the the data, if any. 
+Returns a data frame of "dataElement","period",
+of invalid data elements which are present the the data, if any.
 If there are no violations, a boolean TRUE is returned.
 }
 \description{
 Utility function to produce a data frame of
-invalid data value based on the so-called data element cadence. 
-Quarterly data elements can be submitted each quarter. 
-SAPR data elements should only be submiteted in FYQ2 and FYQ4. 
+invalid data value based on the so-called data element cadence.
+Quarterly data elements can be submitted each quarter.
+SAPR data elements should only be submiteted in FYQ2 and FYQ4.
 APR data elements should only be submitted in FYQ4.
 }
 \examples{
 \dontrun{
-  d<-d2Parser("myfile.csv",type="csv")
+  d <- d2Parser("myfile.csv",type="csv")
   checkDataElementCadence(d)
 }
 }

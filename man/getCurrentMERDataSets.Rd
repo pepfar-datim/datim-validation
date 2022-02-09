@@ -2,9 +2,12 @@
 % Please edit documentation in R/getDataSets.R
 \name{getCurrentMERDataSets}
 \alias{getCurrentMERDataSets}
-\title{getCurrentMERDataSets(type)}
+\title{Get Current MER Data Sets}
 \usage{
-getCurrentMERDataSets(type = "RESULTS", d2session = d2_default_session)
+getCurrentMERDataSets(
+  type = "RESULTS",
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{type}{Should be either RESULTS or TARGETS}
@@ -15,11 +18,11 @@ getCurrentMERDataSets(type = "RESULTS", d2session = d2_default_session)
 Returns a list of dataset UIDs of the given type
 }
 \description{
-getCurrentMERDataSets(type)
+Get Current MER Data Sets
 }
 \examples{
   \dontrun{
- ds<-getCurrentMERDataSets(type="RESULTS", d2session = d2session)
+ ds <- getCurrentMERDataSets(type="RESULTS", d2session = d2session)
  }
 
 }

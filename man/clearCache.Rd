@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{clearCache}
 \alias{clearCache}
-\title{clearCache(wd)}
+\title{Clear Cache}
 \usage{
 clearCache(cache_dir = paste0(getwd(), "/.R_Cache/"), force = NA)
 }
@@ -21,4 +21,5 @@ Internal utility function to clear the object cache.
  \dontrun{
   clearCache(force=TRUE)
 }
+
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/getPeriodInfo.R
 \name{getPeriodInfo}
 \alias{getPeriodInfo}
-\title{getPeriodInfo(ISO)}
+\title{Get Period Info}
 \usage{
-getPeriodInfo(ISO = NA, d2session = d2_default_session)
+getPeriodInfo(
+  ISO = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{ISO}{Formatted string such as 2016Q1. Refer to DHIS2 documentation for

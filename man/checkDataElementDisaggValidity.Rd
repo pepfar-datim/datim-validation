@@ -2,19 +2,19 @@
 % Please edit documentation in R/checkDataElementDisaggValidity.R
 \name{checkDataElementDisaggValidity}
 \alias{checkDataElementDisaggValidity}
-\title{checkDataElementDisaggValidity(data,dataset)}
+\title{Check Data Element Disagg Validity}
 \usage{
 checkDataElementDisaggValidity(
   data,
   datasets = NA,
   return_violations = TRUE,
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
 
-\item{datasets}{Should be a character vector of data set UIDs. 
+\item{datasets}{Should be a character vector of data set UIDs.
 Alternatively, if left missing, user will be promted to choose from a list.}
 
 \item{return_violations}{Boolean to return violations only.}
@@ -24,7 +24,7 @@ Alternatively, if left missing, user will be promted to choose from a list.}
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName",
 "dataElement","categoryOptionCombo"
-of invalid data elements which are present the the data, if any. 
+of invalid data elements which are present the the data, if any.
 If there are no violations, a boolean TRUE is returned.
 }
 \description{
@@ -34,8 +34,8 @@ DATIM form specification.
 }
 \examples{
 \dontrun{
-  d<-d2Parser("myfile.csv",type="csv")
-  ds<-getCurrentMERDataSets(type="RESULTS")
+  d <- d2Parser("myfile.csv",type="csv")
+  ds <- getCurrentMERDataSets(type="RESULTS")
   checkDataElementDisaggValidity(d,ds)
 }
 }

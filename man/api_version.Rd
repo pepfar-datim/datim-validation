@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{api_version}
 \alias{api_version}
-\title{api_version()}
+\title{API Version}
 \usage{
 api_version()
 }

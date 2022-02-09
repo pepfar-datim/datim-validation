@@ -4,7 +4,10 @@
 \alias{checkCodingScheme}
 \title{Utility function to check that the supplied coding scheme is correct}
 \usage{
-checkCodingScheme(data, d2session = d2_default_session)
+checkCodingScheme(
+  data,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
@@ -12,11 +15,11 @@ checkCodingScheme(data, d2session = d2_default_session)
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Warnings are issued if the coding scheme is not 
+Warnings are issued if the coding scheme is not
 congruent with what has been supplied as a paramater.
 }
 \description{
-checkCodingScheme will ensure that all indentifiers 
+checkCodingScheme will ensure that all indentifiers
 after parsing are valid UIDs,
 or in the case of periods, valid periods.
 }

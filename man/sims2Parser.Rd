@@ -11,7 +11,8 @@ sims2Parser(
   idScheme = "id",
   invalidData = FALSE,
   hasHeader = TRUE,
-  isoPeriod = NA
+  isoPeriod = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
@@ -35,18 +36,24 @@ contain header information.}
 
 \item{isoPeriod}{period to be used for date shift boundaries. If not
 provided, no boundaries are set.}
+
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
+Returns a data frame of "dataElement", "period", "orgUnit",
+"categoryOptionCombo", "attributeOptionCombo", "value"
 }
 \description{
-sims2Parser will parse a semi-compliant DHIS2  CSV file and transform it into a standard data
-frame which can be used in subsequent DATIM validation routines. The difference with d2Parser is that
-an extra (non-standard) field will be introduced to record the SIMS visit. This will in turn be
-used to deduplicate visits which occur at the same site + mechanism + date combination. This function
-will automatically decollide these types of visits
+sims2Parser will parse a semi-compliant DHIS2 CSV file and
+transform it into a standard data frame which can be used in subsequent DATIM
+validation routines. The difference with d2Parser is that an extra
+(non-standard) field will be introduced to record the SIMS visit. This will
+in turn be used to deduplicate visits which occur at the same site +
+mechanism + date combination. This function will automatically decollide
+these types of visits
 }
 \note{
-function(filename="/home/me/foo.csv",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id",invalidData=FALSE)
+function(filename = "/home/me/foo.csv", dataElementIdScheme = "code",
+orgUnitIdScheme = "code", idScheme = "id", invalidData = FALSE)
 Note that all values will be returned as characters.
 }

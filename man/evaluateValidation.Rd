@@ -20,6 +20,7 @@ validation rule evaluations.}
 Returns a data frame of validation rule evaluations
 }
 \description{
-evaluationValidation will accept a vector of combis (data elements.category optioncombinations) and values
+evaluationValidation will accept a vector of combis
+(data elements.category optioncombinations) and values
 and evaluate it against the supplied validation rules
 }

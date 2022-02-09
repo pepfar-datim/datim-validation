@@ -4,10 +4,10 @@ with_mock_api({
   test_that("We can get an orgunit map", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
-    test_ous<-getOrganisationUnitMap(d2session = d2_default_session)
-    expect_type(test_ous,"list")
-    ou_map_names<-c("name","id","code","shortName")
-    expect_setequal(names(test_ous),ou_map_names)
+    test_ous <- getOrganisationUnitMap(d2session = d2_default_session)
+    expect_type(test_ous, "list")
+    ou_map_names <- c("name", "id", "code", "shortName")
+    expect_setequal(names(test_ous), ou_map_names)
   })
 })
 

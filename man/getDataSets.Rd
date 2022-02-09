@@ -2,9 +2,9 @@
 % Please edit documentation in R/getDataSets.R
 \name{getDataSets}
 \alias{getDataSets}
-\title{getDataSets()}
+\title{Get Data Sets}
 \usage{
-getDataSets(d2session = d2_default_session)
+getDataSets(d2session = dynGet("d2_default_session", inherits = TRUE))
 }
 \arguments{
 \item{d2session}{DHIS2 Session id}
@@ -13,12 +13,11 @@ getDataSets(d2session = d2_default_session)
 Returns a data frame  of name, id and formtype of all datasets.
 }
 \description{
-Utility function to produce a data frame of
- datasets.
+Utility function to produce a data frame of datasets.
 }
 \examples{
  \dontrun{
- ds<-getDataSets()
+ ds <- getDataSets()
  }
 
 }

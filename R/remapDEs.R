@@ -1,6 +1,6 @@
 #' @export
 #' @title Function which converts data element codes, names or shortnames to another class of identifiers
-#' 
+#'
 #' @description remapDes should be supplied a vector of data elements (names,codes or shortnames)
 #' along with the other required paramaters. It will return a vector of identifiers of a different class.
 #'
@@ -8,13 +8,14 @@
 #'
 #' @return Returns a vector of DATIM uids for each data element which needs to be remapped.
 #' @examples \dontrun{
-#'     d<-d2Parser("myfile.csv",type="csv")
-#'     d$de_codes<-remapOUs(d$dataElements,mode_in="id",mode_out="code")
+#'     d <- d2Parser("myfile.csv",type="csv")
+#'     d$de_codes <- remapOUs(d$dataElements,mode_in="id",mode_out="code")
 #' }
 remapDEs <- function(des_in,
                      mode_in = "code",
                      mode_out = "id",
-                     d2session = d2_default_session) {
+                     d2session = dynGet("d2_default_session",
+                                        inherits = TRUE)) {
   is_valid_mode <-
     (mode_in %in% c("code", "name", "shortName", "id"))  &
     (mode_out %in% c("code", "name", "shortName", "id"))
@@ -33,5 +34,5 @@ remapDEs <- function(des_in,
       )
     eval(parse(text = cmd))
   }
-  
+
 }

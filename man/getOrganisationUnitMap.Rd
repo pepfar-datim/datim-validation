@@ -2,9 +2,12 @@
 % Please edit documentation in R/getOrganisationUnitMap.R
 \name{getOrganisationUnitMap}
 \alias{getOrganisationUnitMap}
-\title{getOrganisationUnitMap(operatingUnit)}
+\title{Get Organisation Unit Map}
 \usage{
-getOrganisationUnitMap(organisationUnit = NA, d2session = d2_default_session)
+getOrganisationUnitMap(
+  organisationUnit = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{organisationUnit}{Organisation unit ancestor.}
@@ -12,14 +15,16 @@ getOrganisationUnitMap(organisationUnit = NA, d2session = d2_default_session)
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest)
+Returns a data frame  of name,code,id, and categoryOptionCombo
+(which is the UID of interest)
 }
 \description{
 Utility function to produce a map of valid mechanisms
 }
 \examples{
 \dontrun{
-    ou_map<-getOrganisationUnitMap("KKFzPM8LoXs") #For a specific operating unit
-    ou_map_mine<-getOrganisationUnitMap() #Based on your login credentials
+    ou_map <- getOrganisationUnitMap("KKFzPM8LoXs") #For a specific operating unit
+    ou_map_mine <- getOrganisationUnitMap() #Based on your login credentials
 }
+
 }

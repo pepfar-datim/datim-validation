@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{getCachedObject}
 \alias{getCachedObject}
-\title{getCachedObject(sig,wd)}
+\title{Get Cached Object}
 \usage{
 getCachedObject(sig, wd = paste0(getwd(), "/.R_Cache/"))
 }

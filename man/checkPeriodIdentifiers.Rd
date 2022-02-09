@@ -2,7 +2,7 @@
 % Please edit documentation in R/periodUtils.R
 \name{checkPeriodIdentifiers}
 \alias{checkPeriodIdentifiers}
-\title{checkPeriodIdentifiers(data)}
+\title{Check Period Identifiers}
 \usage{
 checkPeriodIdentifiers(data)
 }
@@ -17,7 +17,7 @@ Expect an error if any invalid period identifiers are supplied in the file.
 }
 \examples{
 \dontrun{
-    d<-d2Parser("myfile.csv",type="csv")
+    d <- d2Parser("myfile.csv",type="csv")
     checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
 }
 

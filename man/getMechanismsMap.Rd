@@ -2,9 +2,12 @@
 % Please edit documentation in R/getMechanismsMap.R
 \name{getMechanismsMap}
 \alias{getMechanismsMap}
-\title{getMechanismsMap()}
+\title{Get Mechanisms Map}
 \usage{
-getMechanismsMap(organisationUnit = NA, d2session = d2_default_session)
+getMechanismsMap(
+  organisationUnit = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{organisationUnit}{Organisation unit ancestor.}
@@ -12,7 +15,8 @@ getMechanismsMap(organisationUnit = NA, d2session = d2_default_session)
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of name,code,id, and categoryOptionCombo (which is the UID of interest) along with start and endDates of the mechanisms
+Returns a data frame  of name,code,id, and categoryOptionCombo
+(which is the UID of interest) along with start and endDates of the mechanisms
 }
 \description{
 Utility function to produce a map of valid mechanisms. If no

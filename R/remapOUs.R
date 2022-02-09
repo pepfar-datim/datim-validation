@@ -8,16 +8,16 @@
 #'
 #' @return Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs
 #' @examples \dontrun{
-#' d<-d2Parser("myfile.csv",type="csv")
-#'     d$ou_names<-remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+#' d <- d2Parser("myfile.csv",type="csv")
+#'     d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 #' }
 #'
 remapOUs <-
   function(ous_in,
            organisationUnit,
            mode_in = "code",
-           mode_out = "id" ,
-           d2session = d2_default_session) {
+           mode_out = "id",
+           d2session = dynGet("d2_default_session", inherits = TRUE)) {
     is_valid_mode <-
       (mode_in %in% c("code", "name", "shortName", "id"))  &
       (mode_out %in% c("code", "name", "shortName", "id"))
@@ -27,7 +27,7 @@ remapOUs <-
     } else {
       sites <-
         getOrganisationUnitMap(organisationUnit, d2session = d2session)
-      #TODO Get rid of this method and use stringi instead. 
+      #TODO Get rid of this method and use stringi instead.
       cmd <-
         paste0(
           "plyr::mapvalues(ous_in,sites$",

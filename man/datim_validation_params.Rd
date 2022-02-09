@@ -46,7 +46,7 @@ otherwise FALSE will allow for files without a CSV header.}
 or id. If this paramater is "id", then the Data elements are assumed to be
 already specififed as UIDs.}
 
-\item{datasets}{Should be a character vector of data set UIDs. 
+\item{datasets}{Should be a character vector of data set UIDs.
 Alternatively, if left missing, user will be promted to choose from a list.}
 
 \item{filename}{Location of the payload to be imported. Should be a valid

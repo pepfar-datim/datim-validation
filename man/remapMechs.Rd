@@ -9,7 +9,7 @@ remapMechs(
   organisationUnit,
   mode_in = "code",
   mode_out = "id",
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
@@ -35,8 +35,8 @@ along with the other required paramaters. It will return a vector of UIDs.
 }
 \examples{
 \dontrun{
-d<-d2Parser("myfile.csv",type="csv")
-#Add a new column with organisation unit short names. 
-d$mech_names<-remapMechs(d$attributeOptionCombo,mode_in="id",mode_out="code")
+d <- d2Parser("myfile.csv",type="csv")
+#Add a new column with organisation unit short names.
+d$mech_names <- remapMechs(d$attributeOptionCombo,mode_in="id",mode_out="code")
 }
 }

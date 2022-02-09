@@ -2,9 +2,12 @@
 % Please edit documentation in R/checkNegativeValues.R
 \name{checkNegativeValues}
 \alias{checkNegativeValues}
-\title{checkNegativeValues(data)}
+\title{Check Negative Values}
 \usage{
-checkNegativeValues(data, d2session = d2_default_session)
+checkNegativeValues(
+  data,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{data}{D2 compliant data frame object}
@@ -12,8 +15,8 @@ checkNegativeValues(data, d2session = d2_default_session)
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-A filtered D2 compliant data frame of invalid values, otherwise, 
-returns TRUE if there are no violations. A warning will also be issued if 
+A filtered D2 compliant data frame of invalid values, otherwise,
+returns TRUE if there are no violations. A warning will also be issued if
 there are any negative values found in non-dedupe mechanisms.
 }
 \description{
@@ -21,7 +24,7 @@ In general, data values which are negative will not be imported.
 }
 \examples{
 \dontrun{
- d<-d2Parser("myfile.csv",type="csv")
+ d <- d2Parser("myfile.csv",type="csv")
  checkNegativeValues(data=d)
 }
 

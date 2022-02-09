@@ -2,9 +2,11 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrosswalkMechanism}
 \alias{getCrosswalkMechanism}
-\title{getCrosswalkMechanism(d2session = d2_default_session)}
+\title{Get Crosswalk Mechanism}
 \usage{
-getCrosswalkMechanism(d2session = d2_default_session)
+getCrosswalkMechanism(
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{d2session}{DHIS2 Session id}
@@ -17,7 +19,7 @@ Utility function which returns the crosswalk mechanism UID
 }
 \examples{
 \dontrun{
-    cw_uid<-getCrosswalkMechanism()
+    cw_uid <- getCrosswalkMechanism()
  }
 
 }

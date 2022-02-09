@@ -2,9 +2,11 @@
 % Please edit documentation in R/getCategoryOptionCombosMap.R
 \name{getCategoryOptionCombosMap}
 \alias{getCategoryOptionCombosMap}
-\title{getCategoryOptionCombosMap()}
+\title{Get Category Option Combos Map}
 \usage{
-getCategoryOptionCombosMap(d2session = d2_default_session)
+getCategoryOptionCombosMap(
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
 \item{d2session}{DHIS2 Session id}
@@ -17,6 +19,6 @@ Utility function to produce a map of category option combos
 }
 \examples{
 \dontrun{
-coc_map<-getCategoryOptionCombosMap()
+coc_map <- getCategoryOptionCombosMap()
 }
 }
