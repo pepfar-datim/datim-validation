@@ -7,12 +7,11 @@ with_mock_api({
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
     test_vrs <- getValidationRules(d2session = d2_default_session)
     expect_type(test_vrs, "list")
-    names_vrs <- c("name", "id", "periodType", "description",
-"operator", "leftSide.expression", "leftSide.missingValueStrategy",
-"rightSide.expression", "rightSide.missingValueStrategy",
-"rightSide.ops", "leftSide.ops")
+    names_vrs <- c("name", "id", "periodType", "description", "operator",
+                   "leftSide.expression", "leftSide.missingValueStrategy",
+                   "rightSide.expression", "rightSide.missingValueStrategy",
+                   "rightSide.ops", "leftSide.ops")
     expect_setequal(names(test_vrs), names_vrs)
-
   })
 })
 
@@ -22,13 +21,14 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data-validation-simple-fail.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE, d2session = d2_default_session)
+    d <- d2Parser(
+      filename = test_config("test-data-validation-simple-fail.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE, d2session = d2_default_session)
     d <- prepDataForValidation(d)
     vr <- getValidationRules(d2session = d2_default_session)
     foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
@@ -41,13 +41,14 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data-validation-simple-pass.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE, d2session = d2_default_session)
+    d <- d2Parser(
+      filename = test_config("test-data-validation-simple-pass.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE, d2session = d2_default_session)
     d <- prepDataForValidation(d)
     vr <- getValidationRules(d2session = d2_default_session)
     foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
@@ -60,13 +61,14 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data-validation-never-skip-missing-right.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE, d2session = d2_default_session)
+    d <- d2Parser(
+      filename = test_config("test-data-validation-never-skip-missing-right.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE, d2session = d2_default_session)
     d <- prepDataForValidation(d)
     vr <- getValidationRules(d2session = d2_default_session)
     foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
@@ -81,14 +83,16 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data-validation-never-skip-missing-left.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE,
-                d2session = d2_default_session)
+    d <- d2Parser(
+      filename =
+        test_config("test-data-validation-never-skip-missing-left.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE,
+      d2session = d2_default_session)
     d <- prepDataForValidation(d)
     vr <- getValidationRules(d2session = d2_default_session)
     foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
@@ -98,21 +102,20 @@ with_mock_api({
   })
 })
 
-
-
 with_mock_api({
   test_that("We can fail an exclusive rule with data missing on both sides", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data-validation-exclusive-fail.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE,
-                d2session = d2_default_session)
+    d <- d2Parser(
+      filename = test_config("test-data-validation-exclusive-fail.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE,
+      d2session = d2_default_session)
     d <- prepDataForValidation(d)
     vr <- getValidationRules(d2session = d2_default_session)
     foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
@@ -123,20 +126,20 @@ with_mock_api({
   })
 })
 
-
 with_mock_api({
   test_that("We can pass an exclusive rule with data missing on one side", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data-validation-exclusive-fail.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE,
-                d2session = d2_default_session)
+    d <- d2Parser(
+      filename = test_config("test-data-validation-exclusive-fail.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE,
+      d2session = d2_default_session)
     d <- d[1, ]
     d <- prepDataForValidation(d)
     vr <- getValidationRules(d2session = d2_default_session)
@@ -153,17 +156,19 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    d <- d2Parser(filename = test_config("test-data.csv"),
-                type = "csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE,
-                d2session = d2_default_session)
+    d <- d2Parser(
+      filename = test_config("test-data.csv"),
+      type = "csv",
+      organisationUnit = "KKFzPM8LoXs",
+      dataElementIdScheme = "id",
+      orgUnitIdScheme = "id",
+      idScheme = "id",
+      invalidData = FALSE,
+      d2session = d2_default_session)
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    foo <- validateData(d, organisationUnit = "KKFzPM8LoXs", return_violations_only = TRUE,
-                      parallel = FALSE, datasets = datasets, d2session = d2_default_session)
+    foo <- validateData(d, organisationUnit = "KKFzPM8LoXs",
+                        return_violations_only = TRUE, parallel = FALSE,
+                        datasets = datasets, d2session = d2_default_session)
     expect_type(foo, "list")
   })
 })
