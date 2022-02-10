@@ -109,17 +109,3 @@ clearCache <-
 #' @return Version of the API.
 #'
 api_version <- function() "33"
-
-#' @export
-#' @title Get Password
-#'
-#' @return Returns a password from a prompt.
-#'
-get_password <- function() {
-  cat("Password: ")
-  system("stty -echo")
-  a <- readline()
-  system("stty echo")
-  cat("\n")
-  return(a)
-}
