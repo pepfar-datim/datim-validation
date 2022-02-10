@@ -1,8 +1,8 @@
 #' @export
 #' @title Is Valid Cached Object
 #'
-#' @description Internal utility function to determine whether a cached object is stale.
-#' If its stale, it will be removed.
+#' @description Internal utility function to determine whether a cached object
+#' is stale. If its stale, it will be removed.
 #'
 #' @param x file path of the cached object
 #'
@@ -15,7 +15,8 @@ isValidCachedObject <- function(x) {
   } else {
     is_there <- file.exists(x)
     #Age of files in days
-    is_fresh <- as.numeric(Sys.time() - file.info(x)$mtime) < getOption("maxCacheAge")
+    is_fresh <-
+      as.numeric(Sys.time() - file.info(x)$mtime) < getOption("maxCacheAge")
     return(is_there && is_fresh)
   }
 }
@@ -69,7 +70,8 @@ saveCachedObject <-
 #'
 #' @description Internal utility function to clear the object cache.
 #'
-#' @param cache_dir Cache directory path. By default, working directory + ".R_Cache"
+#' @param cache_dir Cache directory path. By default, this is set to the
+#' working directory + ".R_Cache".
 #' @param force Boolean (default FALSE) to clear cache without asking the user
 #'
 #' @return Nothing.
@@ -101,7 +103,8 @@ clearCache <-
 #' @export
 #' @title API Version
 #'
-#' @description Internal utility function to get the current API version of the DATIM server
+#' @description Internal utility function to get the current API version
+#' of the DATIM server
 #'
 #' @return Version of the API.
 #'

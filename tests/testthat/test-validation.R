@@ -62,7 +62,8 @@ with_mock_api({
     expect_true(exists("d2_default_session"))
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
     d <- d2Parser(
-      filename = test_config("test-data-validation-never-skip-missing-right.csv"),
+      filename =
+        test_config("test-data-validation-never-skip-missing-right.csv"),
       type = "csv",
       organisationUnit = "KKFzPM8LoXs",
       dataElementIdScheme = "id",

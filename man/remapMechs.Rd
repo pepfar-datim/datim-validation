@@ -2,7 +2,7 @@
 % Please edit documentation in R/remapMechs.R
 \name{remapMechs}
 \alias{remapMechs}
-\title{Function which converts mechanism codes, names or shortnames to UIDs}
+\title{Remap Mechanisms}
 \usage{
 remapMechs(
   mechs_in,
@@ -30,13 +30,17 @@ we are mapping to.}
 Returns a vector of mechanism UIDs
 }
 \description{
-remapMechs should be supplied a vector of data mechanisms (names,codes or shortnames)
-along with the other required paramaters. It will return a vector of UIDs.
+Function which converts mechanism codes, names or shortnames to
+UIDs. \code{remapMechs} should be supplied a vector of data mechanisms
+(names, codes or shortnames) along with the other required paramaters.
+It will return a vector of UIDs.
 }
 \examples{
 \dontrun{
 d <- d2Parser("myfile.csv",type="csv")
 #Add a new column with organisation unit short names.
-d$mech_names <- remapMechs(d$attributeOptionCombo,mode_in="id",mode_out="code")
+d$mech_names <- remapMechs(d$attributeOptionCombo,
+                           mode_in="id",
+                           mode_out="code")
 }
 }

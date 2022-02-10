@@ -32,7 +32,8 @@ getPeriodType <- function(iso) {
 #' @export
 #' @title Get Period from ISO
 #'
-#' @description Utility function return a data frame of a periods start date, end date, ISO character and periodtype
+#' @description Utility function return a data frame of a periods start date,
+#' end date, ISO character and periodtype
 #'
 #' @inheritParams datim_validation_params
 #'
@@ -78,7 +79,9 @@ getPeriodFromISO <- function(iso) {
     }  else {
       (stop(paste("Invalid quarter specified in ", iso)))
     }
-    add.months <- function(date, n) seq(date, by = paste(n, "months"), length = 2)[2]
+    add.months <- function(date, n) {
+      seq(date, by = paste(n, "months"), length = 2)[2]
+    }
     startDate <- as.Date(paste0(y, m, "01"), "%Y%m%d")
     endDate <- add.months(startDate, 3) - 1
   } else if (pt == "Yearly") {
@@ -109,14 +112,16 @@ getPeriodFromISO <- function(iso) {
 #' @export
 #' @title Check Period Identifiers
 #'
-#' @description Expect an error if any invalid period identifiers are supplied in the file.
+#' @description Expect an error if any invalid period identifiers are
+#' supplied in the file.
 #'
 #' @inheritParams datim_validation_params
 #'
 #' @return TRUE if all periods are valid.
 #' @examples \dontrun{
-#'     d <- d2Parser("myfile.csv",type="csv")
-#'     checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
+#'     d <- d2Parser("myfile.csv", type = "csv")
+#'     #Should return no error if all period identifiers are valid
+#'     checkPeriodIdentifiers(d)
 #' }
 #'
 checkPeriodIdentifiers <- function(data) {

@@ -7,7 +7,8 @@
 #'
 #' @return Returns a vector of organisation unit UIDs
 #' @note
-#' remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
+#' remapOUs(foo,"https://www.datim.org","admin",
+#'          "district","code","id","Ab12345678")
 #' will remap organisation units specified as codes to UIDs
 checkOperatingUnit <- function(organisationUnit = NA,
                                d2session = dynGet("d2_default_session",

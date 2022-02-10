@@ -7,7 +7,8 @@
 clearCache(cache_dir = paste0(getwd(), "/.R_Cache/"), force = NA)
 }
 \arguments{
-\item{cache_dir}{Cache directory path. By default, working directory + ".R_Cache"}
+\item{cache_dir}{Cache directory path. By default, this is set to the
+working directory + ".R_Cache".}
 
 \item{force}{Boolean (default FALSE) to clear cache without asking the user}
 }

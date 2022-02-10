@@ -10,10 +10,11 @@ getDataElementMap(d2session = dynGet("d2_default_session", inherits = TRUE))
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of id,code,shortName and name
+Returns a data frame  of id, code, shortName, and name
 }
 \description{
-Utility function of extraction of data element ids, codes, shortName and names
+Utility function of extraction of data element ids, codes,
+shortNames, and names
 }
 \examples{
 \dontrun{

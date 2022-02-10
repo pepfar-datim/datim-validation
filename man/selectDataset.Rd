@@ -15,7 +15,8 @@ Returns a data frame  of "dataElementName","categoryOptionComboName",
 of invalid data elements which are present the the data
 }
 \description{
-Utility function to produce a vector of data set UIDs from user input.
+Utility function to produce a vector of data set UIDs
+from user input.
 }
 \examples{
 \dontrun{

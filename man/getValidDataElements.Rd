@@ -20,6 +20,6 @@ Returns a data frame  of "dataSet", "dataElementName",
 "shortname", "code", "dataelementuid", "categoryOptionComboName"
 }
 \description{
-Utility function to produce a data frame of valid data elements based on current
-DATIM form specification
+Utility function to produce a data frame of valid data elements
+based on current DATIM form specification.
 }

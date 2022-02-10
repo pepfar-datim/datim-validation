@@ -1,7 +1,8 @@
 #' @export
-#' @title Special purpose parsing function for SIMS2 aggregate data with duplicates
+#' @title SIMS2 Parser
 #'
-#' @description sims2Parser will parse a semi-compliant DHIS2 CSV file and
+#' @description Special purpose parsing function for SIMS2 aggregate data with
+#' duplicates. \code{sims2Parser} will parse a semi-compliant DHIS2 CSV file and
 #' transform it into a standard data frame which can be used in subsequent DATIM
 #' validation routines. The difference with d2Parser is that an extra
 #' (non-standard) field will be introduced to record the SIMS visit. This will
@@ -52,7 +53,8 @@ sims2Parser <-
     #TODO: Centralize all of this between the SIMS parser and general parser
     #Number of lines in the file number equal the number of records
     if (nrow(data) != length(readLines(filename)) - as.numeric(hasHeader)) {
-      warning("Number of records does not equal the number of lines. You may have empty lines or line breaks!")
+      warning(paste("Number of records does not equal the number of lines.",
+                    "You may have empty lines or line breaks!"))
     }
     #Ensure we have the correct number of columns
     data <- data[, seq_len(header)]
@@ -80,8 +82,13 @@ sims2Parser <-
         )
     }
 
-    #Filter out any thing which does not correspond to the orgUnit mapping scheme
-    ou_non_match <- unique(data$orgUnit)[!(unique(data$orgUnit) %in% getOrganisationUnitMap(d2session = d2session)$id)]
+    # Filter out any thing which does not correspond to
+    # the orgUnit mapping scheme
+    ou_non_match <-
+      unique(data$orgUnit)[!(
+        unique(data$orgUnit) %in%
+          getOrganisationUnitMap(d2session = d2session)$id
+      )]
     if (length(ou_non_match) > 0) {
       msg <- paste0("The following orgunits are not valid and will be removed",
                     paste(ou_non_match, sep = "", collapse = ","))
@@ -100,10 +107,14 @@ sims2Parser <-
         )
     }
 
-    de_non_match <- unique(data$dataElement)[!(unique(data$dataElement) %in%
-                                                 getDataElementMap(d2session = d2session)$id)]
+    de_non_match <-
+      unique(data$dataElement)[!(
+        unique(data$dataElement) %in%
+          getDataElementMap(d2session = d2session)$id
+      )]
     if (length(de_non_match) > 0) {
-      msg <- paste0("The following data elements are not valid and will be removed: ",
+      msg <- paste0("The following data elements are not ",
+                    "valid and will be removed: ",
                     paste(de_non_match, sep = "", collapse = " , "))
       warning(msg)
       data <- data[!(data$dataElement %in% de_non_match), ]
@@ -121,10 +132,14 @@ sims2Parser <-
       )
     }
 
-    mechs_non_match <- unique(data$attributeOptionCombo)[!(unique(data$attributeOptionCombo) %in%
-                                                             getMechanismsMap(d2session = d2session)$id)]
+    mechs_non_match <-
+      unique(data$attributeOptionCombo)[!(
+        unique(data$attributeOptionCombo) %in%
+          getMechanismsMap(d2session = d2session)$id
+      )]
     if (length(mechs_non_match) > 0) {
-      msg <- paste0("The following mechanisms are not valid and will be removed: ",
+      msg <- paste0("The following mechanisms are not ",
+                    "valid and will be removed: ",
                     paste(mechs_non_match, sep = "", collapse = " , "))
       warning(msg)
       data <- data[!(data$attributeOptionCombo %in% mechs_non_match), ]
@@ -139,9 +154,9 @@ sims2Parser <-
           is.na(x) || missing(x) || x == "" || x == "NULL"
         })
       }
-    invalid.rows <-
-      apply(apply(data, 2, invalid), 1, sum) != 0 #Anything which is not complete.
 
+    # Anything which is not complete.
+    invalid.rows <- apply(apply(data, 2, invalid), 1, sum) != 0
 
     if (!invalidData) {
       data <- data[!invalid.rows, ]
@@ -149,7 +164,8 @@ sims2Parser <-
 
     if (sum(invalid.rows) > 0) {
       msg <- paste(sum(invalid.rows),
-                 " rows are incomplete. Please check your file to ensure its correct.")
+                   "rows are incomplete.",
+                   "Please check your file to ensure its correct.")
       warning(msg)
     }
 
@@ -168,91 +184,101 @@ sims2Parser <-
 
     #Start to shift the data
     data_shifted <- data[0, ]
-    assessments <- unique(data[, c("period", "orgUnit", "attributeOptionCombo", "assessmentid")])
+    assessments <- unique(data[, c("period",
+                                   "orgUnit",
+                                   "attributeOptionCombo",
+                                   "assessmentid")])
     #Are there any assessment ids which occur on different dates?
     #This should not be possible
     if (sum(duplicated(assessments$assessmentid)) != 0) {
       stop("Duplicate assessment IDS were found.")
     }
-    assessments_ou_acoc <- aggregate(. ~ orgUnit + attributeOptionCombo, data = assessments[, -4], length)
+    assessments_ou_acoc <- aggregate(. ~ orgUnit + attributeOptionCombo,
+                                     data = assessments[, -4],
+                                     length)
     #Possible collisions
-    assessments_ou_acoc_dups <- assessments_ou_acoc[assessments_ou_acoc$period > 1, ]
+    assessments_ou_acoc_dups <-
+      assessments_ou_acoc[assessments_ou_acoc$period > 1, ]
     asessments_collisions <- assessments[0, ]
     if (nrow(assessments_ou_acoc_dups) > 0) {
-    for (i in seq_len(assessments_ou_acoc_dups)) {
-      foo <- assessments_ou_acoc_dups[i, ]
-      bar <- assessments[assessments$orgUnit == foo$orgUnit &
-                           assessments$attributeOptionCombo == foo$attributeOptionCombo, ]
-      #Are there any duplicated dates?
+      for (i in seq_len(assessments_ou_acoc_dups)) {
+        foo <- assessments_ou_acoc_dups[i, ]
+        bar <-
+          assessments[
+            assessments$orgUnit == foo$orgUnit &
+              assessments$attributeOptionCombo == foo$attributeOptionCombo,
+          ]
+        #Are there any duplicated dates?
 
-      if (sum(duplicated(bar$period)) > 0) {
-        dates <- as.Date(unique(strptime(bar$period, "%Y%m%d", tz = "UTC")))
-        start_date <- min(dates)
-        end_date <- max(dates)
-        #We need a minumum pool of dates
-        if ((start_date - end_date) < nrow(bar)) {
-          end_date <- start_date + nrow(bar)
-        }
-        #make sure end date does not go beyond boundaries
-        if (!is.na(period)) {
-          if (end_date > period$endDate) {
-            start_date <- start_date - (end_date - period$endDate)
+        if (sum(duplicated(bar$period)) > 0) {
+          dates <- as.Date(unique(strptime(bar$period, "%Y%m%d", tz = "UTC")))
+          start_date <- min(dates)
+          end_date <- max(dates)
+          #We need a minumum pool of dates
+          if ((start_date - end_date) < nrow(bar)) {
+            end_date <- start_date + nrow(bar)
           }
-          if (start_date < period$startDate) {
-            warning("Shifting results in periods outside of the defined isoPeriod")
+          #make sure end date does not go beyond boundaries
+          if (!is.na(period)) {
+            if (end_date > period$endDate) {
+              start_date <- start_date - (end_date - period$endDate)
+            }
+            if (start_date < period$startDate) {
+              warning(paste("Shifting results in periods",
+                            "outside of the defined isoPeriod"))
+            }
+          }
+
+          possible_dates <- seq(start_date, end_date, by = "day")
+          #Remove any dates which are already used
+          possible_dates <- possible_dates[!(possible_dates %in% dates)]
+
+          duplicated_dates <- which(duplicated(bar$period))
+          for (j in seq_len(duplicated_dates)) {
+            this_date <- as.Date(bar$period[duplicated_dates[j]], "%Y%m%d")
+            #Which date is closest?
+            date_distance <-
+              methods::as(abs(possible_dates - this_date), "integer")
+            replacement_date_n <- which(date_distance == min(date_distance))
+
+            bar$period[duplicated_dates[j]] <-
+              format(possible_dates[replacement_date_n], "%Y%m%d")
+            #Remove it from the pool
+            possible_dates <- possible_dates[-replacement_date_n]
           }
         }
-
-        possible_dates <- seq(start_date, end_date, by = "day")
-        #Remove any dates which are already used
-        possible_dates <- possible_dates[!(possible_dates %in% dates)]
-
-        duplicated_dates <- which(duplicated(bar$period))
-        for (j in seq_len(duplicated_dates)) {
-          this_date <- as.Date(bar$period[duplicated_dates[j]], "%Y%m%d")
-          #Which date is closest?
-          date_distance <-
-            methods::as(abs(possible_dates - this_date), "integer")
-          replacement_date_n <- which(date_distance == min(date_distance))
-
-          bar$period[duplicated_dates[j]] <-
-            format(possible_dates[replacement_date_n], "%Y%m%d")
-          #Remove it from the pool
-          possible_dates <- possible_dates[-replacement_date_n]
-        }
+        asessments_collisions <- rbind(asessments_collisions, bar)
       }
-      asessments_collisions <- rbind(asessments_collisions, bar)
-    }
-    #Non-collisions
+      #Non-collisions
 
-    data_clear <- merge(data,
-                        assessments_ou_acoc[assessments_ou_acoc$period == 1,
-                                            c("orgUnit",
-                                              "attributeOptionCombo")],
-                      by = c("orgUnit", "attributeOptionCombo"))
-    data_not_clear <- merge(data, asessments_collisions,
-                          by = c("orgUnit",
-                                 "attributeOptionCombo",
-                                 "assessmentid"))
-    data_not_clear <- data_not_clear[, c("orgUnit",
-                                         "attributeOptionCombo",
-                                         "dataElement",
-                                         "period.y",
-                                         "categoryOptionCombo",
-                                         "value",
-                                         "assessmentid")]
-    names(data_not_clear) <- names(data_clear)
-    data_shifted <- rbind(data_clear, data_not_clear)
-    assertthat::assert_that(nrow(data) == nrow(data_shifted))
-    data_shifted$comment <- data_shifted$assessmentid
-    data_shifted$storedby <- NA
-    data_shifted$timestamp <- NA
-  } else {
-    data_shifted <- data
-    data_shifted$storedby <- NA
-    data_shifted$timestamp <- NA
-    data_shifted$comment <- data_shifted$assessmentid
-  }
+      data_clear <- merge(data,
+                          assessments_ou_acoc[assessments_ou_acoc$period == 1,
+                                              c("orgUnit",
+                                                "attributeOptionCombo")],
+                          by = c("orgUnit", "attributeOptionCombo"))
+      data_not_clear <- merge(data, asessments_collisions,
+                              by = c("orgUnit",
+                                     "attributeOptionCombo",
+                                     "assessmentid"))
+      data_not_clear <- data_not_clear[, c("orgUnit",
+                                           "attributeOptionCombo",
+                                           "dataElement",
+                                           "period.y",
+                                           "categoryOptionCombo",
+                                           "value",
+                                           "assessmentid")]
+      names(data_not_clear) <- names(data_clear)
+      data_shifted <- rbind(data_clear, data_not_clear)
+      assertthat::assert_that(nrow(data) == nrow(data_shifted))
+      data_shifted$comment <- data_shifted$assessmentid
+      data_shifted$storedby <- NA
+      data_shifted$timestamp <- NA
+    } else {
+      data_shifted <- data
+      data_shifted$storedby <- NA
+      data_shifted$timestamp <- NA
+      data_shifted$comment <- data_shifted$assessmentid
+    }
 
     header_final <-
       c(

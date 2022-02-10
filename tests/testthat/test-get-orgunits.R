@@ -16,9 +16,12 @@ with_mock_api({
   test_that("We can inform whether a UID is an orgunit", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
-    expect_true(checkOperatingUnit("KKFzPM8LoXs", d2session = d2_default_session))
-    expect_false(checkOperatingUnit("ABCDEFG123", d2session = d2_default_session))
-    expect_true(checkOperatingUnit("KKFzPM8LoXs", d2session = d2_default_session))
+    expect_true(
+      checkOperatingUnit("KKFzPM8LoXs", d2session = d2_default_session))
+    expect_false(
+      checkOperatingUnit("ABCDEFG123", d2session = d2_default_session))
+    expect_true(
+      checkOperatingUnit("KKFzPM8LoXs", d2session = d2_default_session))
 
   })
 })

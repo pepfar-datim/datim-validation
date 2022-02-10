@@ -1,15 +1,19 @@
 #' @export
-#' @title Function which converts mechanism codes, names or shortnames to to another class of identifiers
+#' @title Remap Operating Units
 #'
-#' @description remapOUs should be supplied a vector of organisation Units (names,codes or shortnames)
-#' along with the other required paramaters. It will return a vector of to another class of identifiers.
+#' @description Function which converts mechanism codes, names, or shortnames to
+#' another class of identifiers. \code{remapOUs} should be supplied a vector of
+#' organisation Units (names, codes or shortnames) along with the other required
+#' paramaters. It will return a vector of to another class of identifiers.
 #'
 #' @inheritParams datim_validation_params
 #'
-#' @return Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs
+#' @return Returns a vector of organisation unit UIDs will remap organisation
+#' units specified as codes to UIDs
+#'
 #' @examples \dontrun{
 #' d <- d2Parser("myfile.csv",type="csv")
-#'     d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+#' d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 #' }
 #'
 remapOUs <-

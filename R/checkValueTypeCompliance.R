@@ -24,12 +24,16 @@ checkValueTypeCompliance <- function(d,
                                      d2session = dynGet("d2_default_session",
                                                         inherits = TRUE)) {
 
-  #There are differences in the API version, so first, we need to know which version we are dealing with
-  url <- utils::URLencode(paste0(d2session$base_url, "api/", api_version(), "/system/info"))
+  #There are differences in the API version, so first,
+  # we need to know which version we are dealing with
+  url <- utils::URLencode(paste0(d2session$base_url,
+                                 "api/", api_version(),
+                                 "/system/info"))
   r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
   r <-  httr::content(r, "text")
 
-
+  # nolint
+  # nolint start
   patterns <-
     list(NUMBER = "^(-?[0-9]+)(\\.[0-9]+)?$",
          INTEGER = "^(0|-?[1-9]\\d*)$",
@@ -42,8 +46,8 @@ checkValueTypeCompliance <- function(d,
          PERCENTAGE = "^([0-9]|[1-9][0-9]|100)(\\.[0-9]+)?$",
          UNIT_INTERVAL = "^(0(\\.[0-9]+)?)$|^1$",
          DATE = "^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
-         DATETIME = paste0("^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
-                           " (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$"))
+         DATETIME = "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$")
+  # nolint end
 
   patterns <- reshape2::melt(patterns)
   names(patterns) <- c("regex", "valueType")
@@ -65,8 +69,10 @@ checkValueTypeCompliance <- function(d,
   #Validation of zero significance. If the value is zero and the the
   #data element is not zero significant, then flag it.
   #TRUE on Non-zeros and valid zeros. False on invalid zeros
-  d_regex_validation$is_valid_zero <-  !(d_regex_validation$value == "0" & !d_regex_validation$zeroIsSignificant)
-  d_regex_validation$is_valid_value <- d_regex_validation$is_valid_pattern  &  d_regex_validation$is_valid_zero
+  d_regex_validation$is_valid_zero <-
+    !(d_regex_validation$value == "0" & !d_regex_validation$zeroIsSignificant)
+  d_regex_validation$is_valid_value <-
+    d_regex_validation$is_valid_pattern  &  d_regex_validation$is_valid_zero
   d_regex_validation <-  d_regex_validation %>%
     dplyr::select(dataElement,
                   period,
@@ -115,9 +121,10 @@ getOptionSetMap <- function(d2session = dynGet("d2_default_session",
                                                inherits = TRUE)) {
 
 
-  url <- utils::URLencode(paste0(d2session$base_url,
-                                 "api/", api_version(),
-                                 "/optionSets?fields=id,name,options[code]&paging=false"))
+  url <- utils::URLencode(
+    paste0(d2session$base_url,
+           "api/", api_version(),
+           "/optionSets?fields=id,name,options[code]&paging=false"))
   sig <- digest::digest(paste0(url), algo = "md5", serialize = FALSE)
   option_sets <- getCachedObject(sig)
   if (is.null(option_sets)) {
@@ -143,7 +150,8 @@ getOptionSetMap <- function(d2session = dynGet("d2_default_session",
 #'
 #' @description Internal function for validation of data which have option sets
 #'
-#' @return Returns a data frame of invalid values validated against their option set.
+#' @return Returns a data frame of invalid values validated against
+#' their option set.
 #'
 #' @examples
 #'  \dontrun{
@@ -182,7 +190,9 @@ checkOptionSetCompliance <- function(d,
   }
 
   d$option_set_values_list <- lapply(d$optionSetID, getOptionSetValues)
-  d$is_valid_value <- mapply(function(x, y) x %in% y, d$value, d$option_set_values_list)
+  d$is_valid_value <- mapply(function(x, y) x %in% y,
+                             d$value,
+                             d$option_set_values_list)
   d %>%
     dplyr::select(dataElement,
                   period,

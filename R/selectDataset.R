@@ -1,7 +1,8 @@
 #' @export
 #' @title Select Dataset
 #'
-#' @description Utility function to produce a vector of data set UIDs from user input.
+#' @description Utility function to produce a vector of data set UIDs
+#' from user input.
 #'
 #' @inheritParams datim_validation_params
 #'
@@ -11,7 +12,8 @@
 #' @examples \dontrun{
 #'   ds <- selectDataset()
 #' }
-selectDataset <- function(d2session = dynGet("d2_default_session", inherits = TRUE)) {
+selectDataset <- function(d2session = dynGet("d2_default_session",
+                                             inherits = TRUE)) {
   ds <- getDataSets(d2session = d2session)
   promptText <- paste0("Please select the dataset [1-", nrow(ds), "]:")
   print(promptText)

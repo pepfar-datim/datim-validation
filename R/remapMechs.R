@@ -1,8 +1,10 @@
 #' @export
-#' @title Function which converts mechanism codes, names or shortnames to UIDs
+#' @title Remap Mechanisms
 #'
-#' @description remapMechs should be supplied a vector of data mechanisms (names,codes or shortnames)
-#' along with the other required paramaters. It will return a vector of UIDs.
+#' @description Function which converts mechanism codes, names or shortnames to
+#' UIDs. \code{remapMechs} should be supplied a vector of data mechanisms
+#' (names, codes or shortnames) along with the other required paramaters.
+#' It will return a vector of UIDs.
 #'
 #' @inheritParams datim_validation_params
 #'
@@ -10,7 +12,9 @@
 #' @examples \dontrun{
 #' d <- d2Parser("myfile.csv",type="csv")
 #' #Add a new column with organisation unit short names.
-#' d$mech_names <- remapMechs(d$attributeOptionCombo,mode_in="id",mode_out="code")
+#' d$mech_names <- remapMechs(d$attributeOptionCombo,
+#'                            mode_in="id",
+#'                            mode_out="code")
 #' }
 remapMechs <-
   function(mechs_in,

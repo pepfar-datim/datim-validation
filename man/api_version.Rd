@@ -10,5 +10,6 @@ api_version()
 Version of the API.
 }
 \description{
-Internal utility function to get the current API version of the DATIM server
+Internal utility function to get the current API version
+of the DATIM server
 }

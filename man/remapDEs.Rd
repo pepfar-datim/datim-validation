@@ -2,7 +2,7 @@
 % Please edit documentation in R/remapDEs.R
 \name{remapDEs}
 \alias{remapDEs}
-\title{Function which converts data element codes, names or shortnames to another class of identifiers}
+\title{Remap Data Elements}
 \usage{
 remapDEs(
   des_in,
@@ -24,11 +24,14 @@ we are mapping to.}
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a vector of DATIM uids for each data element which needs to be remapped.
+Returns a vector of DATIM uids for each data element which
+needs to be remapped.
 }
 \description{
-remapDes should be supplied a vector of data elements (names,codes or shortnames)
-along with the other required paramaters. It will return a vector of identifiers of a different class.
+Function which converts data element codes, names or shortnames
+to another class of identifiers. \code{remapDes} should be supplied a vector
+of data elements (names, codes or shortnames) along with the other required
+ paramaters. It will return a vector of identifiers of a different class.
 }
 \examples{
 \dontrun{

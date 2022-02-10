@@ -46,8 +46,9 @@ Returns a data frame of at least "dataElement", "period", "orgUnit",
 "categoryOptionCombo", "attributeOptionCombo", "value"
 }
 \description{
-d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
-frame which can be used in subsequent DATIM validation routines
+d2Parser will parse a compliant DHIS2 XML, JSON, or CSV file
+and transform it into a standard data frame which can be used in
+subsequent DATIM validation routines.
 }
 \note{
 function(filename = "/home/me/foo.xml", type = "xml",

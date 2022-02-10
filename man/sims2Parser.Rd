@@ -2,7 +2,7 @@
 % Please edit documentation in R/sims2Parser.R
 \name{sims2Parser}
 \alias{sims2Parser}
-\title{Special purpose parsing function for SIMS2 aggregate data with duplicates}
+\title{SIMS2 Parser}
 \usage{
 sims2Parser(
   filename,
@@ -44,7 +44,8 @@ Returns a data frame of "dataElement", "period", "orgUnit",
 "categoryOptionCombo", "attributeOptionCombo", "value"
 }
 \description{
-sims2Parser will parse a semi-compliant DHIS2 CSV file and
+Special purpose parsing function for SIMS2 aggregate data with
+duplicates. \code{sims2Parser} will parse a semi-compliant DHIS2 CSV file and
 transform it into a standard data frame which can be used in subsequent DATIM
 validation routines. The difference with d2Parser is that an extra
 (non-standard) field will be introduced to record the SIMS visit. This will

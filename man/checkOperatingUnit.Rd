@@ -21,6 +21,7 @@ Returns a vector of organisation unit UIDs
 Validates that the supplied UID is a valid operating unit UID
 }
 \note{
-remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
+remapOUs(foo,"https://www.datim.org","admin",
+         "district","code","id","Ab12345678")
 will remap organisation units specified as codes to UIDs
 }

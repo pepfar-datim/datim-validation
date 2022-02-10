@@ -16,7 +16,8 @@ getMechanismsMap(
 }
 \value{
 Returns a data frame  of name,code,id, and categoryOptionCombo
-(which is the UID of interest) along with start and endDates of the mechanisms
+(which is the UID of interest) along with start and endDates of
+the mechanisms
 }
 \description{
 Utility function to produce a map of valid mechanisms. If no

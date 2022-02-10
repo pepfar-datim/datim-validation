@@ -12,7 +12,8 @@ getCategoryOptionCombosMap(
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of code,name,id and shortName of all categoryOptionCombos
+Returns a data frame  of code, name, id, and shortName
+of all categoryOptionCombos
 }
 \description{
 Utility function to produce a map of category option combos

@@ -19,5 +19,6 @@ details.}
 Returns a data frame of  ISO, startDate, endDate,and periodtype.
 }
 \description{
-Get information like start date, end date and period type from an ISO period string
+Get information like start date, end date and period
+type from an ISO period string
 }

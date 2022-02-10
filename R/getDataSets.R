@@ -5,7 +5,7 @@
 #'
 #' @inheritParams datim_validation_params
 #'
-#' @return Returns a data frame  of name, id and formtype of all datasets.
+#' @return Returns a data frame of name, id and formtype of all datasets.
 #' @examples
 #'  \dontrun{
 #'  ds <- getDataSets()

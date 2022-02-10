@@ -11,9 +11,9 @@
 #'
 #' @return Returns a data frame of validation rule evaluations
 evaluateValidation <- function(combis,
-                                 values,
-                                 vr,
-                                 return_violations_only = TRUE) {
+                               values,
+                               vr,
+                               return_violations_only = TRUE) {
 
   validation.results_empty <-
     data.frame(name = character(),
@@ -62,25 +62,38 @@ evaluateValidation <- function(combis,
 
   values <- as.character(values)
 
-  matches$leftSide.expression <- stringi::stri_replace_all_fixed(matches$leftSide.expression,
-                                                                 combis, values, vectorize_all = FALSE)
+  matches$leftSide.expression <-
+    stringi::stri_replace_all_fixed(matches$leftSide.expression,
+                                    combis,
+                                    values,
+                                    vectorize_all = FALSE)
 
-  matches$rightSide.expression <- stringi::stri_replace_all_fixed(matches$rightSide.expression,
-                                                                  combis, values,
-                                                                  vectorize_all = FALSE)
+  matches$rightSide.expression <-
+    stringi::stri_replace_all_fixed(matches$rightSide.expression,
+                                    combis,
+                                    values,
+                                    vectorize_all = FALSE)
 
   #Substitute totals
-  matches$leftSide.expression <- stringi::stri_replace_all_fixed(matches$leftSide.expression,
-                                                                 totals_df$exp, totals_df$values, vectorize_all = FALSE)
+  matches$leftSide.expression <-
+    stringi::stri_replace_all_fixed(matches$leftSide.expression,
+                                    totals_df$exp,
+                                    totals_df$values,
+                                    vectorize_all = FALSE)
 
-  matches$rightSide.expression <- stringi::stri_replace_all_fixed(matches$rightSide.expression,
-                                                                  totals_df$exp, totals_df$values,
-                                                                  vectorize_all = FALSE)
+  matches$rightSide.expression <-
+    stringi::stri_replace_all_fixed(matches$rightSide.expression,
+                                    totals_df$exp,
+                                    totals_df$values,
+                                    vectorize_all = FALSE)
 
   #We should have exact matches now
-  expression.pattern <- "#\\{[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?\\}"
-  left_side_misses <- stringr::str_count(matches$leftSide.expression, expression.pattern)
-  right_side_misses <- stringr::str_count(matches$rightSide.expression, expression.pattern)
+  expression.pattern <-
+    "#\\{[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?\\}"
+  left_side_misses <-
+    stringr::str_count(matches$leftSide.expression, expression.pattern)
+  right_side_misses <-
+    stringr::str_count(matches$rightSide.expression, expression.pattern)
 
   matches$leftSide.count <- matches$leftSide.ops - left_side_misses
   matches$rightSide.count <- matches$rightSide.ops - right_side_misses
@@ -93,23 +106,17 @@ evaluateValidation <- function(combis,
     gsub(expression.pattern, "0", matches$rightSide.expression)
 
   #Keep rules which should  be evaluated
-  keep_these_rules <- (
-    (
-      matches$leftSide.missingValueStrategy == "NEVER_SKIP" |
-        (matches$leftSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" &
-           matches$leftSide.ops != matches$leftSide.count) |
-        (matches$leftSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING" &
-           matches$leftSide.count != 0)
-    )
-    &
-      (
-        matches$rightSide.missingValueStrategy == "NEVER_SKIP" |
-          (matches$rightSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" &
-             matches$rightSide.ops != matches$rightSide.count) |
-          (matches$rightSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING" &
-             matches$rightSide.count != 0)
-      )
-  )
+  # nolint
+  # nolint start
+  keep_these_rules <-
+    ((matches$leftSide.missingValueStrategy == "NEVER_SKIP" |
+        (matches$leftSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" & matches$leftSide.ops != matches$leftSide.count) |
+        (matches$leftSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING" & matches$leftSide.count != 0))
+     &
+       (matches$rightSide.missingValueStrategy == "NEVER_SKIP" |
+          (matches$rightSide.missingValueStrategy == "SKIP_IF_ANY_VALUE_MISSING" & matches$rightSide.ops != matches$rightSide.count) |
+          (matches$rightSide.missingValueStrategy == "SKIP_IF_ALL_VALUES_MISSING" & matches$rightSide.count != 0)))
+  # nolint end
 
   matches <- matches[keep_these_rules, ]
 
@@ -157,7 +164,9 @@ evaluateValidation <- function(combis,
 
     matches <- rbind(matches_normal, matches_ex)
 
-    matches$result <- vapply(matches$formula, function(x) {eval(parse(text = x))}, FUN.VALUE = logical(1)) #nolint
+    matches$result <- vapply(matches$formula, function(x) {
+      eval(parse(text = x))
+    }, FUN.VALUE = logical(1)) #nolint
     if (return_violations_only == TRUE) {
       matches <- matches[!matches$result, ]
     }

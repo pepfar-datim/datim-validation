@@ -10,13 +10,13 @@ getPureDuplicates(d)
 \item{d}{D2 Parsed data frame}
 }
 \value{
-Returns a data frame of d2 data, with pure duplicates used for de-duplication purposes.
+Returns a data frame of d2 data, with pure duplicates used for
+de-duplication purposes.
 }
 \description{
-Returns a listing of pure duplicates by dataElement,period,orgunit,
-categoryOptionCombo.
-For the purposes of de-duplication, these are considered to be pure
-duplicates (only the attributeOptionCombo differ).
+Returns a listing of pure duplicates by dataElement, period,
+orgunit, categoryOptionCombo. For the purposes of de-duplication, these are
+considered to be pure duplicates (only the attributeOptionCombo differ).
 }
 \examples{
 \dontrun{

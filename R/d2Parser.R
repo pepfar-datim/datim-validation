@@ -18,7 +18,8 @@ checkCodingScheme <- function(data,
   #Additional validation will be required to be sure data elements,
   #catcombos and orgunits are properly associated
   is_valid <- TRUE
-  data_element_check_v <- unique(data$dataElement) %in% getDataElementMap(d2session = d2session)$id
+  data_element_check_v <-
+    unique(data$dataElement) %in% getDataElementMap(d2session = d2session)$id
   data_element_check <- unique(data$dataElement)[!data_element_check_v]
   if (length(data_element_check) > 0) {
     warning(
@@ -41,8 +42,10 @@ checkCodingScheme <- function(data,
     is_valid <- FALSE
   }
   coc_check <-
-    unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in%
-                                         getCategoryOptionCombosMap(d2session = d2session)$id)]
+    unique(data$categoryOptionCombo)[!(
+      unique(data$categoryOptionCombo) %in%
+        getCategoryOptionCombosMap(d2session = d2session)$id
+    )]
   if (length(coc_check) > 0) {
     warning(
       "The following category option combo identifiers could not be found:",
@@ -52,7 +55,8 @@ checkCodingScheme <- function(data,
   }
   acoc_check <-
     unique(data$attributeOptionCombo)[!(
-      unique(data$attributeOptionCombo) %in% getMechanismsMap(d2session = d2session)$id
+      unique(data$attributeOptionCombo) %in%
+        getMechanismsMap(d2session = d2session)$id
     )]
   if (length(acoc_check) > 0) {
     warning(
@@ -74,8 +78,9 @@ checkCodingScheme <- function(data,
 #' @importFrom utils select.list
 #' @title General purpose parsing function for different formats of DHIS2 data
 #'
-#' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
-#' frame which can be used in subsequent DATIM validation routines
+#' @description d2Parser will parse a compliant DHIS2 XML, JSON, or CSV file
+#' and transform it into a standard data frame which can be used in
+#' subsequent DATIM validation routines.
 #'
 #' @param type Type of the file. Should be one of  xml, json or csv.
 #' @inheritParams datim_validation_params
@@ -152,9 +157,11 @@ d2Parser <-
       #Data element, period and orgunit must be specified
       missing_required <- !complete.cases(data[, 1:3])
       if (sum(missing_required) > 0) {
-        msg <- paste0("File contains rows with missing required fields in rows ",
-                    paste(which(missing_required == TRUE), sep = "", collapse = ","),
-                    ". These rows will be excluded.")
+        msg <- paste0("File contains rows with missing ",
+                      "required fields in rows ",
+                      paste(which(missing_required == TRUE),
+                            sep = "", collapse = ","),
+                      ". These rows will be excluded.")
         warning(msg)
         }
       data <- data[!missing_required, ]
@@ -228,7 +235,8 @@ d2Parser <-
     if (sum(valid_rows) != NROW(data)) {
 
       msg <-
-        paste0(sum(!valid_rows), " rows are incomplete. Please check your file to ensure its correct.")
+        paste0(sum(!valid_rows), " rows are incomplete. ",
+               "Please check your file to ensure its correct.")
       warning(msg)
     }
 

@@ -15,7 +15,8 @@ checkOptionSetCompliance(
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of invalid values validated against their option set.
+Returns a data frame of invalid values validated against
+their option set.
 }
 \description{
 Internal function for validation of data which have option sets

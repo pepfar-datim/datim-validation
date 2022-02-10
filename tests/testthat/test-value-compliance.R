@@ -11,10 +11,12 @@ with_mock_api({
                 dataElementIdScheme = "id",
                 orgUnitIdScheme = "id",
                 idScheme = "id",
-                invalidData = FALSE, d2session  = d2_default_session)
-    expect_equal(NROW(checkValueTypeCompliance(d, d2session  = d2_default_session)), 3)
+                invalidData = FALSE, d2session = d2_default_session)
+    expect_equal(
+      NROW(checkValueTypeCompliance(d, d2session = d2_default_session)), 3)
     d$value <- "5"
-    expect_equal(checkValueTypeCompliance(d, d2session  = d2_default_session), TRUE)
+    expect_equal(
+      checkValueTypeCompliance(d, d2session = d2_default_session), TRUE)
   })
 })
 
@@ -32,7 +34,8 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session  = d2_default_session)
-    expect_equal(NROW(checkValueTypeCompliance(d, d2session  = d2_default_session)), 9)
+    expect_equal(
+      NROW(checkValueTypeCompliance(d, d2session  = d2_default_session)), 9)
   })
 })
 
@@ -50,7 +53,8 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session  = d2_default_session)
-    expect_equal(NROW(checkValueTypeCompliance(d, d2session = d2_default_session)), 1)
+    expect_equal(
+      NROW(checkValueTypeCompliance(d, d2session = d2_default_session)), 1)
   })
 })
 
@@ -66,7 +70,8 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session  = d2_default_session)
-    expect_warning(foo <- checkNegativeValues(data = d, d2session  = d2_default_session))
+    expect_warning(
+      foo <- checkNegativeValues(data = d, d2session  = d2_default_session))
     expect_equal(NROW(foo), 2)
   })
 })

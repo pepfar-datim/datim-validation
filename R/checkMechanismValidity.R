@@ -1,8 +1,8 @@
 #' @export
 #' @title Check Mechanism Period Validity
 #'
-#' @description This function will return an object of invalid mechanisms and periods.
-#' All data which is reported
+#' @description This function will return an object of invalid mechanisms and
+#' periods. All data which is reported
 #' must have a period within the valid start and end dates of the
 #' attribute option combination to which it is assigned.
 #' The mechanism must also be associated with the operating unit.
@@ -11,9 +11,8 @@
 #'
 #' @inheritParams datim_validation_params
 #'
-#' @return Returns a data frame of invalid period-mechanism combinations. A warning will
-#' also be issued.
-#' Returns TRUE if there are no violations.
+#' @return Returns a data frame of invalid period-mechanism combinations.
+#' A warning will also be issued. Returns TRUE if there are no violations.
 #'
 #' @examples \dontrun{
 #'      d <- d2Parser("myfile.csv",type="csv")
@@ -36,9 +35,13 @@ checkMechanismValidity <- function(data,
     dplyr::distinct()
 
   period_info <-
-    do.call(rbind.data.frame, lapply(unique(data_mechs_periods$period), getPeriodFromISO))
+    do.call(rbind.data.frame,
+            lapply(unique(data_mechs_periods$period), getPeriodFromISO))
 
-  data_mechs_periods <- merge(data_mechs_periods, period_info, by.x = "period", by.y = "iso")
+  data_mechs_periods <- merge(data_mechs_periods,
+                              period_info,
+                              by.x = "period",
+                              by.y = "iso")
 
   mechanism_map <-
     getMechanismsMap(organisationUnit = organisationUnit,
@@ -56,10 +59,13 @@ checkMechanismValidity <- function(data,
       "endDate_mech")
 
   data_mechs_periods <-
-    dplyr::left_join(data_mechs_periods, mechanism_map, by = "attributeOptionCombo")
+    dplyr::left_join(data_mechs_periods,
+                     mechanism_map,
+                     by = "attributeOptionCombo")
 
   data_mechs_periods <- data_mechs_periods %>%
-    dplyr::mutate(is_valid = (startDate >= startDate_mech & endDate <= endDate_mech)) %>%
+    dplyr::mutate(is_valid = (startDate >= startDate_mech &
+                                endDate <= endDate_mech)) %>%
     dplyr::mutate(is_valid = ifelse(is.na(is_valid), FALSE, is_valid)) %>%
     dplyr::filter(!is_valid)
 

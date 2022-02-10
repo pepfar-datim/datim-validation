@@ -7,7 +7,8 @@
 #' @inheritParams datim_validation_params
 #'
 #' @return Returns a data frame  of name,code,id, and categoryOptionCombo
-#' (which is the UID of interest) along with start and endDates of the mechanisms
+#' (which is the UID of interest) along with start and endDates of
+#' the mechanisms
 #'
 getMechanismsMap <- function(organisationUnit = NA,
                              d2session = dynGet("d2_default_session",

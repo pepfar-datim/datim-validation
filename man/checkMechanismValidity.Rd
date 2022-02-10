@@ -21,13 +21,12 @@ checkMechanismValidity(
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of invalid period-mechanism combinations. A warning will
-also be issued.
-Returns TRUE if there are no violations.
+Returns a data frame of invalid period-mechanism combinations.
+A warning will also be issued. Returns TRUE if there are no violations.
 }
 \description{
-This function will return an object of invalid mechanisms and periods.
-All data which is reported
+This function will return an object of invalid mechanisms and
+periods. All data which is reported
 must have a period within the valid start and end dates of the
 attribute option combination to which it is assigned.
 The mechanism must also be associated with the operating unit.

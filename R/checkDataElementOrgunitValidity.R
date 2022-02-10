@@ -12,9 +12,10 @@
 #' @examples
 #'  \dontrun{
 #'  #Be sure you login to DATIM first
-#'  loadSecrets()
-#'  ds <- getCurrentMERDataSets(type="RESULTS")
-#'  de_ou_map <- getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
+#'  datimutils::loginToDATIM()
+#'  ds <- getCurrentMERDataSets(type = "RESULTS")
+#'  de_ou_map <- getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",
+#'                                       datasets = ds)
 #' }
 #'
 getDataElementsOrgunits <- function(organisationUnit = NA,
@@ -43,7 +44,8 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
     url <-
       paste0(
         d2session$base_url,
-        "api/", api_version(), "/organisationUnits?fields=id&paging=false&filter=path:like:",
+        "api/", api_version(),
+        "/organisationUnits?fields=id&paging=false&filter=path:like:",
         organisationUnit,
         "&filter=dataSets.id:eq:",
         datasets[i]
@@ -58,8 +60,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
       ous <-
         unique(jsonlite::fromJSON(r, flatten = TRUE)$organisationUnits$id)
       #OUs
-      des <-
-        unique(getValidDataElements(datasets = datasets[i], d2session = d2session)$dataelementuid)
+      des <- unique(getValidDataElements(datasets = datasets[i], d2session = d2session)$dataelementuid) #nolint
       des_ous <- list(dataset = datasets[i], list(ous = ous, des = des))
       saveCachedObject(des_ous, sig)
     }
@@ -104,12 +105,19 @@ checkDataElementOrgunitValidity <- function(data = NA,
   if (length(datasets) == 0 | any(is.na(datasets))) {stop("Please specifiy a list of data sets!")}
   # nolint end
 
-  des_ous <- getDataElementsOrgunits(organisationUnit, datasets, d2session = d2session)
-  des_ous_map <- plyr::ldply(des_ous, function(x) expand.grid(dataElement = x[[2]]$des,
-                                                              orgUnit = x[[2]]$ous,
-                                                              stringsAsFactors = FALSE))
+  des_ous <- getDataElementsOrgunits(organisationUnit,
+                                     datasets,
+                                     d2session = d2session)
+  des_ous_map <- plyr::ldply(des_ous,
+                             function(x) {
+                               expand.grid(dataElement = x[[2]]$des,
+                                           orgUnit = x[[2]]$ous,
+                                           stringsAsFactors = FALSE)
+                             })
   data_des_ous_map <- unique(data[, c("dataElement", "orgUnit")])
-  result_data <- dplyr::anti_join(data, des_ous_map, by = c("dataElement", "orgUnit"))
+  result_data <- dplyr::anti_join(data,
+                                  des_ous_map,
+                                  by = c("dataElement", "orgUnit"))
   if (NROW(result_data) > 0) {
     warning("Invalid data element/orgunit associations were detected!")
     if (return_violations) {return(result_data)} #nolint

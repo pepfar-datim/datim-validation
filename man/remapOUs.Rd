@@ -2,7 +2,7 @@
 % Please edit documentation in R/remapOUs.R
 \name{remapOUs}
 \alias{remapOUs}
-\title{Function which converts mechanism codes, names or shortnames to to another class of identifiers}
+\title{Remap Operating Units}
 \usage{
 remapOUs(
   ous_in,
@@ -27,16 +27,19 @@ we are mapping to.}
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a vector of organisation unit UIDs will remap organisation units specified as codes to UIDs
+Returns a vector of organisation unit UIDs will remap organisation
+units specified as codes to UIDs
 }
 \description{
-remapOUs should be supplied a vector of organisation Units (names,codes or shortnames)
-along with the other required paramaters. It will return a vector of to another class of identifiers.
+Function which converts mechanism codes, names, or shortnames to
+another class of identifiers. \code{remapOUs} should be supplied a vector of
+organisation Units (names, codes or shortnames) along with the other required
+paramaters. It will return a vector of to another class of identifiers.
 }
 \examples{
 \dontrun{
 d <- d2Parser("myfile.csv",type="csv")
-    d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
+d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 }
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/remapCategoryOptionCombos.R
 \name{remapCategoryOptionCombos}
 \alias{remapCategoryOptionCombos}
-\title{Function which converts category option combos from identifier to another}
+\title{Remap Category Option Combinations}
 \usage{
 remapCategoryOptionCombos(
   cocs_in,
@@ -26,14 +26,17 @@ we are mapping to.}
 Returns a vector of category option combos of the mode_out type.
 }
 \description{
-remapCategoryOptionCombos should be supplied a vector of
-category option combos (names,codes,uids or shortnames). It will return a
-vector of another class as specified with the mode_out paramater.
+Function which converts category option combos from identifier
+to another. \code{remapCategoryOptionCombos} should be supplied a vector of
+category option combos (names, codes, uids, or shortnames). It will return a
+vector of another class as specified with the \code{mode_out} paramater.
 }
 \examples{
 \dontrun{
-    d <- d2Parser("myfile.csv",type="csv")
-    d$coc_codes <- remapOUs(d$categoryOptionCombos,mode_in="id",mode_out="code")
+    d <- d2Parser("myfile.csv", type = "csv")
+    d$coc_codes <- remapOUs(d$categoryOptionCombos,
+                            mode_in = "id",
+                            mode_out = "code")
 }
 
 }

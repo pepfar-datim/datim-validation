@@ -13,7 +13,8 @@ getCrosswalkMap(d2session = dynGet("d2_default_session", inherits = TRUE))
 Returns a map of DSD/TA data element UIDs.
 }
 \description{
-Utility function which returns a map of DSD / TA data elements UIDs
+Utility function which returns a map of
+DSD / TA data elements UIDs
 }
 \examples{
 \dontrun{

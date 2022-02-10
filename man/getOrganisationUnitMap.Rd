@@ -23,8 +23,11 @@ Utility function to produce a map of valid mechanisms
 }
 \examples{
 \dontrun{
-    ou_map <- getOrganisationUnitMap("KKFzPM8LoXs") #For a specific operating unit
-    ou_map_mine <- getOrganisationUnitMap() #Based on your login credentials
+    # For a specific operating unit
+    ou_map <- getOrganisationUnitMap("KKFzPM8LoXs")
+
+    # Based on your login credentials
+    ou_map_mine <- getOrganisationUnitMap()
 }
 
 }

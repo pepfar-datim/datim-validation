@@ -1,8 +1,8 @@
 #' @export
 #' @title Get Invalid Data Elements
 #'
-#' @description Utility function to produce a data frame of valid data elements based on current
-#' DATIM form specification
+#' @description Utility function to produce a data frame of valid data elements
+#' based on current DATIM form specification.
 #'
 #' @inheritParams datim_validation_params
 #'
@@ -38,20 +38,24 @@ getValidDataElements <- function(datasets = NA,
   for (i in seq_along(datasets)) {
 
     if (allDataSets[allDataSets$id == datasets[i], "formType"] == "CUSTOM") {
-      url <- utils::URLencode(paste0(d2session$base_url,
-                                     "api/", api_version(),
-                                     "/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",
-                                     datasets[i],
-                                     "&paging=false"))
+      url <- utils::URLencode(
+        paste0(d2session$base_url,
+               "api/", api_version(),
+               "/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",
+               datasets[i],
+               "&paging=false"))
     } else {
-      url <- utils::URLencode(paste0(d2session$base_url,
-                                     "api/", api_version(),
-                                     "/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",
-                                     datasets[i],
-                                     "&paging=false"))
+      url <- utils::URLencode(
+        paste0(d2session$base_url,
+               "api/", api_version(),
+               "/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",
+               datasets[i],
+               "&paging=false"))
     }
 
-    sig <- digest::digest(paste0(url, datasets[i]), algo = "md5", serialize = FALSE)
+    sig <- digest::digest(paste0(url, datasets[i]),
+                          algo = "md5",
+                          serialize = FALSE)
     des <- getCachedObject(sig)
 
     if (is.null(des)) {

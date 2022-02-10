@@ -25,9 +25,10 @@ for a dataset (or datasets) for a given organisationUnit
 \examples{
  \dontrun{
  #Be sure you login to DATIM first
- loadSecrets()
- ds <- getCurrentMERDataSets(type="RESULTS")
- de_ou_map <- getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
+ datimutils::loginToDATIM()
+ ds <- getCurrentMERDataSets(type = "RESULTS")
+ de_ou_map <- getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",
+                                      datasets = ds)
 }
 
 }

@@ -1,6 +1,7 @@
 #' @export
 #' @title Get Period Info
-#' @description Get information like start date, end date and period type from an ISO period string
+#' @description Get information like start date, end date and period
+#' type from an ISO period string
 #'
 #' @inheritParams datim_validation_params
 #'
@@ -10,7 +11,9 @@ getPeriodInfo <- function(ISO = NA,
                             d2session = dynGet("d2_default_session",
                                                inherits = TRUE)) {
 
-  url <- utils::URLencode(paste0(d2session$base_url, "api/", api_version(), "/sqlViews/TTM90ytCCdY/data.json"))
+  url <- utils::URLencode(paste0(d2session$base_url,
+                                 "api/", api_version(),
+                                 "/sqlViews/TTM90ytCCdY/data.json"))
   sig <- digest::digest(paste0(url), algo = "md5", serialize = FALSE)
   p <- getCachedObject(sig)
 

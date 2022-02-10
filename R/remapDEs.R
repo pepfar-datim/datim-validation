@@ -1,12 +1,15 @@
 #' @export
-#' @title Function which converts data element codes, names or shortnames to another class of identifiers
+#' @title Remap Data Elements
 #'
-#' @description remapDes should be supplied a vector of data elements (names,codes or shortnames)
-#' along with the other required paramaters. It will return a vector of identifiers of a different class.
+#' @description Function which converts data element codes, names or shortnames
+#' to another class of identifiers. \code{remapDes} should be supplied a vector
+#' of data elements (names, codes or shortnames) along with the other required
+#'  paramaters. It will return a vector of identifiers of a different class.
 #'
 #' @inheritParams datim_validation_params
 #'
-#' @return Returns a vector of DATIM uids for each data element which needs to be remapped.
+#' @return Returns a vector of DATIM uids for each data element which
+#' needs to be remapped.
 #' @examples \dontrun{
 #'     d <- d2Parser("myfile.csv",type="csv")
 #'     d$de_codes <- remapOUs(d$dataElements,mode_in="id",mode_out="code")
