@@ -63,4 +63,3 @@ with_mock_api({
     expect_equal(NROW(test_data), 1)
     expect_equal(test_data$storedby[1], "BAD")
   })})
-
