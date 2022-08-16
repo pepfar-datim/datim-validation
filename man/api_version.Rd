@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{api_version}
 \alias{api_version}
-\title{api_version()}
+\title{API Version}
 \usage{
 api_version()
 }
@@ -10,5 +10,6 @@ api_version()
 Version of the API.
 }
 \description{
-Internal utility function to get the current API version of the DATIM server
+Internal utility function to get the current API version
+of the DATIM server
 }

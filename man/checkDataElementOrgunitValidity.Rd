@@ -2,42 +2,41 @@
 % Please edit documentation in R/checkDataElementOrgunitValidity.R
 \name{checkDataElementOrgunitValidity}
 \alias{checkDataElementOrgunitValidity}
-\title{checkDataElementOrgunitValidity(data,organisationUnit,datasets)}
+\title{Check Data Element Organisation Unit Validity}
 \usage{
 checkDataElementOrgunitValidity(
   data = NA,
   organisationUnit = NA,
   datasets = NA,
   return_violations = TRUE,
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{data}{D2 compliant data frame}
+\item{data}{D2 compliant data frame object}
 
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor, 
-typically the operating unit.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{datasets}{Should be a character vector of data set UIDs. 
-Alternatively, if left missing, user will be promted.}
+\item{datasets}{Should be a character vector of data set UIDs.
+Alternatively, if left missing, user will be promted to choose from a list.}
 
-\item{return_violations}{Return the invalid data if TRUE}
+\item{return_violations}{Boolean to return violations only.}
 
-\item{d2session}{datimutils d2session object @param d2session datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns subset of data which contains
-  invalid data element / organisation unit associations. If no violations are found, a boolean
-  TRUE value is returned.
+  invalid data element / organisation unit associations. If no violations are
+  found, a boolean TRUE value is returned.
 }
 \description{
-Returns a data frame invalid data elements which exist in the data 
-but which do not have a valid organistion unit / dataset association.
+Returns a data frame invalid data elements which exist in the
+data but which do not have a valid organistion unit / dataset association.
 }
 \examples{
 \dontrun{
-     d<-d2Parser("myfile.csv",type="csv")
-     ds<-getCurrentMERDataSets(type="RESULTS")
+     d <- d2Parser("myfile.csv",type="csv")
+     ds <- getCurrentMERDataSets(type="RESULTS")
      checkDataElementOrgunitValidity(data=d,datasets=ds)
 }
 }

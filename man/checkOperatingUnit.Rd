@@ -4,13 +4,15 @@
 \alias{checkOperatingUnit}
 \title{Function which checks that the organisation unit provided is valid}
 \usage{
-checkOperatingUnit(organisationUnit = NA, d2session = d2_default_session)
+checkOperatingUnit(
+  organisationUnit = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{organisationUnit}{Should be a UID of an operating unit. Defaults to the 
-user organisation unit if not supplied}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{d2session}{datimutils login session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a vector of organisation unit UIDs
@@ -19,6 +21,7 @@ Returns a vector of organisation unit UIDs
 Validates that the supplied UID is a valid operating unit UID
 }
 \note{
-remapOUs(foo,"https://www.datim.org","admin","district","code","id","Ab12345678")
+remapOUs(foo,"https://www.datim.org","admin",
+         "district","code","id","Ab12345678")
 will remap organisation units specified as codes to UIDs
 }

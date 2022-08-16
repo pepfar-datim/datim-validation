@@ -2,32 +2,33 @@
 % Please edit documentation in R/checkDataElementOrgunitValidity.R
 \name{getDataElementsOrgunits}
 \alias{getDataElementsOrgunits}
-\title{getDataElementsOrgunits(data,organisationUnit,datasets)}
+\title{Get Data Elements Organisation Units}
 \usage{
 getDataElementsOrgunits(organisationUnit = NA, datasets = NA, d2session)
 }
 \arguments{
-\item{organisationUnit}{Organisation unit. Defaults to user organisation
-unit if not supplied explicitly.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{datasets}{Should be a character vector of data set UIDs. Alternatively, 
-if left missing, user will be prompted.}
+\item{datasets}{Should be a character vector of data set UIDs.
+Alternatively, if left missing, user will be promted to choose from a list.}
 
-\item{d2session}{datimutils login session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-A named list of data frames, each consisting of two columns (des) representing
-data elements and (ous) representing organisation unit UIDs
+A named list of data frames, each consisting of two columns (des)
+representing data elements and (ous) representing organisation unit UIDs.
 }
 \description{
 Returns a map of lists consisting of data elements and orgunits
- for a dataset (or datasets) for a given organisationUnit
+for a dataset (or datasets) for a given organisationUnit
 }
 \examples{
  \dontrun{
  #Be sure you login to DATIM first
- loadSecrets()
- ds<-getCurrentMERDataSets(type="RESULTS")
- de_ou_map<-getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",datasets=ds)
+ datimutils::loginToDATIM()
+ ds <- getCurrentMERDataSets(type = "RESULTS")
+ de_ou_map <- getDataElementsOrgunits(organisationUnit = "f5RoebaDLMx",
+                                      datasets = ds)
 }
+
 }

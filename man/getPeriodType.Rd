@@ -2,7 +2,7 @@
 % Please edit documentation in R/periodUtils.R
 \name{getPeriodType}
 \alias{getPeriodType}
-\title{getPeriodType(iso)}
+\title{Get Period Type}
 \usage{
 getPeriodType(iso)
 }

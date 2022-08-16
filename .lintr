@@ -1,0 +1,8 @@
+linters: with_defaults(
+    object_name_linter = NULL,
+    object_length_linter = NULL,
+    object_usage_linter = NULL,
+    commented_code_linter = NULL,
+    cyclocomp_linter = NULL,
+    dummy_linter = NULL
+  )

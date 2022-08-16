@@ -55,7 +55,7 @@ You will also need to know the identification scheme of the file. The easiest wa
 the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
 
 ```{r eval=FALSE}
-d<-d2Parser(file=filename,type = "csv",
+d <- d2Parser(file=filename,type = "csv",
             dataElementIdScheme = "code",orgUnitIdScheme = "id",
             idScheme = "id" 
             ,invalidData = TRUE )
@@ -127,7 +127,7 @@ In order to run the validation rule check, simply invoke the following command.
 
 ```{r eval=FALSE}
 #Run the validation rule and save the output as a CSV file
-vr_violations<-validateData(data = d,
+vr_violations <- validateData(data = d,
                             return_violations_only = TRUE,
                             parallel =parallel )
 
@@ -148,8 +148,8 @@ If any of the functions return errors, warnings, or non-empty data frames, you s
 require(datimutils)
 require(datimvalidation)
 loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
-datafile<-"/home/littebobbytables/mydata.csv"
-d<-d2Parser(filename = datafile ,type = "csv")
+datafile <- "/home/littebobbytables/mydata.csv"
+d <- d2Parser(filename = datafile ,type = "csv")
 checkDataElementOrgunitValidity(data = d,organisationUnit = "f5RoebaDLMx",datasets = c("zUoy5hk8r0q","KWRj80vEfHU"))
 checkValueTypeCompliance(d)
 checkNegativeValues(d)

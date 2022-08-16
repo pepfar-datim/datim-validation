@@ -2,7 +2,7 @@
 #' @name datimvalidation
 #' @description The datimvalidation package can be used to provide
 #' external validation of data payloads intended for PEPFAR's instance
-#' of DHIS2, located at https://www.datim.org. 
+#' of DHIS2, located at https://www.datim.org.
 #' @title DATIM Validation
 NULL
 
