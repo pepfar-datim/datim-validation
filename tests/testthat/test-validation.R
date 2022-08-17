@@ -152,6 +152,7 @@ with_mock_api({
   })
 })
 
+
 with_mock_api({
   test_that("We can return validation rule violations of bulk data", {
     loginToDATIM(config_path = test_config("test-config.json"))
@@ -170,4 +171,68 @@ with_mock_api({
                       parallel = FALSE,  d2session = d2_default_session)
     expect_type(foo,"list")
   })
+})
+
+test_that("We can pass an compulsory rule with data present on both sides", {
+
+    #Define a mock validation rule of a compulsory paid
+    vr_test <- data.frame(name = "Test rule",
+                          id = "abc123",
+                          periodType = "FinancialOct",
+                          description = "Mock validation rule",
+                          operator = "&",
+                          leftSide.expression = "#{tSYnSvSK200}",
+                          leftSide.missingValueStrategy = "NEVER_SKIP",
+                          rightSide.expression = "#{HO5wSDKttn3}",
+                          rightSide.missingValueStrategy = "NEVER_SKIP",
+                          rightSide.ops = 1,
+                          leftSide.ops = 1)
+
+    #Data on both sides
+    d<- tibble::tribble(
+      ~dataElement,~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,
+      "tSYnSvSK200", "2022Oct","MLDoMSA8oKX","eInUTGbGekL","sEvzK25zQxn",10,
+      "HO5wSDKttn3", "2022Oct","MLDoMSA8oKX","eInUTGbGekL","sEvzK25zQxn",10
+    )
+    d<-prepDataForValidation(d)
+
+    foo<-evaluateValidation(d$combi,d$value,vr_test,FALSE)
+
+    expect_true(NROW(foo) == 1L)
+
+    expect_true(foo$result)
+    expect_equal(foo$rightSide.expression,1)
+    expect_equal(foo$leftSide.expression,1)
+  })
+
+
+test_that("We can fail a compulsory pair rule with data present on one sides", {
+
+  #Define a mock validation rule of a compulsory paid
+  vr_test <- data.frame(name = "Test rule",
+                        id = "abc123",
+                        periodType = "FinancialOct",
+                        description = "Mock validation rule",
+                        operator = "&",
+                        leftSide.expression = "#{tSYnSvSK200}",
+                        leftSide.missingValueStrategy = "NEVER_SKIP",
+                        rightSide.expression = "#{HO5wSDKttn3}",
+                        rightSide.missingValueStrategy = "NEVER_SKIP",
+                        rightSide.ops = 1,
+                        leftSide.ops = 1)
+
+  #Data on both sides
+  d<- tibble::tribble(
+    ~dataElement,~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,
+    "tSYnSvSK200", "2022Oct","MLDoMSA8oKX","eInUTGbGekL","sEvzK25zQxn",10
+  )
+  d<-prepDataForValidation(d)
+
+  foo<-evaluateValidation(d$combi,d$value,vr_test,FALSE)
+
+  expect_true(NROW(foo) == 1L)
+
+  expect_false(foo$result)
+  expect_equal(foo$rightSide.expression,0)
+  expect_equal(foo$leftSide.expression,1)
 })
