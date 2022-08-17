@@ -1,11 +1,11 @@
 context("Parse periods")
 test_that("Paramater cannot be blank", {
-  
+
   expect_error(getPeriodFromISO())
 })
 
 test_that("We can parse a daily period", {
-  
+
   test_date<-getPeriodFromISO("20171213")
   test_result<-data.frame(iso="20171213",
                           startDate=as.Date("2017-12-13"),
@@ -16,13 +16,13 @@ test_that("We can parse a daily period", {
 })
 
 test_that("Invalid daily period produces error", {
-  
+
   expect_error(getPeriodFromISO("20170229"))
 })
 
 
 test_that("We can parse a weekly period", {
-  
+
   test_date<-getPeriodFromISO("2017W14")
   test_result<-data.frame(iso="2017W14",
                           startDate=as.Date("2017-04-03"),
@@ -39,7 +39,7 @@ test_that("Invalid weekly period produces error", {
 })
 
 test_that("We can parse a monthly period", {
-  
+
   test_date<-getPeriodFromISO("201812")
   test_result<-data.frame(iso="201812",
                           startDate=as.Date("2018-12-01"),
@@ -56,7 +56,7 @@ test_that("Invalid monthly period produces error", {
 
 
 test_that("We can parse a yearly period", {
-  
+
   test_date<-getPeriodFromISO("2018")
   test_result<-data.frame(iso="2018",
                           startDate=as.Date("2018-01-01"),
@@ -67,7 +67,7 @@ test_that("We can parse a yearly period", {
 })
 
 test_that("We can parse a quarterly period", {
-  
+
   test_date<-getPeriodFromISO("2018Q4")
   test_result<-data.frame(iso="2018Q4",
                           startDate=as.Date("2018-10-01"),
@@ -84,7 +84,7 @@ test_that("We can error a bad quarterly period", {
 
 
 test_that("We can parse a financial Oct period", {
-  
+
   test_date<-getPeriodFromISO("2018Oct")
   test_result<-data.frame(iso="2018Oct",
                           startDate=as.Date("2018-10-01"),

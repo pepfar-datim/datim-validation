@@ -27,7 +27,7 @@ with_mock_api({
                 dataElementIdScheme = "id",
                 orgUnitIdScheme = "id",
                 idScheme = "id",
-                invalidData = FALSE, 
+                invalidData = FALSE,
                 d2session = d2_default_session)
     expect_silent(dups<-getExactDuplicates(d))
     expect_equal(NROW(dups),0)

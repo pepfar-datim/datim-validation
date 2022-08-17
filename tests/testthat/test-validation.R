@@ -101,7 +101,7 @@ with_mock_api({
 
 
 with_mock_api({
-  test_that("We can fail an exclusive rule with data missing on both sides", {
+  test_that("We can fail an exclusive rule with data present on both sides", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
@@ -140,11 +140,15 @@ with_mock_api({
     d<-d[1,]
     d<-prepDataForValidation(d)
     vr<-getValidationRules(d2session = d2_default_session)
-    foo<-evaluateValidation(d$combi,d$value,vr,FALSE)
+    foo<-evaluateValidation(d$combi,d$value,vr,TRUE)
     foo<-foo %>% dplyr::filter(operator=="|")
-    expect_true(foo$result)
-    expect_equal(foo$rightSide.expression,0)
-    expect_equal(foo$leftSide.expression,1)
+    expect_true(NROW(foo) == 0L)
+    #This is influenced by the skip logic.
+    #Both sides are set to SKIP_IF_ALL_VALUES_MISSING
+    #which means the rule will be skipped and not flagged
+    # expect_true(foo$result)
+    # expect_equal(foo$rightSide.expression,0)
+    # expect_equal(foo$leftSide.expression,1)
   })
 })
 
@@ -163,7 +167,7 @@ with_mock_api({
                 d2session = d2_default_session)
     datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
     foo<-validateData(d,organisationUnit = "KKFzPM8LoXs", return_violations_only = TRUE,
-                      parallel = FALSE, datasets=datasets, d2session = d2_default_session)
+                      parallel = FALSE,  d2session = d2_default_session)
     expect_type(foo,"list")
   })
 })

@@ -28,10 +28,10 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE,
-                d2session = d2_default_session) 
+                d2session = d2_default_session)
   datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
   expect_warning(test_data<-checkDataElementOrgunitValidity(d,"KKFzPM8LoXs",datasets, d2session = d2_default_session ))
-  expect_equal(NROW(test_data),1) 
+  expect_equal(NROW(test_data),1)
 })})
 
 
@@ -49,12 +49,12 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE,
-                d2session = d2_default_session) 
+                d2session = d2_default_session)
     datasets<-c("i29foJcLY9Y","STL4izfLznL")
     expect_warning(test_data<-checkDataElementDisaggValidity(d,
                                                              datasets=datasets,
                                                              return_violations=TRUE,
                                                              d2session = d2_default_session))
-    expect_equal(NROW(test_data),1) 
+    expect_equal(NROW(test_data),1)
     expect_equal(test_data$storedby[1], "BAD")
   })})
