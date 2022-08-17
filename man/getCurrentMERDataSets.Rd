@@ -21,5 +21,5 @@ getCurrentMERDataSets(type)
   \dontrun{
  ds<-getCurrentMERDataSets(type="RESULTS", d2session = d2session)
  }
- 
+
 }

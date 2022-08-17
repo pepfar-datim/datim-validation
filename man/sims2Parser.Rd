@@ -11,7 +11,8 @@ sims2Parser(
   idScheme = "id",
   invalidData = FALSE,
   hasHeader = TRUE,
-  isoPeriod = NA
+  isoPeriod = NA,
+  d2session = d2_default_session
 )
 }
 \arguments{
