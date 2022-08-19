@@ -8,13 +8,13 @@
 #' @return If the file exists and is not stale, returns TRUE, otherwise FALSE.
 #'
 isValidCachedObject <- function(x){
-  
+
   if ( is.null(getOption("maxCacheAge")) ) { return(FALSE) } else {
   is_there<-file.exists(x)
   #Age of files in days
   is_fresh<-as.numeric(Sys.time()-file.info(x)$mtime ) < getOption("maxCacheAge")
   return (is_there && is_fresh) }
-  
+
 }
 
 #' @export
@@ -26,7 +26,7 @@ isValidCachedObject <- function(x){
 #' @param wd By default, the .R_Cache directory in the working directory.
 #' @return Returns a cached data object.
 #'
-getCachedObject<-function(sig,wd=paste0(getwd(),"/.R_Cache/")) {
+getCachedObject<-function(sig,wd=paste0(getwd(), "/.R_Cache/")) {
   if ( is.null(getOption("maxCacheAge")) ) { return(NULL) } else {
   this_obj = file=paste0(getwd(),"/.R_Cache/",sig)
   if (isValidCachedObject(this_obj)) { return(readRDS(this_obj)) }
@@ -67,7 +67,7 @@ saveCachedObject <-
 #' @param cache_dir Cache directory path. By default, working directory + ".R_Cache"
 #' @param force Boolean (default FALSE) to clear cache without asking the user
 #' @return Nothing.
-#' @examples 
+#' @examples
 #'  \dontrun{
 #'   clearCache(force=TRUE)
 #' }
@@ -95,17 +95,17 @@ clearCache <-
 #' @title api_version()
 #'
 #' @description Internal utility function to get the current API version of the DATIM server
-#' @return Version of the API. 
+#' @return Version of the API.
 #'
-#' 
+#'
 api_version<-function() { "33" }
 
 #' @export
 #' @title api_version()
 #'
-#' @return Returns a password from a prompt. 
+#' @return Returns a password from a prompt.
 #'
-#' 
+#'
 get_password <- function() {
   cat("Password: ")
   system("stty -echo")
