@@ -49,7 +49,7 @@ To get started, we will load the package and provide a location of our secrets f
 
 ```r
 require(datimvalidation)
-secrets<-"/home/littebobbytables/.secrets/datim.json"
+secrets <- "/home/littebobbytables/.secrets/datim.json"
 loadSecrets(secrets)
 ```
 
@@ -70,7 +70,7 @@ Depending on the size of the datasets and the objects which need to be recoded, 
 
 
 ```r
-d<-d2Parser(file=filename,type = "csv",
+d <- d2Parser(file=filename,type = "csv",
             dataElementIdScheme = "code",orgUnitIdScheme = "id",
             idScheme = "id" 
             ,invalidData = TRUE )
@@ -143,7 +143,7 @@ In order to run the validation rule check, simply invoke the following command.
 
 ```r
 #Run the validation rule and save the output as a CSV file
-vr_violations<-validateData(data = d,
+vr_violations <- validateData(data = d,
                             return_violations_only = TRUE,
                             parallel =parallel )
 ```

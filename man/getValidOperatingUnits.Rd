@@ -4,10 +4,12 @@
 \alias{getValidOperatingUnits}
 \title{Utility function which provides a list of valid operating units}
 \usage{
-getValidOperatingUnits(d2session = d2_default_session)
+getValidOperatingUnits(
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of operating units and their UIDs

@@ -21,14 +21,33 @@ BugReports:
         https://github.com/jason-p-pickering/datim-validation/issues
 Encoding: UTF-8
 Depends: R (>= 3.6)
-Imports: xml2 (>= 1.3.2), plyr (>= 1.8.4), jsonlite (>= 1.6), stringr
-        (>= 1.4.0), httr (>= 1.4.0), digest (>= 0.6.18), reshape2 (>=
-        1.4.3), assertthat (>= 0.2.0), rlist (>= 0.4.6.1), ISOweek (>=
-        0.6-2), lubridate (>= 1.7.4), getPass (>= 0.2-2), purrr (>=
-        0.3.2), dplyr (>= 0.8.3), R6 (>= 2.4.1), datimutils (>= 0.1.0)
-Suggests: doMC (>= 1.3.5), foreach (>= 1.4.4), httptest (>= 3.2.2),
-        knitr (>= 1.21), methods, rmarkdown (>= 1.11), roxygen2 (>=
-        6.1.1), tcltk, testthat (>= 2.0.1), covr (>= 3.2.1), stringi
-        (>= 1.3.1), rprojroot (>= 1.3-2)
+Imports: assertthat (>= 0.2.0),
+         datimutils (>= 0.1.0),
+         digest (>= 0.6.18),
+         dplyr (>= 0.8.3),
+         getPass (>= 0.2-2),
+         httr (>= 1.4.0),
+         ISOweek (>= 0.6-2),
+         jsonlite (>= 1.6),
+         lubridate (>= 1.7.4),
+         plyr (>= 1.8.4),
+         purrr (>= 0.3.2),
+         R6 (>= 2.4.1),
+         reshape2 (>= 1.4.3),
+         rlist (>= 0.4.6.1),
+         stringr (>= 1.4.0),
+         xml2 (>= 1.3.2)
+Suggests: covr (>= 3.2.1),
+          doMC (>= 1.3.5),
+          foreach (>= 1.4.4),
+          httptest (>= 3.2.2),
+          knitr (>= 1.21),
+          methods,
+          rmarkdown (>= 1.11),
+          roxygen2 (>= 6.1.1),
+          tcltk,
+          testthat (>= 2.0.1),
+          stringi (>= 1.3.1),
+          rprojroot (>= 1.3-2)
 VignetteBuilder: knitr
 RoxygenNote: 7.2.1

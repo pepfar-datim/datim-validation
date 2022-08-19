@@ -2,24 +2,29 @@
 % Please edit documentation in R/checkValueTypeCompliance.R
 \name{checkOptionSetCompliance}
 \alias{checkOptionSetCompliance}
-\title{checkOptionSetCompliance()}
+\title{Check Option Set Compliance}
 \usage{
-checkOptionSetCompliance(d, d2session = d2_default_session)
+checkOptionSetCompliance(
+  d,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{d}{D2Parsed data frame}
+\item{d}{D2 Parsed data frame}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of invalid values validated against their option set.
+Returns a data frame of invalid values validated against
+their option set.
 }
 \description{
 Internal function for validation of data which have option sets
 }
 \examples{
  \dontrun{
-  d<-d2Parser("myfile.csv",type="csv")
+  d <- d2Parser("myfile.csv",type="csv")
   checkOptionSetCompliance(d)
 }
+
 }

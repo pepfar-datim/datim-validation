@@ -2,12 +2,12 @@
 % Please edit documentation in R/selectDataset.R
 \name{selectDataset}
 \alias{selectDataset}
-\title{selectDataSet()}
+\title{Select Dataset}
 \usage{
-selectDataset(d2session = d2_default_session)
+selectDataset(d2session = dynGet("d2_default_session", inherits = TRUE))
 }
 \arguments{
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame  of "dataElementName","categoryOptionComboName",
@@ -15,10 +15,11 @@ Returns a data frame  of "dataElementName","categoryOptionComboName",
 of invalid data elements which are present the the data
 }
 \description{
-Utility function to produce a vector of data set UIDs from user input.
+Utility function to produce a vector of data set UIDs
+from user input.
 }
 \examples{
 \dontrun{
-  ds<-selectDataset()
+  ds <- selectDataset()
 }
 }

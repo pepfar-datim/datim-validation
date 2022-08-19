@@ -2,19 +2,24 @@
 % Please edit documentation in R/getValidDataElements.R
 \name{getValidDataElements}
 \alias{getValidDataElements}
-\title{getInvalidDataElements(datasets)}
+\title{Get Invalid Data Elements}
 \usage{
-getValidDataElements(datasets = NA, d2session = d2_default_session)
+getValidDataElements(
+  datasets = NA,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{datasets}{Should be a character vector of data set UIDs. Alternatively, if left missing, user will be promted.}
+\item{datasets}{Should be a character vector of data set UIDs.
+Alternatively, if left missing, user will be promted to choose from a list.}
 
-\item{d2session}{datimutils login session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of "dataSet","dataElementName","shortname","code","dataelementuid","categoryOptionComboName"
+Returns a data frame  of "dataSet", "dataElementName",
+"shortname", "code", "dataelementuid", "categoryOptionComboName"
 }
 \description{
-Utility function to produce a data frame of valid data elements based on current
-DATIM form specification
+Utility function to produce a data frame of valid data elements
+based on current DATIM form specification.
 }

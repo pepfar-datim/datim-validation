@@ -2,21 +2,24 @@
 % Please edit documentation in R/getCategoryOptionCombosMap.R
 \name{getCategoryOptionCombosMap}
 \alias{getCategoryOptionCombosMap}
-\title{getCategoryOptionCombosMap()}
+\title{Get Category Option Combos Map}
 \usage{
-getCategoryOptionCombosMap(d2session = d2_default_session)
+getCategoryOptionCombosMap(
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame  of code,name,id and shortName of all categoryOptionCombos
+Returns a data frame  of code, name, id, and shortName
+of all categoryOptionCombos
 }
 \description{
 Utility function to produce a map of category option combos
 }
 \examples{
 \dontrun{
-coc_map<-getCategoryOptionCombosMap()
+coc_map <- getCategoryOptionCombosMap()
 }
 }

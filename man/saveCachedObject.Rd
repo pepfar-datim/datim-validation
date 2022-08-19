@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{saveCachedObject}
 \alias{saveCachedObject}
-\title{saveCachedObject(toCache,sig,wd)}
+\title{Save Cached Object}
 \usage{
 saveCachedObject(toCache, sig, wd = paste0(getwd(), "/.R_Cache/"))
 }
