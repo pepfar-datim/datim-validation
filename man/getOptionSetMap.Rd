@@ -10,7 +10,7 @@ getOptionSetMap(d2session = d2_default_session)
 \item{d2session}{datimutils d2session object}
 }
 \value{
-Returns a data frame structure composed of option set names, UIDs, and a data frame for 
+Returns a data frame structure composed of option set names, UIDs, and a data frame for
 each of these with individual options present in the option set.
 }
 \description{
