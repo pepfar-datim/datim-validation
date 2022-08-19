@@ -1,16 +1,16 @@
 #' @export
-#' @title getDataSets()
-#' 
+#' @title Get a list of all datasets from DATIM
+#'
 #' @description Utility function to produce a data frame of
-#'  datasets. 
+#'  datasets.
 #' @param d2session datimutils login session object
 #' @return Returns a data frame  of name, id and formtype of all datasets.
-#' @examples 
+#' @examples
 #'  \dontrun{
-#'  ds<-getDataSets()
+#'  ds<-getDataSetsFromDATIM()
 #'  }
 #'
-getDataSets <- function(d2session = d2_default_session) {
+getDataSetsFromDATIM <- function(d2session = d2_default_session) {
   url <-
     URLencode(
       paste0(
@@ -31,23 +31,23 @@ getDataSets <- function(d2session = d2_default_session) {
       ds <- ds[with(ds, order(name)),]
       saveCachedObject(ds, sig)
     }
-    
+
     else {
       stop("Could not get a list of datasets")
     }
   }
-  
+
   ds
 }
 
 
 
 #' @title getCurrentMERDataSets(type)
-#' 
+#'
 #'
 #' @param type Should be either RESULTS or TARGETS
-#' 
-#' @param d2session datimutils login session object  
+#'
+#' @param d2session datimutils login session object
 #' @return Returns a list of dataset UIDs of the given type
 #' @export
 #'
@@ -55,12 +55,12 @@ getDataSets <- function(d2session = d2_default_session) {
 #'   \dontrun{
 #'  ds<-getCurrentMERDataSets(type="RESULTS", d2session = d2session)
 #'  }
-#'  
+#'
 getCurrentMERDataSets<-function(type="RESULTS", d2session = d2_default_session) {
-  
+
   if ( !(type %in% c("RESULTS","TARGETS"))) {stop("Type must be either RESULTS or TARGETS")}
-  ds<-getDataSets(d2session = d2session)  
-  
+  ds<-getDataSetsFromDATIM(d2session = d2session)
+
   if ( type == "RESULTS" ) {
   want <-
     c(
@@ -80,6 +80,6 @@ getCurrentMERDataSets<-function(type="RESULTS", d2session = d2_default_session) 
       stop("Unknown dataset group. Must be one of RESULTS, TARGETS")
     }
  ds[ds$name %in% want,"id"]
- 
+
 }
 

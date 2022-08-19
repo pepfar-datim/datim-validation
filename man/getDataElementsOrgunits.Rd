@@ -10,7 +10,7 @@ getDataElementsOrgunits(organisationUnit = NA, datasets = NA, d2session)
 \item{organisationUnit}{Organisation unit. Defaults to user organisation
 unit if not supplied explicitly.}
 
-\item{datasets}{Should be a character vector of data set UIDs. Alternatively, 
+\item{datasets}{Should be a character vector of data set UIDs. Alternatively,
 if left missing, user will be prompted.}
 
 \item{d2session}{datimutils login session object}

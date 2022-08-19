@@ -15,10 +15,10 @@ checkDataElementOrgunitValidity(
 \arguments{
 \item{data}{D2 compliant data frame}
 
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor, 
+\item{organisationUnit}{Should be the UID of the organisation unit ancestor,
 typically the operating unit.}
 
-\item{datasets}{Should be a character vector of data set UIDs. 
+\item{datasets}{Should be a character vector of data set UIDs.
 Alternatively, if left missing, user will be promted.}
 
 \item{return_violations}{Return the invalid data if TRUE}
@@ -31,7 +31,7 @@ Returns subset of data which contains
   TRUE value is returned.
 }
 \description{
-Returns a data frame invalid data elements which exist in the data 
+Returns a data frame invalid data elements which exist in the data
 but which do not have a valid organistion unit / dataset association.
 }
 \examples{
