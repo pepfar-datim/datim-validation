@@ -177,7 +177,7 @@ sims2Parser <-
 
     #if period is provided, use it for boundaries
     if (!is.na(isoPeriod)) {
-      period <- getPeriodFromISO(isoPeriod);
+      period <- getPeriodFromISO(isoPeriod)
     } else {
       period <- NA
     }

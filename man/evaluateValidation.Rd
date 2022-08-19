@@ -13,14 +13,13 @@ evaluateValidation(combis, values, vr, return_violations_only = TRUE)
 
 \item{vr}{Validation rule object}
 
-\item{return_violations_only}{Parameter to return only violations or all
-validation rule evaluations.}
+\item{return_violations_only}{Only return validation rule violations}
 }
 \value{
 Returns a data frame of validation rule evaluations
 }
 \description{
-evaluationValidation will accept a vector of combis
-(data elements.category optioncombinations) and values
+evaluationValidation will accept a vector
+of combis (data elements.category optioncombinations) and values
 and evaluate it against the supplied validation rules
 }

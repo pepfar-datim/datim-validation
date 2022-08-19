@@ -70,10 +70,8 @@ getValidDataElements <- function(datasets = NA,
         des <- des[, names(des.all)]
         saveCachedObject(des, sig)
         if (nrow(des) > 0) { des.all <- rbind(des.all, des) } #nolint
-      }
-
-      else {
-        print("Could not get valid data elements"); stop()
+      } else {
+        stop("Could not get valid data elements")
       }
 
     } else {

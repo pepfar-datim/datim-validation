@@ -32,8 +32,7 @@ getDataSets <- function(d2session = dynGet("d2_default_session",
       ds <- as.data.frame(r$dataSets)
       ds <- ds[with(ds, order(name)), ]
       saveCachedObject(ds, sig)
-    }
-    else {
+    } else {
       stop("Could not get a list of datasets")
     }
   }
@@ -72,7 +71,8 @@ getCurrentMERDataSets <- function(type = "RESULTS",
       "MER Results: Community Based - DoD ONLY",
       "MER Results: Facility Based - DoD ONLY",
       "Host Country Results: Facility (USG)"
-    ) } else if (type == "TARGETS") {
+    )
+    } else if (type == "TARGETS") {
     want <- c(
       "Host Country Targets: COP Prioritization SNU (USG)",
       "MER Target Setting: PSNU (Facility and Community Combined)",

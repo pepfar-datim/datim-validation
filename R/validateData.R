@@ -132,11 +132,13 @@ validateData <- function(data,
 
   validation.results <-
     plyr::ddply(data, plyr::.(period, attributeOptionCombo, orgUnit),
-                function(x)
+                \(x) {
                   evaluateValidation(x$combi,
                                      x$value,
                                      vr,
-                                     return_violations_only),
+                                     return_violations_only)
+                                     }
+          ,
                 .parallel = parallel,
                 .inform = TRUE)
 

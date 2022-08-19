@@ -44,12 +44,12 @@ getMechanismsMap <- function(organisationUnit = NA,
       }
       #Need to unwind the dates
       mechs$startDate <-
-        as.Date(sapply(mechs$categoryOptions, function(x)
-          ifelse(is.null(x$startDate), "1900-01-01", x$startDate)),
+        as.Date(sapply(mechs$categoryOptions,
+          \(x) ifelse(is.null(x$startDate), "1900-01-01", x$startDate)),
           "%Y-%m-%d")
       mechs$endDate <-
-        as.Date(sapply(mechs$categoryOptions, function(x)
-          ifelse(is.null(x$endDate), "1900-01-01", x$endDate)),
+        as.Date(sapply(mechs$categoryOptions,
+          \(x) ifelse(is.null(x$endDate), "1900-01-01", x$endDate)),
           "%Y-%m-%d")
       mechs <- mechs[, -which(names(mechs) == "categoryOptions")]
       saveCachedObject(mechs, sig)

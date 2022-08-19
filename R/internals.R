@@ -34,11 +34,10 @@ getCachedObject <- function(sig, wd = paste0(getwd(), "/.R_Cache/")) {
   if (is.null(getOption("maxCacheAge"))) {
     return(NULL)
   } else {
-    this_obj = file = paste0(getwd(), "/.R_Cache/", sig)
+    this_obj <- paste0(getwd(), "/.R_Cache/", sig)
     if (isValidCachedObject(this_obj)) {
       return(readRDS(this_obj))
-    }
-    else {
+    } else {
       unlink(this_obj)
       return(NULL)
     }

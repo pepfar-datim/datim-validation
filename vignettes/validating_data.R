@@ -1,7 +1,9 @@
 ## ----eval=FALSE---------------------------------------------------------------
+#  options(scipen=999) #Turn of any scientific notation
+#  require(datimutils)
 #  require(datimvalidation)
-#  secrets <- "/home/littebobbytables/.secrets/datim.json"
-#  loadSecrets(secrets)
+#  loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
+#  options("maxCacheAge"="7 days")
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  d <- d2Parser(file=filename,type = "csv",

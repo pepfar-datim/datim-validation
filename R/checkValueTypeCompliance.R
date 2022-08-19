@@ -32,8 +32,7 @@ checkValueTypeCompliance <- function(d,
   r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
   r <-  httr::content(r, "text")
 
-  # nolint
-  # nolint start
+
   patterns <-
     list(NUMBER = "^(-?[0-9]+)(\\.[0-9]+)?$",
          INTEGER = "^(0|-?[1-9]\\d*)$",
@@ -41,19 +40,18 @@ checkValueTypeCompliance <- function(d,
          INTEGER_ZERO_OR_POSITIVE = "(^0$)|(^[1-9]\\d*$)",
          INTEGER_NEGATIVE = "^-[1-9]\\d*$",
          ZERO_PATTERN = "^0(\\.0*)?$",
-         BOOLEAN = "^(true|false|True|False|0|1)$",
-         TRUE_ONLY = "^(true|True|1)$",
-         PERCENTAGE = "^([0-9]|[1-9][0-9]|100)(\\.[0-9]+)?$",
-         UNIT_INTERVAL = "^(0(\\.[0-9]+)?)$|^1$",
-         DATE = "^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
-         DATETIME = "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$")
-  # nolint end
+         BOOLEAN ="^(true|false|True|False|TRUE|FALSE|0|1)$",
+         TRUE_ONLY ="^(true|True|TRUE|1)$",
+         PERCENTAGE ="^([0-9]|[1-9][0-9]|100)(\\.[0-9]+)?$",
+         UNIT_INTERVAL ="^(0(\\.[0-9]+)?)$|^1$",
+         DATE ="^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
+         DATETIME ="^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$")
 
-  patterns <- reshape2::melt(patterns)
-  names(patterns) <- c("regex", "valueType")
+  patterns<-reshape2::melt(patterns)
+  names(patterns)<-c("regex", "valueType")
 
   des <- getDataElementMap(d2session = d2session)
-  des <- merge(des, patterns, by = "valueType", all.x = T)
+  des <- merge(des, patterns, by = "valueType", all.x = TRUE)
   d <- merge(d, des, by.x = "dataElement", by.y = "id")
 
   #Support only valueTypes with a regex

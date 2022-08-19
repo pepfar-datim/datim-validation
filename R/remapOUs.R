@@ -16,8 +16,7 @@
 #' d$ou_names <- remapOUs(d$organisationUnits,mode_in="id",mode_out="shortName")
 #' }
 #'
-remapOUs <-
-  function(ous_in,
+remapOUs <- function(ous_in,
            organisationUnit,
            mode_in = "code",
            mode_out = "id",

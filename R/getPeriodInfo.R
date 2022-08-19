@@ -32,8 +32,7 @@ getPeriodInfo <- function(ISO = NA,
         stop(paste0("Period with ISO identifier", ISO, "not found"))
       }
 
-    }
-    else {
+    } else {
       stop("Could not retreive period information")
     }
   }

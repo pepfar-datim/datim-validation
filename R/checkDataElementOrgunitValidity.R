@@ -27,7 +27,7 @@ getDataElementsOrgunits <- function(organisationUnit = NA,
 
   allDataSets <- getDataSets(d2session = d2session)
 
-  if (length(datasets) == 0 | any(is.na(datasets))) {
+  if (length(datasets) == 0 || any(is.na(datasets))) {
     datasets <- selectDataset(d2session)
   }
 

@@ -57,11 +57,11 @@ test_that("Invalid monthly period produces error", {
 
 test_that("We can parse a yearly period", {
 
-  test_date <- getPeriodFromISO("2018")
-  test_result <- data.frame(iso = "2018",
-                          startDate = as.Date("2018-01-01"),
-                          endDate = as.Date("2018-12-31"),
-                          periodType = "Yearly",
+  test_date<-getPeriodFromISO("2018")
+  test_result<-data.frame(iso="2018",
+                          startDate=as.Date("2018-01-01"),
+                          endDate=as.Date("2018-12-31"),
+                          periodType="Yearly",
                           stringsAsFactors = FALSE)
   expect_identical(test_date, test_result)
 })

@@ -248,7 +248,7 @@ d2Parser <-
 
     if (!code_scheme_check$is_valid) {
       return(code_scheme_check)
-    } else{
+    } else {
       data
     }
 
