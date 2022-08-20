@@ -5,15 +5,17 @@ with_mock_api({
   test_that("We flag invalid data element / orgunit associations in the data", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
-    d<-tibble::tribble(
+    # nolint start
+    d <- tibble::tribble(
       ~dataElement, ~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,~comment,
       "MMODRH694Pn","2017Q1","LnGaK6y98gC","pPoX6WdTN1o","WQa4uNduUe","10","GOOD",
       "tG7ocyZ8kVA","2017Q1","RQCy4nM3afc","HllvX50cXC0","WQa4uNduUev","5","GOOD",
       "qeS0bazg6IW","2017Q1","KKFzPM8LoX7","HllvX50cXC0","WQa4uNduUev","20","BAD"
     )
-  datasets<-c("MqNLEXmzIzr","kkXf2zXqTM0")
-  expect_warning(test_data<-checkDataElementOrgunitValidity(d,datasets, d2session = d2_default_session ))
-  expect_equal(NROW(test_data),1)
+    # nolint end
+  datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
+  expect_warning(test_data <- checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session))
+  expect_equal(NROW(test_data), 1)
 })})
 
 
