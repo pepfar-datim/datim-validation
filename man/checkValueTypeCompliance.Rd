@@ -2,14 +2,17 @@
 % Please edit documentation in R/checkValueTypeCompliance.R
 \name{checkValueTypeCompliance}
 \alias{checkValueTypeCompliance}
-\title{checkValueTypeCompliance(d)}
+\title{Check Value Type Compliance}
 \usage{
-checkValueTypeCompliance(d, d2session = d2_default_session)
+checkValueTypeCompliance(
+  d,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{d}{A D2Parsed data frame}
+\item{d}{D2 Parsed data frame}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of invalid data only
@@ -18,14 +21,15 @@ Returns a data frame of invalid data only
 This function will check data to ensure that its value matches
 a given pattern based on its value type. As an example, if the data element
 which is being validated should only accept positive integers, any values
-which are not positive integers will be flagged. For values which are composed
-of option sets, any values which do not correspond so one of the option set
-value codes, will also be flagged. Additionally ,any values which are zero
-for which the data element is not zero significant will also be flagged.
+which are not positive integers will be flagged. For values which are
+composed of option sets, any values which do not correspond so one of the
+option set value codes, will also be flagged. Additionally ,any values which
+are zero for which the data element is not zero significant will also
+be flagged.
 }
 \examples{
 \dontrun{
-d<-d2Parser("myfile.csv",type="csv")
+d <- d2Parser("myfile.csv",type="csv")
 checkValueTypeCompliance(d)
 }
 

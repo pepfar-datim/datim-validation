@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{isValidCachedObject}
 \alias{isValidCachedObject}
-\title{isValidCachedObject(sig,wd)}
+\title{Is Valid Cached Object}
 \usage{
 isValidCachedObject(x)
 }
@@ -13,6 +13,6 @@ isValidCachedObject(x)
 If the file exists and is not stale, returns TRUE, otherwise FALSE.
 }
 \description{
-Internal utility function to determine whether a cached object is stale.
-If its stale, it will be removed.
+Internal utility function to determine whether a cached object
+is stale. If its stale, it will be removed.
 }

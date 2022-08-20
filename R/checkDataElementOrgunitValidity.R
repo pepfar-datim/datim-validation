@@ -6,7 +6,7 @@ getDataElementOrgunitMap <- function(dataset, d2session = d2_default_session) {
   url <-
     paste0(
       d2session$base_url,
-      "api/",api_version(),"/dataSets/",dataset,"?fields=organisationUnits[id],dataSetElements[dataElement[id]]")
+      "api/", api_version(), "/dataSets/", dataset, "?fields=organisationUnits[id],dataSetElements[dataElement[id]]")
 
   r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
   r <- httr::content(r, "text")
@@ -26,18 +26,18 @@ validateOrgunitDataElements <- function(orgUnitDataElements, de_map) {
     )))
 
   #Filter the complete map for this orgunit
-   de_map <- de_map[has_dataset]
+  de_map <- de_map[has_dataset]
 
-   #Need to deal with the zero case here.
-   #This means that the orgunit has data,
-   #but no valid data elemens
-   if (length(de_map) == 0L) {
-     return(orgUnitDataElements)
-   }
+  #Need to deal with the zero case here.
+  #This means that the orgunit has data,
+  #but no valid data elemens
+  if (length(de_map) == 0L) {
+    return(orgUnitDataElements)
+  }
 
   #Filter the datasets and get the possible data elements
-   possible_des <-
-     lapply(lapply(de_map, \(.) .$dataSetElement), \(.) .$dataElement.id) |> unlist() |> unique()
+  possible_des <-
+    lapply(lapply(de_map, \(.) .$dataSetElement), \(.) .$dataElement.id) |> unlist() |> unique()
 
   #Are all the data elements for this orgunit in the list of possible des?
   orgUnitDataElements[!(orgUnitDataElements$dataElement %in% possible_des),]

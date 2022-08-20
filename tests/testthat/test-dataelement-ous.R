@@ -24,19 +24,21 @@ with_mock_api({
   test_that("We flag invalid data element / disagg associations in the data", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
-    d<-d2Parser(filename=test_config("test-data-bad-de-disagg.csv"),
-                type="csv",
-                organisationUnit = "KKFzPM8LoXs",
-                dataElementIdScheme = "id",
-                orgUnitIdScheme = "id",
-                idScheme = "id",
-                invalidData = FALSE,
-                d2session = d2_default_session)
-    datasets<-c("i29foJcLY9Y","STL4izfLznL")
-    expect_warning(test_data<-checkDataElementDisaggValidity(d,
-                                                             datasets=datasets,
-                                                             return_violations=TRUE,
-                                                             d2session = d2_default_session))
-    expect_equal(NROW(test_data),1)
+    d <- d2Parser(filename = test_config("test-data-bad-de-disagg.csv"),
+                  type = "csv",
+                  organisationUnit = "KKFzPM8LoXs",
+                  dataElementIdScheme = "id",
+                  orgUnitIdScheme = "id",
+                  idScheme = "id",
+                  invalidData = FALSE,
+                  d2session = d2_default_session)
+    datasets <- c("i29foJcLY9Y", "STL4izfLznL")
+    expect_warning(test_data <-
+                     checkDataElementDisaggValidity(
+                       d,
+                       datasets = datasets,
+                       return_violations = TRUE,
+                       d2session = d2_default_session))
+    expect_equal(NROW(test_data), 1)
     expect_equal(test_data$storedby[1], "BAD")
   })})

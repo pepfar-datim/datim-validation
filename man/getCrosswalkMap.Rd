@@ -2,19 +2,23 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrosswalkMap}
 \alias{getCrosswalkMap}
-\title{getCrosswalkMap()}
+\title{Get Crosswalk Map}
 \usage{
-getCrosswalkMap(d2session = d2_default_session)
+getCrosswalkMap(d2session = dynGet("d2_default_session", inherits = TRUE))
+}
+\arguments{
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a map of DSD/TA data element UIDs.
 }
 \description{
-Utility function which returns a map of DSD / TA data elements UIDs
+Utility function which returns a map of
+DSD / TA data elements UIDs
 }
 \examples{
 \dontrun{
-    cw_map<-getCrosswalkMap()
+    cw_map <- getCrosswalkMap()
  }
 
 }

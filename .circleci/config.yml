@@ -1,0 +1,34 @@
+version: 2.1
+description: Datapackr Test Suite
+jobs:
+  build:
+    docker:
+      - image: rocker/verse:3.6.3
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ checksum "renv.lock" }}
+      - run:
+         name: Install curl sytem deps
+         command: |
+             sudo apt-get update
+             sudo apt-get -qq -y install libcurl4-openssl-dev libxml2-dev libsodium-dev libgit2-dev
+      - run:
+          name: Install package dependencies
+          command: R -e "install.packages('renv')"
+      - run:
+          name: Restore from lock file
+          command: R -e "options(renv.consent = TRUE); renv::restore()"
+      - save_cache:
+          key: deps1-{{ checksum "renv.lock" }}
+          paths:
+            - /usr/local/lib/R/site-library
+      - run:
+          name: Build package
+          command: R CMD build --no-build-vignettes --no-manual .
+      - run:
+          name: Test package
+          command:  R -e "devtools::check(error_on='error')"
+      - run:
+          name: Lint package
+          command:  R -e "foo<-unique(names(lintr::lint_package())); if ( length(foo) > 0 ) stop(foo)"

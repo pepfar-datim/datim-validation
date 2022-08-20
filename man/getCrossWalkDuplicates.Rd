@@ -2,14 +2,17 @@
 % Please edit documentation in R/getDuplication.R
 \name{getCrossWalkDuplicates}
 \alias{getCrossWalkDuplicates}
-\title{getCrossWalkDuplicates(d)}
+\title{Get Crosswalk Duplicates}
 \usage{
-getCrossWalkDuplicates(d, d2session = d2_default_session)
+getCrossWalkDuplicates(
+  d,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{d}{A d2 parsed data frame of data.}
+\item{d}{D2 Parsed data frame}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame of all crosswalk mechanism values,
@@ -20,7 +23,7 @@ Utility function which returns the crosswalk mechanism UID
 }
 \examples{
 \dontrun{
-    cw_dups<-getCrossWalkDuplicates(d)
+    cw_dups <- getCrossWalkDuplicates(d)
  }
 
 

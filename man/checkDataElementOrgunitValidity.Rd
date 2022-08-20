@@ -6,23 +6,19 @@
 \usage{
 checkDataElementOrgunitValidity(
   d,
-  organisationUnit,
   datasets,
+  return_violations = TRUE,
   d2session = d2_default_session
 )
 }
 \arguments{
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor,
-typically the operating unit.}
-
-\item{datasets}{Should be a character vector of data set UIDs.
-Alternatively, if left missing, user will be promted.}
-
-\item{d2session}{datimutils d2session object @param d2session datimutils d2session object}
-
-\item{data}{D2 compliant data frame}
+\item{datasets}{Should be a character vector of data set UIDs.}
 
 \item{return_violations}{Return the invalid data if TRUE}
+
+\item{d2session}{datimutils d2session object}
+
+\item{data}{D2 compliant data frame}
 }
 \value{
 Returns subset of data which contains

@@ -2,22 +2,24 @@
 % Please edit documentation in R/checkValueTypeCompliance.R
 \name{getOptionSetMap}
 \alias{getOptionSetMap}
-\title{getOptionSetMap()}
+\title{Get Option Set Map}
 \usage{
-getOptionSetMap(d2session = d2_default_session)
+getOptionSetMap(d2session = dynGet("d2_default_session", inherits = TRUE))
 }
 \arguments{
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame structure composed of option set names, UIDs, and a data frame for
-each of these with individual options present in the option set.
+Returns a data frame structure composed of option set names, UIDs,
+and a data frame for each of these with individual options present
+in the option set.
 }
 \description{
-Utility function to fetch a list of optionsets and possible values within them
+Utility function to fetch a list of optionsets and possible
+values within them
 }
 \examples{
  \dontrun{
-  op_set_map<-getOptionSetMap()
+  op_set_map <- getOptionSetMap()
 }
 }

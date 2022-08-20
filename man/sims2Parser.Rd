@@ -2,7 +2,7 @@
 % Please edit documentation in R/sims2Parser.R
 \name{sims2Parser}
 \alias{sims2Parser}
-\title{Special purpose parsing function for SIMS2 aggregate data with duplicates}
+\title{SIMS2 Parser}
 \usage{
 sims2Parser(
   filename,
@@ -12,37 +12,49 @@ sims2Parser(
   invalidData = FALSE,
   hasHeader = TRUE,
   isoPeriod = NA,
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{filename}{Location of the payload to be imported. Should be a valid SIMS2 aggregate file. See the separate spec for details}
+\item{filename}{Location of the payload to be imported. Should be a valid
+import file.}
 
-\item{dataElementIdScheme}{Should be one of either code, name, shortName or id. The default is "code". If this paramater is "id",
-then the Data elements are assumed to be already specififed as UIDs.}
+\item{dataElementIdScheme}{Should be one of either code, name, shortName,
+or id. If this paramater is "id", then the Data elements are assumed to be
+already specififed as UIDs.}
 
-\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id. If this paramater is "id",
-then the organisation units are assumed to be already specififed as UIDs}
+\item{orgUnitIdScheme}{Should be one of either code, name, shortName or id.
+If this paramater is "id", then the organisation units are assumed to be
+already specififed as UIDs}
 
-\item{idScheme}{Remapping scheme for category option combos}
+\item{idScheme}{Remapping scheme for category option combos.}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
-\item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not contain header information.}
+\item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not
+contain header information.}
 
-\item{isoPeriod}{period to be used for date shift boundaries. If not provided, no boundaries are set.}
+\item{isoPeriod}{period to be used for date shift boundaries. If not
+provided, no boundaries are set.}
+
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of  "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
+Returns a data frame of "dataElement", "period", "orgUnit",
+"categoryOptionCombo", "attributeOptionCombo", "value"
 }
 \description{
-sims2Parser will parse a semi-compliant DHIS2  CSV file and transform it into a standard data
-frame which can be used in subsequent DATIM validation routines. The difference with d2Parser is that
-an extra (non-standard) field will be introduced to record the SIMS visit. This will in turn be
-used to deduplicate visits which occur at the same site + mechanism + date combination. This function
-will automatically decollide these types of visits
+Special purpose parsing function for SIMS2 aggregate data with
+duplicates. \code{sims2Parser} will parse a semi-compliant DHIS2 CSV file and
+transform it into a standard data frame which can be used in subsequent DATIM
+validation routines. The difference with d2Parser is that an extra
+(non-standard) field will be introduced to record the SIMS visit. This will
+in turn be used to deduplicate visits which occur at the same site +
+mechanism + date combination. This function will automatically decollide
+these types of visits
 }
 \note{
-function(filename="/home/me/foo.csv",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id",invalidData=FALSE)
+function(filename = "/home/me/foo.csv", dataElementIdScheme = "code",
+orgUnitIdScheme = "code", idScheme = "id", invalidData = FALSE)
 Note that all values will be returned as characters.
 }
