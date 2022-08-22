@@ -1,46 +1,81 @@
-getDataElementOrgunitMap <- function(dataset, d2session = d2_default_session) {
+#' Title
+#'
+#' @param datasets Vector of dataset UIDs
+#' @param d2session
+#'
+#' @return A list of data element IDs and all organisation units which are valid.
+#'
+#' @examples
+getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_session",
+                                                                  inherits = TRUE)) {
   #TODO: Rewrite using datimutils
   #Note that we are not doing any additional filtering here
   #However, the orgunits should be filtered by the server
   #based on the users orgunit profile.
+  #We will check seperately whether all of the orgunits present
+  # in the file actually belong to the users hierarchy.
+  if (length(dataset) != 1L) {
+    stop("You must specify a single dataset UID")
+  }
+
   url <-
     paste0(
       d2session$base_url,
       "api/", api_version(), "/dataSets/", dataset, "?fields=organisationUnits[id],dataSetElements[dataElement[id]]")
 
-  r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
-  r <- httr::content(r, "text")
-  ous_des <- jsonlite::fromJSON(r, flatten = TRUE)
-
+  #This API call should only be a function of the users actual orgunit, not the one which
+  #The may be using for validation. Global users will have all DEs/OrgUnits anyway.
+  sig <- digest::digest(paste0(url,d2session$user_orgunit), algo = "md5", serialize = FALSE)
+  ous_des <- getCachedObject(sig)
+  if (is.null(ous_des)) {
+    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+    if (r$status == 200L) {
+        r <- httr::content(r, "text")
+        ous_des <- jsonlite::fromJSON(r, flatten = TRUE)
+        saveCachedObject(ous_des, sig)
+    } else  {
+    stop("Could not retreive a list of data elements and orgunits from the server")
+      }
+    }
   ous_des
+  }
 
-}
 
-validateOrgunitDataElements <- function(orgUnitDataElements, de_map) {
+#' Title
+#'
+#' @param orgunits_data_elements
+#' @param de_map
+#'
+#' @return
+#'
+#' @examples
+validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 
-  orgUnit <- unique(orgUnitDataElements$orgUnit)
+  org_unit <- unique(orgunit_data_elements$orgUnit)
+  if (length(org_unit) > 1) {
+    stop("Data elements can only be validated for a single orgunit.")
+  }
+
   #Which datasets does this orgunit belong to?
   has_dataset <-
     unlist(lapply(de_map, \(x) any(
-      x$organisationUnits$id %in% orgUnit
+      x$organisationUnits$id %in% org_unit
     )))
 
+  #This orgunit does not have any data sets
+  #Thus all data elements are invalid.
+  if (!any(has_dataset)) {
+    return(orgunit_data_elements)
+  }
   #Filter the complete map for this orgunit
   de_map <- de_map[has_dataset]
-
-  #Need to deal with the zero case here.
-  #This means that the orgunit has data,
-  #but no valid data elemens
-  if (length(de_map) == 0L) {
-    return(orgUnitDataElements)
-  }
 
   #Filter the datasets and get the possible data elements
   possible_des <-
     lapply(lapply(de_map, \(.) .$dataSetElement), \(.) .$dataElement.id) |> unlist() |> unique()
 
-  #Are all the data elements for this orgunit in the list of possible des?
-  orgUnitDataElements[!(orgUnitDataElements$dataElement %in% possible_des),]
+  #Return all data elements which are not part of any of the datasets.
+  orgunit_data_elements[!(orgunit_data_elements$dataElement %in% possible_des),]
 }
 
 
