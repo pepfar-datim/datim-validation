@@ -25,7 +25,7 @@ getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_ses
 
   #This API call should only be a function of the users actual orgunit, not the one which
   #The may be using for validation. Global users will have all DEs/OrgUnits anyway.
-  sig <- digest::digest(paste0(url,d2session$user_orgunit), algo = "md5", serialize = FALSE)
+  sig <- digest::digest(paste0(url, d2session$user_orgunit), algo = "md5", serialize = FALSE)
   ous_des <- getCachedObject(sig)
   if (is.null(ous_des)) {
     r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
@@ -75,7 +75,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
     lapply(lapply(de_map, \(.) .$dataSetElement), \(.) .$dataElement.id) |> unlist() |> unique()
 
   #Return all data elements which are not part of any of the datasets.
-  orgunit_data_elements[!(orgunit_data_elements$dataElement %in% possible_des),]
+  orgunit_data_elements[!(orgunit_data_elements$dataElement %in% possible_des), ]
 }
 
 
@@ -98,19 +98,24 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 #'
-checkDataElementOrgunitValidity <- function(d, datasets, return_violations =TRUE, d2session = d2_default_session) {
+checkDataElementOrgunitValidity <-
+  function(d,
+           datasets,
+           return_violations  = TRUE,
+           d2session = d2_default_session) {
+
   #Get a list of all data elements and orgunits
   #Present in the data and split into a list.
-  des_ous <- unique(d[,c("orgUnit","dataElement")])
+  des_ous <- unique(d[, c("orgUnit", "dataElement")])
   des_ous <- split(des_ous, des_ous$orgUnit)
   #Get a list of datasets, and the organisationunits and
   #data elements which they contain
   #TODO: This likely needs to be cached. Skip for now.
   de_map <- lapply(datasets, \(x) getDataElementOrgunitMap(x, d2session = d2session))
 
-  des_ous_test <- lapply(des_ous, function(x) validateOrgunitDataElements(x,de_map))
+  des_ous_test <- lapply(des_ous, function(x) validateOrgunitDataElements(x, de_map))
   #Filter the list for any orgunits which have bogus data elements
-  bad_data_des_ous <- des_ous_test[unlist(lapply(des_ous_test,\(.) NROW(.) > 0))]
+  bad_data_des_ous <- des_ous_test[unlist(lapply(des_ous_test, \(.) NROW(.) > 0))]
 
 
   if (length(bad_data_des_ous) > 0) {
@@ -120,9 +125,15 @@ checkDataElementOrgunitValidity <- function(d, datasets, return_violations =TRUE
     } else {
       return(FALSE)
     }
-  }
+  } else {
 
-  TRUE
+    if (return_violations) {
+      return(data.frame(dataElement = character(),
+                        orgUnit = character()))
+    } else {
+      return(TRUE)
+    }
+  }
 
 }
 

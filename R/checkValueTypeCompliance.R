@@ -40,15 +40,15 @@ checkValueTypeCompliance <- function(d,
          INTEGER_ZERO_OR_POSITIVE = "(^0$)|(^[1-9]\\d*$)",
          INTEGER_NEGATIVE = "^-[1-9]\\d*$",
          ZERO_PATTERN = "^0(\\.0*)?$",
-         BOOLEAN ="^(true|false|True|False|TRUE|FALSE|0|1)$",
-         TRUE_ONLY ="^(true|True|TRUE|1)$",
-         PERCENTAGE ="^([0-9]|[1-9][0-9]|100)(\\.[0-9]+)?$",
-         UNIT_INTERVAL ="^(0(\\.[0-9]+)?)$|^1$",
-         DATE ="^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
-         DATETIME ="^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$")
+         BOOLEAN = "^(true|false|True|False|TRUE|FALSE|0|1)$",
+         TRUE_ONLY = "^(true|True|TRUE|1)$",
+         PERCENTAGE = "^([0-9]|[1-9][0-9]|100)(\\.[0-9]+)?$",
+         UNIT_INTERVAL = "^(0(\\.[0-9]+)?)$|^1$",
+         DATE = "^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
+         DATETIME = "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$")
 
-  patterns<-reshape2::melt(patterns)
-  names(patterns)<-c("regex", "valueType")
+  patterns <- reshape2::melt(patterns)
+  names(patterns) <-c ("regex", "valueType")
 
   des <- getDataElementMap(d2session = d2session)
   des <- merge(des, patterns, by = "valueType", all.x = TRUE)
