@@ -110,7 +110,6 @@ checkDataElementOrgunitValidity <-
   des_ous <- split(des_ous, des_ous$orgUnit)
   #Get a list of datasets, and the organisationunits and
   #data elements which they contain
-  #TODO: This likely needs to be cached. Skip for now.
   de_map <- lapply(datasets, \(x) getDataElementOrgunitMap(x, d2session = d2session))
 
   des_ous_test <- lapply(des_ous, function(x) validateOrgunitDataElements(x, de_map))
@@ -118,7 +117,7 @@ checkDataElementOrgunitValidity <-
   bad_data_des_ous <- des_ous_test[unlist(lapply(des_ous_test, \(.) NROW(.) > 0))]
 
 
-  if (length(bad_data_des_ous) > 0) {
+  if (length(bad_data_des_ous) > 0L) {
     warning("Invalid data element/orgunit associations were detected!")
     if (return_violations) {
       return(do.call("rbind", bad_data_des_ous))
