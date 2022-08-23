@@ -28,7 +28,7 @@ checkOrgunitsInHierarchy <-
     if (length(invalid_orgunits) > 0) {
 
       warning("Organisation units detected which are not in the provided operating unit.")
-      return(data_des_periods_bad)
+      return(invalid_orgunits)
 
     } else {
       return(TRUE)
