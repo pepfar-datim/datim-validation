@@ -5,7 +5,6 @@
 #'
 #' @return A list of data element IDs and all organisation units which are valid.
 #'
-#' @examples
 getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_session",
                                                                   inherits = TRUE)) {
   #TODO: Rewrite using datimutils
