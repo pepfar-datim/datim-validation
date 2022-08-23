@@ -17,7 +17,7 @@ getCategoryOptionCombosMap <- function(d2session = dynGet("d2_default_session",
   url <- utils::URLencode(
     paste0(d2session$base_url, "api/", api_version(),
            "/categoryOptionCombos?fields=id,name,shortName,code&paging=false"))
-  r <- httr::GET(url,
+  r <- httpcache::GET(url,
                httr::timeout(300),
                handle = d2session$handle)
   if (r$status == 200L) {

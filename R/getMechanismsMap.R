@@ -31,11 +31,8 @@ getMechanismsMap <- function(organisationUnit = NA,
                          organisationUnit))
   }
   url <- utils::URLencode(url)
-  sig <- digest::digest(paste0(url), algo = "md5", serialize = FALSE)
-  mechs <- getCachedObject(sig)
-    if (is.null(mechs)) {
 
-    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
     if (r$status_code == 200L) {
       r <- httr::content(r, "text")
       mechs <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
@@ -52,11 +49,10 @@ getMechanismsMap <- function(organisationUnit = NA,
           \(x) ifelse(is.null(x$endDate), "1900-01-01", x$endDate)),
           "%Y-%m-%d")
       mechs <- mechs[, -which(names(mechs) == "categoryOptions")]
-      saveCachedObject(mechs, sig)
     } else {
       stop(paste("Could not retreive mechanisms", httr::content(r, "text")))
     }
-    }
 
-  return(mechs)
+
+    mechs
 }

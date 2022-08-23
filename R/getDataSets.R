@@ -22,21 +22,16 @@ getDataSets <- function(d2session = dynGet("d2_default_session",
         "/dataSets?fields=name,id,formType&paging=false"
       )
     )
-  sig <- digest::digest(paste0(url), algo = "md5", serialize = FALSE)
-  ds <- getCachedObject(sig)
-  if (is.null(ds)) {
-    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+
+    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       r <- jsonlite::fromJSON(r)
       ds <- as.data.frame(r$dataSets)
       ds <- ds[with(ds, order(name)), ]
-      saveCachedObject(ds, sig)
     } else {
       stop("Could not get a list of datasets")
     }
-  }
-
   ds
 }
 

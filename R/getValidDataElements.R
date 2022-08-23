@@ -53,13 +53,9 @@ getValidDataElements <- function(datasets = NA,
                "&paging=false"))
     }
 
-    sig <- digest::digest(paste0(url, datasets[i]),
-                          algo = "md5",
-                          serialize = FALSE)
-    des <- getCachedObject(sig)
 
-    if (is.null(des)) {
-      r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+      r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
+
       if (r$status == 200L) {
         r <-  httr::content(r, "text")
         r <-  jsonlite::fromJSON(r)
@@ -68,17 +64,15 @@ getValidDataElements <- function(datasets = NA,
         names(des) <- as.character(foo$name)
         #Select only the columns we are interested in
         des <- des[, names(des.all)]
-        saveCachedObject(des, sig)
-        if (nrow(des) > 0) { des.all <- rbind(des.all, des) } #nolint
+
+        if (nrow(des) > 0) {
+          des.all <- rbind(des.all, des)
+        }
       } else {
         stop("Could not get valid data elements")
       }
 
-    } else {
-      if (nrow(des) > 0) { des.all <- rbind(des.all, des) } #nolint
     }
 
-  }
-
-  return(plyr::colwise(as.character)(des.all))
+  plyr::colwise(as.character)(des.all)
 }

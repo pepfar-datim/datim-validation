@@ -58,20 +58,17 @@ getDataElementCadenceMapForPeriod <- function(period,
         period
       )
     )
-  sig <- digest::digest(url, algo = "md5", serialize = FALSE)
-  cadence_map <- getCachedObject(sig)
-  if (is.null(cadence_map)) {
-    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+
+    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       cadence_map_json <- jsonlite::fromJSON(r)
       cadence_map <- cadence_map_json$dataElements
       cadence_map$period <- cadence_map_json$period
-      saveCachedObject(cadence_map, sig)
     } else {
       stop("Could not retreive data element cadence map for period ",
            period)
     }
-  }
-  return(cadence_map)
+
+  cadence_map
 }

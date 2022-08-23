@@ -29,7 +29,8 @@ checkValueTypeCompliance <- function(d,
   url <- utils::URLencode(paste0(d2session$base_url,
                                  "api/", api_version(),
                                  "/system/info"))
-  r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+  r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()),
+                      handle = d2session$handle)
   r <-  httr::content(r, "text")
 
 
@@ -47,6 +48,7 @@ checkValueTypeCompliance <- function(d,
          DATE = "^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",
          DATETIME = "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-9][0-9])(\\.\\d{2,3})?$")
 
+  #TODO: Get rid of this dependency
   patterns <- reshape2::melt(patterns)
   names(patterns) <-c ("regex", "valueType")
 
@@ -123,21 +125,19 @@ getOptionSetMap <- function(d2session = dynGet("d2_default_session",
     paste0(d2session$base_url,
            "api/", api_version(),
            "/optionSets?fields=id,name,options[code]&paging=false"))
-  sig <- digest::digest(paste0(url), algo = "md5", serialize = FALSE)
-  option_sets <- getCachedObject(sig)
-  if (is.null(option_sets)) {
-    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+
+    r <- httpcache::GET(url,
+                        httr::timeout(getHTTPTimeout()),
+                        handle = d2session$handle)
     if (r$status == 200L) {
       r <-  httr::content(r, "text")
       r <-  jsonlite::fromJSON(r, flatten = TRUE)
       option_sets <- as.data.frame(r$optionSets)
-      saveCachedObject(option_sets, sig)
     } else {
       stop("Could not get a list of option sets")
     }
-  }
 
-  return(option_sets)
+  option_sets
 }
 
 
