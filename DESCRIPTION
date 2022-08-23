@@ -1,9 +1,20 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.1.2
-Date: 2021-04-27
-Author: Jason P. Pickering
+Version: 1.2.0
+Date: 2022-08-23
+Authors@R: c(
+    person("Jason", "Pickering", email = "jason.p.pickering@gmail.com",
+        role = c("aut", "cre")),
+    person("Chris", "Nemarich", email = "cnemarich@guidehouse.com",
+        role = c("ctb")),
+    person("Vlad", "Shioshvili", email = "Vladimer.Shioshvili@icf.com",
+        role = c("ctb")),
+    person("Dennis", "Banga", email = "dennisbanga@gmail.com",
+        role = c("ctb")),
+    person("Hiwot", "Chichaybelu", email = "Hiwot.Chichaybelu@icf.com",
+        role = c("ctb"))
+  )
 Maintainer: Jason P. Pickering <jason.p.pickering@gmail.com>
 Description: A comprehensive set of tools to validate data payloads
         intended for import into 'DATIM' <https://www.datim.org/>.
