@@ -23,7 +23,6 @@ Encoding: UTF-8
 Depends: R (>= 3.6)
 Imports: assertthat (>= 0.2.0),
          datimutils (>= 0.1.0),
-         digest (>= 0.6.18),
          dplyr (>= 0.8.3),
          getPass (>= 0.2-2),
          httr (>= 1.4.0),
