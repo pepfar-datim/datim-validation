@@ -388,6 +388,17 @@
         "rlang"
       ]
     },
+    "httpcache": {
+      "Package": "httpcache",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1199297226d95ef7f4b8283ba1b47c13",
+      "Requirements": [
+        "digest",
+        "httr"
+      ]
+    },
     "httptest": {
       "Package": "httptest",
       "Version": "4.1.0",
