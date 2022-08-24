@@ -14,11 +14,8 @@ getPeriodInfo <- function(ISO = NA,
   url <- utils::URLencode(paste0(d2session$base_url,
                                  "api/", api_version(),
                                  "/sqlViews/TTM90ytCCdY/data.json"))
-  sig <- digest::digest(paste0(url), algo = "md5", serialize = FALSE)
-  p <- getCachedObject(sig)
 
-  if (is.null(p)) {
-    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       r <- jsonlite::fromJSON(r)
@@ -27,7 +24,7 @@ getPeriodInfo <- function(ISO = NA,
         names(p) <- r$headers$name
         p$enddate <- as.Date(p$enddate, "%Y-%m-%d")
         p$startdate <- as.Date(p$startdate, "%Y-%m-%d")
-        saveCachedObject(p, sig)
+
       } else {
         stop(paste0("Period with ISO identifier", ISO, "not found"))
       }
@@ -35,9 +32,9 @@ getPeriodInfo <- function(ISO = NA,
     } else {
       stop("Could not retreive period information")
     }
-  }
+
   if (!is.na(ISO)) {
-    assertthat::assert_that(length(ISO) == 1)
+    stopifnot(length(ISO) == 1)
     p <- p[p$iso == ISO, ]
   }
   return(p)

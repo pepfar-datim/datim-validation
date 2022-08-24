@@ -16,69 +16,81 @@
 getValidationRules <- function(remove_decoration = FALSE,
                                d2session = dynGet("d2_default_session",
                                                   inherits = TRUE)) {
+  url <- paste0(
+    d2session$base_url,
+    "api/",
+    api_version(),
+    "/validationRules.json?fields=id,name,description,",
+    "leftSide[expression,missingValueStrategy],",
+    "rightSide[expression,missingValueStrategy],",
+    "operator,periodType&paging=false"
+  )
 
-url <- paste0(d2session$base_url, "api/", api_version(),
-              "/validationRules.json?fields=id,name,description,",
-              "leftSide[expression,missingValueStrategy],",
-              "rightSide[expression,missingValueStrategy],",
-              "operator,periodType&paging=false")
-sig <- digest::digest(url, algo = "md5", serialize = FALSE)
-vr <- getCachedObject(sig)
 
-if (is.null(vr)) {
-expression.pattern <- "[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 
-#Get a copy of the metadata from the server
-r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
-r <-  httr::content(r, "text")
-vr <- jsonlite::fromJSON(r, flatten = TRUE)$validationRules
+    expression.pattern <-
+      "[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
 
-#Static predefined map of operators
-op.map <- data.frame(x = c("greater_than_or_equal_to",
-                           "greater_than",
-                           "equal_to",
-                           "not_equal_to",
-                           "less_than_or_equal_to",
-                           "less_than",
-                           "exclusive_pair",
-                           "compulsory_pair"),
-                   y = c(">=", ">", "==", "!=", "<=", "<", "|", "&"),
-                   stringsAsFactors = FALSE)
-#Strategies
-strat.map <- data.frame(x = c("SKIP_IF_ANY_VALUE_MISSING",
-                              "SKIP_IF_ALL_VALUES_MISSING",
-                              "NEVER_SKIP"))
-#Remap the operators
-vr$operator <- plyr::mapvalues(vr$operator,
-                               op.map$x,
-                               op.map$y,
-                               warn_missing = FALSE)
+    #Get a copy of the metadata from the server
+    r <-
+      httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
+    r <-  httr::content(r, "text")
+    vr <- jsonlite::fromJSON(r, flatten = TRUE)$validationRules
 
-#Count the left and right side operators
-vr$rightSide.ops <- stringr::str_count(vr$rightSide.expression,
-                                       expression.pattern)
-vr$leftSide.ops <- stringr::str_count(vr$leftSide.expression,
-                                      expression.pattern)
+    #Static predefined map of operators
+    op.map <- data.frame(
+      x = c(
+        "greater_than_or_equal_to",
+        "greater_than",
+        "equal_to",
+        "not_equal_to",
+        "less_than_or_equal_to",
+        "less_than",
+        "exclusive_pair",
+        "compulsory_pair"
+      ),
+      y = c(">=", ">", "==", "!=", "<=", "<", "|", "&"),
+      stringsAsFactors = FALSE
+    )
+    #Strategies
+    strat.map <- data.frame(x = c(
+      "SKIP_IF_ANY_VALUE_MISSING",
+      "SKIP_IF_ALL_VALUES_MISSING",
+      "NEVER_SKIP"
+    ))
+    #Remap the operators
+    vr$operator <- plyr::mapvalues(vr$operator,
+                                   op.map$x,
+                                   op.map$y,
+                                   warn_missing = FALSE)
 
-#Remove any line breaks
-vr$leftSide.expression <- stringr::str_replace(vr$leftSide.expression,
-                                               pattern = "\n",
-                                               "")
-vr$rightSide.expression <- stringr::str_replace(vr$rightSide.expression,
-                                                pattern = "\n",
-                                                "")
+    #Count the left and right side operators
+    vr$rightSide.ops <- stringr::str_count(vr$rightSide.expression,
+                                           expression.pattern)
+    vr$leftSide.ops <- stringr::str_count(vr$leftSide.expression,
+                                          expression.pattern)
 
-if (remove_decoration) {
+    #Remove any line breaks
+    vr$leftSide.expression <-
+      stringr::str_replace(vr$leftSide.expression,
+                           pattern = "\n",
+                           "")
+    vr$rightSide.expression <-
+      stringr::str_replace(vr$rightSide.expression,
+                           pattern = "\n",
+                           "")
 
-  #Remove decorations
-  vr$leftSide.expression <- gsub("[#{}]", "", vr$leftSide.expression)
-  vr$rightSide.expression <- gsub("[#{}]", "", vr$rightSide.expression)
+    if (remove_decoration) {
+      #Remove decorations
+      vr$leftSide.expression <-
+        gsub("[#{}]", "", vr$leftSide.expression)
+      vr$rightSide.expression <-
+        gsub("[#{}]", "", vr$rightSide.expression)
 
-}
+    }
 
-saveCachedObject(vr, sig)
 
-}
 
-return(vr)
+
+ vr
 }

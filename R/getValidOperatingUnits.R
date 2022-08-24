@@ -10,14 +10,14 @@
 getValidOperatingUnits <- function(d2session = dynGet("d2_default_session",
                                                       inherits = TRUE)) {
   r <-
-    httr::GET(utils::URLencode(
+    httpcache::GET(utils::URLencode(
       paste0(
         d2session$base_url,
         "api/",
         api_version(),
         "/organisationUnits?level=3&fields=id,name&paging=false"
       )
-    ), httr::timeout(300), handle = d2session$handle)
+    ), httr::timeout(getHTTPTimeout()), handle = d2session$handle)
 
   if (r$status == 200) {
      httr::content(r, "text") %>%

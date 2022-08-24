@@ -18,18 +18,15 @@ getDataElementMap <- function(d2session = dynGet("d2_default_session",
            "api/", api_version(),
            "/dataElements?fields=id,code,shortName,name,",
            "valueType,optionSet[id],zeroIsSignificant&paging=false"))
-  sig <- digest::digest(url, algo = "md5", serialize = FALSE)
-  des <- getCachedObject(sig)
-  if (is.null(des)) {
-  r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+
+  r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
   if (r$status == 200L) {
     r <-  httr::content(r, "text")
     des <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
-    saveCachedObject(des, sig)
      } else {
       print(paste("Could not retreive data elements", httr::content(r, "text")))
       des <- NULL
     }
-  }
-  return(des)
+
+  des
 }

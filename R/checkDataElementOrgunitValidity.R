@@ -5,7 +5,6 @@
 #'
 #' @return A list of data element IDs and all organisation units which are valid.
 #'
-#' @examples
 getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_session",
                                                                   inherits = TRUE)) {
   #TODO: Rewrite using datimutils
@@ -25,18 +24,16 @@ getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_ses
 
   #This API call should only be a function of the users actual orgunit, not the one which
   #The may be using for validation. Global users will have all DEs/OrgUnits anyway.
-  sig <- digest::digest(paste0(url, d2session$user_orgunit), algo = "md5", serialize = FALSE)
-  ous_des <- getCachedObject(sig)
-  if (is.null(ous_des)) {
-    r <- httr::GET(url, httr::timeout(300), handle = d2session$handle)
+
+
+    r <- httpcache::GET(url, httr::timeout(300), handle = d2session$handle)
     if (r$status == 200L) {
         r <- httr::content(r, "text")
         ous_des <- jsonlite::fromJSON(r, flatten = TRUE)
-        saveCachedObject(ous_des, sig)
     } else  {
     stop("Could not retreive a list of data elements and orgunits from the server")
       }
-    }
+
   ous_des
   }
 

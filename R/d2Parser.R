@@ -28,6 +28,7 @@ checkCodingScheme <- function(data,
     )
     is_valid <- FALSE
   }
+  #TODO: This is duplicative with checkOrgunitsInHierarchy
   orgunit_check <-
     unique(data$orgUnit)[!(
       unique(data$orgUnit)

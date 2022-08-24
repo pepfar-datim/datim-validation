@@ -75,11 +75,11 @@ getCrosswalkMap <- function(d2session = dynGet("d2_default_session",
                                                inherits = TRUE)) {
 
   r <-
-    httr::GET(
+    httpcache::GET(
       utils::URLencode(
         paste0(d2session$base_url,
                "api/sqlViews/UTlIicJBZFg/data.json&paging=false")),
-      httr::timeout(300),
+      timeout = getHTTPTimeout(),
       handle = d2session$handle)
   if (r$status == 200L) {
     r <- httr::content(r, "text")
@@ -108,11 +108,11 @@ getCrosswalkMap <- function(d2session = dynGet("d2_default_session",
 getCrosswalkMechanism <- function(d2session = dynGet("d2_default_session",
                                                      inherits = TRUE)) {
   r <-
-    httr::GET(
+    httpcache::GET(
       utils::URLencode(
         paste0(d2session$base_url,
                "api/categoryOptionCombos?filter=name:like:00001")),
-      httr::timeout(300),
+      timeout = getHTTPTimeout(),
       handle = d2session$handle)
   if (r$status == 200L) {
     r <- httr::content(r, "text")
