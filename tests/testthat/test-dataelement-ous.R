@@ -6,9 +6,9 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     foo <- getDataElementOrgunitMap(dataset = "cw2T5eAHxzW", d2session = d2_default_session)
-    expect_type(foo,"list")
+    expect_type(foo, "list")
     expect_length(foo, 2L)
-    expect_named(foo, expected = c("dataSetElements","organisationUnits"), ignore.order = TRUE)
+    expect_named(foo, expected = c("dataSetElements", "organisationUnits"), ignore.order = TRUE)
     expect_true(is.data.frame(foo$dataSetElements))
     expect_named(foo$dataSetElements, expected = c("dataElement.id"))
     expect_true(is.data.frame(foo$organisationUnits))
@@ -20,7 +20,7 @@ with_mock_api({
 
 with_mock_api({
   test_that("Can error if more than one dataset is specified", {
-    expect_error(getDataElementOrgunitMap(dataset=c("abc123","def456"), d2session = training))
+    expect_error(getDataElementOrgunitMap(dataset = c("abc123", "def456"), d2session = training))
   })
 })
 
@@ -48,10 +48,10 @@ with_mock_api({
     )
     #This orgunit is not present in the data element orgunit map
     de_map <- list(dataSetElements = data.frame(dataElement.id = c("zzzz123")),
-                   organisationUnits = data.frame(id = c("xxxxx1234" )))
+                   organisationUnits = data.frame(id = c("xxxxx1234")))
 
     test_data <- validateOrgunitDataElements(d, de_map)
-    expect_identical(d,test_data)
+    expect_identical(d, test_data)
   })
 
 })
@@ -72,7 +72,15 @@ with_mock_api({
   expect_warning(test_data <- checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session))
   expect_equal(NROW(test_data), 1)
 
-  expect_warning(test_data <- checkDataElementOrgunitValidity(d, datasets,return_violations = FALSE, d2session = d2_default_session))
+  expect_warning(
+    test_data <-
+      checkDataElementOrgunitValidity(
+        d,
+        datasets,
+        return_violations = FALSE,
+        d2session = d2_default_session
+      )
+  )
   expect_false(test_data)
 })})
 
@@ -93,7 +101,7 @@ with_mock_api({
               test_data <-
                 checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session)
               expect_equal(NROW(test_data), 0)
-              expect_named(test_data,c("dataElement","orgUnit"))
+              expect_named(test_data, c("dataElement", "orgUnit"))
 
               test_data <-
                 checkDataElementOrgunitValidity(d,

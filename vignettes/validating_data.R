@@ -31,5 +31,4 @@
 #  vr_violations <- validateData(data = d,
 #                              return_violations_only = TRUE,
 #                              parallel =parallel )
-#  
-
+#

@@ -79,4 +79,3 @@ getCurrentMERDataSets <- function(type = "RESULTS",
  ds[ds$name %in% want, "id"]
 
 }
-

@@ -10,7 +10,7 @@
 checkOrgunitsInHierarchy <-
   function(d,
            userOrgUnit,
-           d2session = dynGet("d2_default_session", inherits = TRUE) ) {
+           d2session = dynGet("d2_default_session", inherits = TRUE)) {
     if (is.null(d)) {
       stop("Data cannot be null")
     }
