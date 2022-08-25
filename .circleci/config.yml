@@ -1,5 +1,5 @@
 version: 2.1
-description: Datapackr Test Suite
+description: DATIM Validation Test Suite
 jobs:
   build:
     docker:
