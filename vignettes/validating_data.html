@@ -12,23 +12,20 @@
 
 <meta name="author" content="Jason P. Pickering" />
 
-<meta name="date" content="2020-11-03" />
+<meta name="date" content="2022-08-19" />
 
 <title>Validation of data payloads for DATIM</title>
 
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
   }
 });
 </script>
@@ -40,87 +37,32 @@ document.addEventListener('DOMContentLoaded', function() {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      code.sourceCode > span { display: inline-block; line-height: 1.25; }
-  code.sourceCode > span { color: inherit; text-decoration: inherit; }
-  code.sourceCode > span:empty { height: 1.2em; }
-  .sourceCode { overflow: visible; }
-  code.sourceCode { white-space: pre; position: relative; }
-  div.sourceCode { margin: 1em 0; }
-  pre.sourceCode { margin: 0; }
-  @media screen {
-  div.sourceCode { overflow: auto; }
-  }
-  @media print {
-  code.sourceCode { white-space: pre-wrap; }
-  code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-  }
-  pre.numberSource code
-    { counter-reset: source-line 0; }
-  pre.numberSource code > span
-    { position: relative; left: -4em; counter-increment: source-line; }
-  pre.numberSource code > span > a:first-child::before
-    { content: counter(source-line);
-      position: relative; left: -1em; text-align: right; vertical-align: baseline;
-      border: none; display: inline-block;
-      -webkit-touch-callout: none; -webkit-user-select: none;
-      -khtml-user-select: none; -moz-user-select: none;
-      -ms-user-select: none; user-select: none;
-      padding: 0 4px; width: 4em;
-      color: #aaaaaa;
-    }
-  pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-  div.sourceCode
-    {   }
-  @media screen {
-  code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-  }
-  code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-  code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-  code span.at { color: #7d9029; } /* Attribute */
-  code span.bn { color: #40a070; } /* BaseN */
-  code span.bu { } /* BuiltIn */
-  code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-  code span.ch { color: #4070a0; } /* Char */
-  code span.cn { color: #880000; } /* Constant */
-  code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-  code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-  code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-  code span.dt { color: #902000; } /* DataType */
-  code span.dv { color: #40a070; } /* DecVal */
-  code span.er { color: #ff0000; font-weight: bold; } /* Error */
-  code span.ex { } /* Extension */
-  code span.fl { color: #40a070; } /* Float */
-  code span.fu { color: #06287e; } /* Function */
-  code span.im { } /* Import */
-  code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-  code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-  code span.op { color: #666666; } /* Operator */
-  code span.ot { color: #007020; } /* Other */
-  code span.pp { color: #bc7a00; } /* Preprocessor */
-  code span.sc { color: #4070a0; } /* SpecialChar */
-  code span.ss { color: #bb6688; } /* SpecialString */
-  code span.st { color: #4070a0; } /* String */
-  code span.va { color: #19177c; } /* Variable */
-  code span.vs { color: #4070a0; } /* VerbatimString */
-  code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -140,7 +82,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -194,6 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -391,86 +334,177 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Validation of data payloads for DATIM</h1>
 <h4 class="author">Jason P. Pickering</h4>
-<h4 class="date">2020-11-03</h4>
+<h4 class="date">2022-08-19</h4>
 
 
 
 <div id="using-the-datimvalidation-package" class="section level2">
 <h2>Using the datimvalidation package</h2>
-<p>This package is provided for use by the PEPFAR Data Exchange community in order to provide more stringent validation of data payloads which are intended to be imported into DATIM. To help data importers to prepare their files for submission to DATIM, this R package has been created to help validate the data prior to importing it into the system. This package will help you to validate your data payload and validate it against the business logic of DATIM, prior to attempting to import it into the system. This approach is useful, as it will allow you to interactively correct mistakes in the payload prior to submission of the data for import.</p>
-<p>These scripts, to a large extent, emulate the logic of the server. Basic functions are exposed to allow you to determine if your data contains invalid data elements, incorrect disaggregations, and inactive mechanisms. Each function is documented in separate sections of the package.</p>
-<p>DATIM is based on the <a href="https://www.dhis2.org/">DHIS2</a> software, and is therefore capable of importing different types of data, including CSV, JSON, XML as well as ADX formats. Users wishing to use the data import capabilities of DATIM, should therefore familiarize themselves with the various formats which DHIS2 supports and the syntax of each of these. The DHIS2 development team has provided extensive technical documentation on the various formats <a href="https://docs.dhis2.org/master/en/developer/html/webapi_data_values.html#webapi_data_values_csv">here</a>.</p>
-<p>In addition to the general DHIS2 documentation, a series of DATIM specific resources is available <a href="https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange">here</a>. These guides provide more detailed information on the data import process into DATIM, including code listings for indicators and disaggregations.</p>
+<p>This package is provided for use by the PEPFAR Data Exchange
+community in order to provide more stringent validation of data payloads
+which are intended to be imported into DATIM. To help data importers to
+prepare their files for submission to DATIM, this R package has been
+created to help validate the data prior to importing it into the system.
+This package will help you to validate your data payload and validate it
+against the business logic of DATIM, prior to attempting to import it
+into the system. This approach is useful, as it will allow you to
+interactively correct mistakes in the payload prior to submission of the
+data for import.</p>
+<p>These scripts, to a large extent, emulate the logic of the server.
+Basic functions are exposed to allow you to determine if your data
+contains invalid data elements, incorrect disaggregations, and inactive
+mechanisms. Each function is documented in separate sections of the
+package.</p>
+<p>DATIM is based on the <a href="https://www.dhis2.org/">DHIS2</a>
+software, and is therefore capable of importing different types of data,
+including CSV, JSON, XML as well as ADX formats. Users wishing to use
+the data import capabilities of DATIM, should therefore familiarize
+themselves with the various formats which DHIS2 supports and the syntax
+of each of these. The DHIS2 development team has provided extensive
+technical documentation on the various formats <a href="https://docs.dhis2.org/master/en/developer/html/webapi_data_values.html#webapi_data_values_csv">here</a>.</p>
+<p>In addition to the general DHIS2 documentation, a series of DATIM
+specific resources is available <a href="https://datim.zendesk.com/hc/en-us/sections/200413199-Data-Import-and-Exchange">here</a>.
+These guides provide more detailed information on the data import
+process into DATIM, including code listings for indicators and
+disaggregations.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
-<p>In order to get started, you will need to have installed the R package “datimvalidation”. The source code for this library can be found <a href="https://github.com/jason-p-pickering/datim-validation">here</a>.</p>
-<p>You will need an active internet connection and an active DATIM user name in order to utilize the <code>datimvalidation</code> package. Meta-data will be retrieved from the DATIM server, using your user name and password , and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. By default, cached objects are stored for a week and then invalidated.</p>
-<p>To get started, you should create a “secrets” file, which will contain the authentication information required to access DATIM. You should keep this in a secure place on your computer, as it will require storing the user name and password you access DATIM as a file on your disk. If you are unable to securely store this file, you can also enter your user name and password through a dialog. A secrets file should a single JSON file which looks like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">&quot;dhis&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="dt">&quot;baseurl&quot;</span><span class="fu">:</span> <span class="st">&quot;http://dev-de.datim.org&quot;</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;admin&quot;</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>    <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;district&quot;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">}</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">}</span></span></code></pre></div>
-<p>To get started, we will load the package and provide a location of our secrets file</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">require</span>(datimvalidation)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>secrets&lt;-<span class="st">&quot;/home/littebobbytables/.secrets/datim.json&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">loadSecrets</span>(secrets)</span></code></pre></div>
+<p>In order to get started, you will need to have installed the R
+packages <a href="https://github.com/jason-p-pickering/datim-validation">“datimvalidation”</a>
+and <a href="https://github.com/pepfar-datim/datimutils">“datimutils”</a>.</p>
+<p>You will need an active internet connection and an active DATIM user
+name in order to utilize the <code>datimvalidation</code> package.
+Meta-data will be retrieved from the DATIM server, using your user name
+and password , and stored in a local cache. Once the objects are cached,
+the package can be used off-line, until the cache is invalidated. By
+default, cached objects are stored for a week and then invalidated.</p>
+<p>The “datimvalidation” package relies on “datimutils” to handle
+authentication with DATIM. There are several different ways which you
+can authenticate. Please refer to the “datimutils” package for details
+on setting up a means to connect your local R enviornment to the DATIM
+server.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>) <span class="co">#Turn of any scientific notation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(datimutils)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(datimvalidation)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">loginToDATIM</span>(<span class="at">config_path =</span> <span class="st">&quot;/home/littebobbytables/.secrets/datim.json&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;maxCacheAge&quot;</span><span class="ot">=</span><span class="st">&quot;7 days&quot;</span>)</span></code></pre></div>
 </div>
 <div id="parsing-your-data" class="section level2">
 <h2>Parsing your data</h2>
-<p>Next, we will use the <code>d2Parser</code> function, which is a general purpose function to load the different formats of data which DATIM accepts and to standardize this so that we can use other validation functions on the data.</p>
-<p>In addition to your user name and password, you will need to specific the <code>type</code> of the file. This should be one of ‘json’,‘csv’,or ‘xml’. You will also need to know the identification scheme of the file. The easiest way is to open the file in a text editor, and see what id scheme the payload is using. This could be ‘code’,‘id’ or ‘shortName’. Consult the specifc function documentation for more information on id schemes.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>d&lt;-<span class="kw">d2Parser</span>(<span class="dt">file=</span>filename,<span class="dt">type =</span> <span class="st">&quot;csv&quot;</span>,</span>
-<span id="cb3-2"><a href="#cb3-2"></a>            <span class="dt">dataElementIdScheme =</span> <span class="st">&quot;code&quot;</span>,<span class="dt">orgUnitIdScheme =</span> <span class="st">&quot;id&quot;</span>,</span>
-<span id="cb3-3"><a href="#cb3-3"></a>            <span class="dt">idScheme =</span> <span class="st">&quot;id&quot;</span> </span>
-<span id="cb3-4"><a href="#cb3-4"></a>            ,<span class="dt">invalidData =</span> <span class="ot">TRUE</span> )</span></code></pre></div>
-<p>Note , this operation could take several minutes, so please be patient.</p>
+<p>Next, we will use the <code>d2Parser</code> function, which is a
+general purpose function to load the different formats of data which
+DATIM accepts and to standardize this so that we can use other
+validation functions on the data.</p>
+<p>In addition to your user name and password, you will need to specific
+the <code>type</code> of the file. This should be one of ‘json’,‘csv’,or
+‘xml’. You will also need to know the identification scheme of the file.
+The easiest way is to open the file in a text editor, and see what id
+scheme the payload is using. This could be ‘code’,‘id’ or ‘shortName’.
+Consult the specifc function documentation for more information on id
+schemes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">d2Parser</span>(<span class="at">file=</span>filename,<span class="at">type =</span> <span class="st">&quot;csv&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">dataElementIdScheme =</span> <span class="st">&quot;code&quot;</span>,<span class="at">orgUnitIdScheme =</span> <span class="st">&quot;id&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">idScheme =</span> <span class="st">&quot;id&quot;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            ,<span class="at">invalidData =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<p>Note , this operation could take several minutes, so please be
+patient.</p>
 </div>
 <div id="mechanism-validation" class="section level2">
 <h2>Mechanism validation</h2>
-<p>Now, we have loaded our data payload into the object <code>d</code>, we can proceed to validate it. The <code>checkMechanismValidity</code> function will check that all mechanisms present in the payload are currently active in DATIM. Data values must associated with a period whose start date and end date are within the COP planning periods for which the mechanism is active.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#Check for valid mechanisms and simply print those which are not valid</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">checkMechanismValidity</span>(d)</span></code></pre></div>
+<p>Now, we have loaded our data payload into the object <code>d</code>,
+we can proceed to validate it. The <code>checkMechanismValidity</code>
+function will check that all mechanisms present in the payload are
+currently active in DATIM. Data values must associated with a period
+whose start date and end date are within the COP planning periods for
+which the mechanism is active.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check for valid mechanisms and simply print those which are not valid</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">checkMechanismValidity</span>(d)</span></code></pre></div>
 </div>
 <div id="data-element-and-disaggregation-validation" class="section level2">
 <h2>Data element and disaggregation validation</h2>
-<p>Depending on the type of payload you are submitting, there may be multiple data sets which are bundled together. There are strict controls in DATIM regarding the submission of data elements to given organisaion units. For instance, community data should not be submitted for facility sites, and vice versa. It can be difficult to determine for a given data payload whether certain data should be submitted for a given</p>
-<p>Next, we can check the indicators and disaggregations for validity against the current dataset form definitions. A data frame of indicator/disagg combinations will be returned. The ‘dataset’ paramater should be either the exact name of the dataset, or a grouping name like “MER Results” of</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">checkDataElementDisaggValidity</span>(d)</span></code></pre></div>
+<p>Depending on the type of payload you are submitting, there may be
+multiple data sets which are bundled together. There are strict controls
+in DATIM regarding the submission of data elements to given organisaion
+units. For instance, community data should not be submitted for facility
+sites, and vice versa. It can be difficult to determine for a given data
+payload whether certain data should be submitted for a given</p>
+<p>Next, we can check the indicators and disaggregations for validity
+against the current dataset form definitions. A data frame of
+indicator/disagg combinations will be returned. The ‘dataset’ paramater
+should be either the exact name of the dataset, or a grouping name like
+“MER Results” of</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">checkDataElementDisaggValidity</span>(d)</span></code></pre></div>
 <p>##Data element/period validation</p>
-<p>Certain MER data elements are collected only in certain quarters. Quarterly data elements are collected each quarter, SAPR data elements are collected in quarters 2 and 4, and APR data elements are collected only in quarter 4. In order to ensure that no data values are submitted for the wrong periods, you can check the “cadence” of the data elements to be sure that only the correct data elements are submitted for a particular time period.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#Check for valid data element-period combinations and  print those which are not valid</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">checkDataElementCadence</span>(d)</span></code></pre></div>
+<p>Certain MER data elements are collected only in certain quarters.
+Quarterly data elements are collected each quarter, SAPR data elements
+are collected in quarters 2 and 4, and APR data elements are collected
+only in quarter 4. In order to ensure that no data values are submitted
+for the wrong periods, you can check the “cadence” of the data elements
+to be sure that only the correct data elements are submitted for a
+particular time period.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check for valid data element-period combinations and  print those which are not valid</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">checkDataElementCadence</span>(d)</span></code></pre></div>
 <p>##Value type validation</p>
-<p>DATIM has strict controls on the type of data which can be imported into each data element. For instance, it is not possible to import a data value specified as “11/02/2015” as a date, because DATIM expects the date to be specified in “YYYY-MM-DD” format. In this case, the data would need to be transmitted as “2015-11-02”. Using the <code>checkValueTypeCompliance</code> function, it is possible to validate a given data payload against the value types which have been specified for each data element. As an example, we can simply invoked the <code>checkValueTypeCompliance</code>, with our parsed data (<code>d</code>), along with the URL, username and password. Only data which does not meet the specified value type will be returned.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#Check for indicator / disagg combinations and save the result as a CSV file</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">checkValueTypeCompliance</span>(d)</span></code></pre></div>
+<p>DATIM has strict controls on the type of data which can be imported
+into each data element. For instance, it is not possible to import a
+data value specified as “11/02/2015” as a date, because DATIM expects
+the date to be specified in “YYYY-MM-DD” format. In this case, the data
+would need to be transmitted as “2015-11-02”. Using the
+<code>checkValueTypeCompliance</code> function, it is possible to
+validate a given data payload against the value types which have been
+specified for each data element. As an example, we can simply invoked
+the <code>checkValueTypeCompliance</code>, with our parsed data
+(<code>d</code>), along with the URL, username and password. Only data
+which does not meet the specified value type will be returned.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check for indicator / disagg combinations and save the result as a CSV file</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">checkValueTypeCompliance</span>(d)</span></code></pre></div>
 <p>##Validation rule validation</p>
-<p>We can perform a check of the validation rules as defined in DATIM on the data payload.</p>
-<p>The <code>validateData</code> function is capable of performing the validation operation in parallel. To activate this, you must inform R of the number of parallel sessions which may be spawned. Usually, taking the number of cores on your system is a good starting point.You can modify the following command based on the number of system cores you have access to. Consult the <code>plyr</code> documentation for specifics on parallel operations.</p>
-<p>For users of the <code>datimvalidation</code> package on Linux, you may be able to decrease the amount of time it takes to perform the validation, which can be a very lengthy process, depending on the amount of data and speed of your machine.</p>
-<p>Use the following command to inform that you would like to spawn four parallel processes. This operation is only supported on the Linux operating system.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>doMC<span class="op">::</span><span class="kw">registerDoMC</span>(<span class="dt">cores=</span><span class="dv">4</span>) <span class="co"># or however many cores you have access to</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>parallel=<span class="ot">TRUE</span></span></code></pre></div>
-<p>In order to run the validation rule check, simply invoke the following command.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#Run the validation rule and save the output as a CSV file</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>vr_violations&lt;-<span class="kw">validateData</span>(<span class="dt">data =</span> d,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>                            <span class="dt">return_violations_only =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>                            <span class="dt">parallel =</span>parallel )</span></code></pre></div>
-<p>A list of validation rule violations will be returned to the <code>vr_violations</code>object.</p>
+<p>We can perform a check of the validation rules as defined in DATIM on
+the data payload.</p>
+<p>The <code>validateData</code> function is capable of performing the
+validation operation in parallel. To activate this, you must inform R of
+the number of parallel sessions which may be spawned. Usually, taking
+the number of cores on your system is a good starting point.You can
+modify the following command based on the number of system cores you
+have access to. Consult the <code>plyr</code> documentation for
+specifics on parallel operations.</p>
+<p>For users of the <code>datimvalidation</code> package on Linux, you
+may be able to decrease the amount of time it takes to perform the
+validation, which can be a very lengthy process, depending on the amount
+of data and speed of your machine.</p>
+<p>Use the following command to inform that you would like to spawn four
+parallel processes. This operation is only supported on the Linux
+operating system.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>doMC<span class="sc">::</span><span class="fu">registerDoMC</span>(<span class="at">cores=</span><span class="dv">4</span>) <span class="co"># or however many cores you have access to</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>parallel<span class="ot">=</span><span class="cn">TRUE</span></span></code></pre></div>
+<p>In order to run the validation rule check, simply invoke the
+following command.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run the validation rule and save the output as a CSV file</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>vr_violations <span class="ot">&lt;-</span> <span class="fu">validateData</span>(<span class="at">data =</span> d,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">return_violations_only =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">parallel =</span>parallel )</span></code></pre></div>
+<p>A list of validation rule violations will be returned to the
+<code>vr_violations</code>object.</p>
 <div id="a-complete-example" class="section level3">
 <h3>A complete example</h3>
-<p>A basic script which combines all of the validation checks is supplied below.</p>
-<p>You should of course adjust the specifics of the script, such as where your credentials are stored. If your security parameters do not allow you to store credentials on your machine, then you should leave the <code>loadSecrets</code> function blank and enter them in the dialog. You can change the <code>datafile</code> variable to point to your import file, and then run the the script in your <em>R</em> environment.</p>
-<p>If any of the functions return errors, warnings, or non-empty data frames, you should investigate and resolve the issues prior to submitting your data file for import into DATIM.</p>
-<pre><code>require(datimvalidation)
-secrets&lt;-&quot;/home/littebobbytables/.secrets/datim.json&quot;
-loadSecrets(secrets)
-datafile&lt;-&quot;/home/littebobbytables/mydata.csv&quot;
-d&lt;-d2Parser(filename = datafile ,type = &quot;csv&quot;)
+<p>A basic script which combines all of the validation checks is
+supplied below.</p>
+<p>You should of course adjust the specifics of the script, such as
+where your credentials are stored. If your security parameters do not
+allow you to store credentials on your machine, then you should leave
+the <code>loadSecrets</code> function blank and enter them in the
+dialog. You can change the <code>datafile</code> variable to point to
+your import file, and then run the the script in your <em>R</em>
+environment.</p>
+<p>If any of the functions return errors, warnings, or non-empty data
+frames, you should investigate and resolve the issues prior to
+submitting your data file for import into DATIM.</p>
+<pre><code>require(datimutils)
+require(datimvalidation)
+loginToDATIM(config_path = &quot;/home/littebobbytables/.secrets/datim.json&quot;)
+datafile &lt;- &quot;/home/littebobbytables/mydata.csv&quot;
+d &lt;- d2Parser(filename = datafile ,type = &quot;csv&quot;)
 checkDataElementOrgunitValidity(data = d,organisationUnit = &quot;f5RoebaDLMx&quot;,datasets = c(&quot;zUoy5hk8r0q&quot;,&quot;KWRj80vEfHU&quot;))
 checkValueTypeCompliance(d)
 checkNegativeValues(d)

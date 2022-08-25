@@ -2,48 +2,48 @@
 % Please edit documentation in R/validateData.R
 \name{validateData}
 \alias{validateData}
-\title{Function which checks the of a DATIM data payload agaist define validation rules}
+\title{Function which checks the of a DATIM data payload against define
+validation rules}
 \usage{
 validateData(
   data,
   organisationUnit = NA,
   return_violations_only = TRUE,
   parallel = FALSE,
-  datasets = NA,
   vr = NULL,
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{data}{d2Parser data frame}
+\item{data}{D2 compliant data frame object}
 
-\item{organisationUnit}{Organization unit. Defaults to the user organization unit if not supplied.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{return_violations_only}{Parameter to return only violations or all validation rule evaluations.}
+\item{return_violations_only}{Parameter to return only violations or all
+validation rule evaluations.}
 
-\item{parallel}{Should the rules be evaluated in parallel. Default is to not evaluate in parallel.}
+\item{parallel}{Should the rules be evaluated in parallel.
+Default is to not evaluate in parallel.}
 
-\item{datasets}{Vector of dataset UIDs which can  be used to restrict
-the validation rules which will be applied.}
+\item{vr}{Validation rule object}
 
-\item{vr}{Data frame of validation rules from getValidationRules, or a custom filtered data frame.}
-
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
 Returns a data frame with validation rule results.
 }
 \description{
 validateData should be supplied a d2Parser compliant data frame.
-The data frame is checked dynamically against validation rules defined in the DATIM server.
+The data frame is checked dynamically against validation rules defined in
+the DATIM server.
 }
 \examples{
 \dontrun{
-  d<-d2Parser("myfile.csv",type="csv")
-  vr_rules<-validateData(d)
+  d <- d2Parser("myfile.csv",type="csv")
+  vr_rules <- validateData(d)
   doMC::registerDoMC(cores=4)
-  vr_rules<-validateData(d,parallel=TRUE)
-  ds<-getCurrentMERDataSets(type="RESULTS")
-  vr_rules<-validateData(d,parallel=TRUE,datasets=ds)
+  vr_rules <- validateData(d,parallel=TRUE)
+  ds <- getCurrentMERDataSets(type="RESULTS")
+  vr_rules <- validateData(d,parallel=TRUE,datasets=ds)
 }
 }

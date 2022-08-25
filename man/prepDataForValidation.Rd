@@ -7,7 +7,7 @@
 prepDataForValidation(d)
 }
 \arguments{
-\item{d}{Data frame parsed by d2Parser}
+\item{d}{D2 Parsed data frame}
 }
 \value{
 Modifed data object with combis and totals appended.

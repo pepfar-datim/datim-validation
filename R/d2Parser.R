@@ -1,23 +1,25 @@
-
 #' @title Utility function to check that the supplied coding scheme is correct
 #'
-#' @description checkCodingScheme will ensure that all indentifiers 
+#' @description checkCodingScheme will ensure that all indentifiers
 #' after parsing are valid UIDs,
-#' or in the case of periods, valid periods. 
+#' or in the case of periods, valid periods.
 #'
-#' @param data A parsed DHIS2 data payload from d2parser
-#' @param d2session datimutils d2session object
-#' @return Warnings are issued if the coding scheme is not 
+#' @inheritParams datim_validation_params
+#'
+#' @return Warnings are issued if the coding scheme is not
 #' congruent with what has been supplied as a paramater.
-#'  
-#' 
-checkCodingScheme <- function(data,d2session = d2_default_session) {
+#'
+#'
+checkCodingScheme <- function(data,
+                              d2session = dynGet("d2_default_session",
+                                                 inherits = TRUE)) {
   #This is a very superficial and quick check,
   #just to be sure that the coding scheme is correct.
   #Additional validation will be required to be sure data elements,
   #catcombos and orgunits are properly associated
   is_valid <- TRUE
-  data_element_check_v <- unique(data$dataElement) %in% getDataElementMap(d2session = d2session)$id
+  data_element_check_v <-
+    unique(data$dataElement) %in% getDataElementMap(d2session = d2session)$id
   data_element_check <- unique(data$dataElement)[!data_element_check_v]
   if (length(data_element_check) > 0) {
     warning(
@@ -26,21 +28,25 @@ checkCodingScheme <- function(data,d2session = d2_default_session) {
     )
     is_valid <- FALSE
   }
+  #TODO: This is duplicative with checkOrgunitsInHierarchy
   orgunit_check <-
     unique(data$orgUnit)[!(
       unique(data$orgUnit)
-      %in% 
+      %in%
       getOrganisationUnitMap(d2session = d2session)$id
     )]
   if (length(orgunit_check) > 0) {
     warning(
       "The following org unit identifiers could not be found:",
-      paste( orgunit_check, sep = "", collapse = "," )
+      paste(orgunit_check, sep = "", collapse = ",")
     )
     is_valid <- FALSE
   }
   coc_check <-
-    unique(data$categoryOptionCombo)[!(unique(data$categoryOptionCombo) %in% getCategoryOptionCombosMap(d2session = d2session)$id)]
+    unique(data$categoryOptionCombo)[!(
+      unique(data$categoryOptionCombo) %in%
+        getCategoryOptionCombosMap(d2session = d2session)$id
+    )]
   if (length(coc_check) > 0) {
     warning(
       "The following category option combo identifiers could not be found:",
@@ -50,7 +56,8 @@ checkCodingScheme <- function(data,d2session = d2_default_session) {
   }
   acoc_check <-
     unique(data$attributeOptionCombo)[!(
-      unique(data$attributeOptionCombo) %in% getMechanismsMap(d2session = d2session)$id
+      unique(data$attributeOptionCombo) %in%
+        getMechanismsMap(d2session = d2session)$id
     )]
   if (length(acoc_check) > 0) {
     warning(
@@ -59,12 +66,12 @@ checkCodingScheme <- function(data,d2session = d2_default_session) {
     )
     is_valid <- FALSE
   }
-  
+
     list("dataElement" = data_element_check,
        "orgUnit" = orgunit_check,
        "categoryOptionCombo" = coc_check,
        "attributeOptionCombo" = acoc_check,
-       "is_valid" = is_valid )
+       "is_valid" = is_valid)
 }
 
 #' @export
@@ -72,37 +79,30 @@ checkCodingScheme <- function(data,d2session = d2_default_session) {
 #' @importFrom utils select.list
 #' @title General purpose parsing function for different formats of DHIS2 data
 #'
-#' @description d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
-#' frame which can be used in subsequent DATIM validation routines
+#' @description d2Parser will parse a compliant DHIS2 XML, JSON, or CSV file
+#' and transform it into a standard data frame which can be used in
+#' subsequent DATIM validation routines.
 #'
-#' @param filename Location of the payload to be imported. Should be a valid DHIS2 import file
 #' @param type Type of the file. Should be one of  xml, json or csv.
-#' @param organisationUnit Organization unit UID of the operating unit. If left blank, assumed to be global.
-#' @param dataElementIdScheme Should be one of either code, name, shortName or id. If this parameter is "id",
-#' then the Data elements are assumed to be already specified as UIDs.
-#' @param orgUnitIdScheme Should be one of either code, name, shortName or id. If this parameter is "id",
-#' then the organization units are assumed to be already specified as UIDs
-#' @param idScheme Remapping scheme for category option combos
-#' @param invalidData Exclude any (NA or missing) data from the parsed file?
-#' @param csv_header By default, CSV files are assumed to have a header, otherwise FALSE will allow for 
-#' files without a CSV header. 
-#' @param d2session datimutils d2session object
+#' @inheritParams datim_validation_params
 #'
-#' @return Returns a data frame of at least "dataElement","period","orgUnit","categoryOptionCombo","attributeOptionCombo","value"
+#' @return Returns a data frame of at least "dataElement", "period", "orgUnit",
+#' "categoryOptionCombo", "attributeOptionCombo", "value"
 #'
-#' @note function(filename="/home/me/foo.xml",type="xml",dataElementIdScheme="code",orgUnitIdScheme="code",idScheme="id")
+#' @note function(filename = "/home/me/foo.xml", type = "xml",
+#' dataElementIdScheme = "code", orgUnitIdScheme = "code", idScheme = "id")
 #' Note that all values will be returned as characters.
 #' @examples \dontrun{
 #'     #Be sure to login to DATIM first
 #'     datimutils::loginToDATIM(config_path = "/home/me/datim-test.json")
 #'     #Load a CSV file
-#'     d<-d2Parser("myfile.csv",type="csv",header=TRUE)
+#'     d <- d2Parser("myfile.csv",type="csv",header=TRUE)
 #'     #Load a JSON file
-#'     d<-d2Parser("myfile.json",type="json",dataElementIdScheme="code")
+#'     d <- d2Parser("myfile.json",type="json",dataElementIdScheme="code")
 #'     #Load an XML file
-#'     d<-d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
+#'     d <- d2Parser("myfile.xml",type="xml",dataElementIdScheme="name")
 #' }
-#' 
+#'
 d2Parser <-
   function(filename,
            type,
@@ -112,16 +112,16 @@ d2Parser <-
            idScheme = "id",
            invalidData = FALSE,
            csv_header = TRUE,
-           d2session = d2_default_session) {
+           d2session = dynGet("d2_default_session", inherits = TRUE)) {
     if (is.na(organisationUnit)) {
-      #Get the users organisation unit if not specified 
+      #Get the users organisation unit if not specified
       organisationUnit <- d2session$user_orgunit
     }
     valid_type <- type %in% c("xml", "json", "csv")
     if (!valid_type) {
       stop("ERROR:Not a valid file type")
     }
-    
+
     header <-
       c(
         "dataElement",
@@ -134,41 +134,45 @@ d2Parser <-
         "lastUpdated",
         "comment"
       )
-    
+
     if (type == "xml") {
-      
+
       data <- xml2::read_xml(filename) %>%
-        xml2::xml_children() %>% 
-        purrr::map(.,xml2::xml_attrs) %>% 
-        purrr::map_df(~(as.list(.)))
-      
-      
+        xml2::xml_children() %>%
+        purrr::map(., xml2::xml_attrs) %>%
+        purrr::map_df(~ (as.list(.)))
+
+
       #Names in the XML must correspond exactly
-      if (!Reduce("&",names(data) %in% header)) {
-        stop("XML attributes must be one of the following:", 
-             paste(header,sep="",collapse=",")) }
-      
+      if (!Reduce("&", names(data) %in% header)) {
+        stop("XML attributes must be one of the following:",
+             paste(header, sep = "", collapse = ","))
+      }
     }
-    
+
     if (type == "csv") {
-      data <- read.csv(filename,header = csv_header,stringsAsFactors = FALSE)
+      data <- read.csv(filename, header = csv_header, stringsAsFactors = FALSE)
       data[] <- lapply(data, stringr::str_trim)
       #Get number of columns and assign the header
-      names(data)[1:ncol(data)]<-header[1:ncol(data)] 
+      names(data)[seq_len(ncol(data))] <- header[seq_len(ncol(data))]
       #Data element, period and orgunit must be specified
-      missing_required<-!complete.cases(data[,1:3])
-      if (sum(missing_required) > 0) { 
-        msg<-paste0("File contains rows with missing required fields in rows ", 
-                    paste(which(missing_required == TRUE),sep="",collapse = ","),". These rows will be excluded.")
+      missing_required <- !complete.cases(data[, 1:3])
+      if (sum(missing_required) > 0) {
+        msg <- paste0("File contains rows with missing ",
+                      "required fields in rows ",
+                      paste(which(missing_required == TRUE),
+                            sep = "", collapse = ","),
+                      ". These rows will be excluded.")
         warning(msg)
         }
-      data<-data[!missing_required,] }
-    
+      data <- data[!missing_required, ]
+    }
+
     if (type == "json") {
       j <- jsonlite::fromJSON(txt = filename)
 
       data <- j$dataValues
-    
+
       if (!is.null(j[["period"]])) {
         data$period <- j$period
       }
@@ -178,13 +182,14 @@ d2Parser <-
       if (!is.null(j[["attributeOptionCombo"]])) {
         data$attributeOptionCombo <- j$attributeOptionComboid
       }
-      
+
       #Names in the JSON must correspond exactly
-      if ( !Reduce("&", names( data ) %in% header ) ) {
+      if (!Reduce("&", names(data) %in% header)) {
         stop("JSON attributes must be one of the following:",
-             paste(header,sep="",collapse=",")) }
+             paste(header, sep = "", collapse = ","))
+      }
     }
-    
+
     data <- data[, header[header %in% names(data)]]
 
     if (orgUnitIdScheme != "id") {
@@ -193,7 +198,7 @@ d2Parser <-
           data$orgUnit,
           organisationUnit,
           mode_in = orgUnitIdScheme,
-          mode_out = "id", 
+          mode_out = "id",
           d2session = d2session
         )
     }
@@ -215,36 +220,37 @@ d2Parser <-
         d2session = d2session
       )
     }
-    
+
     #Data frame needs to be completely flattened to characters
     data <- plyr::colwise(as.character)(data)
-    
-    isMissing<-function(x) { x == "" | is.na(x) }
 
-    if (NROW(data) == 1 ) { 
-      valid_rows <- sum(sapply(data,isMissing)) == 0L
+    isMissing <- function(x) { x == "" | is.na(x) } #nolint
+
+    if (NROW(data) == 1) {
+      valid_rows <- sum(sapply(data, isMissing)) == 0L
        } else {
-         
+
          valid_rows <- purrr::reduce(purrr::map(data, isMissing), `+`) == 0L
       }
-    
-    if ( sum(valid_rows) != NROW(data) ) {
-      
+
+    if (sum(valid_rows) != NROW(data)) {
+
       msg <-
-        paste0( sum(!valid_rows), " rows are incomplete. Please check your file to ensure its correct.")
+        paste0(sum(!valid_rows), " rows are incomplete. ",
+               "Please check your file to ensure its correct.")
       warning(msg)
     }
-    
+
     if (!invalidData) {
       data <- data[valid_rows, ]
     }
-    
-    code_scheme_check<-checkCodingScheme(data, d2session = d2session)
-    
+
+    code_scheme_check <- checkCodingScheme(data, d2session = d2session)
+
     if (!code_scheme_check$is_valid) {
       return(code_scheme_check)
-    } else{
+    } else {
       data
     }
-    
+
   }

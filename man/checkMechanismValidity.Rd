@@ -2,42 +2,41 @@
 % Please edit documentation in R/checkMechanismValidity.R
 \name{checkMechanismValidity}
 \alias{checkMechanismValidity}
-\title{checkMechanismPeriodValidity(data,organisationUnit)}
+\title{Check Mechanism Period Validity}
 \usage{
 checkMechanismValidity(
   data,
   organisationUnit = NA,
   return_violations = TRUE,
-  d2session = d2_default_session
+  d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{data}{A data frame which has been parsed by either d2Parser or sims2Parser}
+\item{data}{D2 compliant data frame object}
 
-\item{organisationUnit}{UID of the operating unit.}
+\item{organisationUnit}{Organisation unit ancestor.}
 
-\item{return_violations}{Should the function return a list of violations only.}
+\item{return_violations}{Boolean to return violations only.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of invalid period-mechanism combinations. A warning will 
-also be issued. 
-Returns TRUE if there are no violations.
+Returns a data frame of invalid period-mechanism combinations.
+A warning will also be issued. Returns TRUE if there are no violations.
 }
 \description{
-This function will return an object of invalid mechanisms and periods. 
-All data which is reported 
+This function will return an object of invalid mechanisms and
+periods. All data which is reported
 must have a period within the valid start and end dates of the
-attribute option combination to which it is assigned. 
-The mechanism must also be associated with the operating unit. 
-If either of these two conditions 
+attribute option combination to which it is assigned.
+The mechanism must also be associated with the operating unit.
+If either of these two conditions
 are not met, the data will be flagged as being invalid.
 }
 \examples{
 \dontrun{
-     d<-d2Parser("myfile.csv",type="csv")
-     ds<-getCurrentMERDataSets(type="RESULTS")
+     d <- d2Parser("myfile.csv",type="csv")
+     ds <- getCurrentMERDataSets(type="RESULTS")
      checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
 }
 

@@ -1,0 +1,12 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+    object_length_linter(50),
+    object_name_linter = NULL,
+    commented_code_linter = NULL,
+    object_usage_linter = NULL,
+    cyclocomp_linter = NULL
+  )
+exclusions: list(
+    "tests/testthat/training.datim.org" = list(Inf),
+    "vignettes/" = list(Inf)
+  )

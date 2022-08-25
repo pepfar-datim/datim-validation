@@ -1,10 +1,12 @@
 ## ----eval=FALSE---------------------------------------------------------------
+#  options(scipen=999) #Turn of any scientific notation
+#  require(datimutils)
 #  require(datimvalidation)
-#  secrets<-"/home/littebobbytables/.secrets/datim.json"
-#  loadSecrets(secrets)
+#  loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
+#  options("maxCacheAge"="7 days")
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  d<-d2Parser(file=filename,type = "csv",
+#  d <- d2Parser(file=filename,type = "csv",
 #              dataElementIdScheme = "code",orgUnitIdScheme = "id",
 #              idScheme = "id"
 #              ,invalidData = TRUE )
@@ -26,8 +28,7 @@
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  #Run the validation rule and save the output as a CSV file
-#  vr_violations<-validateData(data = d,
+#  vr_violations <- validateData(data = d,
 #                              return_violations_only = TRUE,
 #                              parallel =parallel )
-#  
-
+#

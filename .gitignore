@@ -6,5 +6,5 @@ inst/doc
 *.*~
 .R_Cache
 *.Rproj
-packrat/lib*/
-packrat/src/
+.Rprofile
+renv/

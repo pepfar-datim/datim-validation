@@ -2,23 +2,25 @@
 % Please edit documentation in R/periodUtils.R
 \name{checkPeriodIdentifiers}
 \alias{checkPeriodIdentifiers}
-\title{checkPeriodIdentifiers(data)}
+\title{Check Period Identifiers}
 \usage{
 checkPeriodIdentifiers(data)
 }
 \arguments{
-\item{data}{A data frame which has been parsed by either d2Parser or sims2Parser}
+\item{data}{D2 compliant data frame object}
 }
 \value{
 TRUE if all periods are valid.
 }
 \description{
-Expect an error if any invalid period identifiers are supplied in the file.
+Expect an error if any invalid period identifiers are
+supplied in the file.
 }
 \examples{
 \dontrun{
-    d<-d2Parser("myfile.csv",type="csv")
-    checkPeriodIdentifiers(d) #Should return no error if all period identifiers are valid
+    d <- d2Parser("myfile.csv", type = "csv")
+    #Should return no error if all period identifiers are valid
+    checkPeriodIdentifiers(d)
 }
 
 }

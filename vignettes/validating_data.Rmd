@@ -29,19 +29,18 @@ In addition to the general DHIS2 documentation, a series of DATIM specific resou
 
 ## Getting started
 
-In order to get started, you will need to have installed the R packages ["datimvalidation"](https://github.com/jason-p-pickering/datim-validation) and ["datimutils"](https://github.com/pepfar-datim/datimutils). 
+In order to get started, you will need to have installed the R packages ["datimvalidation"](https://github.com/pepfar-datim/datim-validation) and ["datimutils"](https://github.com/pepfar-datim/datimutils). 
 
 You will need an active internet connection and an active DATIM user name in order to utilize the `datimvalidation` package. Meta-data will be retrieved from the DATIM server, using your user name and password , and stored in a local cache. Once the objects are cached, the package can be used off-line, until the cache is invalidated. By default, cached objects are stored for a week and then invalidated. 
 
 
-The "datimvalidation" package relies on "datimutils" to handle authentication with DATIM. There are several different ways which you can authenticate. Please refer to the "datimutils" package for details on setting up a means to connect your local R enviornment to the DATIM server. 
+The "datimvalidation" package relies on "datimutils" to handle authentication with DATIM. There are several different ways which you can authenticate. Please refer to the "datimutils" package for details on setting up a means to connect your local R environment to the DATIM server. 
 
 ```{r eval=FALSE}
 options(scipen=999) #Turn of any scientific notation
 require(datimutils)
 require(datimvalidation)
 loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
-options("maxCacheAge"="7 days")
 ```
 
 
@@ -55,7 +54,7 @@ You will also need to know the identification scheme of the file. The easiest wa
 the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
 
 ```{r eval=FALSE}
-d<-d2Parser(file=filename,type = "csv",
+d <- d2Parser(file=filename,type = "csv",
             dataElementIdScheme = "code",orgUnitIdScheme = "id",
             idScheme = "id" 
             ,invalidData = TRUE )
@@ -127,7 +126,7 @@ In order to run the validation rule check, simply invoke the following command.
 
 ```{r eval=FALSE}
 #Run the validation rule and save the output as a CSV file
-vr_violations<-validateData(data = d,
+vr_violations <- validateData(data = d,
                             return_violations_only = TRUE,
                             parallel =parallel )
 
@@ -148,8 +147,8 @@ If any of the functions return errors, warnings, or non-empty data frames, you s
 require(datimutils)
 require(datimvalidation)
 loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
-datafile<-"/home/littebobbytables/mydata.csv"
-d<-d2Parser(filename = datafile ,type = "csv")
+datafile <- "/home/littebobbytables/mydata.csv"
+d <- d2Parser(filename = datafile ,type = "csv")
 checkDataElementOrgunitValidity(data = d,organisationUnit = "f5RoebaDLMx",datasets = c("zUoy5hk8r0q","KWRj80vEfHU"))
 checkValueTypeCompliance(d)
 checkNegativeValues(d)

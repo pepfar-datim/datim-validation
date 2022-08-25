@@ -2,28 +2,23 @@
 % Please edit documentation in R/checkDataElementOrgunitValidity.R
 \name{checkDataElementOrgunitValidity}
 \alias{checkDataElementOrgunitValidity}
-\title{checkDataElementOrgunitValidity(data,organisationUnit,datasets)}
+\title{checkDataElementOrgunitValidity(data,organisationUnit,datasets, d2session)}
 \usage{
 checkDataElementOrgunitValidity(
-  data = NA,
-  organisationUnit = NA,
-  datasets = NA,
+  d,
+  datasets,
   return_violations = TRUE,
   d2session = d2_default_session
 )
 }
 \arguments{
-\item{data}{D2 compliant data frame}
-
-\item{organisationUnit}{Should be the UID of the organisation unit ancestor, 
-typically the operating unit.}
-
-\item{datasets}{Should be a character vector of data set UIDs. 
-Alternatively, if left missing, user will be promted.}
+\item{datasets}{Should be a character vector of data set UIDs.}
 
 \item{return_violations}{Return the invalid data if TRUE}
 
-\item{d2session}{datimutils d2session object @param d2session datimutils d2session object}
+\item{d2session}{datimutils d2session object}
+
+\item{data}{D2 compliant data frame}
 }
 \value{
 Returns subset of data which contains
@@ -31,7 +26,7 @@ Returns subset of data which contains
   TRUE value is returned.
 }
 \description{
-Returns a data frame invalid data elements which exist in the data 
+Returns a data frame invalid data elements which exist in the data
 but which do not have a valid organistion unit / dataset association.
 }
 \examples{
@@ -40,4 +35,5 @@ but which do not have a valid organistion unit / dataset association.
      ds<-getCurrentMERDataSets(type="RESULTS")
      checkDataElementOrgunitValidity(data=d,datasets=ds)
 }
+
 }

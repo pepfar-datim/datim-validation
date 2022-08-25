@@ -2,19 +2,26 @@
 % Please edit documentation in R/getValidationRules.R
 \name{getValidationRules}
 \alias{getValidationRules}
-\title{Utility function for getting validation rules dynamically from DHIS2 and parsing them into a data frame}
+\title{Utility function for getting validation rules dynamically from DHIS2
+and parsing them into a data frame}
 \usage{
-getValidationRules(remove_decoration = FALSE, d2session = d2_default_session)
+getValidationRules(
+  remove_decoration = FALSE,
+  d2session = dynGet("d2_default_session", inherits = TRUE)
+)
 }
 \arguments{
-\item{remove_decoration}{Remove decoration of curly braces present in the raw validation metadata.}
+\item{remove_decoration}{Remove decoration of curly braces present in the
+raw validation metadata.}
 
-\item{d2session}{datimutils d2session object}
+\item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of validation rules consisting of name, left and right side operators and strategies
+Returns a data frame of validation rules consisting of name, left and
+right side operators and strategies
 }
 \description{
-d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and transform it into a standard data
-frame which can be used in subsequent DATIM validation routines
+d2Parser will parse a compliant DHIS2 XML,JSON or CSV file and
+transform it into a standard data frame which can be used in subsequent
+DATIM validation routines
 }
