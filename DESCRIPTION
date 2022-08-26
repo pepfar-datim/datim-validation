@@ -1,8 +1,8 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.2.0
-Date: 2022-08-23
+Version: 1.2.1
+Date: 2022-08-26
 Authors@R: c(
     person("Jason", "Pickering", email = "jason.p.pickering@gmail.com",
         role = c("aut", "cre")),
