@@ -3,6 +3,7 @@
 export(api_version)
 export(checkDataElementCadence)
 export(checkDataElementDisaggValidity)
+export(checkDataElementMechValidity)
 export(checkDataElementOrgunitValidity)
 export(checkMechanismValidity)
 export(checkNegativeValues)
