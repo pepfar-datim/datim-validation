@@ -55,7 +55,7 @@ getCurrentMERDataSets <- function(type = "RESULTS",
   dataset_groups <- c("RESULTS", "TARGETS", "NARRATIVES_RESULTS")
 
   if (!(type %in% dataset_groups)) {
-    stop(paste("Type must be one of", paste(dataset_groups, sep="",collapse=", ")))
+    stop(paste("Type must be one of", paste(dataset_groups, sep = "", collapse = ", ")))
     }
 
   ds <- getDataSets(d2session = d2session)
