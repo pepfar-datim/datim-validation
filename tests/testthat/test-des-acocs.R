@@ -49,7 +49,7 @@ with_mock_api({
     )
     #This attribute option combo is not present in the data element/ACOC map
     de_map <- list(dataSetElements = data.frame(dataElement.id = c("zzzz123")),
-                   categoryCombo = list(categoryOptionCombos=data.frame(id = c("xxxxx1234"))))
+                   categoryCombo = list(categoryOptionCombos = data.frame(id = c("xxxxx1234"))))
 
     test_data <- validateDEs_ACOCs(d, de_map)
     expect_identical(d, test_data)
