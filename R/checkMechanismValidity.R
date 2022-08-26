@@ -46,7 +46,10 @@ checkMechanismValidity <- function(data,
   mechanism_map <-
     getMechanismsMap(organisationUnit = organisationUnit,
                      d2session = d2session) %>%
-    dplyr::select(id, code, startDate, endDate)
+    dplyr::select(id, code, startDate, endDate) %>%
+    #Filter only mechanisms with star tdate end date
+    #We will check the default mechanism elsewhere
+    dplyr::filter(!is.na(startDate) & !is.na(endDate))
 
   if (is.null(mechanism_map)) {
     stop("No valid mechanisms were found!")

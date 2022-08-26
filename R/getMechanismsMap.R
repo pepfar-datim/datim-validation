@@ -53,6 +53,11 @@ getMechanismsMap <- function(organisationUnit = NA,
       stop(paste("Could not retreive mechanisms", httr::content(r, "text")))
     }
 
-
+    default_mech <- list(code = "default",
+                         name = "default",
+                         id = "HllvX50cXC0",
+                         startDate = NA,
+                         endDate = NA)
+    mechs <- rbind(mechs, default_mech)
     mechs
 }
