@@ -65,7 +65,8 @@ getCurrentMERDataSets <- function(type = "RESULTS",
       "MER Results: Medical Store",
       "MER Results: Community Based - DoD ONLY",
       "MER Results: Facility Based - DoD ONLY",
-      "Host Country Results: Facility (USG)"
+      "Host Country Results: Facility (USG)",
+      "MER Results: Operating Unit Level (IM)"
     )
     } else if (type == "TARGETS") {
     want <- c(
