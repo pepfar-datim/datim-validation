@@ -52,13 +52,16 @@ getCurrentMERDataSets <- function(type = "RESULTS",
                                 d2session = dynGet("d2_default_session",
                                                    inherits = TRUE)) {
 
-  if (!(type %in% c("RESULTS", "TARGETS"))) {
-    stop("Type must be either RESULTS or TARGETS")
+  dataset_groups <- c("RESULTS", "TARGETS", "NARRATIVES_RESULTS")
+
+  if (!(type %in% dataset_groups)) {
+    stop(paste("Type must be one of", paste(dataset_groups, sep="",collapse=", ")))
     }
+
   ds <- getDataSets(d2session = d2session)
 
-  if (type == "RESULTS") {
-  want <-
+
+  mer_results <-   want <-
     c(
       "MER Results: Facility Based",
       "MER Results: Community Based",
@@ -69,15 +72,22 @@ getCurrentMERDataSets <- function(type = "RESULTS",
       "MER Results: Operating Unit Level (IM)",
       "Host Country Results: Operating Unit Level (USG)"
     )
-    } else if (type == "TARGETS") {
-    want <- c(
-      "Host Country Targets: COP Prioritization SNU (USG)",
-      "MER Target Setting: PSNU (Facility and Community Combined)",
-      "MER Target Setting: PSNU (Facility and Community Combined) - DoD ONLY"
-    )
-    } else {
-      stop("Unknown dataset group. Must be one of RESULTS, TARGETS")
-    }
- ds[ds$name %in% want, "id"]
+
+  mer_targets <-  c(
+    "Host Country Targets: COP Prioritization SNU (USG)",
+    "MER Target Setting: PSNU (Facility and Community Combined)",
+    "MER Target Setting: PSNU (Facility and Community Combined) - DoD ONLY"
+  )
+
+  mer_narratives <- c("Host Country Results: Narratives (USG)",
+                      "MER Results: Narratives (IM)")
+
+  want <-  switch(type,
+          "RESULTS" = mer_results,
+          "TARGETS"  = mer_targets,
+          "NARRATIVES_RESULTS" = mer_narratives
+  )
+
+  ds[ds$name %in% want, "id"]
 
 }
