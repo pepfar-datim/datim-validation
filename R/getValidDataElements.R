@@ -37,6 +37,8 @@ getValidDataElements <- function(datasets = NA,
 
   for (i in seq_along(datasets)) {
 
+    #We need to use these views here since they are based on
+    #the actual HTML form. Certain disaggs may be excluded.
     if (allDataSets[allDataSets$id == datasets[i], "formType"] == "CUSTOM") {
       url <- utils::URLencode(
         paste0(d2session$base_url,

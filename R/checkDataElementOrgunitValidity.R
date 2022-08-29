@@ -5,7 +5,7 @@
 #'
 #' @return A list of data element IDs and all organisation units which are valid.
 #'
-getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_session",
+getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_session",
                                                                   inherits = TRUE)) {
   #TODO: Rewrite using datimutils
   #Note that we are not doing any additional filtering here
@@ -20,7 +20,7 @@ getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_ses
   url <-
     paste0(
       d2session$base_url,
-      "api/", api_version(), "/dataSets/", dataset, "?fields=organisationUnits[id],dataSetElements[dataElement[id]]")
+      "api/", api_version(), "/dataSets/", dataset, "?fields=organisationUnits[id],categoryCombo[categoryOptionCombos[id]],dataSetElements[dataElement[id]]")
 
   #This API call should only be a function of the users actual orgunit, not the one which
   #The may be using for validation. Global users will have all DEs/OrgUnits anyway.
@@ -29,12 +29,34 @@ getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_ses
     r <- httpcache::GET(url, httr::timeout(300), handle = d2session$handle)
     if (r$status == 200L) {
         r <- httr::content(r, "text")
-        ous_des <- jsonlite::fromJSON(r, flatten = TRUE)
+        r <- jsonlite::fromJSON(r, flatten = TRUE)
     } else  {
     stop("Could not retreive a list of data elements and orgunits from the server")
       }
 
-  ous_des
+    #Reshape this list a bit to make it a bit easier to deal with
+    #Also deal with NULLs
+
+    des_details <- list(acocs = character(),
+                        des = character(),
+                        ous = character())
+
+
+
+    if (NROW(r$categoryCombo$categoryOptionCombos) > 0) {
+      des_details$acocs <- r$categoryCombo$categoryOptionCombos$id
+    }
+
+    if (length(r$dataSetElements) > 0) {
+      des_details$des <- r$dataSetElements$dataElement.id
+    }
+
+    if (NROW(r$organisationUnits) > 0) {
+      des_details$ous <- r$organisationUnits$id
+    }
+
+
+    des_details
   }
 
 
@@ -56,7 +78,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
   #Which datasets does this orgunit belong to?
   has_dataset <-
     unlist(lapply(de_map, \(x) any(
-      x$organisationUnits$id %in% org_unit
+      x$ous %in% org_unit
     )))
 
   #This orgunit does not have any data sets
@@ -68,8 +90,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
   de_map <- de_map[has_dataset]
 
   #Filter the datasets and get the possible data elements
-  possible_des <-
-    lapply(lapply(de_map, \(.) .$dataSetElement), \(.) .$dataElement.id) |> unlist() |> unique()
+  possible_des <- lapply(de_map, \(.) .$des) |> unlist() |> unique()
 
   #Return all data elements which are not part of any of the datasets.
   orgunit_data_elements[!(orgunit_data_elements$dataElement %in% possible_des), ]
@@ -107,7 +128,7 @@ checkDataElementOrgunitValidity <-
   des_ous <- split(des_ous, des_ous$orgUnit)
   #Get a list of datasets, and the organisationunits and
   #data elements which they contain
-  de_map <- lapply(datasets, \(x) getDataElementOrgunitMap(x, d2session = d2session))
+  de_map <- lapply(datasets, \(x) getDataElementDetailsMap(x, d2session = d2session))
 
   des_ous_test <- lapply(des_ous, function(x) validateOrgunitDataElements(x, de_map))
   #Filter the list for any orgunits which have bogus data elements

@@ -1,29 +1,6 @@
 
 context("Flag invalid data element ACOC combinations")
 
-with_mock_api({
-  test_that("Can get a list of data elements and orgunits for a dataset", {
-    loginToDATIM(config_path = test_config("test-config.json"))
-    expect_true(exists("d2_default_session"))
-    foo <- getDE_ACOC_Map(dataset = "cw2T5eAHxzW", d2session = d2_default_session)
-    expect_type(foo, "list")
-    expect_length(foo, 2L)
-    expect_named(foo, expected = c("dataSetElements", "categoryCombo"), ignore.order = TRUE)
-    expect_true(is.data.frame(foo$dataSetElements))
-    expect_named(foo$dataSetElements, expected = c("dataElement.id"))
-    expect_true(is.list(foo$categoryCombo))
-    expect_named(foo$categoryCombo, expected = c("categoryOptionCombos"))
-    expect_true(is.data.frame(foo$categoryCombo$categoryOptionCombos))
-    expect_named(foo$categoryCombo$categoryOptionCombos, expected = c("id"))
-  })
-
-})
-
-with_mock_api({
-  test_that("Can error if more than one ACOC is specified", {
-    expect_error(getDE_ACOC_Map(dataset = c("abc123", "def456"), d2session = training))
-  })
-})
 
 with_mock_api({
   test_that("Can error if more than one orgunit exists", {
@@ -48,11 +25,30 @@ with_mock_api({
       "abc123", "zzzz123"
     )
     #This attribute option combo is not present in the data element/ACOC map
-    de_map <- list(dataSetElements = data.frame(dataElement.id = c("zzzz123")),
-                   categoryCombo = list(categoryOptionCombos = data.frame(id = c("xxxxx1234"))))
+    de_map <- list(list(acocs = c("o0exnLGytku","SJCCfahcsGr"),
+                                  ous = c("OZyRtJPWHii"),
+                                  des = c("OPmsmx2Rvz2")))
+
 
     test_data <- validateDEs_ACOCs(d, de_map)
     expect_identical(d, test_data)
+
+    #A dataset with no mechanisms. All data should be invalid
+    de_map <- list(list(acocs = character(),
+                        ous = c("OZyRtJPWHii"),
+                        des = c("zzzz123")))
+
+    test_data <- validateDEs_ACOCs(d, de_map)
+    expect_identical(d, test_data)
+
+    #A dataset with no data element. Makes no sense, but lets test it.
+    de_map <- list(list(acocs = c("abc123"),
+                        ous = c("OZyRtJPWHii"),
+                        des = character()))
+
+    test_data <- validateDEs_ACOCs(d, de_map)
+    expect_identical(d, test_data)
+
   })
 
 })
@@ -64,9 +60,9 @@ with_mock_api({
     # nolint start
     d <- tibble::tribble(
       ~dataElement, ~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,~comment,
-      "Kk4CdspETNQ","2017Q1","LnGaK6y98gC","pPoX6WdTN1o","pPoX6WdTN1o","10","BAD",
-      "Kk4CdspETNQ","2017Q1","RQCy4nM3afc","HllvX50cXC0","HllvX50cXC0","5","GOOD",
-      "Kk4CdspETNQ","2017Q1","KKFzPM8LoX7","HllvX50cXC0","HllvX50cXC0","20","GOOD"
+      "Kk4CdspETNQ","2017Q1","LnGaK6y98gC","pPoX6WdTN1o","badMech1234","10","BAD",
+      "Kk4CdspETNQ","2017Q1","RQCy4nM3afc","HllvX50cXC0","o0exnLGytku","5","GOOD",
+      "Kk4CdspETNQ","2017Q1","KKFzPM8LoX7","HllvX50cXC0","SJCCfahcsGr","20","GOOD"
     )
     # nolint end
     datasets <- c("cw2T5eAHxzW")
@@ -93,9 +89,9 @@ with_mock_api({
 
               d <- tibble::tribble(
                 ~ dataElement, ~ attributeOptionCombo,
-                "Kk4CdspETNQ", "HllvX50cXC0",
-                "Kk4CdspETNQ", "HllvX50cXC0",
-                "Kk4CdspETNQ", "HllvX50cXC0"
+                "Kk4CdspETNQ", "o0exnLGytku",
+                "Kk4CdspETNQ", "miCk34PtHnS",
+                "Kk4CdspETNQ", "SJCCfahcsGr"
               )
 
               datasets <- c("cw2T5eAHxzW")
@@ -112,3 +108,5 @@ with_mock_api({
               expect_true(test_data)
             })
 })
+
+
