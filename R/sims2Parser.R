@@ -57,7 +57,7 @@ sims2Parser <-
                     "You may have empty lines or line breaks!"))
     }
     #Ensure we have the correct number of columns
-    data <- data[, seq_len(header)]
+    data <- data[, seq_len(length(header))]
     #Get number of columns and assign the header
     names(data) <- header
     #Data element, period and orgunit must be specified
