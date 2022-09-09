@@ -20,7 +20,13 @@ getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_ses
   url <-
     paste0(
       d2session$base_url,
-      "api/", api_version(), "/dataSets/", dataset, "?fields=organisationUnits[id],categoryCombo[categoryOptionCombos[id]],dataSetElements[dataElement[id]]")
+      "api/",
+      api_version(),
+      "/dataSets/",
+      dataset,
+      "?fields=organisationUnits[id],categoryCombo[categoryOptionCombos[id]]",
+      ",dataSetElements[dataElement[id]]"
+    )
 
   #This API call should only be a function of the users actual orgunit, not the one which
   #The may be using for validation. Global users will have all DEs/OrgUnits anyway.

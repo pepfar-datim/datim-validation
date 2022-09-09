@@ -25,7 +25,7 @@ with_mock_api({
       "abc123", "zzzz123"
     )
     #This attribute option combo is not present in the data element/ACOC map
-    de_map <- list(list(acocs = c("o0exnLGytku","SJCCfahcsGr"),
+    de_map <- list(list(acocs = c("o0exnLGytku", "SJCCfahcsGr"),
                                   ous = c("OZyRtJPWHii"),
                                   des = c("OPmsmx2Rvz2")))
 
@@ -108,5 +108,3 @@ with_mock_api({
               expect_true(test_data)
             })
 })
-
-
