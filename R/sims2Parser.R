@@ -201,7 +201,7 @@ sims2Parser <-
       assessments_ou_acoc[assessments_ou_acoc$period > 1, ]
     asessments_collisions <- assessments[0, ]
     if (nrow(assessments_ou_acoc_dups) > 0) {
-      for (i in seq_len(length(assessments_ou_acoc_dups))) {
+      for (i in seq_len(nrow(assessments_ou_acoc_dups))) {
         foo <- assessments_ou_acoc_dups[i, ]
         bar <-
           assessments[
