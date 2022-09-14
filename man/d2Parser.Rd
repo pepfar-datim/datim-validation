@@ -7,12 +7,14 @@
 d2Parser(
   filename,
   type,
+  datastream,
   organisationUnit = NA,
   dataElementIdScheme = "id",
   orgUnitIdScheme = "id",
   idScheme = "id",
   invalidData = FALSE,
   csv_header = TRUE,
+  isoPeriod = NA,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
@@ -38,6 +40,9 @@ already specififed as UIDs}
 
 \item{csv_header}{By default, CSV files are assumed to have a header,
 otherwise FALSE will allow for files without a CSV header.}
+
+\item{isoPeriod}{period to be used for date shift boundaries. If not
+provided, no boundaries are set.}
 
 \item{d2session}{DHIS2 Session id}
 }

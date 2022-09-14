@@ -104,153 +104,171 @@ checkCodingScheme <- function(data,
 #' }
 #'
 d2Parser <-
-  function(filename,
+  function(
+           filename,
            type,
+           datastream,
            organisationUnit = NA,
            dataElementIdScheme = "id",
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE,
            csv_header = TRUE,
+           isoPeriod = NA,
            d2session = dynGet("d2_default_session", inherits = TRUE)) {
-    if (is.na(organisationUnit)) {
-      #Get the users organisation unit if not specified
-      organisationUnit <- d2session$user_orgunit
-    }
-    valid_type <- type %in% c("xml", "json", "csv")
-    if (!valid_type) {
-      stop("ERROR:Not a valid file type")
-    }
 
-    header <-
-      c(
-        "dataElement",
-        "period",
-        "orgUnit",
-        "categoryOptionCombo",
-        "attributeOptionCombo",
-        "value",
-        "storedby",
-        "lastUpdated",
-        "comment"
-      )
-
-    if (type == "xml") {
-
-      data <- xml2::read_xml(filename) %>%
-        xml2::xml_children() %>%
-        purrr::map(., xml2::xml_attrs) %>%
-        purrr::map_df(~ (as.list(.)))
-
-
-      #Names in the XML must correspond exactly
-      if (!Reduce("&", names(data) %in% header)) {
-        stop("XML attributes must be one of the following:",
-             paste(header, sep = "", collapse = ","))
+      if (is.na(organisationUnit)) {
+        #Get the users organisation unit if not specified
+        organisationUnit <- d2session$user_orgunit
       }
-    }
+      valid_type <- type %in% c("xml", "json", "csv")
+      if (!valid_type) {
+        stop("ERROR:Not a valid file type")
+      }
 
-    if (type == "csv") {
-      data <- read.csv(filename, header = csv_header, stringsAsFactors = FALSE)
-      data[] <- lapply(data, stringr::str_trim)
-      #Get number of columns and assign the header
-      names(data)[seq_len(ncol(data))] <- header[seq_len(ncol(data))]
-      #Data element, period and orgunit must be specified
-      missing_required <- !complete.cases(data[, 1:3])
-      if (sum(missing_required) > 0) {
-        msg <- paste0("File contains rows with missing ",
-                      "required fields in rows ",
-                      paste(which(missing_required == TRUE),
-                            sep = "", collapse = ","),
-                      ". These rows will be excluded.")
-        warning(msg)
+      if (datastream == "SIMS") {
+        header <-
+          c(
+            "dataElement",
+            "period",
+            "orgUnit",
+            "categoryOptionCombo",
+            "attributeOptionCombo",
+            "value",
+            "assessmentid"
+          )
+      } else {
+        header <-
+          c(
+            "dataElement",
+            "period",
+            "orgUnit",
+            "categoryOptionCombo",
+            "attributeOptionCombo",
+            "value",
+            "storedby",
+            "lastUpdated",
+            "comment"
+          )
+
+      }
+
+      if (type == "xml") {
+
+        data <- xml2::read_xml(filename) %>%
+          xml2::xml_children() %>%
+          purrr::map(., xml2::xml_attrs) %>%
+          purrr::map_df(~ (as.list(.)))
+
+
+        #Names in the XML must correspond exactly
+        if (!Reduce("&", names(data) %in% header)) {
+          stop("XML attributes must be one of the following:",
+               paste(header, sep = "", collapse = ","))
         }
-      data <- data[!missing_required, ]
-    }
-
-    if (type == "json") {
-      j <- jsonlite::fromJSON(txt = filename)
-
-      data <- j$dataValues
-
-      if (!is.null(j[["period"]])) {
-        data$period <- j$period
-      }
-      if (!is.null(j[["orgUnit"]])) {
-        data$orgUnit <- j$orgUnit
-      }
-      if (!is.null(j[["attributeOptionCombo"]])) {
-        data$attributeOptionCombo <- j$attributeOptionComboid
       }
 
-      #Names in the JSON must correspond exactly
-      if (!Reduce("&", names(data) %in% header)) {
-        stop("JSON attributes must be one of the following:",
-             paste(header, sep = "", collapse = ","))
+      if (type == "csv") {
+        data <- read.csv(filename, header = csv_header, stringsAsFactors = FALSE)
+        data[] <- lapply(data, stringr::str_trim)
+        #Get number of columns and assign the header
+        names(data)[seq_len(ncol(data))] <- header[seq_len(ncol(data))]
+        #Data element, period and orgunit must be specified
+        missing_required <- !complete.cases(data[, 1:3])
+        if (sum(missing_required) > 0) {
+          msg <- paste0("File contains rows with missing ",
+                        "required fields in rows ",
+                        paste(which(missing_required == TRUE),
+                              sep = "", collapse = ","),
+                        ". These rows will be excluded.")
+          warning(msg)
+        }
+        data <- data[!missing_required, ]
       }
-    }
 
-    data <- data[, header[header %in% names(data)]]
+      if (type == "json") {
+        j <- jsonlite::fromJSON(txt = filename)
 
-    if (orgUnitIdScheme != "id") {
-      data$orgUnit <-
-        remapOUs(
-          data$orgUnit,
-          organisationUnit,
-          mode_in = orgUnitIdScheme,
+        data <- j$dataValues
+
+        if (!is.null(j[["period"]])) {
+          data$period <- j$period
+        }
+        if (!is.null(j[["orgUnit"]])) {
+          data$orgUnit <- j$orgUnit
+        }
+        if (!is.null(j[["attributeOptionCombo"]])) {
+          data$attributeOptionCombo <- j$attributeOptionComboid
+        }
+
+        #Names in the JSON must correspond exactly
+        if (!Reduce("&", names(data) %in% header)) {
+          stop("JSON attributes must be one of the following:",
+               paste(header, sep = "", collapse = ","))
+        }
+      }
+
+      data <- data[, header[header %in% names(data)]]
+
+      if (orgUnitIdScheme != "id") {
+        data$orgUnit <-
+          remapOUs(
+            data$orgUnit,
+            organisationUnit,
+            mode_in = orgUnitIdScheme,
+            mode_out = "id",
+            d2session = d2session
+          )
+      }
+      if (dataElementIdScheme != "id") {
+        data$dataElement <-
+          remapDEs(
+            data$dataElement,
+            mode_in = dataElementIdScheme,
+            mode_out = "id",
+            d2session = d2session
+          )
+      }
+      if (idScheme != "id") {
+        data$attributeOptionCombo <- remapMechs(
+          data$attributeOptionCombo,
+          organisationUnit = organisationUnit,
+          mode_in = idScheme,
           mode_out = "id",
           d2session = d2session
         )
-    }
-    if (dataElementIdScheme != "id") {
-      data$dataElement <-
-        remapDEs(
-          data$dataElement,
-          mode_in = dataElementIdScheme,
-          mode_out = "id",
-          d2session = d2session
-        )
-    }
-    if (idScheme != "id") {
-      data$attributeOptionCombo <- remapMechs(
-        data$attributeOptionCombo,
-        organisationUnit = organisationUnit,
-        mode_in = idScheme,
-        mode_out = "id",
-        d2session = d2session
-      )
-    }
-
-    #Data frame needs to be completely flattened to characters
-    data <- plyr::colwise(as.character)(data)
-
-    isMissing <- function(x) { x == "" | is.na(x) } #nolint
-
-    if (NROW(data) == 1) {
-      valid_rows <- sum(sapply(data, isMissing)) == 0L
-       } else {
-
-         valid_rows <- purrr::reduce(purrr::map(data, isMissing), `+`) == 0L
       }
 
-    if (sum(valid_rows) != NROW(data)) {
+      #Data frame needs to be completely flattened to characters
+      data <- plyr::colwise(as.character)(data)
 
-      msg <-
-        paste0(sum(!valid_rows), " rows are incomplete. ",
-               "Please check your file to ensure its correct.")
-      warning(msg)
-    }
+      isMissing <- function(x) { x == "" | is.na(x) } #nolint
 
-    if (!invalidData) {
-      data <- data[valid_rows, ]
-    }
+      if (NROW(data) == 1) {
+        valid_rows <- sum(sapply(data, isMissing)) == 0L
+      } else {
 
-    code_scheme_check <- checkCodingScheme(data, d2session = d2session)
+        valid_rows <- purrr::reduce(purrr::map(data, isMissing), `+`) == 0L
+      }
 
-    if (!code_scheme_check$is_valid) {
-      return(code_scheme_check)
-    } else {
-      data
-    }
+      if (sum(valid_rows) != NROW(data)) {
+
+        msg <-
+          paste0(sum(!valid_rows), " rows are incomplete. ",
+                 "Please check your file to ensure its correct.")
+        warning(msg)
+      }
+
+      if (!invalidData) {
+        data <- data[valid_rows, ]
+      }
+
+      code_scheme_check <- checkCodingScheme(data, d2session = d2session)
+
+      if (!code_scheme_check$is_valid) {
+        return(code_scheme_check)
+      } else {
+        data
+      }
 
   }

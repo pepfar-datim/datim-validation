@@ -41,8 +41,10 @@ sims2Parser <-
       )
 
     #We need to be a global user.
-    organisationUnit <- getOption("organisationUnit")
-    assertthat::assert_that(organisationUnit == "ybg3MO3hcf4")
+    is_global_user <- d2session$user_orgunit == "ybg3MO3hcf4"
+    if (!is_global_user) {
+      stop("You must use an account with Global credentials for SIMS")
+    }
     data <- read.csv(filename,
                      na = "",
                      stringsAsFactors = FALSE,
@@ -57,9 +59,10 @@ sims2Parser <-
                     "You may have empty lines or line breaks!"))
     }
     #Ensure we have the correct number of columns
-    data <- data[, seq_len(header)]
+    data <- data[, seq_along(header)]
     #Get number of columns and assign the header
     names(data) <- header
+
     #Data element, period and orgunit must be specified
     missing_required <- !complete.cases(data[, 1:3])
     if (sum(missing_required) > 0) {
@@ -199,7 +202,9 @@ sims2Parser <-
     #Possible collisions
     assessments_ou_acoc_dups <-
       assessments_ou_acoc[assessments_ou_acoc$period > 1, ]
+
     asessments_collisions <- assessments[0, ]
+
     if (nrow(assessments_ou_acoc_dups) > 0) {
       for (i in seq_len(assessments_ou_acoc_dups)) {
         foo <- assessments_ou_acoc_dups[i, ]
