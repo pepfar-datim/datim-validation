@@ -54,7 +54,7 @@ loadExchangeFile <- function(filename,
                                csv_header = TRUE,
                                d2session = d2session)
 
-  if (datastream = "SIMS") {
+  if (datastream == "SIMS") {
     d <- shiftSIMSData(d)
   } else  {
     d$data$import <- d$data$parsed
