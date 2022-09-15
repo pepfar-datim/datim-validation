@@ -32,7 +32,7 @@ checkCodingScheme <- function(d,
       paste(data_element_check, sep = "", collapse = ","))
       d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
       d$tests$data_element_check <- data_element_check
-
+      warning(msg)
   }
 
   #TODO: This is duplicative with checkOrgunitsInHierarchy
@@ -48,7 +48,7 @@ checkCodingScheme <- function(d,
       "WARNING! The following org unit identifiers could not be found:",
       paste(orgunit_check, sep = "", collapse = ",")
     )
-
+    warning(msg)
     d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
     d$tests$orgunit_check <- orgunit_check
     is_valid <- FALSE
@@ -63,6 +63,7 @@ checkCodingScheme <- function(d,
       "WARNING! The following category option combo identifiers could not be found:",
       paste(coc_check, sep = "", collapse = ",")
     )
+    warning(msg)
     d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
     d$tests$coc_check <- coc_check
 
@@ -77,6 +78,7 @@ checkCodingScheme <- function(d,
       "WARNING! The following attribute option combo identifiers could not be found:",
       paste(acoc_check, sep = "", collapse = ",")
     )
+    warning(msg)
     d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
     d$tests$acoc_check <- acoc_check
 

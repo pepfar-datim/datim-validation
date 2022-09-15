@@ -49,6 +49,11 @@ getPeriodFromISO <- function(iso) {
     stop("You must supply a period identifier")
   }
   pt <- getPeriodType(iso)
+
+  if (is.na(pt)) {
+    return(NULL)
+  }
+
   startDate <- NA
   endDate <- NA
   if (pt == "Daily") {
@@ -77,11 +82,14 @@ getPeriodFromISO <- function(iso) {
     } else if (q == 4) {
       m <- "10"
     }  else {
-      (stop(paste("Invalid quarter specified in ", iso)))
+      (warning(paste("Invalid quarter specified in ", iso)))
+      return(NULL)
     }
+
     add.months <- function(date, n) {
       seq(date, by = paste(n, "months"), length = 2)[2]
     }
+
     startDate <- as.Date(paste0(y, m, "01"), "%Y%m%d")
     endDate <- add.months(startDate, 3) - 1
   } else if (pt == "Yearly") {
@@ -102,10 +110,11 @@ getPeriodFromISO <- function(iso) {
     stringsAsFactors = FALSE)
 
   if (anyNA(period) || is.null(period)) {
-    stop(paste0(iso, "is not a valid period."))
+    warning(paste0(iso, "is not a valid period."))
+    return(NULL)
   }
 
-  return(period)
+  period
 }
 
 
@@ -124,7 +133,20 @@ getPeriodFromISO <- function(iso) {
 #'     checkPeriodIdentifiers(d)
 #' }
 #'
-checkPeriodIdentifiers <- function(data) {
-  do.call(rbind.data.frame, lapply(data$period, getPeriodFromISO))
-  return(TRUE)
+checkPeriodIdentifiers <- function(d) {
+  periods <- unique(d$data$import$period)
+  period_check <- lapply(periods, getPeriodFromISO)
+  bad_periods_idx <- which(sapply(period_check,is.null))
+
+  if(length(bad_periods_idx) > 0) {
+    bad_periods <- periods[bad_periods_idx]
+    msg <- paste("ERROR! The following periods are invalid. This data will be removed to allow for further processing.",
+                 paste(bad_periods,sep="",collapse=", "))
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    d$tests$bad_periods <- bad_periods
+
+   d$data$import <- d$data$import %>%
+    dplyr::filter(!(d$data$import$period %in% bad_periods))
+  }
+  d
 }

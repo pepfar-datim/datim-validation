@@ -27,23 +27,9 @@ loadExchangeFile <- function(filename,
                              isoPeriod = NA,
                              d2session = dynGet("d2_default_session", inherits = TRUE)) {
 
-  # d ----
-  d <- list(
-    info = list(
-      filename = filename,
-      type = type,
-      dataElementIdScheme = dataElementIdScheme,
-      orgUnitIdScheme = orgUnitIdScheme,
-      idScheme = idScheme,
-      invalidData = invalidData,
-      hasHeader = hasHeader,
-      isoPeriod = isoPeriod,
-      messages = MessageQueue(),
-      has_error = FALSE
-  ))
 
 
-  d$data$parsed <- d2Parser(   filename = filename,
+  d <- d2Parser(   filename = filename,
                                type = type,
                                datastream = datastream,
                                organisationUnit = organisationUnit,
