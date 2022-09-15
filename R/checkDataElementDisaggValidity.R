@@ -18,7 +18,6 @@
 #' }
 checkDataElementDisaggValidity <- function(d,
                                            datasets = NA,
-                                           return_violations = TRUE,
                                            d2session =
                                              dynGet("d2_default_session",
                                                     inherits = TRUE)) {

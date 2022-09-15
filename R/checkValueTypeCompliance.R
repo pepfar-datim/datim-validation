@@ -54,10 +54,12 @@ checkValueTypeCompliance <- function(d,
 
   des <- getDataElementMap(d2session = d2session)
   des <- merge(des, patterns, by = "valueType", all.x = TRUE)
-  d <- merge(d, des, by.x = "dataElement", by.y = "id")
+
+  data <- d$data$import
+  data <- merge(data, des, by.x = "dataElement", by.y = "id")
 
   #Support only valueTypes with a regex
-  d_regex_validation <- d[!is.na(d$regex), ]
+  d_regex_validation <- data[!is.na(data$regex), ]
 
   if (NROW(d_regex_validation) > 0)  {
 
@@ -82,24 +84,26 @@ checkValueTypeCompliance <- function(d,
                   value,
                   is_valid_value) %>%
     dplyr::filter(!is_valid_value)
-  } else {
-    d_regex_validation <- data.frame(dataElement = character(),
-                                     period = character(),
-                                     categoryOptionCombo = character(),
-                                     attributeOptionCombo = character(),
-                                     value = character(),
-                                     is_valid_value = logical(),
-                                     stringsAsFactors = FALSE)
   }
+
+
+
+
+  if (NROW(d_regex_validation) > 0 ) {
+    d$tests$value_compliance <- d_regex_validation
+    msg <- paste("ERROR!", NROW(d_regex_validation), " invalid values found.")
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+
+  } else {
+    msg <- paste("No invalid values found.")
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+  }
+
   #Deal with data of type option sets
-  d_option_sets <- checkOptionSetCompliance(d, d2session = d2session)
-  #Return anything which is not valid
-  d <- dplyr::bind_rows(d_regex_validation, d_option_sets)
-  if (NROW(d) > 0) {
-    d
-  } else {
-    TRUE
-  }
+  d <- checkOptionSetCompliance(d, d2session = d2session)
+
+  d
+
   }
 
 #' @export
@@ -161,23 +165,17 @@ checkOptionSetCompliance <- function(d,
                                    d2session = dynGet("d2_default_session",
                                                       inherits = TRUE)) {
 
+  data <- d$data$import
+
   option_sets_des <- getDataElementMap(d2session = d2session) %>%
     dplyr::filter(!is.na(optionSet.id)) %>%
     dplyr::select(dataElement = id, optionSetID = optionSet.id) %>%
     dplyr::distinct()
 
-  d <-  dplyr::inner_join(d, option_sets_des, by = "dataElement")
+  data <-  dplyr::inner_join(data, option_sets_des, by = "dataElement")
 
-  if (NROW(d) == 0) {
-
-    foo <- data.frame(dataElement = character(),
-               period = character(),
-               categoryOptionCombo = character(),
-               attributeOptionCombo = character(),
-               value = character(),
-               is_valid_value = logical(),
-               stringsAsFactors = FALSE)
-    return(foo)
+  if (NROW(data) == 0) {
+    return(d)
   }
 
   option_set_map <- getOptionSetMap(d2session = d2session)
@@ -187,18 +185,30 @@ checkOptionSetCompliance <- function(d,
     option_set_map[list_index, "options"][[1]] %>% dplyr::pull("code")
   }
 
-  d$option_set_values_list <- lapply(d$optionSetID, getOptionSetValues)
-  d$is_valid_value <- mapply(function(x, y) x %in% y,
-                             d$value,
-                             d$option_set_values_list)
-  d %>%
+  option_set_values_list <- lapply(data$optionSetID, getOptionSetValues)
+
+  is_valid_value <- mapply(function(x, y) x %in% y,
+                             data$value,
+                             option_set_values_list)
+
+  invalid_option_set_values <- data %>%
+    dplyr::filter(!is_valid_value)  %>%
     dplyr::select(dataElement,
                   period,
                   orgUnit,
                   categoryOptionCombo,
                   attributeOptionCombo,
-                  value,
-                  is_valid_value) %>%
-    dplyr::filter(!is_valid_value)
+                  value)
+
+  if (NROW(invalid_option_set_values) > 0) {
+    d$tests$invalid_option_set_values <- invalid_option_set_values
+    msg <- paste(NROW(invalid_option_set_values),"invalid option set values detected.")
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+
+  } else  {
+    msg <- "All option set values were valid."
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+  }
+  d
 
 }

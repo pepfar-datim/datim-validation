@@ -60,7 +60,10 @@ with_mock_api({
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
     # nolint start
-    d <- tibble::tribble(
+    d <- list()
+    d$info$messages <- MessageQueue()
+
+    d$data$import <- tibble::tribble(
       ~dataElement, ~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,~comment,
       "MMODRH694Pn","2017Q1","OZyRtJPWHii","pPoX6WdTN1o","WQa4uNduUe","10","GOOD",
       "tG7ocyZ8kVA","2017Q1","oRU10tDCoJe","HllvX50cXC0","WQa4uNduUev","5","GOOD",
@@ -68,19 +71,10 @@ with_mock_api({
     )
     # nolint end
   datasets <- c("MqNLEXmzIzr")
-  expect_warning(test_data <- checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session))
-  expect_equal(NROW(test_data), 1)
+  d <- checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session)
+  expect_equal(NROW(d$tests$invalid_des_ous), 1)
+  expect_named(d$tests$invalid_des_ous, c("dataElement", "orgUnit"), ignore.order = TRUE)
 
-  expect_warning(
-    test_data <-
-      checkDataElementOrgunitValidity(
-        d,
-        datasets,
-        return_violations = FALSE,
-        d2session = d2_default_session
-      )
-  )
-  expect_false(test_data)
 })})
 
 with_mock_api({
@@ -88,8 +82,10 @@ with_mock_api({
             {
               loginToDATIM(config_path = test_config("test-config.json"))
               expect_true(exists("d2_default_session"))
+              d <- list()
+              d$info$messages <- MessageQueue()
 
-              d <- tibble::tribble(
+              d$data$import  <- tibble::tribble(
                 ~ dataElement, ~ orgUnit,
                 "Kk4CdspETNQ", "OZyRtJPWHii",
                 "Kk4CdspETNQ", "oRU10tDCoJe",
@@ -99,15 +95,8 @@ with_mock_api({
               datasets <- c("cw2T5eAHxzW")
               test_data <-
                 checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session)
-              expect_equal(NROW(test_data), 0)
-              expect_named(test_data, c("dataElement", "orgUnit"))
+              expect_null(d$tests$invalid_des_ous)
 
-              test_data <-
-                checkDataElementOrgunitValidity(d,
-                                                datasets,
-                                                return_violations = FALSE,
-                                                d2session = d2_default_session)
-              expect_true(test_data)
             })
 })
 
@@ -128,12 +117,10 @@ with_mock_api({
                   invalidData = FALSE,
                   d2session = d2_default_session)
     datasets <- c("i29foJcLY9Y", "STL4izfLznL")
-    expect_warning(test_data <-
-                     checkDataElementDisaggValidity(
+  d <- checkDataElementDisaggValidity(
                        d,
                        datasets = datasets,
-                       return_violations = TRUE,
-                       d2session = d2_default_session))
-    expect_equal(NROW(test_data), 1)
-    expect_equal(test_data$storedby[1], "BAD")
+                       d2session = d2_default_session)
+    expect_equal(NROW(d$tests$data_des_cocs_bad), 1)
+    expect_equal(d$tests$data_des_cocs_bad$storedby[1], "BAD")
   })})

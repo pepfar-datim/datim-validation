@@ -10,24 +10,31 @@
 #' congruent with what has been supplied as a paramater.
 #'
 #'
-checkCodingScheme <- function(data,
+checkCodingScheme <- function(d,
                               d2session = dynGet("d2_default_session",
                                                  inherits = TRUE)) {
+
+  data <- d$data$parsed
   #This is a very superficial and quick check,
   #just to be sure that the coding scheme is correct.
   #Additional validation will be required to be sure data elements,
   #catcombos and orgunits are properly associated
   is_valid <- TRUE
+
   data_element_check_v <-
     unique(data$dataElement) %in% getDataElementMap(d2session = d2session)$id
+
   data_element_check <- unique(data$dataElement)[!data_element_check_v]
+
   if (length(data_element_check) > 0) {
-    warning(
-      "The following data element identifiers could not be found:",
-      paste(data_element_check, sep = "", collapse = ",")
-    )
-    is_valid <- FALSE
+
+      msg <- paste("WARNING!: The following data element identifiers could not be found:",
+      paste(data_element_check, sep = "", collapse = ","))
+      d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
+      d$tests$data_element_check <- data_element_check
+
   }
+
   #TODO: This is duplicative with checkOrgunitsInHierarchy
   orgunit_check <-
     unique(data$orgUnit)[!(
@@ -35,11 +42,15 @@ checkCodingScheme <- function(data,
       %in%
       getOrganisationUnitMap(d2session = d2session)$id
     )]
+
   if (length(orgunit_check) > 0) {
-    warning(
-      "The following org unit identifiers could not be found:",
+    msg <- paste(
+      "WARNING! The following org unit identifiers could not be found:",
       paste(orgunit_check, sep = "", collapse = ",")
     )
+
+    d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
+    d$tests$orgunit_check <- orgunit_check
     is_valid <- FALSE
   }
   coc_check <-
@@ -48,11 +59,13 @@ checkCodingScheme <- function(data,
         getCategoryOptionCombosMap(d2session = d2session)$id
     )]
   if (length(coc_check) > 0) {
-    warning(
-      "The following category option combo identifiers could not be found:",
+    msg <- paste(
+      "WARNING! The following category option combo identifiers could not be found:",
       paste(coc_check, sep = "", collapse = ",")
     )
-    is_valid <- FALSE
+    d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
+    d$tests$coc_check <- coc_check
+
   }
   acoc_check <-
     unique(data$attributeOptionCombo)[!(
@@ -60,18 +73,17 @@ checkCodingScheme <- function(data,
         getMechanismsMap(d2session = d2session)$id
     )]
   if (length(acoc_check) > 0) {
-    warning(
-      "The following attribute option combo identifiers could not be found:",
+    msg <- paste(
+      "WARNING! The following attribute option combo identifiers could not be found:",
       paste(acoc_check, sep = "", collapse = ",")
     )
-    is_valid <- FALSE
+    d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
+    d$tests$acoc_check <- acoc_check
+
   }
 
-    list("dataElement" = data_element_check,
-       "orgUnit" = orgunit_check,
-       "categoryOptionCombo" = coc_check,
-       "attributeOptionCombo" = acoc_check,
-       "is_valid" = is_valid)
+  d
+
 }
 
 #' @export
@@ -106,16 +118,32 @@ checkCodingScheme <- function(data,
 d2Parser <-
   function(
            filename,
-           type,
-           datastream,
+           type = "csv",
+           datastream = "MER",
            organisationUnit = NA,
            dataElementIdScheme = "id",
            orgUnitIdScheme = "id",
            idScheme = "id",
            invalidData = FALSE,
-           csv_header = TRUE,
+           hasHeader = TRUE,
            isoPeriod = NA,
            d2session = dynGet("d2_default_session", inherits = TRUE)) {
+
+
+    # d ----
+    d <- list(
+      info = list(
+        filename = filename,
+        type = type,
+        dataElementIdScheme = dataElementIdScheme,
+        orgUnitIdScheme = orgUnitIdScheme,
+        idScheme = idScheme,
+        invalidData = invalidData,
+        hasHeader = hasHeader,
+        isoPeriod = isoPeriod,
+        messages = MessageQueue(),
+        has_error = FALSE
+      ))
 
       if (is.na(organisationUnit)) {
         #Get the users organisation unit if not specified
@@ -169,7 +197,7 @@ d2Parser <-
       }
 
       if (type == "csv") {
-        data <- read.csv(filename, header = csv_header, stringsAsFactors = FALSE)
+        data <- read.csv(filename, header = hasHeader, stringsAsFactors = FALSE)
         data[] <- lapply(data, stringr::str_trim)
         #Get number of columns and assign the header
         names(data)[seq_len(ncol(data))] <- header[seq_len(ncol(data))]
@@ -263,12 +291,18 @@ d2Parser <-
         data <- data[valid_rows, ]
       }
 
-      code_scheme_check <- checkCodingScheme(data, d2session = d2session)
+      #This will be used to hold the raw parsed data, prior to
+      #any filtering of invalid rows
+      d$data$parsed <- data
 
-      if (!code_scheme_check$is_valid) {
-        return(code_scheme_check)
-      } else {
-        data
+      d <- checkCodingScheme(d, d2session = d2session)
+
+      #If we have SIMS data, shift the dates as needed.
+      if (datastream == "SIMS") {
+        d <- shiftSIMSData(d)
+      } else  {
+        d$data$import <- d$data$parsed
       }
 
+      d
   }
