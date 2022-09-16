@@ -5,19 +5,16 @@
 \title{Check Data Element Disagg Validity}
 \usage{
 checkDataElementDisaggValidity(
-  data,
+  d,
   datasets = NA,
-  return_violations = TRUE,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{data}{D2 compliant data frame object}
+\item{d}{D2 Parsed data frame}
 
 \item{datasets}{Should be a character vector of data set UIDs.
 Alternatively, if left missing, user will be promted to choose from a list.}
-
-\item{return_violations}{Boolean to return violations only.}
 
 \item{d2session}{DHIS2 Session id}
 }

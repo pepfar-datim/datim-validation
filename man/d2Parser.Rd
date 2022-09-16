@@ -6,14 +6,14 @@
 \usage{
 d2Parser(
   filename,
-  type,
-  datastream,
+  type = "csv",
+  datastream = "MER",
   organisationUnit = NA,
   dataElementIdScheme = "id",
   orgUnitIdScheme = "id",
   idScheme = "id",
   invalidData = FALSE,
-  csv_header = TRUE,
+  hasHeader = TRUE,
   isoPeriod = NA,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
@@ -38,8 +38,8 @@ already specififed as UIDs}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
-\item{csv_header}{By default, CSV files are assumed to have a header,
-otherwise FALSE will allow for files without a CSV header.}
+\item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not
+contain header information.}
 
 \item{isoPeriod}{period to be used for date shift boundaries. If not
 provided, no boundaries are set.}
