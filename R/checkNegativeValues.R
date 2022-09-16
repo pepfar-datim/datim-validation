@@ -32,7 +32,7 @@ checkNegativeValues <- function(d,
   data <- d$data$import %>%
     dplyr::filter(dataElement %in% des_numeric)
 
-  if (NROW(data) == 0 ) {
+  if (NROW(data) == 0) {
     return(d)
   }
 

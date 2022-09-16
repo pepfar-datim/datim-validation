@@ -51,7 +51,7 @@ getPeriodFromISO <- function(iso) {
   pt <- getPeriodType(iso)
 
   if (is.na(pt)) {
-    warning(paste("Could not identify the period type for ",iso))
+    warning(paste("Could not identify the period type for ", iso))
     return(NULL)
   }
 
@@ -149,12 +149,12 @@ checkPeriodIdentifiers <- function(d) {
   periods <- unique(d$data$import$period)
 
   period_check <- lapply(periods, getPeriodFromISO)
-  bad_periods_idx <- which(sapply(period_check,is.null))
+  bad_periods_idx <- which(sapply(period_check, is.null))
 
-  if(length(bad_periods_idx) > 0) {
+  if (length(bad_periods_idx) > 0) {
     bad_periods <- periods[bad_periods_idx]
     msg <- paste("ERROR! The following periods are invalid. This data will be removed to allow for further processing.",
-                 paste(bad_periods,sep="",collapse=", "))
+                 paste(bad_periods, sep = "", collapse = ", "))
     d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
     d$tests$bad_periods <- bad_periods
 

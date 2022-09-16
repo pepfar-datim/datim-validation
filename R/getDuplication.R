@@ -63,7 +63,7 @@ getPureDuplicates <- function(d) {
 
   if (NROW(pure_dupes) > 0) {
 
-    msg <- paste(NROW(pure_dupes),"combinations requiring duplication found.")
+    msg <- paste(NROW(pure_dupes), "combinations requiring duplication found.")
     d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
 

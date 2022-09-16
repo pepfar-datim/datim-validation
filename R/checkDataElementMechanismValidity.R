@@ -78,8 +78,7 @@ checkDataElementMechValidity <-
              \(x) getDataElementDetailsMap(x, d2session = d2session))
 
     des_acocs_test <-
-      lapply(des_acocs, function(x)
-        validateDEs_ACOCs(x, des_acocs_map))
+      lapply(des_acocs, \(x) validateDEs_ACOCs(x, des_acocs_map))
     #Filter the list for any orgunits which have bogus data elements
     bad_data_des_acocs <-
       des_acocs_test[unlist(lapply(des_acocs_test, \(.) NROW(.) > 0))]

@@ -13,9 +13,9 @@ with_mock_api({
                   invalidData = FALSE,
                   d2session = d2_default_session)
     expect_type(d, "list")
-    expect_named(d,c("info","data"),ignore.order = TRUE)
-    expect_named(d$data,c("parsed","import"), ignore.order = TRUE)
-    expect_type(d$info,"list")
+    expect_named(d, c("info", "data"), ignore.order = TRUE)
+    expect_named(d$data, c("parsed", "import"), ignore.order = TRUE)
+    expect_type(d$info, "list")
     info_names <-  c("filename",
                      "type",
                      "dataElementIdScheme",
@@ -26,7 +26,7 @@ with_mock_api({
                      "isoPeriod",
                      "messages",
                      "has_error")
-    expect_named(d$info,info_names,ignore.order = TRUE)
+    expect_named(d$info, info_names, ignore.order = TRUE)
     expect_is(d$data$import, "data.frame")
     d_names <- c("dataElement",
                  "period",
@@ -34,8 +34,8 @@ with_mock_api({
                  "categoryOptionCombo",
                  "attributeOptionCombo",
                  "value")
-    expect_named(d$data$parsed,d_names,ignore.order = TRUE)
-    expect_named(d$data$import,d_names,ignore.order = TRUE)
+    expect_named(d$data$parsed, d_names, ignore.order = TRUE)
+    expect_named(d$data$import, d_names, ignore.order = TRUE)
   })})
 
 with_mock_api({
@@ -69,7 +69,7 @@ with_mock_api({
                             invalidData = FALSE,
                             hasHeader = TRUE,
                             d2session = d2_default_session))
-     expect_equal(NROW(d$tests$acoc_check),3)
+     expect_equal(NROW(d$tests$acoc_check), 3)
   })})
 
 context("Parse JSON data")
@@ -94,8 +94,8 @@ with_mock_api({
                  "categoryOptionCombo",
                  "attributeOptionCombo",
                  "value")
-    expect_named(d$data$import,d_names)
-    expect_equal(NROW(d$data$import),1000)
+    expect_named(d$data$import, d_names)
+    expect_equal(NROW(d$data$import), 1000)
   })})
 
 with_mock_api({
@@ -136,7 +136,7 @@ with_mock_api({
                  "attributeOptionCombo",
                  "value")
     expect_identical(names(d$data$import), d_names)
-    expect_equal(NROW(d$data$import),4)
+    expect_equal(NROW(d$data$import), 4)
   })})
 
 
@@ -183,7 +183,7 @@ with_mock_api({
                   idScheme = "id",
                   invalidData = FALSE, d2session = d2_default_session)
     d <- expect_warning(checkPeriodIdentifiers(d))
-    expect_equal(length(d$tests$bad_periods),2L)
+    expect_equal(length(d$tests$bad_periods), 2L)
   })})
 
 context("Can return bad mechanism/period association")
@@ -218,7 +218,7 @@ with_mock_api({
                            "endDate_mech",
                            "is_valid")
       expect_setequal(names(d$tests$invalid_mechanisms), bad_mechs_names)
-      expect_equal(NROW(d$tests$invalid_mechanisms),4L)
+      expect_equal(NROW(d$tests$invalid_mechanisms), 4L)
     })})
 
 context("Can warn on bad mechanism/period associations")
@@ -252,7 +252,7 @@ with_mock_api({
                            "endDate_mech",
                            "is_valid")
       expect_setequal(names(d$tests$invalid_mechanisms), bad_mechs_names)
-      expect_equal(NROW(d$tests$invalid_mechanisms),4L)
+      expect_equal(NROW(d$tests$invalid_mechanisms), 4L)
     })})
 
 
@@ -271,8 +271,8 @@ with_mock_api({
                         orgUnitIdScheme = "id",
                         idScheme = "id",
                         invalidData = FALSE, d2session  = d2_default_session))
-      expect_is(d$tests$orgunit_check ,"character")
-      expect_equal(length(d$tests$orgunit_check),1L)
+      expect_is(d$tests$orgunit_check, "character")
+      expect_equal(length(d$tests$orgunit_check), 1L)
     })})
 
 context("Can error on an invalid data element UID")
@@ -292,9 +292,9 @@ with_mock_api({
                       invalidData = FALSE, d2session  = d2_default_session)
       )
 
-      expect_is(d$tests$data_element_check ,"character")
-      expect_identical(d$tests$data_element_check,"SiuNE0ywCW4")
-      expect_equal(length(d$tests$data_element_check),1L)
+      expect_is(d$tests$data_element_check, "character")
+      expect_identical(d$tests$data_element_check, "SiuNE0ywCW4")
+      expect_equal(length(d$tests$data_element_check), 1L)
 
     })})
 
@@ -313,9 +313,9 @@ with_mock_api({
                         orgUnitIdScheme = "id",
                         idScheme = "id",
                         invalidData = FALSE, d2session = d2_default_session))
-      expect_is(d$tests$acoc_check ,"character")
-      expect_identical(d$tests$acoc_check,"SiuNE0ywCW4")
-      expect_equal(length(d$tests$acoc),1L)
+      expect_is(d$tests$acoc_check, "character")
+      expect_identical(d$tests$acoc_check, "SiuNE0ywCW4")
+      expect_equal(length(d$tests$acoc), 1L)
     })})
 
 context("Can warn on a missing values")

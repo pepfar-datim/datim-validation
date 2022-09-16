@@ -70,7 +70,7 @@ with_mock_api({
     datasets <- c("cw2T5eAHxzW")
     d <- checkDataElementMechValidity(d, datasets, d2session = d2_default_session)
     expect_equal(NROW(d$tests$bad_data_des_acocs), 1)
-    expect_named(d$tests$bad_data_des_acocs,c("dataElement", "attributeOptionCombo"), ignore.order = TRUE)
+    expect_named(d$tests$bad_data_des_acocs, c("dataElement", "attributeOptionCombo"), ignore.order = TRUE)
   })})
 
 with_mock_api({

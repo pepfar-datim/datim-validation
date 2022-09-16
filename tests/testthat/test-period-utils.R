@@ -17,7 +17,7 @@ test_that("We can parse a daily period", {
 
 test_that("Invalid daily period produces error", {
 
-  expect_warning( foo <- getPeriodFromISO("20170229"))
+  expect_warning(foo <- getPeriodFromISO("20170229"))
   expect_null(foo)
 })
 
@@ -101,14 +101,14 @@ test_that("We can error on a bad period", {
   d$info$messages <- MessageQueue()
   d$data$import <- data.frame(period = c("2017Q1", "2017Q2", "2017Q5"))
 
-  expect_warning( d <- checkPeriodIdentifiers(d), "Invalid quarter specified in  2017Q5")
-  expect_equal(NROW(d$info$messages),1L)
+  expect_warning(d <- checkPeriodIdentifiers(d), "Invalid quarter specified in  2017Q5")
+  expect_equal(NROW(d$info$messages), 1L)
 })
 
 test_that("We can error on a missing period", {
   d <- list()
   d$info$messages <- MessageQueue()
-  d$data$import <- data.frame( period = c("2017Q1", "2017Q2", NA))
+  d$data$import <- data.frame(period = c("2017Q1", "2017Q2", NA))
   expect_error(d <- checkPeriodIdentifiers(d))
 })
 
@@ -118,7 +118,7 @@ test_that("We get true on good periods", {
   names(d) <- c("period")
   d$data$import <- data.frame(period =  c("2018Q3", "2017Q1", "2017Q2",
                 "2017Q4", "2017", "2017Oct", "2017W2"))
-  expect_silent( d_new <- checkPeriodIdentifiers(d))
-  expect_identical(d,d_new)
+  expect_silent(d_new <- checkPeriodIdentifiers(d))
+  expect_identical(d, d_new)
   }
   )

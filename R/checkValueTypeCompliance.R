@@ -89,7 +89,7 @@ checkValueTypeCompliance <- function(d,
 
 
 
-  if (NROW(d_regex_validation) > 0 ) {
+  if (NROW(d_regex_validation) > 0) {
     d$tests$value_compliance <- d_regex_validation
     msg <- paste("ERROR!", NROW(d_regex_validation), " invalid values found.")
     d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
@@ -202,7 +202,7 @@ checkOptionSetCompliance <- function(d,
 
   if (NROW(invalid_option_set_values) > 0) {
     d$tests$invalid_option_set_values <- invalid_option_set_values
-    msg <- paste(NROW(invalid_option_set_values),"invalid option set values detected.")
+    msg <- paste(NROW(invalid_option_set_values), "invalid option set values detected.")
     d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
 
   } else  {

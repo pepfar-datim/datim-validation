@@ -8,7 +8,7 @@
 #' @return Object of class data.frame and Message queue.
 #' @export
 
-MessageQueue <- function(message=character(), level=character()) {
+MessageQueue <- function(message = character(), level = character()) {
 
   messages <- data.frame(
     message = message,
@@ -44,7 +44,7 @@ appendMessage <- function(x, message, level) {
 #' @return A MessageQueue object
 #' @export
 
-appendMessage.MessageQueue <- function(x, message=NA, level=NA) {
+appendMessage.MessageQueue <- function(x, message = NA, level = NA) {
 
   if (length(message) != length(level)) {
     stop("Messages and warnings must be of the same length")
@@ -94,7 +94,7 @@ printMessages <- function(x) {
 #'
 printMessages.MessageQueue <- function(x) {
   # If warnings, show all grouped by sheet and issue
-  if (NROW(x) > 0 & interactive()) {
+  if (NROW(x) > 0 && interactive()) {
     options(warning.length = 8170)
 
     levels <- c("ERROR", "WARNING", "INFO")

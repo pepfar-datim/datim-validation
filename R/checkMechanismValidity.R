@@ -76,15 +76,14 @@ checkMechanismValidity <- function(d,
   if (NROW(data_mechs_periods) > 0) {
 
     msg <- paste("ERROR! The following invalid mechanisms found were found: ",
-                 paste(data_mechs_periods$code),sep="",collapse=", ")
+                 paste(data_mechs_periods$code), sep = "", collapse = ", ")
     d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
     d$tests$invalid_mechanisms <- data_mechs_periods
   } else {
     msg <- paste("All mechanisms appear to be valid.",
-                 paste(data_mechs_periods$code),sep="",collapse=", ")
+                 paste(data_mechs_periods$code), sep = "", collapse = ", ")
     d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
 
   d
 }
-
