@@ -35,9 +35,12 @@ getDataSets <- function(d2session = dynGet("d2_default_session",
   ds
 }
 
-#' @title Get Current MER Data Sets
+#' @title Get Current datasets provided a data stream
 #'
-#' @param type Should be either RESULTS or TARGETS
+#' @param datastream One of "RESULTS", "TARGETS", "NARRATIVES", "SIMS".
+#' RESULTS and TARGETS refer to the current MER Results and targets datasets
+#' NARRATIVES refer to the current MER Results Narratives
+#' SIMS refer to the current SIMS datasets.
 #' @inheritParams datim_validation_params
 #'
 #' @return Returns a list of dataset UIDs of the given type
@@ -45,14 +48,14 @@ getDataSets <- function(d2session = dynGet("d2_default_session",
 #'
 #' @examples
 #'   \dontrun{
-#'  ds <- getCurrentMERDataSets(type="RESULTS", d2session = d2session)
+#'  ds <- getCurrentDataSets(type="RESULTS", d2session = d2session)
 #'  }
 #'
-getCurrentMERDataSets <- function(type = "RESULTS",
+getCurrentDataSets <- function(datastream = "RESULTS",
                                 d2session = dynGet("d2_default_session",
                                                    inherits = TRUE)) {
 
-  dataset_groups <- c("RESULTS", "TARGETS", "NARRATIVES_RESULTS")
+  dataset_groups <- c("RESULTS", "TARGETS", "NARRATIVES","SIMS")
 
   if (!(type %in% dataset_groups)) {
     stop(paste("Type must be one of", paste(dataset_groups, sep = "", collapse = ", ")))
@@ -82,10 +85,14 @@ getCurrentMERDataSets <- function(type = "RESULTS",
   mer_narratives <- c("Host Country Results: Narratives (USG)",
                       "MER Results: Narratives (IM)")
 
+  sims <- c("SIMS 4: Above Site Based",
+            "SIMS 4: Site Based")
+
   want <-  switch(type,
           "RESULTS" = mer_results,
           "TARGETS"  = mer_targets,
-          "NARRATIVES_RESULTS" = mer_narratives
+          "NARRATIVES" = mer_narratives,
+          "SIMS" = sims
   )
 
   ds[ds$name %in% want, "id"]

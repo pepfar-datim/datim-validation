@@ -30,7 +30,7 @@ but which do not have a valid association with an attribute option combo (mechan
 \examples{
 \dontrun{
      d <- d2Parser("myfile.csv", type = "csv")
-     ds <- getCurrentMERDataSets(type = "RESULTS")
+     ds <- getCurrentDataSets(type = "RESULTS")
      checkDataElementOrgunitValidity(data = d,datasets = ds)
 }
 

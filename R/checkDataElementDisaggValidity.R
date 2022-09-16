@@ -13,7 +13,7 @@
 #' If there are no violations, a boolean TRUE is returned.
 #' @examples \dontrun{
 #'   d <- d2Parser("myfile.csv",type="csv")
-#'   ds <- getCurrentMERDataSets(type="RESULTS")
+#'   ds <- getCurrentDataSets(type="RESULTS")
 #'   checkDataElementDisaggValidity(d,ds)
 #' }
 checkDataElementDisaggValidity <- function(d,

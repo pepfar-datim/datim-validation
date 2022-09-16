@@ -118,7 +118,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 #'   TRUE value is returned.
 #' @examples \dontrun{
 #'      d<-d2Parser("myfile.csv",type="csv")
-#'      ds<-getCurrentMERDataSets(type="RESULTS")
+#'      ds<-getCurrentDataSets(type="RESULTS")
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 #'

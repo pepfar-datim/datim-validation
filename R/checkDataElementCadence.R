@@ -36,7 +36,7 @@ checkDataElementCadence <- function(d,
   if (NROW(cadence_maps) == 0) {
     msg <- "Could not get cadence maps for any periods."
     d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
-    d
+    return(d)
   }
 
   cadence_maps %<>%
