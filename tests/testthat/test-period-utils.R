@@ -17,7 +17,8 @@ test_that("We can parse a daily period", {
 
 test_that("Invalid daily period produces error", {
 
-  expect_error(getPeriodFromISO("20170229"))
+  expect_warning( foo <- getPeriodFromISO("20170229"))
+  expect_null(foo)
 })
 
 
@@ -33,9 +34,10 @@ test_that("We can parse a weekly period", {
 })
 
 test_that("Invalid weekly period produces error", {
-  expect_error(getPeriodFromISO("2017W54"))
+  expect_warning(foo <- getPeriodFromISO("2017W54"))
+  expect_null(foo)
   skip("Upstream bug. 2017W53 does not exist.")
-  expect_error(getPeriodFromISO("2017W53"))
+  expect_warning(getPeriodFromISO("2017W53"))
 })
 
 test_that("We can parse a monthly period", {
@@ -50,8 +52,8 @@ test_that("We can parse a monthly period", {
 })
 
 test_that("Invalid monthly period produces error", {
-  expect_error(getPeriodFromISO("201713"))
-  expect_error(getPeriodFromISO("20171"))
+  expect_warning(getPeriodFromISO("201713"))
+  expect_warning(getPeriodFromISO("20171"))
 })
 
 
@@ -78,8 +80,8 @@ test_that("We can parse a quarterly period", {
 })
 
 test_that("We can error a bad quarterly period", {
-  expect_error(getPeriodFromISO("2018Q0"))
-  expect_error(getPeriodFromISO("2018Q5"))
+  expect_warning(getPeriodFromISO("2018Q0"))
+  expect_warning(getPeriodFromISO("2018Q5"))
 })
 
 
@@ -95,23 +97,28 @@ test_that("We can parse a financial Oct period", {
 })
 
 test_that("We can error on a bad period", {
-  d <- as.data.frame(matrix(NA, ncol = 1, nrow = 3))
-  names(d) <- c("period")
-  d$period <- c("2017Q1", "2017Q2", "2017Q5")
- expect_error(checkPeriodIdentifiers(d), "Invalid quarter specified in  2017Q5")
+  d <- list()
+  d$info$messages <- MessageQueue()
+  d$data$import <- data.frame(period = c("2017Q1", "2017Q2", "2017Q5"))
+
+  expect_warning( d <- checkPeriodIdentifiers(d), "Invalid quarter specified in  2017Q5")
+  expect_equal(NROW(d$info$messages),1L)
 })
 
 test_that("We can error on a missing period", {
-  d <- as.data.frame(matrix(NA, ncol = 1, nrow = 3))
-  names(d) <- c("period")
-  d$period <- c("2017Q1", "2017Q2", NA)
-  expect_error(checkPeriodIdentifiers(d), "You must supply a period identifier")
+  d <- list()
+  d$info$messages <- MessageQueue()
+  d$data$import <- data.frame( period = c("2017Q1", "2017Q2", NA))
+  expect_error(d <- checkPeriodIdentifiers(d))
 })
 
 
 test_that("We get true on good periods", {
   d <- as.data.frame(matrix(NA, ncol = 1, nrow = 7))
   names(d) <- c("period")
-  d$period <- c("2018Q3", "2017Q1", "2017Q2",
-                "2017Q4", "2017", "2017Oct", "2017W2")
-  expect_true(checkPeriodIdentifiers(d)) })
+  d$data$import <- data.frame(period =  c("2018Q3", "2017Q1", "2017Q2",
+                "2017Q4", "2017", "2017Oct", "2017W2"))
+  expect_silent( d_new <- checkPeriodIdentifiers(d))
+  expect_identical(d,d_new)
+  }
+  )

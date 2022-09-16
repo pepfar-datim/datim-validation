@@ -51,6 +51,7 @@ getPeriodFromISO <- function(iso) {
   pt <- getPeriodType(iso)
 
   if (is.na(pt)) {
+    warning(paste("Could not identify the period type for ",iso))
     return(NULL)
   }
 
@@ -60,11 +61,20 @@ getPeriodFromISO <- function(iso) {
     startDate <- as.Date(iso, "%Y%m%d")
     endDate <- as.Date(iso, "%Y%m%d")
   } else if (pt == "Weekly") {
+
     y <- substr(iso, 1, 4)
+
     wk <- as.numeric(gsub("W", "", stringr::str_extract(iso, "W.+")))
+
     if (wk <= 10) {
       wk <- paste0("0", as.character(wk))
     }
+
+    if (wk >= 53) {
+      warning("Invalid week.")
+      return(NULL)
+    }
+
     startDate <- ISOweek2date(paste0(y, "-W", wk, "-1"))
     endDate <- ISOweek2date(paste0(y, "-W", wk, "-7"))
   } else if (pt == "Monthly") {
@@ -134,7 +144,10 @@ getPeriodFromISO <- function(iso) {
 #' }
 #'
 checkPeriodIdentifiers <- function(d) {
+
+  #Ignore NAs
   periods <- unique(d$data$import$period)
+
   period_check <- lapply(periods, getPeriodFromISO)
   bad_periods_idx <- which(sapply(period_check,is.null))
 
