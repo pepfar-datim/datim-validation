@@ -17,6 +17,8 @@ with_mock_api({
     expect_named(d$data, c("parsed", "import"), ignore.order = TRUE)
     expect_type(d$info, "list")
     info_names <-  c("filename",
+                     "datastream",
+                     "organisationUnit",
                      "type",
                      "dataElementIdScheme",
                      "orgUnitIdScheme",
@@ -25,7 +27,8 @@ with_mock_api({
                      "hasHeader",
                      "isoPeriod",
                      "messages",
-                     "has_error")
+                     "has_error",
+                     "datasets")
     expect_named(d$info, info_names, ignore.order = TRUE)
     expect_is(d$data$import, "data.frame")
     d_names <- c("dataElement",

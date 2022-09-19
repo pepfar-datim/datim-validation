@@ -10,14 +10,14 @@
 #' @export
 #'
 runValidation <- function(d,
-                          datasets = NA,
-                          organisationUnit = NA,
-                          datastream = NA,
                           d2session = dynGet("d2_default_session", inherits = TRUE)) {
+
+  datastream <- d$info$datastream
+  datasets <- d$info$datasets
   #Exact duplicates
   d <- getExactDuplicates(d)
   #Check orgunits are within users hierarchy
-  d <- checkOrgunitsInHierarchy(d, userOrgUnit = organisationUnit, d2session = d2session)
+  d <- checkOrgunitsInHierarchy(d, userOrgUnit = d$info$organisationUnit, d2session = d2session)
 
   #Check data element cadence
   d <- checkDataElementCadence(d, d2session)
@@ -33,7 +33,7 @@ runValidation <- function(d,
   #Check mechanism validity
 
   d <-
-    checkMechanismValidity(d, organisationUnit = organisationUnit, d2session =  d2session)
+    checkMechanismValidity(d, organisationUnit = d$info$organisationUnit, d2session =  d2session)
 
   if (datastream == "MER") {
     #Negative values
@@ -45,9 +45,17 @@ runValidation <- function(d,
       "parallel" %in% rownames(utils::installed.packages()) == TRUE &
       .Platform$OS.type != "windows"
 
+    if (can_parallel) {
+      n_cores <-
+        ifelse(Sys.getenv("MAX_CORES") != "",
+               as.numeric(Sys.getenv("MAX_CORES")),
+               parallel::detectCores())
+      doMC::registerDoMC(cores = n_cores)
+    }
+
     d$tests$validation_rules <- validateData(
       d$data$import,
-      organisationUnit = organisationUnit,
+      organisationUnit = d$info$organisationUnit,
       return_violations_only = TRUE,
       parallel = can_parallel,
       d2session = d2session

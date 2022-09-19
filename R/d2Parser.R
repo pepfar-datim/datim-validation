@@ -121,7 +121,8 @@ d2Parser <-
   function(
            filename,
            type = "csv",
-           datastream = "MER",
+           datastream = "RESULTS",
+           datasets = NA,
            organisationUnit = NA,
            dataElementIdScheme = "id",
            orgUnitIdScheme = "id",
@@ -136,6 +137,8 @@ d2Parser <-
     d <- list(
       info = list(
         filename = filename,
+        datastream = datastream,
+        organisationUnit = organisationUnit,
         type = type,
         dataElementIdScheme = dataElementIdScheme,
         orgUnitIdScheme = orgUnitIdScheme,
@@ -147,11 +150,23 @@ d2Parser <-
         has_error = FALSE
       ))
 
-      if (is.na(organisationUnit)) {
+    #If no datasets are specified, then get then from the datastream
+    if (is.na(datastream)) {
+      stop("You must specify a datastream (RESULTS, TARGETS, NARRATIVES or SIMS")
+    }
+
+    if (is.na(datasets)) {
+      d$info$datasets <-
+        getCurrentDataSets(datastream = datastream, d2session = d2session)
+    }
+
+
+    if (is.na(organisationUnit)) {
         #Get the users organisation unit if not specified
         organisationUnit <- d2session$user_orgunit
       }
-      valid_type <- type %in% c("xml", "json", "csv")
+
+    valid_type <- type %in% c("xml", "json", "csv")
       if (!valid_type) {
         stop("ERROR:Not a valid file type")
       }

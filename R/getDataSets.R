@@ -55,10 +55,10 @@ getCurrentDataSets <- function(datastream = "RESULTS",
                                 d2session = dynGet("d2_default_session",
                                                    inherits = TRUE)) {
 
-  dataset_groups <- c("RESULTS", "TARGETS", "NARRATIVES","SIMS")
+  dataset_groups <- c("RESULTS", "TARGETS", "NARRATIVES", "SIMS")
 
-  if (!(type %in% dataset_groups)) {
-    stop(paste("Type must be one of", paste(dataset_groups, sep = "", collapse = ", ")))
+  if (!(datastream %in% dataset_groups)) {
+    stop(paste("Datastream must be one of", paste(dataset_groups, sep = "", collapse = ", ")))
     }
 
   ds <- getDataSets(d2session = d2session)
@@ -88,7 +88,7 @@ getCurrentDataSets <- function(datastream = "RESULTS",
   sims <- c("SIMS 4: Above Site Based",
             "SIMS 4: Site Based")
 
-  want <-  switch(type,
+  want <-  switch(datastream,
           "RESULTS" = mer_results,
           "TARGETS"  = mer_targets,
           "NARRATIVES" = mer_narratives,
