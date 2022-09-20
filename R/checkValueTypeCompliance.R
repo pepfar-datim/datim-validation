@@ -96,7 +96,7 @@ checkValueTypeCompliance <- function(d,
 
   } else {
     msg <- paste("No invalid values found.")
-    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
 
   #Deal with data of type option sets
