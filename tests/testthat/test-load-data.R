@@ -13,14 +13,32 @@ with_mock_api({
                   invalidData = FALSE,
                   d2session = d2_default_session)
     expect_type(d, "list")
-    expect_is(d, "data.frame")
+    expect_named(d, c("info", "data"), ignore.order = TRUE)
+    expect_named(d$data, c("parsed", "import"), ignore.order = TRUE)
+    expect_type(d$info, "list")
+    info_names <-  c("filename",
+                     "datastream",
+                     "organisationUnit",
+                     "type",
+                     "dataElementIdScheme",
+                     "orgUnitIdScheme",
+                     "idScheme",
+                     "invalidData",
+                     "hasHeader",
+                     "isoPeriod",
+                     "messages",
+                     "has_error",
+                     "datasets")
+    expect_named(d$info, info_names, ignore.order = TRUE)
+    expect_is(d$data$import, "data.frame")
     d_names <- c("dataElement",
                  "period",
                  "orgUnit",
                  "categoryOptionCombo",
                  "attributeOptionCombo",
                  "value")
-    expect_identical(names(d), d_names)
+    expect_named(d$data$parsed, d_names, ignore.order = TRUE)
+    expect_named(d$data$import, d_names, ignore.order = TRUE)
   })})
 
 with_mock_api({
@@ -34,33 +52,27 @@ with_mock_api({
                   orgUnitIdScheme = "id",
                   idScheme = "id",
                   invalidData = FALSE,
-                  csv_header = FALSE,
+                  hasHeader = FALSE,
                   d2session = d2_default_session)
-    expect_type(d, "list")
-    expect_is(d, "data.frame")
-    d_names <- c("dataElement",
-                 "period",
-                 "orgUnit",
-                 "categoryOptionCombo",
-                 "attributeOptionCombo",
-                 "value")
-    expect_identical(names(d), d_names)
-    expect_equal(NROW(d), 5)
+
+
+    expect_equal(NROW(d$data$import), 5)
   })})
 
 with_mock_api({
   test_that("We can error when mechanisms are not coded properly", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
-    expect_warning(d2Parser(filename = test_config("test-data-bad-mechs.csv"),
+     expect_warning(d <- d2Parser(filename = test_config("test-data-bad-mechs.csv"),
                             type = "csv",
                             organisationUnit = "KKFzPM8LoXs",
                             dataElementIdScheme = "id",
                             orgUnitIdScheme = "id",
                             idScheme = "id",
                             invalidData = FALSE,
-                            csv_header = FALSE,
+                            hasHeader = TRUE,
                             d2session = d2_default_session))
+     expect_equal(NROW(d$tests$acoc_check), 3)
   })})
 
 context("Parse JSON data")
@@ -78,14 +90,15 @@ with_mock_api({
                   invalidData = FALSE,
                   d2session = d2_default_session)
     expect_type(d, "list")
-    expect_is(d, "data.frame")
+    expect_is(d$data$import, "data.frame")
     d_names <- c("dataElement",
                  "period",
                  "orgUnit",
                  "categoryOptionCombo",
                  "attributeOptionCombo",
                  "value")
-    expect_identical(names(d), d_names)
+    expect_named(d$data$import, d_names)
+    expect_equal(NROW(d$data$import), 1000)
   })})
 
 with_mock_api({
@@ -118,14 +131,15 @@ with_mock_api({
                   idScheme = "id",
                   invalidData = FALSE, d2session = d2_default_session)
     expect_type(d, "list")
-    expect_is(d, "data.frame")
+    expect_is(d$data$import, "data.frame")
     d_names <- c("dataElement",
                  "period",
                  "orgUnit",
                  "categoryOptionCombo",
                  "attributeOptionCombo",
                  "value")
-    expect_identical(names(d), d_names)
+    expect_identical(names(d$data$import), d_names)
+    expect_equal(NROW(d$data$import), 4)
   })})
 
 
@@ -171,7 +185,8 @@ with_mock_api({
                   orgUnitIdScheme = "id",
                   idScheme = "id",
                   invalidData = FALSE, d2session = d2_default_session)
-    expect_error(checkPeriodIdentifiers(d))
+    d <- expect_warning(checkPeriodIdentifiers(d))
+    expect_equal(length(d$tests$bad_periods), 2L)
   })})
 
 context("Can return bad mechanism/period association")
@@ -189,14 +204,13 @@ with_mock_api({
         orgUnitIdScheme = "id",
         idScheme = "id",
         invalidData = FALSE, d2session = d2_default_session)
-      expect_warning(
-        bad_mechs <- checkMechanismValidity(d,
+
+      d <- checkMechanismValidity(d,
                                             organisationUnit = "KKFzPM8LoXs",
                                             return_violations = TRUE,
-                                            d2session = d2_default_session),
-        "Invalid mechanisms found!")
-      expect_type(bad_mechs, "list")
-      expect_is(bad_mechs, "data.frame")
+                                            d2session = d2_default_session)
+
+      expect_is(d$tests$invalid_mechanisms, "data.frame")
       bad_mechs_names <- c("attributeOptionCombo",
                            "period",
                            "startDate",
@@ -206,7 +220,8 @@ with_mock_api({
                            "startDate_mech",
                            "endDate_mech",
                            "is_valid")
-      expect_setequal(names(bad_mechs), bad_mechs_names)
+      expect_setequal(names(d$tests$invalid_mechanisms), bad_mechs_names)
+      expect_equal(NROW(d$tests$invalid_mechanisms), 4L)
     })})
 
 context("Can warn on bad mechanism/period associations")
@@ -225,13 +240,22 @@ with_mock_api({
         idScheme = "id",
         invalidData = FALSE,
         d2session  = d2_default_session)
-      expect_warning(
-        bad_mechs <- checkMechanismValidity(d,
-                                            organisationUnit = "KKFzPM8LoXs",
-                                            return_violations = FALSE,
-                                            d2session = d2_default_session),
-        "Invalid mechanisms found!")
-      expect_null(bad_mechs)
+      d <- checkMechanismValidity(d,
+                                  organisationUnit = "KKFzPM8LoXs",
+                                  return_violations = TRUE,
+                                  d2session = d2_default_session)
+      expect_is(d$tests$invalid_mechanisms, "data.frame")
+      bad_mechs_names <- c("attributeOptionCombo",
+                           "period",
+                           "startDate",
+                           "endDate",
+                           "periodType",
+                           "code",
+                           "startDate_mech",
+                           "endDate_mech",
+                           "is_valid")
+      expect_setequal(names(d$tests$invalid_mechanisms), bad_mechs_names)
+      expect_equal(NROW(d$tests$invalid_mechanisms), 4L)
     })})
 
 
@@ -243,16 +267,15 @@ with_mock_api({
       loginToDATIM(config_path = test_config("test-config.json"))
       expect_true(exists("d2_default_session"))
       expect_warning(
-        foo <- d2Parser(filename = test_config("test-data-bad-ou-uid.csv"),
+        d <- d2Parser(filename = test_config("test-data-bad-ou-uid.csv"),
                         type = "csv",
                         organisationUnit = "KKFzPM8LoXs",
                         dataElementIdScheme = "id",
                         orgUnitIdScheme = "id",
                         idScheme = "id",
-                        invalidData = FALSE, d2session  = d2_default_session),
-        "The following org unit identifiers could not be found:SiuNE0ywCW4")
-      expect_false(foo$is_valid)
-      expect_type(foo, "list")
+                        invalidData = FALSE, d2session  = d2_default_session))
+      expect_is(d$tests$orgunit_check, "character")
+      expect_equal(length(d$tests$orgunit_check), 1L)
     })})
 
 context("Can error on an invalid data element UID")
@@ -263,16 +286,19 @@ with_mock_api({
       loginToDATIM(config_path = test_config("test-config.json"))
       expect_true(exists("d2_default_session"))
       expect_warning(
-        foo <- d2Parser(filename = test_config("test-data-bad-de-uid.csv"),
-                        type = "csv",
-                        organisationUnit = "KKFzPM8LoXs",
-                        dataElementIdScheme = "id",
-                        orgUnitIdScheme = "id",
-                        idScheme = "id",
-                        invalidData = FALSE, d2session  = d2_default_session),
-        "The following data element identifiers could not be found:SiuNE0ywCW4")
-      expect_false(foo$is_valid)
-      expect_type(foo, "list")
+        d <- d2Parser(filename = test_config("test-data-bad-de-uid.csv"),
+                      type = "csv",
+                      organisationUnit = "KKFzPM8LoXs",
+                      dataElementIdScheme = "id",
+                      orgUnitIdScheme = "id",
+                      idScheme = "id",
+                      invalidData = FALSE, d2session  = d2_default_session)
+      )
+
+      expect_is(d$tests$data_element_check, "character")
+      expect_identical(d$tests$data_element_check, "SiuNE0ywCW4")
+      expect_equal(length(d$tests$data_element_check), 1L)
+
     })})
 
 context("Can error on an invalid attribute option combo UID")
@@ -283,16 +309,16 @@ with_mock_api({
       loginToDATIM(config_path = test_config("test-config.json"))
       expect_true(exists("d2_default_session"))
       expect_warning(
-        foo <- d2Parser(filename = test_config("test-data-bad-acoc-uid.csv"),
+        d <- d2Parser(filename = test_config("test-data-bad-acoc-uid.csv"),
                         type = "csv",
                         organisationUnit = "KKFzPM8LoXs",
                         dataElementIdScheme = "id",
                         orgUnitIdScheme = "id",
                         idScheme = "id",
-                        invalidData = FALSE, d2session = d2_default_session),
-        "The following attribute option combo identifiers could not be found:SiuNE0ywCW4") #nolint
-      expect_false(foo$is_valid)
-      expect_type(foo, "list")
+                        invalidData = FALSE, d2session = d2_default_session))
+      expect_is(d$tests$acoc_check, "character")
+      expect_identical(d$tests$acoc_check, "SiuNE0ywCW4")
+      expect_equal(length(d$tests$acoc), 1L)
     })})
 
 context("Can warn on a missing values")

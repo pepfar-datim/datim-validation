@@ -118,7 +118,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 #'   TRUE value is returned.
 #' @examples \dontrun{
 #'      d<-d2Parser("myfile.csv",type="csv")
-#'      ds<-getCurrentMERDataSets(type="RESULTS")
+#'      ds<-getCurrentDataSets(type="RESULTS")
 #'      checkDataElementOrgunitValidity(data=d,datasets=ds)
 #' }
 #'
@@ -128,9 +128,10 @@ checkDataElementOrgunitValidity <-
            return_violations  = TRUE,
            d2session = d2_default_session) {
 
+  data <- d$data$import
   #Get a list of all data elements and orgunits
   #Present in the data and split into a list.
-  des_ous <- unique(d[, c("orgUnit", "dataElement")])
+  des_ous <- unique(data[, c("orgUnit", "dataElement")])
   des_ous <- split(des_ous, des_ous$orgUnit)
   #Get a list of datasets, and the organisationunits and
   #data elements which they contain
@@ -138,25 +139,16 @@ checkDataElementOrgunitValidity <-
 
   des_ous_test <- lapply(des_ous, function(x) validateOrgunitDataElements(x, de_map))
   #Filter the list for any orgunits which have bogus data elements
-  bad_data_des_ous <- des_ous_test[unlist(lapply(des_ous_test, \(.) NROW(.) > 0))]
+  invalid_des_ous <- des_ous_test[unlist(lapply(des_ous_test, \(.) NROW(.) > 0))]
 
 
-  if (length(bad_data_des_ous) > 0L) {
-    warning("Invalid data element/orgunit associations were detected!")
-    if (return_violations) {
-      return(do.call("rbind", bad_data_des_ous))
-    } else {
-      return(FALSE)
+  if (length(invalid_des_ous) > 0L) {
+    msg <- paste("ERROR! Invalid data element/orgunit associations were detected!")
+    d$tests$invalid_des_ous <- do.call("rbind", invalid_des_ous)
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
     }
-  } else {
 
-    if (return_violations) {
-      return(data.frame(dataElement = character(),
-                        orgUnit = character()))
-    } else {
-      return(TRUE)
-    }
-  }
+  d
 
 }
 

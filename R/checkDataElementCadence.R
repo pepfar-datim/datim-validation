@@ -16,10 +16,11 @@
 #'   d <- d2Parser("myfile.csv",type="csv")
 #'   checkDataElementCadence(d)
 #' }
-checkDataElementCadence <- function(data,
+checkDataElementCadence <- function(d,
                                     d2session = dynGet("d2_default_session",
                                                        inherits = TRUE)) {
 
+  data <- d$data$import
   #Get a listing of periods which are present in the data
   des_periods <- unique(data[, c("period", "dataElement")])
 
@@ -33,8 +34,9 @@ checkDataElementCadence <- function(data,
   #Queue so that we can inform the user that there was
   #some problem with checking the cadence.
   if (NROW(cadence_maps) == 0) {
-    warning("Could not get cadence maps for any periods.")
-    return(TRUE)
+    msg <- "Could not get cadence maps for any periods."
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    return(d)
   }
 
   cadence_maps %<>%
@@ -47,12 +49,16 @@ checkDataElementCadence <- function(data,
 
   if (NROW(data_des_periods_bad) > 0) {
 
-    warning("Invalid data element / period combinations found!")
-    return(data_des_periods_bad)
+    msg <- "ERROR! Invalid data element / period combinations found!"
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    d$tests$invalid_des_periods <- data_des_periods_bad
 
   } else {
-    return(TRUE)
+    msg <- "No invalid data element/period combinations found."
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
+
+  d
 
 }
 

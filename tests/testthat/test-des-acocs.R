@@ -57,8 +57,10 @@ with_mock_api({
   test_that("We flag invalid data element / ACOC in the data", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
+    d <- list()
+    d$info$messages <- MessageQueue()
     # nolint start
-    d <- tibble::tribble(
+    d$data$import <- tibble::tribble(
       ~dataElement, ~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,~comment,
       "Kk4CdspETNQ","2017Q1","LnGaK6y98gC","pPoX6WdTN1o","badMech1234","10","BAD",
       "Kk4CdspETNQ","2017Q1","RQCy4nM3afc","HllvX50cXC0","o0exnLGytku","5","GOOD",
@@ -66,19 +68,9 @@ with_mock_api({
     )
     # nolint end
     datasets <- c("cw2T5eAHxzW")
-    expect_warning(test_data <- checkDataElementMechValidity(d, datasets, d2session = d2_default_session))
-    expect_equal(NROW(test_data), 1)
-
-    expect_warning(
-      test_data <-
-        checkDataElementMechValidity(
-          d,
-          datasets,
-          return_violations = FALSE,
-          d2session = d2_default_session
-        )
-    )
-    expect_false(test_data)
+    d <- checkDataElementMechValidity(d, datasets, d2session = d2_default_session)
+    expect_equal(NROW(d$tests$bad_data_des_acocs), 1)
+    expect_named(d$tests$bad_data_des_acocs, c("dataElement", "attributeOptionCombo"), ignore.order = TRUE)
   })})
 
 with_mock_api({
@@ -87,24 +79,23 @@ with_mock_api({
               loginToDATIM(config_path = test_config("test-config.json"))
               expect_true(exists("d2_default_session"))
 
-              d <- tibble::tribble(
+              d <- list()
+              d$info$messages <- MessageQueue()
+
+              d$data$import <- tibble::tribble(
                 ~ dataElement, ~ attributeOptionCombo,
                 "Kk4CdspETNQ", "o0exnLGytku",
                 "Kk4CdspETNQ", "miCk34PtHnS",
                 "Kk4CdspETNQ", "SJCCfahcsGr"
               )
 
-              datasets <- c("cw2T5eAHxzW")
-              test_data <-
-                checkDataElementMechValidity(d, datasets, d2session = d2_default_session)
-              expect_equal(NROW(test_data), 0)
-              expect_named(test_data, c("dataElement", "attributeOptionCombo"))
 
-              test_data <-
+              datasets <- c("cw2T5eAHxzW")
+              d <-
                 checkDataElementMechValidity(d,
-                                                datasets,
-                                                return_violations = FALSE,
-                                                d2session = d2_default_session)
-              expect_true(test_data)
+                                             datasets,
+                                             d2session = d2_default_session)
+              expect_null(d$tests$bad_data_des_acocs)
+
             })
 })

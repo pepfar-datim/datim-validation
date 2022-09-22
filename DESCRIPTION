@@ -1,8 +1,8 @@
 Package: datimvalidation
 Type: Package
 Title: External Validation Routines for Data Payloads in DATIM
-Version: 1.2.1
-Date: 2022-08-26
+Version: 1.3.0
+Date: 2022-09-19
 Authors@R: c(
     person("Jason", "Pickering", email = "jason.p.pickering@gmail.com",
         role = c("aut", "cre")),
@@ -33,7 +33,7 @@ BugReports:
 Encoding: UTF-8
 Depends: R (>= 4.1)
 Imports: assertthat (>= 0.2.0),
-         datimutils (>= 0.1.0),
+         datimutils (>= 0.6.0),
          dplyr (>= 0.8.3),
          getPass (>= 0.2-2),
          httr (>= 1.4.0),

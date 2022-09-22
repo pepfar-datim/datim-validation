@@ -29,9 +29,9 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE, d2session = d2_default_session)
-    d <- prepDataForValidation(d)
+    d_validate <- prepDataForValidation(d$data$import)
     vr <- getValidationRules(d2session = d2_default_session)
-    foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
+    foo <- evaluateValidation(d_validate$combi, d_validate$value, vr, FALSE)
     expect_false(foo$result)
   })
 })
@@ -48,9 +48,9 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE, d2session = d2_default_session)
-    d <- prepDataForValidation(d)
+    d_validate  <- prepDataForValidation(d$data$import)
     vr <- getValidationRules(d2session = d2_default_session)
-    foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
+    foo <- evaluateValidation(d_validate$combi, d_validate$value, vr, FALSE)
     expect_true(foo$result)
   })
 })
@@ -67,9 +67,9 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE, d2session = d2_default_session)
-    d <- prepDataForValidation(d)
+    d_validate <- prepDataForValidation(d$data$import)
     vr <- getValidationRules(d2session = d2_default_session)
-    foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
+    foo <- evaluateValidation(d_validate$combi, d_validate$value, vr, FALSE)
     expect_false(foo$result)
     expect_equal(foo$rightSide.expression, 0)
     expect_equal(foo$leftSide.expression, 5)
@@ -89,9 +89,9 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session = d2_default_session)
-    d <- prepDataForValidation(d)
+    d_validate <- prepDataForValidation(d$data$import)
     vr <- getValidationRules(d2session = d2_default_session)
-    foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
+    foo <- evaluateValidation(d_validate$combi, d_validate$value, vr, FALSE)
     expect_true(foo$result)
     expect_equal(foo$rightSide.expression, 6)
     expect_equal(foo$leftSide.expression, 0)
@@ -113,9 +113,9 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session = d2_default_session)
-    d <- prepDataForValidation(d)
+    d_validate <- prepDataForValidation(d$data$import)
     vr <- getValidationRules(d2session = d2_default_session)
-    foo <- evaluateValidation(d$combi, d$value, vr, FALSE)
+    foo <- evaluateValidation(d_validate$combi, d_validate$value, vr, FALSE)
     foo <- foo %>% dplyr::filter(operator == "|")
     expect_false(foo$result)
     expect_equal(foo$rightSide.expression, 1)
@@ -137,10 +137,10 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session = d2_default_session)
-    d <- d[1, ]
-    d <- prepDataForValidation(d)
+    d_validate <- d$data$import[1, ]
+    d_validate <- prepDataForValidation(d_validate)
     vr <- getValidationRules(d2session = d2_default_session)
-    foo <- evaluateValidation(d$combi, d$value, vr, TRUE)
+    foo <- evaluateValidation(d_validate$combi, d_validate$value, vr, TRUE)
     foo <- foo %>% dplyr::filter(operator == "|")
     expect_true(NROW(foo) == 0L)
     #This is influenced by the skip logic.
@@ -167,7 +167,7 @@ with_mock_api({
                 invalidData = FALSE,
                 d2session = d2_default_session)
     datasets <- c("MqNLEXmzIzr", "kkXf2zXqTM0")
-    foo <- validateData(d, organisationUnit = "KKFzPM8LoXs", return_violations_only = TRUE,
+    foo <- validateData(d$data$import, organisationUnit = "KKFzPM8LoXs", return_violations_only = TRUE,
                       parallel = FALSE,  d2session = d2_default_session)
     expect_type(foo, "list")
   })

@@ -12,11 +12,9 @@ with_mock_api({
                 orgUnitIdScheme = "id",
                 idScheme = "id",
                 invalidData = FALSE, d2session = d2_default_session)
-    expect_equal(
-      NROW(checkValueTypeCompliance(d, d2session = d2_default_session)), 3)
-    d$value <- "5"
-    expect_equal(
-      checkValueTypeCompliance(d, d2session = d2_default_session), TRUE)
+    d <- checkValueTypeCompliance(d, d2session = d2_default_session)
+    expect_equal(NROW(d$tests$value_compliance), 3)
+
   })
 })
 
@@ -25,8 +23,10 @@ with_mock_api({
   test_that("We can identify bad values for true only data elements", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
+    d <- list()
+    d$info$messages <- datimvalidation:::MessageQueue()
     # nolint start
-    d <- tibble::tribble(
+    d$data$import <- tibble::tribble(
     ~dataElement,~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,
     "mFvVvrRvZgo","2019Q3","LnGaK6y98gC","HllvX50cXC0","X8hrDf6bLDC","TRUE",
     "mFvVvrRvZgo","2019Q3","LnGaK6y98gC","HllvX50cXC0","X8hrDf6bLDC","Yes",
@@ -41,8 +41,8 @@ with_mock_api({
     "mFvVvrRvZgo","2019Q3","LnGaK6y98gC","HllvX50cXC0","X8hrDf6bLDC","true",
     "mFvVvrRvZgo","2019Q3","LnGaK6y98gC","HllvX50cXC0","X8hrDf6bLDC","1" )
     # nolint end
-    expect_equal(
-      NROW(checkValueTypeCompliance(d, d2session  = d2_default_session)), 8)
+    d <- checkValueTypeCompliance(d, d2session  = d2_default_session)
+    expect_equal(NROW(d$tests$value_compliance), 8)
   })
 })
 
@@ -60,8 +60,8 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session  = d2_default_session)
-    expect_equal(
-      NROW(checkValueTypeCompliance(d, d2session = d2_default_session)), 1)
+    d <- checkValueTypeCompliance(d, d2session = d2_default_session)
+    expect_equal(NROW(d$tests$invalid_option_set_values), 1)
   })
 })
 
@@ -77,9 +77,9 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session  = d2_default_session)
-    expect_warning(
-      foo <- checkNegativeValues(data = d, d2session  = d2_default_session))
-    expect_equal(NROW(foo), 2)
+
+    d <- checkNegativeValues(d, d2session  = d2_default_session)
+    expect_equal(NROW(d$tests$negative_values), 2)
   })
 })
 

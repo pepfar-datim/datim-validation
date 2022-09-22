@@ -11,6 +11,7 @@ checkOrgunitsInHierarchy <-
   function(d,
            userOrgUnit,
            d2session = dynGet("d2_default_session", inherits = TRUE)) {
+
     if (is.null(d)) {
       stop("Data cannot be null")
     }
@@ -19,7 +20,7 @@ checkOrgunitsInHierarchy <-
       stop("You must specify and organisation unit")
     }
 
-    data_orgunits <- unique(d$orgUnit)
+    data_orgunits <- unique(d$data$import$orgUnit)
 
     user_orgunits <- getOrganisationUnitMap(organisationUnit = userOrgUnit, d2session = d2session)
 
@@ -27,11 +28,14 @@ checkOrgunitsInHierarchy <-
 
     if (length(invalid_orgunits) > 0) {
 
-      warning("Organisation units detected which are not in the provided operating unit.")
-      return(invalid_orgunits)
+      msg <- "ERROR! Organisation units detected which are not in the provided operating unit."
+      d$tests$orgunits_not_in_hierarchy <- invalid_orgunits
+      d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
 
     } else {
-      return(TRUE)
+      msg <- "All organisation units were within the provided operating unit.."
+      d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
     }
 
+    d
     }

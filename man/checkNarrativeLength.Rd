@@ -4,10 +4,10 @@
 \alias{checkNarrativeLength}
 \title{Title Check that the length of narrative data does not exceed 50k characters.}
 \usage{
-checkNarrativeLength(data)
+checkNarrativeLength(d)
 }
 \arguments{
-\item{d2session}{}
+\item{d}{}
 }
 \description{
 Title Check that the length of narrative data does not exceed 50k characters.

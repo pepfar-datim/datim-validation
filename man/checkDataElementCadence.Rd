@@ -5,12 +5,12 @@
 \title{Check Data Element Cadence}
 \usage{
 checkDataElementCadence(
-  data,
+  d,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{data}{D2 compliant data frame object}
+\item{d}{D2 Parsed data frame}
 
 \item{d2session}{DHIS2 Session id}
 }

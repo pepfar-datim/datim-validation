@@ -15,7 +15,7 @@
 #'  dups
 #'  }
 getExactDuplicates <- function(d) {
-  dups <- d %>%
+  dups <- d$data$import %>%
     dplyr::group_by(.,
                     dataElement,
                     period,
@@ -24,10 +24,14 @@ getExactDuplicates <- function(d) {
                     attributeOptionCombo) %>%
     dplyr::summarise(count = dplyr::n()) %>%
     dplyr::filter(count > 1)
+
   if (NROW(dups) > 0) {
-    warning("Your data contains exact duplicates!")
+    d$tests$exact_duplicates <- dups
+    msg <- paste("ERROR! Your data contains", NROW(dups), "exact duplicates!")
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
   }
-  return(dups)
+
+  d
 }
 
 #' @export
@@ -49,13 +53,21 @@ getExactDuplicates <- function(d) {
 #'
 getPureDuplicates <- function(d) {
 
-  d %>%
+  pure_dupes <- d$data$import %>%
     dplyr::group_by(dataElement,
                     period,
                     orgUnit,
                     categoryOptionCombo) %>%
     dplyr::summarise(count = dplyr::n()) %>%
     dplyr::filter(count > 1)
+
+  if (NROW(pure_dupes) > 0) {
+
+    msg <- paste(NROW(pure_dupes), "combinations requiring duplication found.")
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
+  }
+
+  d
 }
 
 #' @export
@@ -144,12 +156,12 @@ getCrossWalkDuplicates <- function(d,
                                                     inherits = TRUE)) {
   cw <- getCrosswalkMap(d2session = d2session)
   #TA values
-  ta <- merge(d, cw, by.x = "dataElement", by.y = "ta_de_uid")
+  ta <- merge(d$data$import, cw, by.x = "dataElement", by.y = "ta_de_uid")
   ta <- ta[, -which(names(ta) %in% c("dsd_de_uid"))]
   names(ta)[which(names(ta) %in% c("value"))] <- "value_ta"
   names(ta)[which(names(ta) %in% c("attributeOptionCombo"))] <- "attributeOptionCombo_ta" #nolint
   #DSD Values
-  dsd <- merge(d, cw, by.x = "dataElement", by.y = "dsd_de_uid")
+  dsd <- merge(d$data$import, cw, by.x = "dataElement", by.y = "dsd_de_uid")
   #Swtich the DSD data element
   names(dsd)[which(names(dsd) %in% c("value"))] <- "value_dsd"
   names(dsd)[which(names(dsd) %in% c("attributeOptionCombo"))] <- "attributeOptionCombo_dsd" #nolint
@@ -166,5 +178,6 @@ getCrossWalkDuplicates <- function(d,
   dupes$auto_resolve <- mapply(dsd.ta.agg,
                                as.numeric(dupes$value_dsd),
                                as.numeric(dupes$value_ta))
-  return(dupes)
+  d$tests$crosswalk_duplicates <- dupes
+
 }
