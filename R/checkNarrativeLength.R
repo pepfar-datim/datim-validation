@@ -7,9 +7,7 @@
 #' @export
 #'
 
-checkNarrativeLength <- function(data,
-                                    d2session = dynGet("d2_default_session",
-                                                       inherits = TRUE)) {
+checkNarrativeLength <- function(data) {
   MAX_ALLOWED_CHARACTERS <- 50000L
 
   long_narratives <- data %>%

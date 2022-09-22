@@ -4,10 +4,7 @@
 \alias{checkNarrativeLength}
 \title{Title Check that the length of narrative data does not exceed 50k characters.}
 \usage{
-checkNarrativeLength(
-  data,
-  d2session = dynGet("d2_default_session", inherits = TRUE)
-)
+checkNarrativeLength(data)
 }
 \arguments{
 \item{d2session}{}
