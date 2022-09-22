@@ -111,7 +111,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 #' @param d datimvalidation object obtained from d2Parser.
 #' @param datasets Should be a character vector of data set UIDs.
 #' @param d2session datimutils d2session object
-#' @return datimvalidation object obtained from d2Parser which have 
+#' @return datimvalidation object obtained from d2Parser which have
 #' been checked for invalid data element/ organisation unit combinations
 #' @examples \dontrun{
 #'      d<-d2Parser("myfile.csv",type="csv")
