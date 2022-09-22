@@ -43,24 +43,35 @@ require(datimvalidation)
 loginToDATIM(config_path = "/home/littebobbytables/.secrets/datim.json")
 ```
 
+You should not store your credentials in a plain text file if you machine is not encrypted. The better solution is to utilize the `keyring` 
+functionality of `datimutils`. Consult the documentation of that package for how to use it. 
 
 ## Parsing your data
 
 Next, we will use the `d2Parser` function, which is a general purpose function to load the different formats of data which 
-DATIM accepts and to standardize this so that we can use other validation functions on the data. 
-
-In addition to your user name and password, you will need to specific the `type` of the file. This should be one of 'json','csv',or 'xml'. 
+DATIM accepts. This function should work with CSV, JSON, and XML files, which have been formatted according to the technical 
+specifications of DHIS2. 
+ 
 You will also need to know the identification scheme of the file. The easiest way is to open the file in a text editor, and see what id scheme
-the payload is using. This could be 'code','id' or 'shortName'. Consult the specifc function documentation for more information on id schemes.
+the payload is using. This could be 'code','id' or 'shortName'. Consult the specific function documentation for more information on id schemes.
 
 ```{r eval=FALSE}
-d <- d2Parser(file=filename,type = "csv",
-            dataElementIdScheme = "code",orgUnitIdScheme = "id",
-            idScheme = "id" 
-            ,invalidData = TRUE )
+d <- d2Parser(file=filename,
+              type = "csv",
+              datastream =  "MER",
+              dataElementIdScheme = "code",
+              orgUnitIdScheme = "id",
+              idScheme = "id")
 ```
 
-Note , this operation could take several minutes, so please be patient. 
+Note , this operation could take several minutes, so please be patient.  If the parsing of your data was successful, you should not receive any errors.
+
+## Working with the validation object. 
+
+The d2Parser function produces an object composed of various lists. We will not describe the structure of this object (assuming that it was named `d` as in the previous example. 
+
+- d$info : Consists of various metadata objects which are used by validation functions. The most important of these from the users perspective is the dataframe stored in `d$info$messages`. Various messages will be appended to this data frame during the parsing and validation of your data. Messages with the level of `INFO` do not indicate an error, but are rather for your information only. Message of type `WARNING` may indicate that there are issues, but they are not critical enough to prevent the processing of your data. Messages marked with `ERROR` are issues which usually under all circumstances must be resolved prior to import.
+
 
 ## Mechanism validation
 

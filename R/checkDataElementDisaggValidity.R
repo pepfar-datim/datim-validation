@@ -13,12 +13,11 @@
 #' If there are no violations, a boolean TRUE is returned.
 #' @examples \dontrun{
 #'   d <- d2Parser("myfile.csv",type="csv")
-#'   ds <- getCurrentMERDataSets(type="RESULTS")
+#'   ds <- getCurrentDataSets(type="RESULTS")
 #'   checkDataElementDisaggValidity(d,ds)
 #' }
-checkDataElementDisaggValidity <- function(data,
+checkDataElementDisaggValidity <- function(d,
                                            datasets = NA,
-                                           return_violations = TRUE,
                                            d2session =
                                              dynGet("d2_default_session",
                                                     inherits = TRUE)) {
@@ -27,18 +26,21 @@ checkDataElementDisaggValidity <- function(data,
          dplyr::select(dataElement = dataelementuid,
                        categoryOptionCombo = categoryoptioncombouid)
 
-  data_des_cocs_bad <- dplyr::anti_join(data,
+  data_des_cocs_bad <- dplyr::anti_join(d$data$import,
                                         des,
                                         by = c("dataElement",
                                                "categoryOptionCombo"))
 
   if (NROW(data_des_cocs_bad) > 0) {
-    warning("Invalid data element / category option combos found!")
-    if (return_violations) {
-      return(data_des_cocs_bad)
-    }
+     msg <- "ERROR! Invalid data element / category option combos found!"
+     d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+     d$tests$data_des_cocs_bad <- data_des_cocs_bad
+
   } else {
-    return(TRUE)
+    msg <- "No invalid data element/ category option combos detected"
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
+
+  d
 
 }

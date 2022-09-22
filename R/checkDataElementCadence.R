@@ -16,17 +16,32 @@
 #'   d <- d2Parser("myfile.csv",type="csv")
 #'   checkDataElementCadence(d)
 #' }
-checkDataElementCadence <- function(data,
+checkDataElementCadence <- function(d,
                                     d2session = dynGet("d2_default_session",
                                                        inherits = TRUE)) {
 
+  data <- d$data$import
   #Get a listing of periods which are present in the data
   des_periods <- unique(data[, c("period", "dataElement")])
+
   cadence_maps <-
     purrr::map_dfr(
       unique(des_periods$period),
-      ~getDataElementCadenceMapForPeriod(., d2session = d2session)) %>%
-    dplyr::select(period, dataElement = uid)
+      ~getDataElementCadenceMapForPeriod(., d2session = d2session))
+
+  #Not exactly sure how to handle this right now.
+  #This likely needs to be reimplemented with a message
+  #Queue so that we can inform the user that there was
+  #some problem with checking the cadence.
+  if (NROW(cadence_maps) == 0) {
+    msg <- "Could not get cadence maps for any periods."
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    return(d)
+  }
+
+  cadence_maps %<>%
+      dplyr::select(period, dataElement = uid)
+
 
   data_des_periods_bad <- dplyr::anti_join(des_periods,
                                            cadence_maps,
@@ -34,12 +49,16 @@ checkDataElementCadence <- function(data,
 
   if (NROW(data_des_periods_bad) > 0) {
 
-    warning("Invalid data element / period combinations found!")
-    return(data_des_periods_bad)
+    msg <- "ERROR! Invalid data element / period combinations found!"
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    d$tests$invalid_des_periods <- data_des_periods_bad
 
   } else {
-    return(TRUE)
+    msg <- "No invalid data element/period combinations found."
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
+
+  d
 
 }
 
@@ -66,8 +85,8 @@ getDataElementCadenceMapForPeriod <- function(period,
       cadence_map <- cadence_map_json$dataElements
       cadence_map$period <- cadence_map_json$period
     } else {
-      stop("Could not retreive data element cadence map for period ",
-           period)
+      warning("Could not retreive data element cadence map for period ", period)
+    return(NULL)
     }
 
   cadence_map

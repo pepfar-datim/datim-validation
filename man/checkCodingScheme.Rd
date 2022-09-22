@@ -4,13 +4,10 @@
 \alias{checkCodingScheme}
 \title{Utility function to check that the supplied coding scheme is correct}
 \usage{
-checkCodingScheme(
-  data,
-  d2session = dynGet("d2_default_session", inherits = TRUE)
-)
+checkCodingScheme(d, d2session = dynGet("d2_default_session", inherits = TRUE))
 }
 \arguments{
-\item{data}{D2 compliant data frame object}
+\item{d}{D2 Parsed data frame}
 
 \item{d2session}{DHIS2 Session id}
 }

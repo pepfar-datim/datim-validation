@@ -4,10 +4,10 @@
 \alias{prepDataForValidation}
 \title{Internal function which prepares a parsed data frame for validation}
 \usage{
-prepDataForValidation(d)
+prepDataForValidation(data)
 }
 \arguments{
-\item{d}{D2 Parsed data frame}
+\item{data}{D2 compliant data frame object}
 }
 \value{
 Modifed data object with combis and totals appended.

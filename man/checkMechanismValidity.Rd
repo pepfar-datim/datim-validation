@@ -5,14 +5,14 @@
 \title{Check Mechanism Period Validity}
 \usage{
 checkMechanismValidity(
-  data,
+  d,
   organisationUnit = NA,
   return_violations = TRUE,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
 \arguments{
-\item{data}{D2 compliant data frame object}
+\item{d}{D2 Parsed data frame}
 
 \item{organisationUnit}{Organisation unit ancestor.}
 
@@ -36,7 +36,7 @@ are not met, the data will be flagged as being invalid.
 \examples{
 \dontrun{
      d <- d2Parser("myfile.csv",type="csv")
-     ds <- getCurrentMERDataSets(type="RESULTS")
+     ds <- getCurrentDataSets(type="RESULTS")
      checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
 }
 

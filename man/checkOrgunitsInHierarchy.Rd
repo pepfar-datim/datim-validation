@@ -11,7 +11,14 @@ checkOrgunitsInHierarchy(
 )
 }
 \arguments{
-\item{d2session}{}
+\item{d}{datimvalidation object obtained from d2Parser.}
+
+\item{userOrgUnit}{UID of the operating unit which the user belongs to, or wishes to assume}
+
+\item{d2session}{datimutils d2session object}
+}
+\value{
+datimvalidation object
 }
 \description{
 Title

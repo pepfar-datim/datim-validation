@@ -11,10 +11,10 @@ with_mock_api({
                           idScheme = "id",
                           invalidData = FALSE,
                           d2session = d2_default_session)
-    expect_warning(dups <- getExactDuplicates(d),
-                   "Your data contains exact duplicates!")
-    expect_equal(NROW(dups), 1)
-  })})
+d <- getExactDuplicates(d)
+expect_equal(NROW(d$tests$exact_duplicates), 1)
+expect_true(grepl("duplicates", d$info$messages$message))
+})})
 
 
 context("Don't warn on no duplicates")
@@ -30,6 +30,6 @@ with_mock_api({
                 idScheme = "id",
                 invalidData = FALSE,
                 d2session = d2_default_session)
-    expect_silent(dups <- getExactDuplicates(d))
-    expect_equal(NROW(dups), 0)
+    d <- getExactDuplicates(d)
+    expect_null(d$tests$exact_duplicates)
   })})

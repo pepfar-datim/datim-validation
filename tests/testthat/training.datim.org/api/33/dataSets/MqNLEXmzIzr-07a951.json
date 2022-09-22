@@ -1,0 +1,25 @@
+{
+    "categoryCombo": {
+        "categoryOptionCombos": [
+            {"id":"WQa4uNduUe"}
+    ]},
+    "dataSetElements": [
+        {
+            "dataElement": {
+                "id": "MMODRH694Pn"
+            }
+        },
+        {
+            "dataElement": {
+                "id": "tG7ocyZ8kVA"
+            }
+        },
+        {
+            "dataElement": {
+                "id": "qeS0bazg6IW"
+            }
+        }
+    ],
+    "organisationUnits": [{"id":"OZyRtJPWHii"},
+    {"id":"oRU10tDCoJe"},{"id":"KKFzPM8LoX7"}]
+}

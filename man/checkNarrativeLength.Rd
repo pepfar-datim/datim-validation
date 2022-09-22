@@ -4,10 +4,14 @@
 \alias{checkNarrativeLength}
 \title{Title Check that the length of narrative data does not exceed 50k characters.}
 \usage{
-checkNarrativeLength(data)
+checkNarrativeLength(d)
 }
 \arguments{
-\item{d2session}{}
+\item{d}{datimvalidation object obtained from d2Parser.}
+}
+\value{
+datimvalidation object obtained from d2Parser
+checked for long narratives.
 }
 \description{
 Title Check that the length of narrative data does not exceed 50k characters.

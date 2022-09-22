@@ -5,7 +5,7 @@
 #'
 #' @return A list of data element IDs and all organisation units which are valid.
 #'
-getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_session",
+getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_session",
                                                                   inherits = TRUE)) {
   #TODO: Rewrite using datimutils
   #Note that we are not doing any additional filtering here
@@ -20,7 +20,13 @@ getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_ses
   url <-
     paste0(
       d2session$base_url,
-      "api/", api_version(), "/dataSets/", dataset, "?fields=organisationUnits[id],dataSetElements[dataElement[id]]")
+      "api/",
+      api_version(),
+      "/dataSets/",
+      dataset,
+      "?fields=organisationUnits[id],categoryCombo[categoryOptionCombos[id]]",
+      ",dataSetElements[dataElement[id]]"
+    )
 
   #This API call should only be a function of the users actual orgunit, not the one which
   #The may be using for validation. Global users will have all DEs/OrgUnits anyway.
@@ -29,23 +35,44 @@ getDataElementOrgunitMap <- function(dataset, d2session = dynGet("d2_default_ses
     r <- httpcache::GET(url, httr::timeout(300), handle = d2session$handle)
     if (r$status == 200L) {
         r <- httr::content(r, "text")
-        ous_des <- jsonlite::fromJSON(r, flatten = TRUE)
+        r <- jsonlite::fromJSON(r, flatten = TRUE)
     } else  {
     stop("Could not retreive a list of data elements and orgunits from the server")
       }
 
-  ous_des
+    #Reshape this list a bit to make it a bit easier to deal with
+    #Also deal with NULLs
+
+    des_details <- list(acocs = character(),
+                        des = character(),
+                        ous = character())
+
+
+
+    if (NROW(r$categoryCombo$categoryOptionCombos) > 0) {
+      des_details$acocs <- r$categoryCombo$categoryOptionCombos$id
+    }
+
+    if (length(r$dataSetElements) > 0) {
+      des_details$des <- r$dataSetElements$dataElement.id
+    }
+
+    if (NROW(r$organisationUnits) > 0) {
+      des_details$ous <- r$organisationUnits$id
+    }
+
+
+    des_details
   }
 
 
 #' Title
 #'
-#' @param orgunits_data_elements
-#' @param de_map
+#' @param orgunits_data_elements A data frame consisting of organisation units and data elements
+#' obtained from the validation payload.
+#' @param de_map A nested list of possible data element /organiation unit combinations.
 #'
-#' @return
-#'
-#' @examples
+#' @return A data frame of organisation unit/ data element combinations which are invalid.
 validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 
   org_unit <- unique(orgunit_data_elements$orgUnit)
@@ -56,7 +83,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
   #Which datasets does this orgunit belong to?
   has_dataset <-
     unlist(lapply(de_map, \(x) any(
-      x$organisationUnits$id %in% org_unit
+      x$ous %in% org_unit
     )))
 
   #This orgunit does not have any data sets
@@ -68,8 +95,7 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
   de_map <- de_map[has_dataset]
 
   #Filter the datasets and get the possible data elements
-  possible_des <-
-    lapply(lapply(de_map, \(.) .$dataSetElement), \(.) .$dataElement.id) |> unlist() |> unique()
+  possible_des <- lapply(de_map, \(.) .$des) |> unlist() |> unique()
 
   #Return all data elements which are not part of any of the datasets.
   orgunit_data_elements[!(orgunit_data_elements$dataElement %in% possible_des), ]
@@ -82,54 +108,43 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 #' @description Returns a data frame invalid data elements which exist in the data
 #' but which do not have a valid organistion unit / dataset association.
 #'
-#' @param data D2 compliant data frame
+#' @param d datimvalidation object obtained from d2Parser.
 #' @param datasets Should be a character vector of data set UIDs.
-#' @param return_violations Return the invalid data if TRUE
 #' @param d2session datimutils d2session object
-#' @return Returns subset of data which contains
-#'   invalid data element / organisation unit associations. If no violations are found, a boolean
-#'   TRUE value is returned.
+#' @return datimvalidation object obtained from d2Parser which have
+#' been checked for invalid data element/ organisation unit combinations
 #' @examples \dontrun{
 #'      d<-d2Parser("myfile.csv",type="csv")
-#'      ds<-getCurrentMERDataSets(type="RESULTS")
-#'      checkDataElementOrgunitValidity(data=d,datasets=ds)
+#'      ds<-getCurrentDataSets(type="RESULTS")
+#'      d <- checkDataElementOrgunitValidity(d,datasets=ds)
 #' }
 #'
 checkDataElementOrgunitValidity <-
   function(d,
            datasets,
-           return_violations  = TRUE,
            d2session = d2_default_session) {
 
+  data <- d$data$import
   #Get a list of all data elements and orgunits
   #Present in the data and split into a list.
-  des_ous <- unique(d[, c("orgUnit", "dataElement")])
+  des_ous <- unique(data[, c("orgUnit", "dataElement")])
   des_ous <- split(des_ous, des_ous$orgUnit)
   #Get a list of datasets, and the organisationunits and
   #data elements which they contain
-  de_map <- lapply(datasets, \(x) getDataElementOrgunitMap(x, d2session = d2session))
+  de_map <- lapply(datasets, \(x) getDataElementDetailsMap(x, d2session = d2session))
 
   des_ous_test <- lapply(des_ous, function(x) validateOrgunitDataElements(x, de_map))
   #Filter the list for any orgunits which have bogus data elements
-  bad_data_des_ous <- des_ous_test[unlist(lapply(des_ous_test, \(.) NROW(.) > 0))]
+  invalid_des_ous <- des_ous_test[unlist(lapply(des_ous_test, \(.) NROW(.) > 0))]
 
 
-  if (length(bad_data_des_ous) > 0L) {
-    warning("Invalid data element/orgunit associations were detected!")
-    if (return_violations) {
-      return(do.call("rbind", bad_data_des_ous))
-    } else {
-      return(FALSE)
+  if (length(invalid_des_ous) > 0L) {
+    msg <- paste("ERROR! Invalid data element/orgunit associations were detected!")
+    d$tests$invalid_des_ous <- do.call("rbind", invalid_des_ous)
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
     }
-  } else {
 
-    if (return_violations) {
-      return(data.frame(dataElement = character(),
-                        orgUnit = character()))
-    } else {
-      return(TRUE)
-    }
-  }
+  d
 
 }
 

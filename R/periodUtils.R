@@ -49,17 +49,32 @@ getPeriodFromISO <- function(iso) {
     stop("You must supply a period identifier")
   }
   pt <- getPeriodType(iso)
+
+  if (is.na(pt)) {
+    warning(paste("Could not identify the period type for ", iso))
+    return(NULL)
+  }
+
   startDate <- NA
   endDate <- NA
   if (pt == "Daily") {
     startDate <- as.Date(iso, "%Y%m%d")
     endDate <- as.Date(iso, "%Y%m%d")
   } else if (pt == "Weekly") {
+
     y <- substr(iso, 1, 4)
+
     wk <- as.numeric(gsub("W", "", stringr::str_extract(iso, "W.+")))
+
     if (wk <= 10) {
       wk <- paste0("0", as.character(wk))
     }
+
+    if (wk >= 53) {
+      warning("Invalid week.")
+      return(NULL)
+    }
+
     startDate <- ISOweek2date(paste0(y, "-W", wk, "-1"))
     endDate <- ISOweek2date(paste0(y, "-W", wk, "-7"))
   } else if (pt == "Monthly") {
@@ -77,11 +92,14 @@ getPeriodFromISO <- function(iso) {
     } else if (q == 4) {
       m <- "10"
     }  else {
-      (stop(paste("Invalid quarter specified in ", iso)))
+      (warning(paste("Invalid quarter specified in ", iso)))
+      return(NULL)
     }
+
     add.months <- function(date, n) {
       seq(date, by = paste(n, "months"), length = 2)[2]
     }
+
     startDate <- as.Date(paste0(y, m, "01"), "%Y%m%d")
     endDate <- add.months(startDate, 3) - 1
   } else if (pt == "Yearly") {
@@ -102,10 +120,11 @@ getPeriodFromISO <- function(iso) {
     stringsAsFactors = FALSE)
 
   if (anyNA(period) || is.null(period)) {
-    stop(paste0(iso, "is not a valid period."))
+    warning(paste0(iso, "is not a valid period."))
+    return(NULL)
   }
 
-  return(period)
+  period
 }
 
 
@@ -124,7 +143,23 @@ getPeriodFromISO <- function(iso) {
 #'     checkPeriodIdentifiers(d)
 #' }
 #'
-checkPeriodIdentifiers <- function(data) {
-  do.call(rbind.data.frame, lapply(data$period, getPeriodFromISO))
-  return(TRUE)
+checkPeriodIdentifiers <- function(d) {
+
+  #Ignore NAs
+  periods <- unique(d$data$import$period)
+
+  period_check <- lapply(periods, getPeriodFromISO)
+  bad_periods_idx <- which(sapply(period_check, is.null))
+
+  if (length(bad_periods_idx) > 0) {
+    bad_periods <- periods[bad_periods_idx]
+    msg <- paste("ERROR! The following periods are invalid. This data will be removed to allow for further processing.",
+                 paste(bad_periods, sep = "", collapse = ", "))
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    d$tests$bad_periods <- bad_periods
+
+   d$data$import <- d$data$import %>%
+    dplyr::filter(!(d$data$import$period %in% bad_periods))
+  }
+  d
 }

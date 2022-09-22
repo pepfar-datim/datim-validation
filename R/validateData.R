@@ -5,7 +5,7 @@
 #'
 #' @return Modifed data object with combis and totals appended.
 #
-prepDataForValidation <- function(d) {
+prepDataForValidation <- function(data) {
   header <-
     c(
       "dataElement",
@@ -16,21 +16,21 @@ prepDataForValidation <- function(d) {
       "value"
     )
 
-  d <- d[, header[header %in% names(d)]]
+  data <- data[, header[header %in% names(data)]]
   invalid <-
     function(x) {
       sapply(x, function(x) {
         is.na(x) || missing(x) || x == ""
       })
     }
-  d$value <- as.numeric(d$value) #This may throw a warning
+  data$value <- as.numeric(data$value) #This may throw a warning
 
-  total_rows <- NROW(d)
-  d <- d %>%
+  total_rows <- NROW(data)
+  data <- data %>%
     dplyr::filter(purrr::reduce(purrr::map(., is.na), `+`) == 0)
 
-  if (total_rows != NROW(d)) {
-    foo <- total_rows - NROW(d)
+  if (total_rows != NROW(data)) {
+    foo <- total_rows - NROW(data)
     msg <-
       paste(foo,
             " rows are incomplete.",
@@ -39,7 +39,7 @@ prepDataForValidation <- function(d) {
   }
 
   #Calculate the totals
-  d$combi <- paste0("#{", d$dataElement, ".", d$categoryOptionCombo, "}")
+  data$combi <- paste0("#{", data$dataElement, ".", data$categoryOptionCombo, "}")
   # data.totals <-
   #   aggregate(
   #     value ~ dataElement + period + orgUnit + attributeOptionCombo,
@@ -52,7 +52,7 @@ prepDataForValidation <- function(d) {
   # dplyr::bind_rows(d, data.totals) %>%
   #   dplyr::filter(value != 0)
 
-  d
+  data
 }
 
 #' @export
@@ -75,7 +75,7 @@ prepDataForValidation <- function(d) {
 #'   vr_rules <- validateData(d)
 #'   doMC::registerDoMC(cores=4)
 #'   vr_rules <- validateData(d,parallel=TRUE)
-#'   ds <- getCurrentMERDataSets(type="RESULTS")
+#'   ds <- getCurrentDataSets(type="RESULTS")
 #'   vr_rules <- validateData(d,parallel=TRUE,datasets=ds)
 #' }
 validateData <- function(data,

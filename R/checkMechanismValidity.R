@@ -16,11 +16,11 @@
 #'
 #' @examples \dontrun{
 #'      d <- d2Parser("myfile.csv",type="csv")
-#'      ds <- getCurrentMERDataSets(type="RESULTS")
+#'      ds <- getCurrentDataSets(type="RESULTS")
 #'      checkMechanismValidity(data=d, organisationUnit = "f5RoebaDLMx")
 #' }
 #'
-checkMechanismValidity <- function(data,
+checkMechanismValidity <- function(d,
                                    organisationUnit = NA,
                                    return_violations = TRUE,
                                    d2session = dynGet("d2_default_session",
@@ -30,7 +30,7 @@ checkMechanismValidity <- function(data,
     organisationUnit <- d2session$user_orgunit
   }
 
-  data_mechs_periods <- data %>%
+  data_mechs_periods <- d$data$import %>%
       dplyr::select(attributeOptionCombo, period) %>%
     dplyr::distinct()
 
@@ -75,14 +75,15 @@ checkMechanismValidity <- function(data,
 
   if (NROW(data_mechs_periods) > 0) {
 
-    warning("Invalid mechanisms found!")
-
-    if (return_violations) {
-      return(data_mechs_periods)
-    }
-
+    msg <- paste("ERROR! The following invalid mechanisms found were found: ",
+                 paste(data_mechs_periods$code), sep = "", collapse = ", ")
+    d$info$messages <- appendMessage(d$info$messages, msg, "ERROR")
+    d$tests$invalid_mechanisms <- data_mechs_periods
   } else {
-    return(TRUE)
+    msg <- paste("All mechanisms appear to be valid.",
+                 paste(data_mechs_periods$code), sep = "", collapse = ", ")
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
 
+  d
 }

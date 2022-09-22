@@ -4,10 +4,10 @@
 \alias{checkPeriodIdentifiers}
 \title{Check Period Identifiers}
 \usage{
-checkPeriodIdentifiers(data)
+checkPeriodIdentifiers(d)
 }
 \arguments{
-\item{data}{D2 compliant data frame object}
+\item{d}{D2 Parsed data frame}
 }
 \value{
 TRUE if all periods are valid.

@@ -11,10 +11,10 @@
 #'
 #' @examples \dontrun{
 #'  d <- d2Parser("myfile.csv",type="csv")
-#'  checkNegativeValues(data=d)
+#'  d <- checkNegativeValues(d)
 #' }
 #'
-checkNegativeValues <- function(data,
+checkNegativeValues <- function(d,
                                 d2session = dynGet("d2_default_session",
                                                    inherits = TRUE)) {
 
@@ -29,17 +29,30 @@ checkNegativeValues <- function(data,
     dplyr::filter(valueType %in% numeric_types) %>%
     dplyr::pull(id)
 
+  data <- d$data$import %>%
+    dplyr::filter(dataElement %in% des_numeric)
+
+  if (NROW(data) == 0) {
+    return(d)
+  }
+
   value_is_negative <- grepl("^-", stringr::str_trim(data$value))
   mech_is_dedupe <- data$attributeOptionCombo %in% dedupe_mechs
   is_invalid <- value_is_negative & !mech_is_dedupe
 
-  d_bad <- data[is_invalid, ]
+  tests_negative_values <- data[is_invalid, ]
 
-  if (NROW(d_bad) > 0) {
-    warning("Negative values found in non-dedupe mechanisms!")
-    d_bad
+  if (NROW(tests_negative_values) > 0) {
+    msg <- paste("ERROR!", NROW(tests_negative_values), "negative values found in non-dedupe mechanisms!")
+    d$info$messages <-
+      appendMessage(d$info$messages, msg, "ERROR")
+    d$tests$negative_values <- tests_negative_values
   } else {
-    return(TRUE)
+    msg <- "No negative values detected."
+    d$info$messages <-
+      appendMessage(d$info$messages, msg, "INFO")
   }
+
+  d
 
 }

@@ -6,13 +6,16 @@
 \usage{
 d2Parser(
   filename,
-  type,
+  type = "csv",
+  datastream = "RESULTS",
+  datasets = NA,
   organisationUnit = NA,
   dataElementIdScheme = "id",
   orgUnitIdScheme = "id",
   idScheme = "id",
   invalidData = FALSE,
-  csv_header = TRUE,
+  hasHeader = TRUE,
+  isoPeriod = NA,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }
@@ -21,6 +24,9 @@ d2Parser(
 import file.}
 
 \item{type}{Type of the file. Should be one of  xml, json or csv.}
+
+\item{datasets}{Should be a character vector of data set UIDs.
+Alternatively, if left missing, user will be promted to choose from a list.}
 
 \item{organisationUnit}{Organisation unit ancestor.}
 
@@ -36,8 +42,11 @@ already specififed as UIDs}
 
 \item{invalidData}{Exclude any (NA or missing) data from the parsed file?}
 
-\item{csv_header}{By default, CSV files are assumed to have a header,
-otherwise FALSE will allow for files without a CSV header.}
+\item{hasHeader}{TRUE by default. Should be set to FALSE if the file does not
+contain header information.}
+
+\item{isoPeriod}{period to be used for date shift boundaries. If not
+provided, no boundaries are set.}
 
 \item{d2session}{DHIS2 Session id}
 }

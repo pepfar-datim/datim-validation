@@ -4,21 +4,16 @@
 \alias{checkDataElementMechValidity}
 \title{checkDataElementMechValidity(data,organisationUnit,datasets, d2session)}
 \usage{
-checkDataElementMechValidity(
-  d,
-  datasets,
-  return_violations = TRUE,
-  d2session = d2_default_session
-)
+checkDataElementMechValidity(d, datasets, d2session = d2_default_session)
 }
 \arguments{
 \item{datasets}{Should be a character vector of data set UIDs.}
 
-\item{return_violations}{Return the invalid data if TRUE}
-
 \item{d2session}{datimutils d2session object}
 
 \item{data}{D2 compliant data frame}
+
+\item{return_violations}{Return the invalid data if TRUE}
 }
 \value{
 Returns subset of data which contains
@@ -35,7 +30,7 @@ but which do not have a valid association with an attribute option combo (mechan
 \examples{
 \dontrun{
      d <- d2Parser("myfile.csv", type = "csv")
-     ds <- getCurrentMERDataSets(type = "RESULTS")
+     ds <- getCurrentDataSets(type = "RESULTS")
      checkDataElementOrgunitValidity(data = d,datasets = ds)
 }
 
