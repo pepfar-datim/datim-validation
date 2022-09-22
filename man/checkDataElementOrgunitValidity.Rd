@@ -12,18 +12,15 @@ checkDataElementOrgunitValidity(
 )
 }
 \arguments{
+\item{d}{datimvalidation object obtained from d2Parser.}
+
 \item{datasets}{Should be a character vector of data set UIDs.}
 
-\item{return_violations}{Return the invalid data if TRUE}
-
 \item{d2session}{datimutils d2session object}
-
-\item{data}{D2 compliant data frame}
 }
 \value{
-Returns subset of data which contains
-  invalid data element / organisation unit associations. If no violations are found, a boolean
-  TRUE value is returned.
+datimvalidation object obtained from d2Parser which have 
+been checked for invalid data element/ organisation unit combinations
 }
 \description{
 Returns a data frame invalid data elements which exist in the data
@@ -33,7 +30,7 @@ but which do not have a valid organistion unit / dataset association.
 \dontrun{
      d<-d2Parser("myfile.csv",type="csv")
      ds<-getCurrentDataSets(type="RESULTS")
-     checkDataElementOrgunitValidity(data=d,datasets=ds)
+     d <- checkDataElementOrgunitValidity(d,datasets=ds)
 }
 
 }

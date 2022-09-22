@@ -7,7 +7,8 @@
 d2Parser(
   filename,
   type = "csv",
-  datastream = "MER",
+  datastream = "RESULTS",
+  datasets = NA,
   organisationUnit = NA,
   dataElementIdScheme = "id",
   orgUnitIdScheme = "id",
@@ -23,6 +24,9 @@ d2Parser(
 import file.}
 
 \item{type}{Type of the file. Should be one of  xml, json or csv.}
+
+\item{datasets}{Should be a character vector of data set UIDs.
+Alternatively, if left missing, user will be promted to choose from a list.}
 
 \item{organisationUnit}{Organisation unit ancestor.}
 

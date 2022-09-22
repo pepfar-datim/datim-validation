@@ -1,8 +1,9 @@
 #' Title
 #'
-#' @param d
+#' @param d datimvalidation object
 #'
-#' @return
+#' @return datimvalidation object with with dates deconflicted in
+#' d$data$import.
 #' @export
 #'
 

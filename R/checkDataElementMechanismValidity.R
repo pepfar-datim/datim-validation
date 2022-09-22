@@ -7,9 +7,8 @@
 #' @param des_acocs_map A list of all possible valid Data elements
 #' and attribute option combinations.
 #'
-#' @return
+#' @return A data frame of invalid data element/disagg combinations.
 #'
-#' @examples
 validateDEs_ACOCs <- function(des_acocs, des_acocs_map) {
 
   acoc <- unique(des_acocs$attributeOptionCombo)
@@ -45,20 +44,14 @@ validateDEs_ACOCs <- function(des_acocs, des_acocs_map) {
 #' @description Returns a data frame invalid data elements which exist in the data
 #' but which do not have a valid association with an attribute option combo (mechanism.)
 #'
-#' @param data D2 compliant data frame
+#' @param d datimvalidation object
 #' @param datasets Should be a character vector of data set UIDs.
-#' @param return_violations Return the invalid data if TRUE
 #' @param d2session datimutils d2session object
-#' @return Returns subset of data which contains
-#'   invalid data element / attribute option combo associations. As an example, MER results
-#'   data should always be submitted against mechanism, while other data may be
-#'   reported against the "default" mechanism.
-#'   If no violations are found, a boolean
-#'   TRUE value is returned.
+#' @return datimvalidation object
 #' @examples \dontrun{
 #'      d <- d2Parser("myfile.csv", type = "csv")
 #'      ds <- getCurrentDataSets(type = "RESULTS")
-#'      checkDataElementOrgunitValidity(data = d,datasets = ds)
+#'      d <- checkDataElementOrgunitValidity(data = d,datasets = ds)
 #' }
 #'
 checkDataElementMechValidity <-

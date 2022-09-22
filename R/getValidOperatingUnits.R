@@ -22,7 +22,7 @@ getValidOperatingUnits <- function(d2session = dynGet("d2_default_session",
   if (r$status == 200) {
      httr::content(r, "text") %>%
      jsonlite::fromJSON(., flatten = TRUE) %>%
-     rlist::list.extract(., "organisationUnits")
+     purrr::pluck("organisationUnits")
   } else {
     stop(paste(
       "Could not retreive valid operating units",

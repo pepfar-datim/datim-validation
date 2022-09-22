@@ -68,12 +68,11 @@ getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_ses
 
 #' Title
 #'
-#' @param orgunits_data_elements
-#' @param de_map
+#' @param orgunits_data_elements A data frame consisting of organisation units and data elements
+#' obtained from the validation payload.
+#' @param de_map A nested list of possible data element /organiation unit combinations.
 #'
-#' @return
-#'
-#' @examples
+#' @return A data frame of organisation unit/ data element combinations which are invalid.
 validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 
   org_unit <- unique(orgunit_data_elements$orgUnit)
@@ -109,23 +108,20 @@ validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 #' @description Returns a data frame invalid data elements which exist in the data
 #' but which do not have a valid organistion unit / dataset association.
 #'
-#' @param data D2 compliant data frame
+#' @param d datimvalidation object obtained from d2Parser.
 #' @param datasets Should be a character vector of data set UIDs.
-#' @param return_violations Return the invalid data if TRUE
 #' @param d2session datimutils d2session object
-#' @return Returns subset of data which contains
-#'   invalid data element / organisation unit associations. If no violations are found, a boolean
-#'   TRUE value is returned.
+#' @return datimvalidation object obtained from d2Parser which have
+#' been checked for invalid data element/ organisation unit combinations
 #' @examples \dontrun{
 #'      d<-d2Parser("myfile.csv",type="csv")
 #'      ds<-getCurrentDataSets(type="RESULTS")
-#'      checkDataElementOrgunitValidity(data=d,datasets=ds)
+#'      d <- checkDataElementOrgunitValidity(d,datasets=ds)
 #' }
 #'
 checkDataElementOrgunitValidity <-
   function(d,
            datasets,
-           return_violations  = TRUE,
            d2session = d2_default_session) {
 
   data <- d$data$import
