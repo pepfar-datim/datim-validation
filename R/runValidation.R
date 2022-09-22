@@ -1,12 +1,12 @@
 #' Title
 #'
-#' @param d
-#' @param datasets
-#' @param organisationUnit
-#' @param datastream
-#' @param d2session
+#' @param d datimvalidation object
+#' @param datasets list of dataset UIDs
+#' @param organisationUnit users organisation unit or one which they wish to assume
+#' @param datastream one of RESULTS, TARGETS, NARRATIVES, SIMS.
+#' @param d2session datimutils session object
 #'
-#' @return
+#' @return datimvalidation object with all validations run.
 #' @export
 #'
 runValidation <- function(d,

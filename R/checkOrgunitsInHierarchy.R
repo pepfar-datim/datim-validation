@@ -1,10 +1,10 @@
 #' Title
 #'
-#' @param d
-#' @param userOrgUnit
-#' @param d2session
+#' @param d datimvalidation object obtained from d2Parser.
+#' @param userOrgUnit UID of the operating unit which the user belongs to, or wishes to assume
+#' @param d2session datimutils d2session object
 #'
-#' @return
+#' @return datimvalidation object
 #' @export
 #'
 checkOrgunitsInHierarchy <-

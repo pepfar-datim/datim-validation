@@ -98,10 +98,10 @@ checkCodingScheme <- function(d,
 #' subsequent DATIM validation routines.
 #'
 #' @param type Type of the file. Should be one of  xml, json or csv.
+#' @param datastream One of RESULTS, TARGETS, NARRATIVES or SIMS.
 #' @inheritParams datim_validation_params
 #'
-#' @return Returns a data frame of at least "dataElement", "period", "orgUnit",
-#' "categoryOptionCombo", "attributeOptionCombo", "value"
+#' @return A list object consisting of "info", "data" and "tests". 
 #'
 #' @note function(filename = "/home/me/foo.xml", type = "xml",
 #' dataElementIdScheme = "code", orgUnitIdScheme = "code", idScheme = "id")

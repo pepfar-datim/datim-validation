@@ -4,16 +4,21 @@
 \alias{runValidation}
 \title{Title}
 \usage{
-runValidation(
-  d,
-  datasets = NA,
-  organisationUnit = NA,
-  datastream = NA,
-  d2session = dynGet("d2_default_session", inherits = TRUE)
-)
+runValidation(d, d2session = dynGet("d2_default_session", inherits = TRUE))
 }
 \arguments{
-\item{d2session}{}
+\item{d}{datimvalidation object}
+
+\item{d2session}{datimutils session object}
+
+\item{datasets}{list of dataset UIDs}
+
+\item{organisationUnit}{users organisation unit or one which they wish to assume}
+
+\item{datastream}{one of RESULTS, TARGETS, NARRATIVES, SIMS.}
+}
+\value{
+datimvalidation object with all validations run.
 }
 \description{
 Title

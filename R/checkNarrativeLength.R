@@ -1,8 +1,9 @@
 #' Title Check that the length of narrative data does not exceed 50k characters.
 #'
-#' @param d
+#' @param d datimvalidation object obtained from d2Parser.
 #'
-#' @return
+#' @return datimvalidation object obtained from d2Parser
+#' checked for long narratives.
 #' @export
 #'
 

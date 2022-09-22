@@ -7,7 +7,13 @@
 validateOrgunitDataElements(orgunit_data_elements, de_map)
 }
 \arguments{
-\item{de_map}{}
+\item{de_map}{A nested list of possible data element /organiation unit combinations.}
+
+\item{orgunits_data_elements}{A data frame consisting of organisation units and data elements
+obtained from the validation payload.}
+}
+\value{
+A data frame of organisation unit/ data element combinations which are invalid.
 }
 \description{
 Title

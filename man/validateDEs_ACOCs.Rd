@@ -14,6 +14,9 @@ attribute option combinations.}
 \item{des_acocs_map}{A list of all possible valid Data elements
 and attribute option combinations.}
 }
+\value{
+A data frame of invalid data element/disagg combinations.
+}
 \description{
 Title Given a data frame of data elements and attribute option combinations
 identify the invalid combinations.
