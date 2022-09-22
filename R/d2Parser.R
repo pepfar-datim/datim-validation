@@ -101,7 +101,7 @@ checkCodingScheme <- function(d,
 #' @param datastream One of RESULTS, TARGETS, NARRATIVES or SIMS.
 #' @inheritParams datim_validation_params
 #'
-#' @return A list object consisting of "info", "data" and "tests". 
+#' @return A list object consisting of "info", "data" and "tests".
 #'
 #' @note function(filename = "/home/me/foo.xml", type = "xml",
 #' dataElementIdScheme = "code", orgUnitIdScheme = "code", idScheme = "id")

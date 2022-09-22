@@ -2,8 +2,8 @@
 #'
 #' @param d datimvalidation object
 #'
-#' @return datimvalidation object with with dates deconflicted in 
-#' d$data$import. 
+#' @return datimvalidation object with with dates deconflicted in
+#' d$data$import.
 #' @export
 #'
 

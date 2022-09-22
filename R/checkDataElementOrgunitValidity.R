@@ -73,8 +73,6 @@ getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_ses
 #' @param de_map A nested list of possible data element /organiation unit combinations.
 #'
 #' @return A data frame of organisation unit/ data element combinations which are invalid.
-#'
-#' 
 validateOrgunitDataElements <- function(orgunit_data_elements, de_map) {
 
   org_unit <- unique(orgunit_data_elements$orgUnit)
