@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 This package has been developed to assist the PEPFAR Data Exchange Community
 with validation of their data import payloads. Various checks have been 
 developed to allow users to identify and validate
@@ -26,8 +26,7 @@ If you prefer, you can download the source of the package with the vignettes and
 devtools::install_github('https://github.com/pepfar-datim/datim-validation',build_vignettes = TRUE)
 ```
 
-This package uses `renv`, which allows for fine grained control of dependencies. 
-While not required, it is reccomended that you use `renv` to ensure that you
+This package uses `renv`, which allows for fine grained control of dependencies.  While not required, it is reccomended that you use `renv` to ensure that you
 versions of dependencies in your local enviornment are the same as those which
 a particular version of `datimvalidation` has been tested against.  You can 
 install `renv` with the following command. 
@@ -47,32 +46,47 @@ isolated environment on your machine, and will not affect the global R
 environment. 
 
 
-Once the package has installed, you can load it with the following command:
-
-```R
-library(datimvalidation)
-```
-
-Consult the vignette in the package documentation on how to use the library. A very basic script is provided below as an example of how you can validate your data payload. 
+A very basic script is provided below as an example of how you can validate your data payload. You should consult the `datimutils` package documentation for details regarding usage of the `loginToDATIM` function. Also consult this packages function documentation for more information on each validation function.
 
 ```
 require(datimvalidation)
+require(datimutils)
+require(magrittr)
+datim_config <- "/home/littebobbytables/.secrets/datim.json"
+loginToDATIM(config)
 
-#Adjust this to the location of your own credentials file. 
-secrets <- "/home/littebobbytables/.secrets/datim.json"
-loadSecrets(secrets)
 
-#Adjust this to point to the location of your data payload. 
+#Adjust this to point to the location of your exchange file.
 datafile <- "/home/littebobbytables/mydata.csv"
-d <- d2Parser(filename = datafile ,type = "csv")
+d <- d2Parser(filename = datafile, type = "csv", datastream = "RESULTS") 
+#Run all reccomended validations. Note, this process may take several minutes.
+d <- runValidation(d)
 
-#You may need to adjust the datasets to match those which you are submitting data for. 
-#If you get non-empty data frames here, then your data has issues. 
-
-checkDataElementOrgunitValidity(data = d,datasets = c("zUoy5hk8r0q","KWRj80vEfHU"))
-checkDataElementDisaggValidity(data=d,datasets = c("zUoy5hk8r0q","KWRj80vEfHU"))
-checkValueTypeCompliance(d)
-checkNegativeValues(d)
-validateData(data = d, datasets = c("zUoy5hk8r0q","KWRj80vEfHU"),
- return_violations_only = TRUE)
 ```
+
+You can check any messages which may have been generated
+during the parsing and validation of your data.
+
+```R
+print(d$info$messages)
+```
+
+Any messages with a level of "ERROR" generally indicate problems which must be
+fixed prior to import. Messages with a level of "WARNING" may prevent your data 
+from being imported, and should be carefully reviewd. Messages with a level of "INFO" are provided for your information only.
+
+
+If you export your data to CSV file with the following command.
+
+```R
+write.table(d$data$import, 
+file="my_export_file.csv",
+quote=TRUE,sep=",", na="")
+```
+
+Note that this file will will only contain data which has been 
+deemed to be valid by the parser. For instance, duplicate and blank 
+rows from the original file will be removed. Also, all identifiers
+will be converted to IDs.
+
+
