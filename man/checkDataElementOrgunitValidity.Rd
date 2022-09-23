@@ -4,12 +4,7 @@
 \alias{checkDataElementOrgunitValidity}
 \title{checkDataElementOrgunitValidity(data,organisationUnit,datasets, d2session)}
 \usage{
-checkDataElementOrgunitValidity(
-  d,
-  datasets,
-  return_violations = TRUE,
-  d2session = d2_default_session
-)
+checkDataElementOrgunitValidity(d, datasets, d2session = d2_default_session)
 }
 \arguments{
 \item{d}{datimvalidation object obtained from d2Parser.}
@@ -19,7 +14,7 @@ checkDataElementOrgunitValidity(
 \item{d2session}{datimutils d2session object}
 }
 \value{
-datimvalidation object obtained from d2Parser which have 
+datimvalidation object obtained from d2Parser which have
 been checked for invalid data element/ organisation unit combinations
 }
 \description{

@@ -10,7 +10,7 @@ shiftSIMSData(d)
 \item{d}{datimvalidation object}
 }
 \value{
-datimvalidation object with with dates deconflicted in 
+datimvalidation object with with dates deconflicted in
 d$data$import.
 }
 \description{

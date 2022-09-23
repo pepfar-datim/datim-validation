@@ -49,8 +49,7 @@ checkNegativeValues <- function(d,
     d$tests$negative_values <- tests_negative_values
   } else {
     msg <- "No negative values detected."
-    d$info$messages <-
-      appendMessage(d$info$messages, msg, "INFO")
+    d$info$messages <- appendMessage(d$info$messages, msg, "INFO")
   }
 
   d

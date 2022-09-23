@@ -7,21 +7,14 @@
 checkDataElementMechValidity(d, datasets, d2session = d2_default_session)
 }
 \arguments{
+\item{d}{datimvalidation object}
+
 \item{datasets}{Should be a character vector of data set UIDs.}
 
 \item{d2session}{datimutils d2session object}
-
-\item{data}{D2 compliant data frame}
-
-\item{return_violations}{Return the invalid data if TRUE}
 }
 \value{
-Returns subset of data which contains
-  invalid data element / attribute option combo associations. As an example, MER results
-  data should always be submitted against mechanism, while other data may be
-  reported against the "default" mechanism.
-  If no violations are found, a boolean
-  TRUE value is returned.
+datimvalidation object
 }
 \description{
 Returns a data frame invalid data elements which exist in the data
@@ -31,7 +24,7 @@ but which do not have a valid association with an attribute option combo (mechan
 \dontrun{
      d <- d2Parser("myfile.csv", type = "csv")
      ds <- getCurrentDataSets(type = "RESULTS")
-     checkDataElementOrgunitValidity(data = d,datasets = ds)
+     d <- checkDataElementOrgunitValidity(data = d,datasets = ds)
 }
 
 }
