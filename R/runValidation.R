@@ -35,12 +35,12 @@ runValidation <- function(d,
   d <-
     checkMechanismValidity(d, organisationUnit = d$info$organisationUnit, d2session =  d2session)
 
-  if (datastream %in% c("RESULTS","TARGETS")) {
+  if (datastream %in% c("RESULTS", "TARGETS")) {
     #Negative values
     d <- checkNegativeValues(d, d2session = d2session)
     #Value type compliance
     d <- checkValueTypeCompliance(d, d2session = d2session)
-    #Validation rules 
+    #Validation rules
     d <- checkValidationRules(d, d2session = d2session)
   }
 
