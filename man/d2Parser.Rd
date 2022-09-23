@@ -25,6 +25,8 @@ import file.}
 
 \item{type}{Type of the file. Should be one of  xml, json or csv.}
 
+\item{datastream}{One of RESULTS, TARGETS, NARRATIVES or SIMS.}
+
 \item{datasets}{Should be a character vector of data set UIDs.
 Alternatively, if left missing, user will be promted to choose from a list.}
 
@@ -51,8 +53,7 @@ provided, no boundaries are set.}
 \item{d2session}{DHIS2 Session id}
 }
 \value{
-Returns a data frame of at least "dataElement", "period", "orgUnit",
-"categoryOptionCombo", "attributeOptionCombo", "value"
+A list object consisting of "info", "data" and "tests".
 }
 \description{
 d2Parser will parse a compliant DHIS2 XML, JSON, or CSV file

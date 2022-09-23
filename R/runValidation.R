@@ -35,31 +35,13 @@ runValidation <- function(d,
   d <-
     checkMechanismValidity(d, organisationUnit = d$info$organisationUnit, d2session =  d2session)
 
-  if (datastream == "MER") {
+  if (datastream %in% c("RESULTS", "TARGETS")) {
     #Negative values
     d <- checkNegativeValues(d, d2session = d2session)
     #Value type compliance
     d <- checkValueTypeCompliance(d, d2session = d2session)
-
-    can_parallel <-
-      "parallel" %in% rownames(utils::installed.packages()) == TRUE &
-      .Platform$OS.type != "windows"
-
-    if (can_parallel) {
-      n_cores <-
-        ifelse(Sys.getenv("MAX_CORES") != "",
-               as.numeric(Sys.getenv("MAX_CORES")),
-               parallel::detectCores())
-      doMC::registerDoMC(cores = n_cores)
-    }
-
-    d$tests$validation_rules <- validateData(
-      d$data$import,
-      organisationUnit = d$info$organisationUnit,
-      return_violations_only = TRUE,
-      parallel = can_parallel,
-      d2session = d2session
-    )
+    #Validation rules
+    d <- checkValidationRules(d, d2session = d2session)
   }
 
   if (datastream == "SIMS") {
