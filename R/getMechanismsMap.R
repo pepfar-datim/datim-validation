@@ -56,8 +56,8 @@ getMechanismsMap <- function(organisationUnit = NA,
     default_mech <- list(code = "default",
                          name = "default",
                          id = "HllvX50cXC0",
-                         startDate = NA,
-                         endDate = NA)
+                         startDate = "1900-01-01",
+                         endDate = "9999-12-31")
     mechs <- rbind(mechs, default_mech)
     mechs
 }
