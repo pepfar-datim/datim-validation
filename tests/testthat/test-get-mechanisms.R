@@ -28,3 +28,30 @@ with_mock_api({
                                  d2session = d2_default_session))
   })
 })
+
+with_mock_api({
+  test_that("We can include the default mechanism", {
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
+    test_mechs <- getMechanismsMap(organisationUnit = "f5RoebaDLMx",
+                                   include_default = TRUE,
+                                   d2session = d2_default_session)
+    expect_true(any(test_mechs$name == "default"))
+    default_mech <- test_mechs[test_mechs$name == "default", ]
+    expect_true(NROW(default_mech) == 1)
+    expect_false(is.na(default_mech$startDate))
+    expect_false(is.na(default_mech$endDate))
+  })
+})
+
+with_mock_api({
+  test_that("We can exclude the default mechanism", {
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
+    test_mechs <- getMechanismsMap(organisationUnit = "f5RoebaDLMx",
+                                 include_default = FALSE,
+                                 d2session = d2_default_session)
+    expect_false(any(test_mechs$name == "default"))
+    
+  })
+})
