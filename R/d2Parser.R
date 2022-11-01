@@ -282,8 +282,7 @@ d2Parser <-
           mode_out = "id",
           d2session = d2session
         )
-      }
-      if (idScheme != "id") {
+
         data$categoryOptionCombo <- remapCategoryOptionCombos(
           data$categoryOptionCombo,
           mode_in = idScheme,
@@ -309,7 +308,7 @@ d2Parser <-
         msg <-
           paste0(sum(!valid_rows), " rows are incomplete. ",
                  "Please check your file to ensure its correct.")
-        warning(msg)
+        d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
       }
 
       if (!invalidData) {
