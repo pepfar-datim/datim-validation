@@ -46,6 +46,24 @@ with_mock_api({
   })
 })
 
+with_mock_api({
+  test_that("We can identify bad values for DATIMTIME", {
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
+    d <- list()
+    d$info$messages <- datimvalidation:::MessageQueue()
+    # nolint start
+    d$data$import <- tibble::tribble(
+      ~dataElement,~period,~orgUnit,~categoryOptionCombo,~attributeOptionCombo,~value,
+      "zi1Z7t0zT4w","2019Q3","LnGaK6y98gC","HllvX50cXC0","X8hrDf6bLDC","2022-10-31T12:04:12",
+      "zi1Z7t0zT4w","2019Q3","LnGaK6y98gC","HllvX50cXC0","X8hrDf6bLDC","2022-10-31 12:05:12" )
+    # nolint end
+    d <- checkValueTypeCompliance(d, d2session  = d2_default_session)
+    expect_equal(NROW(d$tests$value_compliance), 1)
+  })
+})
+
+
 
 with_mock_api({
   test_that("We can identify bad values for option set elements", {

@@ -1,5 +1,4 @@
-{
-    "dataElements": [
+{ "dataElements" : [
         {
             "code": "BS_COLL_N_DSD",
             "name": "BS_COLL (N, DSD): Blood Units Donated",
@@ -1849,7 +1848,7 @@
             "name": "Eval_SOP COP V22 - Evaluation Start Date",
             "id": "zi1Z7t0zT4w",
             "shortName": "Eval_SOP COP V22 - Evaluation Start Date",
-            "valueType": "DATE",
+            "valueType": "DATETIME",
             "zeroIsSignificant": false
         },
         {
