@@ -282,6 +282,13 @@ d2Parser <-
           mode_out = "id",
           d2session = d2session
         )
+        
+        data$categoryOptionCombo <- remapCategoryOptionCombos(
+          data$categoryOptionCombo,
+          mode_in = idScheme,
+          mode_out = "id",
+          d2session = d2session
+        )
       }
 
       #Data frame needs to be completely flattened to characters
