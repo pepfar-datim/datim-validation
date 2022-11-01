@@ -282,7 +282,7 @@ d2Parser <-
           mode_out = "id",
           d2session = d2session
         )
-        
+
         data$categoryOptionCombo <- remapCategoryOptionCombos(
           data$categoryOptionCombo,
           mode_in = idScheme,
