@@ -6,6 +6,7 @@
 \usage{
 getMechanismsMap(
   organisationUnit = NA,
+  include_default = TRUE,
   d2session = dynGet("d2_default_session", inherits = TRUE)
 )
 }

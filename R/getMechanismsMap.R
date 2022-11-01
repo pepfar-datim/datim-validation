@@ -11,6 +11,7 @@
 #' the mechanisms
 #'
 getMechanismsMap <- function(organisationUnit = NA,
+                             include_default = TRUE,
                              d2session = dynGet("d2_default_session",
                                                 inherits = TRUE)) {
   if (is.na(organisationUnit)) {
@@ -39,25 +40,34 @@ getMechanismsMap <- function(organisationUnit = NA,
       if (length(mechs) == 0) {
         return(NULL)
       }
+
+      min_start_date <- "1900-01-01"
+      max_end_date <- "2099-12-31"
+
       #Need to unwind the dates
       mechs$startDate <-
         as.Date(sapply(mechs$categoryOptions,
-          \(x) ifelse(is.null(x$startDate), "1900-01-01", x$startDate)),
+          \(x) ifelse(is.null(x$startDate), min_start_date, x$startDate)),
           "%Y-%m-%d")
       mechs$endDate <-
         as.Date(sapply(mechs$categoryOptions,
-          \(x) ifelse(is.null(x$endDate), "1900-01-01", x$endDate)),
+          \(x) ifelse(is.null(x$endDate), max_end_date, x$endDate)),
           "%Y-%m-%d")
       mechs <- mechs[, -which(names(mechs) == "categoryOptions")]
+
+      if (include_default) {
+        #Add the default mech, if needed
+        default_mech <- list(code = "default",
+                             name = "default",
+                             id = "HllvX50cXC0",
+                             startDate = as.Date(min_start_date),
+                             endDate = as.Date(max_end_date))
+        mechs <- rbind(mechs, default_mech)
+      }
+
     } else {
       stop(paste("Could not retreive mechanisms", httr::content(r, "text")))
     }
 
-    default_mech <- list(code = "default",
-                         name = "default",
-                         id = "HllvX50cXC0",
-                         startDate = NA,
-                         endDate = NA)
-    mechs <- rbind(mechs, default_mech)
     mechs
 }

@@ -1,0 +1,4866 @@
+{
+    "categoryOptionCombos": [
+        {
+            "code": "100211",
+            "name": "100211 - TBDawardUSAID - Health Improvement  Partnership Project",
+            "id": "Hrw9sOpbnfA",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "100212",
+            "name": "100212 - TBDawardUSAID - Health Improvement  Partnership Project",
+            "id": "Beuz6xUw5gA",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "100213",
+            "name": "100213 - TBDawardUSAID - Health Improvement  Partnership Project",
+            "id": "CwTXVbvsP2J",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "100226",
+            "name": "100226 - GH000994 - ICAP TA",
+            "id": "zGaDI5yJ5sG",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2018-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10203",
+            "name": "10203 - The Zambia Prevention, Care and Treatment Partnership II (ZPCT II)",
+            "id": "vFgK7skG1OR",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10205",
+            "name": "10205 - MEASURE Phase III, Demographic and Health Surveys (DHS)",
+            "id": "AOkzY7KNYHI",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10207",
+            "name": "10207 - U97HA04128 - Twinning Centre",
+            "id": "pr82Rggtodo",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10212",
+            "name": "10212 - CSO",
+            "id": "PclNx438JBN",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10219",
+            "name": "10219 - EGPAF",
+            "id": "jk2yegUAkio",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10220",
+            "name": "10220 - Intrahealth International",
+            "id": "E1RhxjVn984",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10222",
+            "name": "10222 - Lusaka Provincial Health Office",
+            "id": "f8w606bnxIm",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10223",
+            "name": "10223 - Ministry of Health",
+            "id": "FrWZmTCUqgd",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10224",
+            "name": "10224 - National HIV/AIDS/STI/TB Council",
+            "id": "PjJf5U0ZHN3",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10225",
+            "name": "10225 - GH002047 - EPHO Follow On",
+            "id": "ensvVBwpZfd",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10227",
+            "name": "10227 - GH002043 - WPHO Follow on",
+            "id": "IB198eth5ky",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10229",
+            "name": "10229 - American Society for Microbiology",
+            "id": "r8yoyJDQidH",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10235",
+            "name": "10235 - GH00827 - UNZA SOM Follow-on",
+            "id": "hZWKdr14Kvv",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10236",
+            "name": "10236 - GH001630 - University Teaching Hospital",
+            "id": "HBJeXBDrQqH",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10238",
+            "name": "10238 - TBD (ZNBTS)",
+            "id": "vpUqs5IyQmk",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10241",
+            "name": "10241 - CRS FBO follow on",
+            "id": "fJlNwpCzmep",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10251",
+            "name": "10251 - TBDawardUSAID - PROFIT",
+            "id": "Z8pvwGisoCA",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10260",
+            "name": "10260 - USAID | DELIVER PROJECT",
+            "id": "eyq53hNCyXo",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10274",
+            "name": "10274 - GH001057 - MARCH Zambia",
+            "id": "EyUZXIpRUAU",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10290",
+            "name": "10290 - TBDawardUSAID - Health Services and Systems Program",
+            "id": "tQzBohnmIeO",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10296",
+            "name": "10296 - TBDawardUSAID - TBD - Local Partners Capacity Building Project II",
+            "id": "BmNtnQrXA7Z",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10299",
+            "name": "10299 - Zambia Integrated Systems Strengthening Program (ZISSP)",
+            "id": "MU3FYqDe8kQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10309",
+            "name": "10309 - VU-CIDRZ AITRP",
+            "id": "Kl0Wexmhqxw",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10314",
+            "name": "10314 - Communications Support for Health (CSH)",
+            "id": "fX8gau73Cgz",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10332",
+            "name": "10332 - UNIVERSITY OF NEBRASKA",
+            "id": "z6kqf987f09",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10334",
+            "name": "10334 - Time to Learn",
+            "id": "cWaBDyDfpMl",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10354",
+            "name": "10354 - Zambia OVC System Strengthening Program (ZOVSS) / Zambia Rising",
+            "id": "Nkwv5IAmoHp",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10364",
+            "name": "10364 - Read to Succeed (previously ISEP)",
+            "id": "YjU2vfjmul2",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "106160",
+            "name": "106160 - Zambia Management and Operations Funding Data For PC",
+            "id": "jUjO0zr3Gdo",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10725",
+            "name": "10725 - CRS-ISAP",
+            "id": "LUtZaPtXH6j",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10726",
+            "name": "10726 - The Thrive Project",
+            "id": "Zsmb6TkEITk",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10816",
+            "name": "10816 - Boston University",
+            "id": "dA8VaPzErkK",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10817",
+            "name": "10817 - Jhpiego",
+            "id": "EtMv23VmPSZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10875",
+            "name": "10875 - United Nations High Commissioner for Refugees/PRM",
+            "id": "LIzzWdeIH24",
+            "categoryOptions": [
+                {
+                    "endDate": "2017-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "10984",
+            "name": "10984 - N002441610045 - DOD Project Concern International PCI",
+            "id": "lK2cZkRhfXt",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "11027",
+            "name": "11027 - SZA6018GR0005 - National AIDS Council Joint Financing Arrangement",
+            "id": "s68kZw1qovv",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "11626",
+            "name": "11626 - Jhpiego",
+            "id": "fXfHwXjbsfT",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "11627",
+            "name": "11627 - HT0003819458 - DAO Lusaka",
+            "id": "YPwdNJtOb3w",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "11687",
+            "name": "11687 - Peace Corps",
+            "id": "la2NJknpSM3",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "11694",
+            "name": "11694 - CDC Technical Assistance - SMDP & FETP",
+            "id": "LgZRNscnzhu",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12264",
+            "name": "12264 - MEASURE Evaluation Phase III",
+            "id": "Ehjm189mlOQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12267",
+            "name": "12267 - Mawa (formerly ZERS)",
+            "id": "gmXggThpUly",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12271",
+            "name": "12271 - Community Compacts",
+            "id": "aYrlL3CPpxY",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12272",
+            "name": "12272 - StateAFSmallGrants - PEPFAR OVC Small Grants",
+            "id": "jwFWSaGPfsW",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12273",
+            "name": "12273 - Tropical Disease Research Center (TDRC)",
+            "id": "DNKKnuOkezA",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12276",
+            "name": "12276 - Macha Research Trust, Inc",
+            "id": "sKNjMBZgFx3",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12278",
+            "name": "12278 - CLSI",
+            "id": "WC6i3UqT5bX",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12283",
+            "name": "12283 - NASTAD - HQ",
+            "id": "N9cJpTvsD78",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12284",
+            "name": "12284 - Association of Public Health Laboratories",
+            "id": "PyIFEq4nQxb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12286",
+            "name": "12286 - University of Noth Carolina at Chapel Hill",
+            "id": "AKiatEyWgMF",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12821",
+            "name": "12821 - STEP UP",
+            "id": "GSGCaud5fIt",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12942",
+            "name": "12942 - PROJECT CONCERN INTERNATIONAL",
+            "id": "mkNEwldOner",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "12988",
+            "name": "12988 - CARE",
+            "id": "nxuCTOpEyKp",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13006",
+            "name": "13006 - CIDRZ - Community Compact",
+            "id": "JRL1cYi26jz",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13016",
+            "name": "13016 - CMMB",
+            "id": "LlmACqbsl82",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13033",
+            "name": "13033 - POPULATION COUNCIL",
+            "id": "IphoDGfYOc1",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13069",
+            "name": "13069 - University of California at San Francisco",
+            "id": "n2bJyH90PRm",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13070",
+            "name": "13070 - GBV Survivor Support",
+            "id": "lS91p3KZlo7",
+            "categoryOptions": [
+                {
+                    "endDate": "2017-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13071",
+            "name": "13071 - TBD - Public Private Partnerships",
+            "id": "VvWVQvdy51J",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13076",
+            "name": "13076 - JSI Logistics Services",
+            "id": "AX7GpVntFal",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13096",
+            "name": "13096 - TBDawardUSAID - Zambia-led Prevention Initiative (ZPI)",
+            "id": "rIenI5WjiTA",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13258",
+            "name": "13258 - Comprehensive Care for Children Affected by HIV and AIDS (C3)",
+            "id": "X4RVqWqOwbX",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13279",
+            "name": "13279 - University Teaching Hospital",
+            "id": "w5iOBgHlDIs",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13391",
+            "name": "13391 - TBD- New Operations Research Project",
+            "id": "uG6SdQD7bQX",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13409",
+            "name": "13409 - University of North Carolina at Chapel Hill - PS10-10108",
+            "id": "Lph7fQOBYCb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13562",
+            "name": "13562 - CHRESO Ministries",
+            "id": "oCflmGCvgsf",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13580",
+            "name": "13580 - GH001920 - CIDRZ Achieve",
+            "id": "tozq04Xa75R",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13653",
+            "name": "13653 - National Alliance of State and Territorial AIDS Directors (NASTAD)",
+            "id": "wEbhQQc3dtz",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13684",
+            "name": "13684 - UNZA ZEPACT",
+            "id": "lk9L0fflIZ5",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13731",
+            "name": "13731 - DAPP",
+            "id": "qanKvDKjwps",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13787",
+            "name": "13787 - CHAZ",
+            "id": "IJj2cl608kF",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "13792",
+            "name": "13792 - Support to the HIV/AIDS Response in Zambia II (SHARe II)",
+            "id": "GIeqST6f2t4",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14272",
+            "name": "14272 - Health Policy Initiative Costing Task Order",
+            "id": "Mf1yQarJRUl",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14276",
+            "name": "14276 - NYS AIDS INSTITUTE/ HEALTHQUAL",
+            "id": "CX8iqb6DwlL",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14335",
+            "name": "14335 - Zambia AIDS Law Research and Advocacy Network (ZARAN)",
+            "id": "lufDpq0B77t",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14338",
+            "name": "14338 - Sustainability Through Economic strengthening, Prevention, and Support for Orphans, and Vulnerable Children, youth and other vulnerable populations (STEPS OVC) program",
+            "id": "FTeDJ2Day4M",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14339",
+            "name": "14339 - StateAFSmallGrants - PEPFAR Prevention Small Grants",
+            "id": "XA3vFulRzMm",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14349",
+            "name": "14349 - Network Of Zambians Living with HIV and AIDS (NZP+)",
+            "id": "hcNOdcQuh92",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14350",
+            "name": "14350 - The Treatment Advocacy and Literacy Campaign (TALC)",
+            "id": "XfOcUoLKqWN",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14386",
+            "name": "14386 - UNZA M&E Follow-on",
+            "id": "sSNUsMjlYBx",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14392",
+            "name": "14392 - Jhpiego (Eastern)",
+            "id": "WlcaQoYPhuI",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14420",
+            "name": "14420 - GH002040 - LPHO Follow On",
+            "id": "wekGAZy62WY",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14421",
+            "name": "14421 - GH002045 - SPMO Follow On",
+            "id": "bHKEyvyK1RJ",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14452",
+            "name": "14452 - N002441610046 - Society for Family Health",
+            "id": "QMtGHh3P3bI",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "14507",
+            "name": "14507 - N002441710038 - Family Health International",
+            "id": "PHArE34M2ot",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160789",
+            "name": "160789 - W81XWH2120056 - JHPIEGO",
+            "id": "TBHT1iDgwVA",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160790",
+            "name": "160790 - TBDawardDOD - [Placeholder - 160790 Zambia DOD]",
+            "id": "A6sXQDQ22eP",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160791",
+            "name": "160791 - GH002382 - IHM",
+            "id": "TX2TUuKQEQg",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160792",
+            "name": "160792 - TBDawardHHSCDC - [Placeholder - 160792 Zambia HHS/CDC]",
+            "id": "xzAeQ85RSNI",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160793",
+            "name": "160793 - TBDawardHHSCDC - [Placeholder - 160793 Zambia HHS/CDC]",
+            "id": "sNktjcp7WSL",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160794",
+            "name": "160794 - TBDawardHHSCDC - [Placeholder - 160794 Zambia HHS/CDC]",
+            "id": "Oma4w6HdfDy",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160795",
+            "name": "160795 - GH002328 - UNAIDS",
+            "id": "wZfHT0j2Yd7",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160796",
+            "name": "160796 - TBDawardHHSCDC - [Placeholder - 160796 Zambia HHS/CDC]",
+            "id": "ThSuPYD7yD2",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160797",
+            "name": "160797 - TBDawardHHSCDC - [Placeholder - 160797 Zambia HHS/CDC]",
+            "id": "xYQZovihTQO",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160798",
+            "name": "160798 - TBDawardHHSCDC - [Placeholder - 160798 Zambia HHS/CDC]",
+            "id": "UK7JGEPVHq3",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160799",
+            "name": "160799 - TBDawardHHSCDC - [Placeholder - 160799 Zambia HHS/CDC]",
+            "id": "S5yuFWBEYag",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160800",
+            "name": "160800 - TBDawardHHSCDC - [Placeholder - 160800 Zambia HHS/CDC]",
+            "id": "Ve8yRgzv1eq",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160801",
+            "name": "160801 - TBDawardHHSHRSA - [Placeholder - 160801 Zambia HHS/HRSA]",
+            "id": "eRTqNIVJZpP",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160802",
+            "name": "160802 - TBDawardHHSHRSA - [Placeholder - 160802 Zambia HHS/HRSA]",
+            "id": "uFH70tfjRjG",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160803",
+            "name": "160803 - TBDawardStateAF - [Placeholder - 160803 Zambia State/AF]",
+            "id": "W4FwamGFpJR",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160804",
+            "name": "160804 - TBDawardStatePRM - [Placeholder - 160804 Zambia State/PRM]",
+            "id": "OLbjvy9RtEW",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160805",
+            "name": "160805 - TBDawardStateSGAC - [Placeholder - 160805 Zambia State/SGAC]",
+            "id": "HHk4BUjnb2Y",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160806",
+            "name": "160806 - 72061122FA00001 - Controlling HIV Epidemic for Key and Underserved Populations II (CHEKUP II)",
+            "id": "tSoJnSrEgIp",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160807",
+            "name": "160807 - TBDawardUSAID - [Placeholder - 160807 Zambia USAID]",
+            "id": "LDDPKFEQte4",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160808",
+            "name": "160808 - TBDawardUSAID - [Placeholder - 160808 Zambia USAID]",
+            "id": "YERJpjyJ5XX",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160809",
+            "name": "160809 - TBDawardUSAID - [Placeholder - 160809 Zambia USAID]",
+            "id": "S71gpKHWVDi",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160810",
+            "name": "160810 - TBDawardUSAID - [Placeholder - 160810 Zambia USAID]",
+            "id": "hQpS2jdyxX4",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160811",
+            "name": "160811 - TBDawardUSAID - [Placeholder - 160811 Zambia USAID]",
+            "id": "SWtfOfq7mLU",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160812",
+            "name": "160812 - TBDawardUSAID - [Placeholder - 160812 Zambia USAID]",
+            "id": "IZhOAXhyDWe",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160813",
+            "name": "160813 - TBDawardUSAID - [Placeholder - 160813 Zambia USAID]",
+            "id": "E6CHDoI9bxI",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160814",
+            "name": "160814 - TBDawardUSAID - [Placeholder - 160814 Zambia USAID]",
+            "id": "NiAfP8VDGgi",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160815",
+            "name": "160815 - TBDawardUSAID - [Placeholder - 160815 Zambia USAID]",
+            "id": "WPQTo1GL25O",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160816",
+            "name": "160816 - TBDawardUSAID - [Placeholder - 160816 Zambia USAID]",
+            "id": "zN8WcgtQa7r",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160817",
+            "name": "160817 - TBDawardUSAID - [Placeholder - 160817 Zambia USAID]",
+            "id": "VmOmc4ePS94",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160958",
+            "name": "160958 - WCFAIDOAAC1500001 - GHSC-QA",
+            "id": "pQOQaMNZ59W",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160959",
+            "name": "160959 - TBDawardUSAIDWCF - [Placeholder - 160959 Zambia USAID/WCF]",
+            "id": "Xl5kouGxImx",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160960",
+            "name": "160960 - TBDawardUSAIDWCF - [Placeholder - 160960 Zambia USAID/WCF]",
+            "id": "eZLKzWAJMXW",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160961",
+            "name": "160961 - TBDawardUSAIDWCF - [Placeholder - 160961 Zambia USAID/WCF]",
+            "id": "xy8arbG2ah3",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160962",
+            "name": "160962 - TBDawardUSAIDWCF - [Placeholder - 160962 Zambia USAID/WCF]",
+            "id": "QgWLVDiY7Yh",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "160963",
+            "name": "160963 - TBDawardUSAIDWCF - [Placeholder - 160963 Zambia USAID/WCF]",
+            "id": "pnBngCbkpYU",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2021-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16608",
+            "name": "16608 - Stamping Out and Prevention of Gender-based Violence (STOP GBV)",
+            "id": "k8lb1oVWi3G",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16620",
+            "name": "16620 - TBD PMCT  EXPANSION",
+            "id": "iIyNzet5uTQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16634",
+            "name": "16634 - AID611A1500002 - USAID/Copperbelt Lusaka Zambia Family activity",
+            "id": "e7tgUFuUat2",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16635",
+            "name": "16635 - Project SEARCH/HIVCore -- Operations Research and Evaluation Task Order: HIV/AIDS Treatment, Care and Support, and Prevention of Mother to Child Transmission",
+            "id": "SCg2ZmfsUYN",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16651",
+            "name": "16651 - TBD -USAID Governance/Civil Society Project",
+            "id": "t42tQV00Dmb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16652",
+            "name": "16652 - TBD -USAID Governance/Civil Society Project",
+            "id": "kT8h4Y6JhJ2",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16653",
+            "name": "16653 - TBD -USAID Governance/Civil Society Project",
+            "id": "E6MnWoDhnvb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16654",
+            "name": "16654 - TBD -USAID Governance/Civil Society Project",
+            "id": "Gl3PfYmfrDa",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16655",
+            "name": "16655 - TBD -USAID Governance/Civil Society Project",
+            "id": "rYsnlrz7d1x",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16656",
+            "name": "16656 - AID611C1700005 - Accountable Governance for Improved Service Delivery (AGIS)",
+            "id": "R8ebBIqDK7S",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16657",
+            "name": "16657 - TBD Medical Supplies",
+            "id": "tvGID84UvqL",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16658",
+            "name": "16658 - TBD Health Management Information Systems",
+            "id": "OnxWtxwn6pU",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16667",
+            "name": "16667 - Project SEARCH: Population Council Task Order (HIV CORE)",
+            "id": "XZWPDZ4j6wO",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16690",
+            "name": "16690 - GH001043 - SAVVY",
+            "id": "TgYnk2moWdG",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16755",
+            "name": "16755 - TBD LAB 1",
+            "id": "QAVuhMI10Nw",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16757",
+            "name": "16757 - TBD LAB 2 (Former CLSI)",
+            "id": "K7gKHQeiZs0",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16758",
+            "name": "16758 - TO BE DETERMINED",
+            "id": "UUKK1pPLPeE",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16761",
+            "name": "16761 - TBD – CoAg Task Order Contract",
+            "id": "vcntIpfEa89",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16799",
+            "name": "16799 - HSS/CDC TA - Strategic Information Total",
+            "id": "wZYITQQ3JYx",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16832",
+            "name": "16832 - TBD - Combo Prevention Evaluation Task Order",
+            "id": "PIaPfTggiHQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16833",
+            "name": "16833 - Human Resource Information System (HRIS)",
+            "id": "hD93BjxeaD0",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "16903",
+            "name": "16903 - Evaluation of Integrated Community-Based and Clinical HIV/AIDS Interventions in Sinazongwe, Zambia",
+            "id": "wRzDonRFRci",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17099",
+            "name": "17099 - STOP GBV - Access to Justice",
+            "id": "rCfEOC3RthR",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17100",
+            "name": "17100 - Stamping Out and Preventing Gender-Based Violence (STOP GBV) : Prevention & Advocacy",
+            "id": "RebRz750viC",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17168",
+            "name": "17168 - Zambian OVC Management Information Systems (ZOMIS) / Data Rising",
+            "id": "VNcaECSmxgN",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17283",
+            "name": "17283 - U.S. Peace Corps",
+            "id": "pOYS7KZiXEo",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17284",
+            "name": "17284 - U.S. Peace Corps",
+            "id": "qjdEasFK0qZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17342",
+            "name": "17342 - Livelihoods and Food Security Technical Assistance (LIFT) II",
+            "id": "uWg83rOq6NA",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17344",
+            "name": "17344 - CSH II - Next Generation Project",
+            "id": "f7goSF8yZk5",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17354",
+            "name": "17354 - Livelihoods and Food Security Technical Assistance (LIFT) II",
+            "id": "eRYbvtbk40v",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17355",
+            "name": "17355 - Applying Science to Strengthen & Improve Systems Project (ASSIST)/USAID Healthcare Improvement Project (HCI)",
+            "id": "hNHzVfZYCkw",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17356",
+            "name": "17356 - Food and Nutrition Technical Assistance (FANTA III)",
+            "id": "HagwSlaYAKP",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17360",
+            "name": "17360 - Time To Learn",
+            "id": "wtWTgHxA9q6",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17391",
+            "name": "17391 - TBD - CSH II - Next Generation Project",
+            "id": "tno824cgKE2",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17393",
+            "name": "17393 - District OVC Systems Strengthening (DOSS)",
+            "id": "vzltzOE0YOu",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17394",
+            "name": "17394 - District OVC Systems Strengthening (DOSS)",
+            "id": "vAxbGGe2tAV",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17395",
+            "name": "17395 - District OVC Systems Strengthening (DOSS) / Community Rising",
+            "id": "ChvsO2L56nf",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17396",
+            "name": "17396 - AID611A1500001 - Sexual and  Reproductive Health for All Initiative (SARAI)",
+            "id": "QEomxSBfTNG",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17399",
+            "name": "17399 - AID611A1600004 - USAID/District Coverage of Health Services (DISCOVER-H)",
+            "id": "Cs8GAIrZXFL",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17400",
+            "name": "17400 - AID611C1700003 - Eradicate TB",
+            "id": "oITJyTAnDjq",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17403",
+            "name": "17403 - AID611A1200004 - Gender Based Violence - Survivor Support Project",
+            "id": "vK8XwS0fVLO",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17410",
+            "name": "17410 - AID611A1600001 - USAID/Zambia Community HIV Prevention Project (Z-CHPP)",
+            "id": "UyYDjCyYk1V",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17411",
+            "name": "17411 - TBD - Linkages",
+            "id": "HtyMOVmVe4a",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17413",
+            "name": "17413 - AID611C1700001 - SAFE",
+            "id": "UyVfIMhEh0B",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17414",
+            "name": "17414 - TBD - Zambia Prevention Care and Treatment Partnership (ZPCT) Follow-on Region 2",
+            "id": "sA0QQOS9L2L",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17421",
+            "name": "17421 - Improving Prevention and Adherence to Care and Treatment (IMPACT)",
+            "id": "GvR8cM0OnhQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17422",
+            "name": "17422 - AID611A1600005 - USAID Open Doors",
+            "id": "OUv1W6abMQU",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17424",
+            "name": "17424 - Human Resources Alliance for Africa",
+            "id": "q3YtXIJGAfx",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17425",
+            "name": "17425 - AID611TO1600001 - USAID Systems for Better Health",
+            "id": "Uw6JYFmEyf4",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17439",
+            "name": "17439 - MEASURE Evaluation Phase IV",
+            "id": "ScR2jboOyXO",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17440",
+            "name": "17440 - TBD - Local Capacity Development",
+            "id": "K5EzbSQKJia",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17441",
+            "name": "17441 - TBD - Program Evaluation",
+            "id": "ekNdZzlQjUT",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17448",
+            "name": "17448 - Stamping Out and Preventing Gender Based Violence (STOP GBV) : Access to Justice",
+            "id": "dfez6OopwaO",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17449",
+            "name": "17449 - Fostering Accountability and Transparency in Zambia (FACT-Zambia)",
+            "id": "HlDknLzKhSQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17453",
+            "name": "17453 - TBD-MCDMCH",
+            "id": "W2Zmvnwdv6D",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17457",
+            "name": "17457 - TBD follow on to American International Health Alliance-Twinning Centre",
+            "id": "b5T1ndEOLA9",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17477",
+            "name": "17477 - GH001116 - ASM",
+            "id": "GgtYxk2bo93",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17478",
+            "name": "17478 - GH001114 - CLSI",
+            "id": "avhADVMmTcj",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17479",
+            "name": "17479 - NU2GGH001097 - APHL",
+            "id": "Tp7MEi2hvxs",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17481",
+            "name": "17481 - TBD  xAPHL",
+            "id": "qNgWcsCdbrH",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17483",
+            "name": "17483 - MCDMCH",
+            "id": "a9jnBwoS71u",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17484",
+            "name": "17484 - Human Resources Alliance for Africa",
+            "id": "P7I6suMvTvf",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17497",
+            "name": "17497 - GH001091 - University of Maryland SMACHT",
+            "id": "R3ZDlNaQKK8",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17498",
+            "name": "17498 - TBD - xUTH HAP",
+            "id": "GNn9Yltl9o3",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17499",
+            "name": "17499 - GH001921 - TDRC",
+            "id": "vv79kLJGkbW",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17500",
+            "name": "17500 - UNZA M&E, Department of Population Studies",
+            "id": "btBvEJtL3wr",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17501",
+            "name": "17501 - University Teaching Hospital",
+            "id": "CxfbDgAsYfs",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17502",
+            "name": "17502 - UNC Eastern",
+            "id": "QmtjITyjkuc",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17513",
+            "name": "17513 - GH001617 - Ministry of Health",
+            "id": "uX9kKeI0a3A",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17514",
+            "name": "17514 - GH001438 - Jhpiego Follow-On",
+            "id": "BaAWvLUBS9a",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17517",
+            "name": "17517 - TBD - Smartcare Evaluation",
+            "id": "N2wDQ1G8ELJ",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17519",
+            "name": "17519 - CDC Technical Assistance - DRH",
+            "id": "I7FGzi6dyhz",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17523",
+            "name": "17523 - GH001624 - Ministry of Home Affairs",
+            "id": "ALuXrLHcCjC",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17573",
+            "name": "17573 - Global Nursing Capacity Building Program",
+            "id": "bZFsaMAjeKz",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17574",
+            "name": "17574 - U.S. Peace Corps",
+            "id": "ifGnYvd63ug",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17575",
+            "name": "17575 - U.S. Peace Corps",
+            "id": "ZLVZyIDmPqR",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17576",
+            "name": "17576 - U.S. Peace Corps",
+            "id": "yEnEEhOC4g3",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17582",
+            "name": "17582 - U.S. Peace Corps",
+            "id": "DoUOcERDF5A",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17587",
+            "name": "17587 - MEPI Programme",
+            "id": "eECShOWvjkH",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17761",
+            "name": "17761 - U.S. Peace Corps",
+            "id": "pisfmNktcpj",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17781",
+            "name": "17781 - Health Communications Collaborative (HC3)",
+            "id": "gq7bOtXlR9x",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17788",
+            "name": "17788 - AID611A1600002 - USAID/South-Central Zambia Family Activity",
+            "id": "igZ151a1fIA",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17807",
+            "name": "17807 - Youth Power: Implementation IDIQ",
+            "id": "o9A824HuESo",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17833",
+            "name": "17833 - Project SOAR",
+            "id": "nuGBPD2JU14",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17873",
+            "name": "17873 - TBDawardUSAID - Health Improvement  Partnership Project",
+            "id": "SBTTvFY5GU6",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17890",
+            "name": "17890 - UTH FOLLOW ON ( Combined HAP & LAB)",
+            "id": "OjZMBXIJcgK",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17891",
+            "name": "17891 - ASLM",
+            "id": "gRFcMMjCKlg",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17896",
+            "name": "17896 - TBD - Support USG SI Activities",
+            "id": "LdKIbhy04aU",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17897",
+            "name": "17897 - Better Health Service Delivey Through Community Monitoring in Zambia",
+            "id": "SU47YAy0b3G",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "17927",
+            "name": "17927 - Safe Motherhood 360+",
+            "id": "mFInHG7rDxJ",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18159",
+            "name": "18159 - AIDOAAI1500004AIDOAATO1500007 - GHSC-PSM",
+            "id": "VMBscYGhKUz",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18160",
+            "name": "18160 - AIDOAAA1400046 - AIDSFree ZAMBIA",
+            "id": "jmSpHeSkWxY",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18161",
+            "name": "18161 - AIDOAAI1500002AIDOAATO1500004 - GHSC-RTK",
+            "id": "hSc067hgXzx",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18251",
+            "name": "18251 - Early Childhood Development Zambia",
+            "id": "U6WxfXWCmkq",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18259",
+            "name": "18259 - Youth Workforce Development",
+            "id": "V67Uo0hcYWn",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18263",
+            "name": "18263 - GHAG000700007 - Cash Plus Care",
+            "id": "C4Si2fFp1xf",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18264",
+            "name": "18264 - Evidence on Cash Plus Care",
+            "id": "Jtk8IESraeS",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18278",
+            "name": "18278 - 72061120C00004 - USAID Evidence for Health",
+            "id": "jU5H3qphVRZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18297",
+            "name": "18297 - GH001971 - UNAIDS",
+            "id": "xOOHg8PeUW3",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18302",
+            "name": "18302 - EQUIP",
+            "id": "WStJJfx0BOC",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18304",
+            "name": "18304 - AIDOAAA1500070 - EQUIP",
+            "id": "BOKwiEdAMzQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18308",
+            "name": "18308 - U.S. Peace Corps",
+            "id": "rkpGCefcSxb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18309",
+            "name": "18309 - U.S. Peace Corps",
+            "id": "sDVwJKjrPTG",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18322",
+            "name": "18322 - U1NHA28555 - Quality Improvement and Capacity for Impact Project (QICIP)",
+            "id": "kZf5p9xEBla",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18323",
+            "name": "18323 - GH001916 - BroadReach",
+            "id": "NXZTghU9A9y",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18324",
+            "name": "18324 - GH001913 - University of Maryland ZCHECK",
+            "id": "fqp7zGGaYf8",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18325",
+            "name": "18325 - GH001917 - UNZA ZEPACT+ Follow On",
+            "id": "tOxGPrSEGgV",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18326",
+            "name": "18326 - FBO Follow-on",
+            "id": "QnYgmmQnLFs",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18327",
+            "name": "18327 - GH002041 - CRS (FBO Follow-on 2)",
+            "id": "UGXz7VInhGe",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18330",
+            "name": "18330 - TBD (Population Council)",
+            "id": "IUIstm7oK8a",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18332",
+            "name": "18332 - GH002056 - ICAP KP",
+            "id": "UVa1LWNoho8",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18335",
+            "name": "18335 - TBD (Demand Creation)",
+            "id": "EeccpuX2SKh",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18342",
+            "name": "18342 - TBD (Data Warehouse)",
+            "id": "wK7baCc7JIj",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18343",
+            "name": "18343 - TBD (UNAIDS)",
+            "id": "mbtWGaj0jai",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18344",
+            "name": "18344 - TBD (G Data)",
+            "id": "bSjzuOrKrvh",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18345",
+            "name": "18345 - UCSF- DQA and DU",
+            "id": "hcX4LSsOoom",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18346",
+            "name": "18346 - PCSmallGrants - U.S. Peace Corps",
+            "id": "tDKXlTIncpn",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18457",
+            "name": "18457 - Solar Power Game-Changer",
+            "id": "M7wNmqSbIgX",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2016-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18460",
+            "name": "18460 - Emergency PfSCM Field Support",
+            "id": "Ix7Y49rxW3n",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18467",
+            "name": "18467 - USAID Central-Southern Zambia Family Activity",
+            "id": "FLD7z9Jjhr2",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18468",
+            "name": "18468 - ZAMFAM Grants",
+            "id": "vr3tUAsAN7s",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18469",
+            "name": "18469 - ZAMFAM Grants",
+            "id": "xduIIO80zfv",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18470",
+            "name": "18470 - ZAMFAM Grants",
+            "id": "dCMKPv45xHb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18471",
+            "name": "18471 - ZAMFAM Grants",
+            "id": "r9bmwbXf2Cs",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18472",
+            "name": "18472 - ZAMFAM Grants",
+            "id": "w4h1GTJckDM",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18473",
+            "name": "18473 - ZAMFAM Grants",
+            "id": "xUSrsrI4IAV",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18474",
+            "name": "18474 - ZAMFAM Grants",
+            "id": "y1ss5g321fj",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18475",
+            "name": "18475 - ZAMFAM Grants",
+            "id": "SgMrAbzg3YK",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18476",
+            "name": "18476 - ZAMFAM Grants",
+            "id": "Ur2r8Kjjaf5",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18477",
+            "name": "18477 - SOAR Program Evaluation",
+            "id": "LSLBtjdePNk",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2013-09-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18487",
+            "name": "18487 - 72061119CA00001 - USAID/Stop Gender Based Violence Project (Stop GBV)",
+            "id": "Sq5c3WKfQWc",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18527",
+            "name": "18527 - GH002141 - UCSF M&E",
+            "id": "c4nz2lKqDtt",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18528",
+            "name": "18528 - GH002123 - UMB CIRCUITS",
+            "id": "HKs2YNc1jOo",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18529",
+            "name": "18529 - AIDOAAA1600002 - Policy, Advocacy and Communication Enhanced for Population and Reproductive Health (PACE)",
+            "id": "mjOcJeH9NY2",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18530",
+            "name": "18530 - U92HA31460 - JHPIEGO HRH",
+            "id": "QfYRtE7tdT0",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18531",
+            "name": "18531 - TBD (Construction DOD)",
+            "id": "vCGKkoQDQow",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18532",
+            "name": "18532 - GH002122 - CIDRZ Life",
+            "id": "Q4y5782CQI7",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18533",
+            "name": "18533 - TBD  internships and professional development",
+            "id": "VMt9rPyVWuP",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18605",
+            "name": "18605 - U.S PEACE CORPS",
+            "id": "E5wANbPzEBB",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18651",
+            "name": "18651 - U.S PEACE CORPS",
+            "id": "YcCvJErwPe1",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18652",
+            "name": "18652 - AIDOAAA1700017 - Breakthrough ACTION",
+            "id": "FbcTChlZ5WU",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18653",
+            "name": "18653 - U.S PEACE CORPS",
+            "id": "XVRYmjXg5Cs",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "18669",
+            "name": "18669 - TBDawardStateSGAC - TBD - Acceleration to Link PLHIV to Treatment",
+            "id": "YKIPUpAQsFb",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "4610",
+            "name": "4610 - TBDawardUSAID - BizAIDS",
+            "id": "qUqjkm2XCMF",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "6730",
+            "name": "6730 - TBDawardUSAID - Corridors of Hope II",
+            "id": "zwLD6uYuKps",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70432",
+            "name": "70432 - N002441910003 - JHPIEGO",
+            "id": "EbrKzPcLQet",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2018-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70433",
+            "name": "70433 - [Placeholder - 70433 Zambia DOD]",
+            "id": "GeL9RK89gza",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70434",
+            "name": "70434 - [Placeholder - 70434 Zambia HHS/CDC]",
+            "id": "hxrxM8pptgj",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70435",
+            "name": "70435 - [Placeholder - 70435 Zambia HHS/CDC]",
+            "id": "qenJzdawMWo",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70436",
+            "name": "70436 - [Placeholder - 70436 Zambia HHS/CDC]",
+            "id": "kJi55OzndY8",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70437",
+            "name": "70437 - [Placeholder - 70437 Zambia HHS/CDC]",
+            "id": "BKz5pj1DwMV",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70438",
+            "name": "70438 - [Placeholder - 70438 Zambia HHS/CDC]",
+            "id": "Gmxi3qKdcuz",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70439",
+            "name": "70439 - [Placeholder - 70439 Zambia HHS/CDC]",
+            "id": "DWEPzx0PHhb",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70440",
+            "name": "70440 - [Placeholder - 70440 Zambia HHS/CDC]",
+            "id": "QD2IJvQZPNG",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70441",
+            "name": "70441 - [Placeholder - 70441 Zambia HHS/CDC]",
+            "id": "iKWjUQSWMZ5",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70442",
+            "name": "70442 - [Placeholder - 70442 Zambia HHS/CDC]",
+            "id": "mM0TIYCIXeg",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70443",
+            "name": "70443 - [Placeholder - 70443 Zambia HHS/CDC]",
+            "id": "nET4KolKGyZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70444",
+            "name": "70444 - [Placeholder - 70444 Zambia HHS/CDC]",
+            "id": "iPd8MBIao4L",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70445",
+            "name": "70445 - [Placeholder - 70445 Zambia HHS/CDC]",
+            "id": "YuzLnDRRy9D",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70446",
+            "name": "70446 - [Placeholder - 70446 Zambia HHS/HRSA]",
+            "id": "sTGvHUL6BZh",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70447",
+            "name": "70447 - [Placeholder - 70447 Zambia HHS/HRSA]",
+            "id": "adDtm9iApmI",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70448",
+            "name": "70448 - [Placeholder - 70448 Zambia HHS/HRSA]",
+            "id": "kASOl7Wfzqa",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70449",
+            "name": "70449 - [Placeholder - 70449 Zambia HHS/HRSA]",
+            "id": "hXGBaddmsDU",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70450",
+            "name": "70450 - [Placeholder - 70450 Zambia PC]",
+            "id": "Erx1VdxAMh0",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70451",
+            "name": "70451 - [Placeholder - 70451 Zambia PC]",
+            "id": "XKQxZJrnq7X",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70452",
+            "name": "70452 - [Placeholder - 70452 Zambia PC]",
+            "id": "kQ8GZpJWcoL",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70453",
+            "name": "70453 - AID611C1700004 - USAID Health Access for All project",
+            "id": "a5LmY7eEAfZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70454",
+            "name": "70454 - [Placeholder - 70454 Zambia USAID]",
+            "id": "IiXJKDnMgXT",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70455",
+            "name": "70455 - GHSC-TA Central Task Order",
+            "id": "QQBbMaVonWA",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2018-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70456",
+            "name": "70456 - [Placeholder - 70456 Zambia USAID]",
+            "id": "XYHq048zn3T",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70457",
+            "name": "70457 - [Placeholder - 70457 Zambia USAID]",
+            "id": "PXRc8h3bhVH",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70458",
+            "name": "70458 - [Placeholder - 70458 Zambia USAID]",
+            "id": "Q8KGBZDiwUL",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70459",
+            "name": "70459 - [Placeholder - 70459 Zambia USAID]",
+            "id": "zT7nfiqaQ9D",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70460",
+            "name": "70460 - [Placeholder - 70460 Zambia USAID]",
+            "id": "hyf9vyeORYF",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70461",
+            "name": "70461 - [Placeholder - 70461 Zambia USAID]",
+            "id": "Q5h0i7DR0Tv",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70462",
+            "name": "70462 - [Placeholder - 70462 Zambia USAID]",
+            "id": "W0AoUjDCFTv",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70463",
+            "name": "70463 - [Placeholder - 70463 Zambia USAID]",
+            "id": "TeTwIAq0Iw6",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "70521",
+            "name": "70521 - [Placeholder - 70521 Zambia State/SGAC]",
+            "id": "X3tWIepEAQR",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "7422",
+            "name": "7422 - Central Contraceptive Procurement (CCP)",
+            "id": "yeJxzVTfBrB",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "7423",
+            "name": "7423 - Supply Chain Management System Project (SCMS)",
+            "id": "wFcCmcvrfuO",
+            "categoryOptions": [
+                {
+                    "endDate": "2018-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "7427",
+            "name": "7427 - Partnership for Integrated Social Marketing (PRISM)",
+            "id": "wwCkCXVYIaF",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "7428",
+            "name": "7428 - Corridors of Hope III",
+            "id": "RHb9PhzYNfQ",
+            "categoryOptions": [
+                {
+                    "endDate": "2016-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "80000",
+            "name": "80000 - USAID Health Access for All",
+            "id": "SunqtplP238",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "80001",
+            "name": "80001 - U.S PEACE CORPS",
+            "id": "YEXqK29hWZe",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "80078",
+            "name": "80078 - Challenge TB",
+            "id": "QeLupvfa3a4",
+            "categoryOptions": [
+                {
+                    "endDate": "2019-09-30T00:00:00.000",
+                    "startDate": "2017-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "8034",
+            "name": "8034 - TBDawardUSAID - Social Marketing",
+            "id": "i9lSdk5lzCi",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "8038",
+            "name": "8038 - Zambia Partner Reporting System (ZPRS)",
+            "id": "VyrBJAO6TY5",
+            "categoryOptions": [
+                {
+                    "endDate": "2014-09-30T00:00:00.000",
+                    "startDate": "2014-09-30T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "81510",
+            "name": "81510 - TBDawardStateSGAC - [Placeholder - 81510 Zambia State/SGAC]",
+            "id": "eBYN4M5Amly",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82050",
+            "name": "82050 - TBDawardDOD - [Placeholder - 82050 Zambia DOD]",
+            "id": "ElFYYXhLzz8",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82051",
+            "name": "82051 - TBDawardDOD - [Placeholder - 82051 Zambia DOD]",
+            "id": "TVrwAdQL0lk",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82052",
+            "name": "82052 - TBDawardDOD - [Placeholder - 82052 Zambia DOD]",
+            "id": "LKHq1yVjfAe",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82053",
+            "name": "82053 - TBDawardHHSCDC - [Placeholder - 82053 Zambia HHS/CDC]",
+            "id": "nyA9LDH5z7f",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82054",
+            "name": "82054 - GH002251 - CIDRZ Proud Z",
+            "id": "MKBoKahCoUa",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82055",
+            "name": "82055 - GH002254 - ICAP TA Local",
+            "id": "irzvOXEky6C",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82056",
+            "name": "82056 - TBDawardHHSCDC - [Placeholder - 82056 Zambia HHS/CDC]",
+            "id": "EGKKW6HAG8m",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82057",
+            "name": "82057 - TBDawardHHSCDC - [Placeholder - 82057 Zambia HHS/CDC]",
+            "id": "w1fmnswjhXp",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82058",
+            "name": "82058 - TBDawardHHSCDC - [Placeholder - 82058 Zambia HHS/CDC]",
+            "id": "nYG2VEz6Lmz",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82059",
+            "name": "82059 - TBDawardHHSCDC - [Placeholder - 82059 Zambia HHS/CDC]",
+            "id": "egSoKX7OLjU",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82060",
+            "name": "82060 - TBDawardHHSCDC - [Placeholder - 82060 Zambia HHS/CDC]",
+            "id": "KRXNKKRpbFK",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82061",
+            "name": "82061 - TBDawardHHSCDC - [Placeholder - 82061 Zambia HHS/CDC]",
+            "id": "BumWhKTVTdv",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82062",
+            "name": "82062 - TBDawardHHSCDC - [Placeholder - 82062 Zambia HHS/CDC]",
+            "id": "WdRAR7rn1xI",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82063",
+            "name": "82063 - TBDawardHHSCDC - [Placeholder - 82063 Zambia HHS/CDC]",
+            "id": "RJl2T6Zd1rn",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82064",
+            "name": "82064 - TBDawardHHSCDC - [Placeholder - 82064 Zambia HHS/CDC]",
+            "id": "bX8PgstFjlz",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82065",
+            "name": "82065 - TBDawardHHSCDC - [Placeholder - 82065 Zambia HHS/CDC]",
+            "id": "pxC2cEtoMDL",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82066",
+            "name": "82066 - GH002170 - Recency HQ Mechanism - UCSF",
+            "id": "XSAAppsBE6k",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82067",
+            "name": "82067 - GH002216 - ICAP TA",
+            "id": "NhXgkcLsAzi",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82068",
+            "name": "82068 - TBDawardHHSHRSA - [Placeholder - 82068 Zambia HHS/HRSA]",
+            "id": "UcagH6RXfvM",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82069",
+            "name": "82069 - TBDawardHHSHRSA - [Placeholder - 82069 Zambia HHS/HRSA]",
+            "id": "XqJy7JZ35Lq",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82070",
+            "name": "82070 - TBDawardHHSHRSA - [Placeholder - 82070 Zambia HHS/HRSA]",
+            "id": "ENO3C6a7jjm",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82071",
+            "name": "82071 - TBDawardHHSHRSA - [Placeholder - 82071 Zambia HHS/HRSA]",
+            "id": "qYZucDxhdZK",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82072",
+            "name": "82072 - TBDawardHHSHRSA - [Placeholder - 82072 Zambia HHS/HRSA]",
+            "id": "GAFmCtUEHHN",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82073",
+            "name": "82073 - TBDawardUSAID - [Placeholder - 82073 Zambia USAID]",
+            "id": "nSNBQGZ7Lsg",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82074",
+            "name": "82074 - 72061119F00001 - USAID Health Integrated Infrastructure Design Activity",
+            "id": "z14FPcNdmXt",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82075",
+            "name": "82075 - 72061121C00006 - Action to HIV Epidemic Control (ACTION HIV)",
+            "id": "LpaOEKVOk29",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82076",
+            "name": "82076 - TBDawardUSAID - SAFE to Local Partner",
+            "id": "a25XRBukp4r",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82077",
+            "name": "82077 - WCF72061120C00003 - eSCMIS",
+            "id": "FD4193ohLgL",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82078",
+            "name": "82078 - 611DO32G11000016 - Copperbelt Province",
+            "id": "Ox36K90V7yy",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82079",
+            "name": "82079 - 611DO32G11000016 - Central province",
+            "id": "IOKaq77nUIU",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82080",
+            "name": "82080 - 611DO32G11000016 - Luapula Province",
+            "id": "bL28qJMdX09",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82081",
+            "name": "82081 - 611DO32G11000016 - Northern Province",
+            "id": "ANKQiCKtRLa",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82082",
+            "name": "82082 - 72061119CA00002 - Community Health Assistants",
+            "id": "jfgAEtQw2xN",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82083",
+            "name": "82083 - TBDawardUSAID - Lab Sample Transport",
+            "id": "skJt7YICBSw",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82084",
+            "name": "82084 - TBDawardUSAID - OVC and Social Protection",
+            "id": "YkVLepBHOzn",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82085",
+            "name": "82085 - TBDawardUSAID - MCDSS G2G TA",
+            "id": "CJGc3Wpt2rx",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82086",
+            "name": "82086 - 72061121CA00001 - Zambia Accessible Markets for Health",
+            "id": "b4oAMCUoOv1",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82150",
+            "name": "82150 - TBDawardStatePRM - [Placeholder - 82150 Zambia State/PRM]",
+            "id": "fgLadD87lqN",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "82151",
+            "name": "82151 - TBDawardStatePRM - [Placeholder - 82151 Zambia State/PRM]",
+            "id": "gWesxPWfw8O",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85087",
+            "name": "85087 - N002442110004 - Jhpiego",
+            "id": "RhAHqAxno2a",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2014-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85088",
+            "name": "85088 - TBDawardDOD - [Placeholder - 85088 Zambia DOD]",
+            "id": "wKRmEDJpWEV",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85089",
+            "name": "85089 - TBDawardDOD - [Placeholder - 85089 Zambia DOD]",
+            "id": "Gh08RANHliv",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85090",
+            "name": "85090 - GH002255 - DAPP",
+            "id": "IhFwkkDe7SR",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85091",
+            "name": "85091 - GH002253 - FHI",
+            "id": "xSIjFTck23P",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85092",
+            "name": "85092 - GH002235 - UTH",
+            "id": "lVSPuj5jLQR",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85093",
+            "name": "85093 - GH002234 - MOH",
+            "id": "yZGG1rb8ju6",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85094",
+            "name": "85094 - GH002316 - COH",
+            "id": "xv5TxfkmUJT",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85095",
+            "name": "85095 - TBDawardHHSCDC - [Placeholder - 85095 Zambia HHS/CDC]",
+            "id": "MiqOKNR0G6z",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85096",
+            "name": "85096 - TBDawardHHSCDC - [Placeholder - 85096 Zambia HHS/CDC]",
+            "id": "axnHy4d8h2E",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85097",
+            "name": "85097 - TBDawardHHSCDC - [Placeholder - 85097 Zambia HHS/CDC]",
+            "id": "AvBIRDTYHeV",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85098",
+            "name": "85098 - TBDawardHHSCDC - [Placeholder - 85098 Zambia HHS/CDC]",
+            "id": "QymX8ZBROKi",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85099",
+            "name": "85099 - TBDawardHHSCDC - [Placeholder - 85099 Zambia HHS/CDC]",
+            "id": "Y9fybEIPmjH",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85100",
+            "name": "85100 - TBDawardHHSCDC - [Placeholder - 85100 Zambia HHS/CDC]",
+            "id": "rRSQLX023Ow",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85101",
+            "name": "85101 - TBDawardHHSCDC - [Placeholder - 85101 Zambia HHS/CDC]",
+            "id": "SKsp13K2l7k",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85102",
+            "name": "85102 - TBDawardHHSCDC - [Placeholder - 85102 Zambia HHS/CDC]",
+            "id": "gVn4mbZ8jbf",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85103",
+            "name": "85103 - TBDawardHHSCDC - [Placeholder - 85103 Zambia HHS/CDC]",
+            "id": "wdIU6doI5H3",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85104",
+            "name": "85104 - TBDawardHHSCDC - [Placeholder - 85104 Zambia HHS/CDC]",
+            "id": "SS0t8zPjtyf",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85105",
+            "name": "85105 - TBDawardHHSHRSA - [Placeholder - 85105 Zambia HHS/HRSA]",
+            "id": "Lq64B7GqMwj",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85106",
+            "name": "85106 - TBDawardHHSHRSA - [Placeholder - 85106 Zambia HHS/HRSA]",
+            "id": "OIgrBiFR3lf",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85107",
+            "name": "85107 - TBDawardHHSHRSA - [Placeholder - 85107 Zambia HHS/HRSA]",
+            "id": "tVP6ULTKS5C",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85108",
+            "name": "85108 - TBDawardHHSHRSA - [Placeholder - 85108 Zambia HHS/HRSA]",
+            "id": "dUhS28cfYR8",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85109",
+            "name": "85109 - TBDawardHHSHRSA - [Placeholder - 85109 Zambia HHS/HRSA]",
+            "id": "x638R0Kb98C",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85110",
+            "name": "85110 - TBDawardStatePRM - [Placeholder - 85110 Zambia State/PRM]",
+            "id": "P4YfG6xt9mV",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85111",
+            "name": "85111 - TBDawardStatePRM - [Placeholder - 85111 Zambia State/PRM]",
+            "id": "Gw2SPNpFPd8",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85112",
+            "name": "85112 - 72061121C00005 - Revenue for Growth",
+            "id": "cXgXcoPmbUD",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85113",
+            "name": "85113 - TBDawardUSAID - [Placeholder - 85113 Zambia USAID]",
+            "id": "YicSTUboPFb",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85114",
+            "name": "85114 - 72061120CA00008 - Empowered Children and Adolescent Program I (ECAP I)",
+            "id": "T78tolj1UpS",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85115",
+            "name": "85115 - 7200AA19CA00006 - ACHIEVE",
+            "id": "A0Afz7U2NUU",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85116",
+            "name": "85116 - TBDawardUSAID - [Placeholder - 85116 Zambia USAID]",
+            "id": "LoEHijISFQE",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85117",
+            "name": "85117 - 72061121CA00002 - Controlling HIV Epidemic for Key and Underserved Populations I ( USAID CHEKUP I)",
+            "id": "PZdDfdzkgjm",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85118",
+            "name": "85118 - TBDawardUSAIDWCF - [Placeholder - 85118 Zambia USAID]",
+            "id": "tpcyEvA81qw",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85119",
+            "name": "85119 - TBDawardUSAID - [Placeholder - 85119 Zambia USAID]",
+            "id": "bKXzFkO7tiF",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85120",
+            "name": "85120 - 72061120CA00007 - Empowered Children and Adolescent Program II (ECAP II)",
+            "id": "nbLtmo9rnEj",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85121",
+            "name": "85121 - 72061120CA00009 - Empowered Children and Adolescent Program III (ECAP III)",
+            "id": "lh8xAa9CahZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85122",
+            "name": "85122 - TBDawardUSAID - [Placeholder - 85122 Zambia USAID]",
+            "id": "pB2WRc1vK0i",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85123",
+            "name": "85123 - TBDawardUSAID - [Placeholder - 85123 Zambia USAID]",
+            "id": "nFslkIpMVl8",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85124",
+            "name": "85124 - TBDawardUSAID - [Placeholder - 85124 Zambia USAID]",
+            "id": "B6DHoYO8S4W",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85125",
+            "name": "85125 - TBDawardUSAID - [Placeholder - 85125 Zambia USAID]",
+            "id": "VCU9Wys2mUv",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85126",
+            "name": "85126 - TBDawardPC - [Placeholder - 85126 Zambia PC]",
+            "id": "hqjQU5opsGA",
+            "categoryOptions": [
+                {
+                    "endDate": "2021-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85127",
+            "name": "85127 - TBDawardStateAF - [Placeholder - 85127 Zambia State/AF]",
+            "id": "zLsreSfuHZ7",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85161",
+            "name": "85161 - TBDawardHHSCDC - [Placeholder - 85161 Zambia HHS/CDC]",
+            "id": "nLZJL09DxBU",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85162",
+            "name": "85162 - TBDawardHHSCDC - [Placeholder - 85162 Zambia HHS/CDC]",
+            "id": "w3tivqlKYOp",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85163",
+            "name": "85163 - TBDawardHHSCDC - [Placeholder - 85163 Zambia HHS/CDC]",
+            "id": "F1oGe3j8o8d",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85164",
+            "name": "85164 - TBDawardUSAID - [Placeholder - 85164 Zambia USAID]",
+            "id": "W7U0UTZKZ9i",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85165",
+            "name": "85165 - TBDawardUSAID - [Placeholder - 85165 Zambia USAID]",
+            "id": "tUsWYsvEFXO",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85166",
+            "name": "85166 - TBDawardUSAID - [Placeholder - 85166 Zambia USAID]",
+            "id": "YtGqixE5Npw",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85167",
+            "name": "85167 - TBDawardUSAID - [Placeholder - 85167 Zambia USAID]",
+            "id": "YBKyO9orOU7",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85168",
+            "name": "85168 - TBDawardDOD - [Placeholder - 85168 Zambia DOD]",
+            "id": "gtuVYphb1ch",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "85169",
+            "name": "85169 - TBDawardDOD - [Placeholder - 85169 Zambia DOD]",
+            "id": "S8klHAeSu9p",
+            "categoryOptions": [
+                {
+                    "endDate": "2022-09-30T00:00:00.000",
+                    "startDate": "2019-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86386",
+            "name": "86386 - TBDawardDOD - [Placeholder - 86386 Zambia DOD]",
+            "id": "qQuHLmNynIB",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86387",
+            "name": "86387 - TBDawardDOD - [Placeholder - 86387 Zambia DOD]",
+            "id": "yOWhEKBhOnL",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86388",
+            "name": "86388 - TBDawardDOD - [Placeholder - 86388 Zambia DOD]",
+            "id": "G8ioT1rhz6Q",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86389",
+            "name": "86389 - GH002442 - EPHO New",
+            "id": "uFdp3pdTLrV",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86390",
+            "name": "86390 - GH002441 - WPHO New",
+            "id": "Hn3T1nPAzJZ",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86391",
+            "name": "86391 - GH002439 - SPHO New",
+            "id": "HbKmmcWS1W9",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86392",
+            "name": "86392 - GH002440 - LPHO New",
+            "id": "VXVE5C2uN9J",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86393",
+            "name": "86393 - TBDawardHHSCDC - [Placeholder - 86393 Zambia HHS/CDC]",
+            "id": "bfBcCPrvWFC",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86394",
+            "name": "86394 - TBDawardHHSCDC - [Placeholder - 86394 Zambia HHS/CDC]",
+            "id": "pGu7fbBTNS1",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86395",
+            "name": "86395 - TBDawardHHSCDC - [Placeholder - 86395 Zambia HHS/CDC]",
+            "id": "DFPJYJK8Tow",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86396",
+            "name": "86396 - TBDawardHHSCDC - [Placeholder - 86396 Zambia HHS/CDC]",
+            "id": "zTxp1jws1mS",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86397",
+            "name": "86397 - TBDawardHHSCDC - [Placeholder - 86397 Zambia HHS/CDC]",
+            "id": "jASs0iCYW1n",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86398",
+            "name": "86398 - TBDawardHHSCDC - [Placeholder - 86398 Zambia HHS/CDC]",
+            "id": "foR2GybzBCe",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86399",
+            "name": "86399 - TBDawardHHSCDC - [Placeholder - 86399 Zambia HHS/CDC]",
+            "id": "TnDPiFExOWA",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86400",
+            "name": "86400 - TBDawardHHSCDC - [Placeholder - 86400 Zambia HHS/CDC]",
+            "id": "gPvVTj03ZA1",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86401",
+            "name": "86401 - TBDawardHHSCDC - [Placeholder - 86401 Zambia HHS/CDC]",
+            "id": "eJNxiQMVu0J",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86402",
+            "name": "86402 - TBDawardHHSCDC - [Placeholder - 86402 Zambia HHS/CDC]",
+            "id": "RcVQZnaXc2U",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86403",
+            "name": "86403 - TBDawardHHSCDC - [Placeholder - 86403 Zambia HHS/CDC]",
+            "id": "clGepjTCqTK",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86404",
+            "name": "86404 - UH6OA45170 - Global Reach II",
+            "id": "EOplCIRaavS",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86405",
+            "name": "86405 - TBDawardHHSHRSA - [Placeholder - 86405 Zambia HHS/HRSA]",
+            "id": "z6eMMpMs9p0",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86406",
+            "name": "86406 - TBDawardHHSHRSA - [Placeholder - 86406 Zambia HHS/HRSA]",
+            "id": "zwByalKVNUT",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86407",
+            "name": "86407 - TBDawardHHSHRSA - [Placeholder - 86407 Zambia HHS/HRSA]",
+            "id": "z83gTq2kIMI",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86408",
+            "name": "86408 - TBDawardHHSHRSA - [Placeholder - 86408 Zambia HHS/HRSA]",
+            "id": "Z3kCQ2chrGs",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86409",
+            "name": "86409 - TBDawardStatePRM - [Placeholder - 86409 Zambia State/PRM]",
+            "id": "FYtmarez8iG",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86410",
+            "name": "86410 - TBDawardStatePRM - [Placeholder - 86410 Zambia State/PRM]",
+            "id": "YuCM9jqUuA9",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86411",
+            "name": "86411 - 72061120CA00001 - TB-LON",
+            "id": "UO9HCuoitVo",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86412",
+            "name": "86412 - TBDawardUSAID - [Placeholder - 86412 Zambia USAID]",
+            "id": "xQhnzG9PPjw",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86413",
+            "name": "86413 - TBDawardUSAID - [Placeholder - 86413 Zambia USAID]",
+            "id": "qdptkPMHCq5",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86414",
+            "name": "86414 - TBDawardUSAID - [Placeholder - 86414 Zambia USAID]",
+            "id": "ODZgLR4YiGX",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86415",
+            "name": "86415 - 7200AA19CA00003 - RISE- HRH Optimization Analysis",
+            "id": "GZC9AxzgIJp",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86416",
+            "name": "86416 - TBDawardUSAID - [Placeholder - 86416 Zambia USAID]",
+            "id": "a4hRm9bs3Mw",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86417",
+            "name": "86417 - TBDawardUSAID - [Placeholder - 86417 Zambia USAID]",
+            "id": "vmqPAePqiVx",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86418",
+            "name": "86418 - TBDawardUSAID - [Placeholder - 86418 Zambia USAID]",
+            "id": "QcX037eTbzN",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86419",
+            "name": "86419 - TBDawardUSAID - [Placeholder - 86419 Zambia USAID]",
+            "id": "vJPOkXsPt4A",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86420",
+            "name": "86420 - TBDawardUSAID - [Placeholder - 86420 Zambia USAID]",
+            "id": "Bzx0bSJUvmF",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86421",
+            "name": "86421 - TBDawardUSAID - [Placeholder - 86421 Zambia USAID]",
+            "id": "wdrxkuNtD9b",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86422",
+            "name": "86422 - TBDawardUSAID - [Placeholder - 86422 Zambia USAID]",
+            "id": "tMk6kT9fdFV",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86423",
+            "name": "86423 - TBDawardUSAID - [Placeholder - 86423 Zambia USAID]",
+            "id": "uitQqWuVGZI",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86424",
+            "name": "86424 - TBDawardUSAID - [Placeholder - 86424 Zambia USAID]",
+            "id": "ZORJYbFwYEM",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86425",
+            "name": "86425 - TBDawardPC - [Placeholder - 86425 Zambia PC]",
+            "id": "Ie5zgeoKekI",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        },
+        {
+            "code": "86426",
+            "name": "86426 - TBDawardStateAF - [Placeholder - 86426 Zambia State/AF]",
+            "id": "zT1aHfQv3WF",
+            "categoryOptions": [
+                {
+                    "endDate": "2023-09-30T00:00:00.000",
+                    "startDate": "2022-10-01T00:00:00.000"
+                }
+            ]
+        }
+    ]
+}
