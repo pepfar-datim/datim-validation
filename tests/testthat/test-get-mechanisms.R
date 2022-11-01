@@ -52,6 +52,6 @@ with_mock_api({
                                  include_default = FALSE,
                                  d2session = d2_default_session)
     expect_false(any(test_mechs$name == "default"))
-    
+
   })
 })

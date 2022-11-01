@@ -40,10 +40,10 @@ getMechanismsMap <- function(organisationUnit = NA,
       if (length(mechs) == 0) {
         return(NULL)
       }
-      
+
       min_start_date <- "1900-01-01"
       max_end_date <- "2099-12-31"
-      
+
       #Need to unwind the dates
       mechs$startDate <-
         as.Date(sapply(mechs$categoryOptions,
@@ -54,7 +54,7 @@ getMechanismsMap <- function(organisationUnit = NA,
           \(x) ifelse(is.null(x$endDate), max_end_date, x$endDate)),
           "%Y-%m-%d")
       mechs <- mechs[, -which(names(mechs) == "categoryOptions")]
-      
+
       if (include_default) {
         #Add the default mech, if needed
         default_mech <- list(code = "default",
@@ -68,6 +68,6 @@ getMechanismsMap <- function(organisationUnit = NA,
     } else {
       stop(paste("Could not retreive mechanisms", httr::content(r, "text")))
     }
-    
+
     mechs
 }
