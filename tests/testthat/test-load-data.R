@@ -327,13 +327,13 @@ with_mock_api({
   test_that("Can warn on a missing data value", {
     loginToDATIM(config_path = test_config("test-config.json"))
     expect_true(exists("d2_default_session"))
-    expect_warning(
+
       foo <- d2Parser(filename = test_config("test-data-missing-value.csv"),
                       type = "csv",
                       organisationUnit = "KKFzPM8LoXs",
                       dataElementIdScheme = "id",
                       orgUnitIdScheme = "id",
                       idScheme = "id",
-                      invalidData = FALSE, d2session = d2_default_session),
-      "1 rows are incomplete. Please check your file to ensure its correct.")
+                      invalidData = FALSE, d2session = d2_default_session)
+      expect_true(grepl("1 rows are incomplete", foo$info$messages$message))
   })})
