@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.1",
+    "Version": "4.2.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -33,14 +33,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e9c08b94391e9f3f97355841229124f2",
-      "Requirements": []
-    },
-    "XML": {
-      "Package": "XML",
-      "Version": "3.99-0.10",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "f140675d766cf765bf06a5f14afb149d",
       "Requirements": []
     },
     "askpass": {
@@ -209,14 +201,6 @@
         "withr"
       ]
     },
-    "data.table": {
-      "Package": "data.table",
-      "Version": "1.14.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "36b67b5adf57b292923f5659f5f0c853",
-      "Requirements": []
-    },
     "datimutils": {
       "Package": "datimutils",
       "Version": "0.6.0",
@@ -367,16 +351,6 @@
       "Repository": "CRAN",
       "Hash": "15e9634c0fcd294799e9b2e929ed1b86",
       "Requirements": []
-    },
-    "getPass": {
-      "Package": "getPass",
-      "Version": "0.2-2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "07a91f99e56951818ab911366db77700",
-      "Requirements": [
-        "rstudioapi"
-      ]
     },
     "glue": {
       "Package": "glue",
@@ -745,19 +719,6 @@
       "Hash": "971c3d698fc06dabdac6bc4bcda72dc4",
       "Requirements": []
     },
-    "rlist": {
-      "Package": "rlist",
-      "Version": "0.4.6.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "290c8ea0700d2e7258082d0025386e68",
-      "Requirements": [
-        "XML",
-        "data.table",
-        "jsonlite",
-        "yaml"
-      ]
-    },
     "rmarkdown": {
       "Package": "rmarkdown",
       "Version": "2.14",
@@ -807,14 +768,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "1de7ab598047a87bba48434ba35d497d",
-      "Requirements": []
-    },
-    "rstudioapi": {
-      "Package": "rstudioapi",
-      "Version": "0.13",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "06c85365a03fdaf699966cc1d3cf53ea",
       "Requirements": []
     },
     "sass": {
