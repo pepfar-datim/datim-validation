@@ -9,8 +9,8 @@ test_that("Can pass a valid validation rule expression", {
   parsed_inds <- lapply(inds, function(x) lex(x, indicator_regexes))
   is_valid <- isValidIndicator(parsed_inds)
   expect_true(all(is_valid))
-  
-  
+
+
   inds <- "( 2 * #{P3jJH5Tu5VC.S34ULMcHMca} ) / ( #{FQ2o8UBlcrS.S34ULMcHMca} - 200 ) * 25"
   parsed_inds <- lapply(inds, function(x) lex(x, indicator_regexes))
   is_valid <- isValidIndicator(parsed_inds)
