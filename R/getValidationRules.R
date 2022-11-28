@@ -1,13 +1,16 @@
-
 indicator_regexes <- c(
-  number = "[+\\-]?(?:0|[1-9]\\d*)(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?",
+  indicator = "N\\{[a-zA-Z][a-zA-Z0-9]{10}\\}",
+  constant = "C\\{[a-zA-Z][a-zA-Z0-9]{10}\\}",
   de_coc_operand  = "#\\{[a-zA-Z][a-zA-Z0-9]{10}\\.[a-zA-Z][a-zA-Z0-9]{10}\\}",
   de_operand = "#\\{[a-zA-Z][a-zA-Z0-9]{10}\\}",
   plus  = "\\+",
   minus = "\\-",
   times = "\\*",
   division = "\\/",
-  whitespace  = "\\s+"
+  whitespace  = "\\s+",
+  number = "[+\\-]?(?:0|[1-9]\\d*)(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?",
+  lparen = "\\(",
+  rparent = "\\)"
 )
 
 
