@@ -7,7 +7,7 @@ test_that("Can pass a valid validation rule expression", {
 
   parsed_inds <- lapply(inds, function(x) lex(x, indicator_regexes))
   is_valid <- isValidIndicator(parsed_inds)
-  expect_identical(is_valid, c(TRUE, TRUE, TRUE,TRUE))
+  expect_identical(is_valid, c(TRUE, TRUE, TRUE, TRUE))
 
 })
 
