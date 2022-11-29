@@ -185,13 +185,13 @@ evaluateValidation <- function(combis, values, vr, return_violations_only = TRUE
       matches_normal$rightSide.expression <-
         gsub(expression.pattern, "0", matches_normal$rightSide.expression)
       matches_normal$leftSide.expression <-
-        sapply(matches_normal$leftSide.expression, function(x) {
-          eval(parse(text = x))
-        })
+        vapply(matches_normal$leftSide.expression, function(x) {
+          eval(str2expression(x))
+        }, FUN.VALUE = numeric(1))
       matches_normal$rightSide.expression <-
-        sapply(matches_normal$rightSide.expression, function(x) {
-          eval(parse(text = x))
-        })
+        vapply(matches_normal$rightSide.expression, function(x) {
+          eval(str2expression(x))
+        }, FUN.VALUE = numeric(1))
       matches_normal$formula <-
         paste(
           matches_normal$leftSide.expression,
@@ -205,7 +205,7 @@ evaluateValidation <- function(combis, values, vr, return_violations_only = TRUE
 
 
     matches$result <- vapply(matches$formula,
-     \(x) eval(parse(text = x)), FUN.VALUE = logical(1))
+     \(x) eval(str2expression(x)), FUN.VALUE = logical(1))
 
     if (return_violations_only == TRUE) {
       matches <- matches[!matches$result, ]

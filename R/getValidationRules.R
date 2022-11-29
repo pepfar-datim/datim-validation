@@ -1,6 +1,4 @@
-indicator_regexes <- c(
-  indicator = "N\\{[a-zA-Z][a-zA-Z0-9]{10}\\}",
-  constant = "C\\{[a-zA-Z][a-zA-Z0-9]{10}\\}",
+vr_regexes <- c(
   de_coc_operand  = "#\\{[a-zA-Z][a-zA-Z0-9]{10}\\.[a-zA-Z][a-zA-Z0-9]{10}\\}",
   de_operand = "#\\{[a-zA-Z][a-zA-Z0-9]{10}\\}",
   plus  = "\\+",
@@ -10,11 +8,11 @@ indicator_regexes <- c(
   whitespace  = "\\s+",
   number = "[+\\-]?(?:0|[1-9]\\d*)(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?",
   lparen = "\\(",
-  rparent = "\\)"
+  rparen = "\\)"
 )
 
 
-isValidIndicator <- function(parsed_inds) {
+isValidExpression <- function(parsed_inds) {
 
   !unlist(lapply(lapply(parsed_inds, function(x) names(x) == ".missing"), any))
 }
@@ -103,10 +101,10 @@ getValidationRules <- function(remove_decoration = FALSE,
                            "")
 
     #Filter any rules which we cannot handle
-    parsed_inds_left <- lapply(vr$leftSide.expression, function(x) lex(x, indicator_regexes))
-    parsed_inds_right <- lapply(vr$leftSide.expression, function(x) lex(x, indicator_regexes))
-    is_valid_left <- isValidIndicator(parsed_inds_left)
-    is_valid_right <- isValidIndicator(parsed_inds_right)
+    parsed_inds_left <- lapply(vr$leftSide.expression, function(x) lex(x, vr_regexes))
+    parsed_inds_right <- lapply(vr$leftSide.expression, function(x) lex(x, vr_regexes))
+    is_valid_left <- isValidExpression(parsed_inds_left)
+    is_valid_right <- isValidExpression(parsed_inds_right)
     is_valid <- is_valid_left & is_valid_right
     vr <- vr[is_valid, ]
 
