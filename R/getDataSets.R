@@ -85,8 +85,7 @@ getCurrentDataSets <- function(datastream = "RESULTS",
   mer_narratives <- c("Host Country Results: Narratives (USG)",
                       "MER Results: Narratives (IM)")
 
-  sims <- c("SIMS 4: Above Site Based",
-            "SIMS 4: Site Based")
+  sims <- c("SIMS 4: Site Based (4.2)")
 
   want <-  switch(datastream,
           "RESULTS" = mer_results,
