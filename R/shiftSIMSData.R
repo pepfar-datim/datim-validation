@@ -59,7 +59,7 @@ shiftSIMSData <- function(d) {
           end_date <- start_date + nrow(bar)
         }
         #make sure end date does not go beyond boundaries
-        if (!is.na(period)) {
+        if (is.data.frame(period)) {
           if (end_date > period$endDate) {
             start_date <- start_date - (end_date - period$endDate)
           }
