@@ -75,7 +75,7 @@ shiftSIMSData <- function(d) {
 
         duplicated_dates <- which(duplicated(bar$period))
 
-        for (j in seq_len(duplicated_dates)) {
+        for (j in seq_len(length(duplicated_dates))) {
           this_date <- as.Date(bar$period[duplicated_dates[j]], "%Y%m%d")
           #Which date is closest?
           date_distance <-
