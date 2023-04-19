@@ -86,7 +86,7 @@ getDataElementCadenceMapForPeriod <- function(period,
         return(NULL)
       } else {
         cadence_map <- cadence_map_json$dataElements
-        cadence_map$period <- cadence_map_json$period        
+        cadence_map$period <- cadence_map_json$period
       }
 
     } else {
