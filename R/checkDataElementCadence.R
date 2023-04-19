@@ -82,8 +82,13 @@ getDataElementCadenceMapForPeriod <- function(period,
     if (r$status == 200L) {
       r <- httr::content(r, "text")
       cadence_map_json <- jsonlite::fromJSON(r)
-      cadence_map <- cadence_map_json$dataElements
-      cadence_map$period <- cadence_map_json$period
+      if (length(cadence_map_json$dataElements) == 0L) {
+        return(NULL)
+      } else {
+        cadence_map <- cadence_map_json$dataElements
+        cadence_map$period <- cadence_map_json$period
+      }
+
     } else {
       warning("Could not retreive data element cadence map for period ", period)
     return(NULL)
