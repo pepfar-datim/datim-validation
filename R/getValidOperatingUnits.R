@@ -9,7 +9,7 @@
 
 getValidOperatingUnits <- function(d2session = dynGet("d2_default_session",
                                                       inherits = TRUE)) {
-    d2_api_get("organisationUnits?level=3&fields=id,name&paging=false", d2session) %>% 
+    d2_api_get("organisationUnits?level=3&fields=id,name&paging=false", d2session) %>%
     purrr::pluck("organisationUnits")
 
 }

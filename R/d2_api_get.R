@@ -16,12 +16,12 @@
 d2_api_get <- function(path,
                     d2session,
                     timeout = 60) {
-  
+
   base_url <- d2session$base_url
   handle <- d2session$handle
 
-  url <- paste0(d2session$base_url,"api/", path)
-  
+  url <- paste0(d2session$base_url, "api/", path)
+
   if (is.null(d2session$token)) {
     r <- httpcache::GET(url, httr::timeout(timeout),
                    handle = handle)
@@ -34,13 +34,19 @@ d2_api_get <- function(path,
                                        paste("Bearer",
                                              d2session$token$credentials$access_token, sep = " ")))
   }
-  
-  if (r$status == 200L) {
+
+  if (r$status_code == 200L && httr::http_type(r) == "application/json") {
     httr::content(r, "text") %>%
-      jsonlite::fromJSON(., flatten = TRUE) } else {
-        stop(paste( "Could not retreive", url, "with error code",
-          httr::content(r$status)))
-      }
-  
-  
+      jsonlite::fromJSON(., flatten = TRUE)
+  } else {
+    warning(paste(
+      "Could not retreive",
+      url,
+      "with error code",
+      r$status_code
+    ))
+    return(NULL)
+  }
+
+
 }
