@@ -40,27 +40,21 @@ getValidDataElements <- function(datasets = NA,
     #We need to use these views here since they are based on
     #the actual HTML form. Certain disaggs may be excluded.
     if (allDataSets[allDataSets$id == datasets[i], "formType"] == "CUSTOM") {
-      url <- utils::URLencode(
-        paste0(d2session$base_url,
-               "api/", api_version(),
-               "/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",
+      path <- paste0("/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",
                datasets[i],
-               "&paging=false"))
+               "&paging=false")
     } else {
-      url <- utils::URLencode(
-        paste0(d2session$base_url,
-               "api/", api_version(),
+      path <- paste0(
                "/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",
                datasets[i],
-               "&paging=false"))
+               "&paging=false")
     }
 
 
-      r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
+      r <- d2_api_get(path, d2session = d2session)
 
-      if (r$status == 200L) {
-        r <-  httr::content(r, "text")
-        r <-  jsonlite::fromJSON(r)
+      if (!is.null(r)) {
+
         des <- as.data.frame(r$listGrid$rows, stringsAsFactors = FALSE)
         foo <- r$listGrid$headers
         names(des) <- as.character(foo$name)

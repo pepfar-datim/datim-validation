@@ -22,19 +22,18 @@ getOrganisationUnitMap <- function(organisationUnit = NA,
   if (is.na(organisationUnit)) {
     organisationUnit <- d2session$user_orgunit
   }
-  url <- utils::URLencode(paste0(d2session$base_url, "api/", api_version(),
-                                 "/organisationUnits.json?&filter=path:like:",
-                                 organisationUnit,
-                                 "&fields=id,code,name,shortName&paging=false"))
 
+ path <- paste0(
+    "organisationUnits.json?&filter=path:like:",
+    organisationUnit,
+    "&fields=id,code,name,shortName&paging=false"
+  )
 
-  r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
-  if (r$status == 200L) {
-    r <-  httr::content(r, "text")
-    sites <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
+  r <- d2_api_get(path, d2session = d2session)
+  if (!is.null(r)) {
+      r %>%
+      purrr::pluck("organisationUnits")
      } else {
-      stop(paste("Could not retreive site listing", httr::content(r, "text")))
+      stop(paste("Could not retreive site listing"))
      }
-
-  return(sites)
 }

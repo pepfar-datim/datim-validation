@@ -7,27 +7,17 @@
 d2_api_get(path, d2session, timeout = 60)
 }
 \arguments{
-\item{path}{Should begin with api/ and contain the query}
-
-\item{timeout}{how long should a reponse be waited for}
+\item{path}{Should exclude the "api" portion of the HTTP request. This will
+be added as part of the GET request.}
 
 \item{d2_session}{the d2Session object, default is "d2_default_session",
 it will be made upon logining in to datim with loginToDATIM}
-
-\item{retry}{number of times to try in case of failure,
-default will not try again}
-
-\item{api_version}{defaults to current but can pass in version number}
-
-\item{verbose}{return raw content with data}
-
-\item{quiet}{Echo the URL which is called to the console.}
 }
 \value{
-Result of DATIM API query returned as named list.
+Result the result of the API query as a list.
 
-Copied almost verbatim from datimutils
+Simplified version of the original api_get function from datimutils.
 }
 \description{
-Gets and flattens DATIM API query as dataframe.
+Execute and return a DATIM API query.
 }

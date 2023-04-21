@@ -17,11 +17,8 @@ getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_ses
     stop("You must specify a single dataset UID")
   }
 
-  url <-
+  path <-
     paste0(
-      d2session$base_url,
-      "api/",
-      api_version(),
       "/dataSets/",
       dataset,
       "?fields=organisationUnits[id],categoryCombo[categoryOptionCombos[id]]",
@@ -32,13 +29,7 @@ getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_ses
   #The may be using for validation. Global users will have all DEs/OrgUnits anyway.
 
 
-    r <- httpcache::GET(url, httr::timeout(300), handle = d2session$handle)
-    if (r$status == 200L) {
-        r <- httr::content(r, "text")
-        r <- jsonlite::fromJSON(r, flatten = TRUE)
-    } else  {
-    stop("Could not retreive a list of data elements and orgunits from the server")
-      }
+    r <- d2_api_get(path, d2session = d2session)
 
     #Reshape this list a bit to make it a bit easier to deal with
     #Also deal with NULLs

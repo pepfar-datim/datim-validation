@@ -1,18 +1,12 @@
 
 #' @title Execute and return a DATIM API query.
-#' @description Gets and flattens DATIM API query as dataframe.
-#' @param path Should begin with api/ and contain the query
+#' @param path Should exclude the "api" portion of the HTTP request. This will
+#' be added as part of the GET request.
 #' @param d2_session the d2Session object, default is "d2_default_session",
 #' it will be made upon logining in to datim with loginToDATIM
-#' @param retry number of times to try in case of failure,
-#' default will not try again
-#' @param timeout how long should a reponse be waited for
-#' @param api_version defaults to current but can pass in version number
-#' @param verbose return raw content with data
-#' @param quiet Echo the URL which is called to the console.
-#' @return Result of DATIM API query returned as named list.
+#' @return Result the result of the API query as a list.
 #'
-#' Copied almost verbatim from datimutils
+#' Simplified version of the original api_get function from datimutils.
 d2_api_get <- function(path,
                     d2session,
                     timeout = 60) {

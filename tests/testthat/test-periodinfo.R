@@ -12,7 +12,7 @@ with_mock_api({
                           "startdate",
                           "enddate",
                           "periodtype")
-    expect_setequal(names(test_periods), period_map_names)
+    expect_named(test_periods, period_map_names, ignore.order = TRUE)
     expect_true(is(test_periods$startdate, "Date"))
     expect_true(is(test_periods$enddate, "Date"))
   })
