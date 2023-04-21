@@ -20,9 +20,6 @@
 #'         with the value being the element extracted by the corresponding
 #'         regular expression.
 #'
-#' @examples
-#' lex("hello there 123.45", regexes=c(number=re$number, word="(\\w+)", whitespace="(\\s+)"))
-#'
 #' @import stringi
 #' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
