@@ -37,7 +37,7 @@ getValidationRules <- function(remove_decoration = FALSE,
                                d2session = dynGet("d2_default_session",
                                                   inherits = TRUE)) {
   path <- paste0(
-    "/validationRules.json?fields=id,name,description,",
+    "validationRules.json?fields=id,name,description,",
     "leftSide[expression,missingValueStrategy],",
     "rightSide[expression,missingValueStrategy],",
     "operator,periodType&paging=false"
