@@ -13,26 +13,12 @@
 #'
 getDataSets <- function(d2session = dynGet("d2_default_session",
                                            inherits = TRUE)) {
-  url <-
-    utils::URLencode(
-      paste0(
-        d2session$base_url,
-        "api/",
-        api_version(),
-        "/dataSets?fields=name,id,formType&paging=false"
-      )
-    )
+  path <- "dataSets?fields=name,id,formType&paging=false"
 
-    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
-    if (r$status == 200L) {
-      r <- httr::content(r, "text")
-      r <- jsonlite::fromJSON(r)
-      ds <- as.data.frame(r$dataSets)
-      ds <- ds[with(ds, order(name)), ]
-    } else {
-      stop("Could not get a list of datasets")
-    }
-  ds
+  r <- d2_api_get(path, d2session = d2session)
+  ds <- as.data.frame(r$dataSets)
+  ds <- ds[with(ds, order(name)), ]
+
 }
 
 #' @title Get Current datasets provided a data stream

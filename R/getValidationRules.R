@@ -36,26 +36,24 @@ isValidExpression <- function(parsed_inds) {
 getValidationRules <- function(remove_decoration = FALSE,
                                d2session = dynGet("d2_default_session",
                                                   inherits = TRUE)) {
-  url <- paste0(
-    d2session$base_url,
-    "api/",
-    api_version(),
-    "/validationRules.json?fields=id,name,description,",
+  path <- paste0(
+    "validationRules.json?fields=id,name,description,",
     "leftSide[expression,missingValueStrategy],",
     "rightSide[expression,missingValueStrategy],",
     "operator,periodType&paging=false"
   )
 
+    #Get a copy of the metadata from the server
+    r <- d2_api_get(path, d2session = d2session)
 
+    if (!is.null(r)) {
+      vr <- r$validationRules
+    } else {
+      stop("Could not obtain validation rule metadata")
+    }
 
     expression.pattern <-
       "[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?"
-
-    #Get a copy of the metadata from the server
-    r <-
-      httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
-    r <-  httr::content(r, "text")
-    vr <- jsonlite::fromJSON(r, flatten = TRUE)$validationRules
 
     #Static predefined map of operators
     op.map <- data.frame(

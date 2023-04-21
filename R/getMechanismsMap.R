@@ -22,21 +22,23 @@ getMechanismsMap <- function(organisationUnit = NA,
   #Determine if we should filter by OU
   ou_filter <- !(organisationUnit == "ybg3MO3hcf4")
   #Special cases when global OU is used, particularly for SIMS Import
-  url <- paste0(d2session$base_url, "api/", api_version(),
-                "/categoryOptionCombos?filter=categoryCombo.id:eq:wUpfppgjEza&",
+  path <- paste0("categoryOptionCombos?filter=categoryCombo.id:eq:wUpfppgjEza&",
                 "fields=code,name,id,categoryOptions[startDate,endDate]&",
                 "paging=false")
   if (ou_filter) {
-    url <- paste0(url,
+    path <- paste0(path,
                   paste0("&filter=categoryOptions.organisationUnits.id:eq:",
                          organisationUnit))
   }
-  url <- utils::URLencode(url)
 
-    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
-    if (r$status_code == 200L) {
-      r <- httr::content(r, "text")
-      mechs <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
+
+    r <- d2_api_get(path, d2session = d2session)
+
+    if (!is.null(r)) {
+
+      mechs <- r %>%
+        purrr::pluck("categoryOptionCombos")
+
       if (length(mechs) == 0) {
         return(NULL)
       }
@@ -66,7 +68,7 @@ getMechanismsMap <- function(organisationUnit = NA,
       }
 
     } else {
-      stop(paste("Could not retreive mechanisms", httr::content(r, "text")))
+      stop(paste("Could not retreive mechanisms"))
     }
 
     mechs

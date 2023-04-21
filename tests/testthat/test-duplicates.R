@@ -33,3 +33,14 @@ with_mock_api({
     d <- getExactDuplicates(d)
     expect_null(d$tests$exact_duplicates)
   })})
+
+
+
+with_mock_api({
+  test_that("We can get a crosswalk map ", {
+    loginToDATIM(config_path = test_config("test-config.json"))
+    expect_true(exists("d2_default_session"))
+    dup_map <- getCrosswalkMap(d2_default_session)
+    expect_named(dup_map, c("dsd_uid", "ta_uid"))
+  })
+})

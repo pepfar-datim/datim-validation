@@ -13,20 +13,9 @@
 
 getDataElementMap <- function(d2session = dynGet("d2_default_session",
                                                  inherits = TRUE)) {
-  url <- utils::URLencode(
-    paste0(d2session$base_url,
-           "api/", api_version(),
-           "/dataElements?fields=id,code,shortName,name,",
-           "valueType,optionSet[id],zeroIsSignificant&paging=false"))
+  path <- paste0("dataElements?fields=id,code,shortName,name,",
+                 "valueType,optionSet[id],zeroIsSignificant&paging=false")
+  d2_api_get(path, d2session = d2session) %>%
+    purrr::pluck("dataElements")
 
-  r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
-  if (r$status == 200L) {
-    r <-  httr::content(r, "text")
-    des <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
-     } else {
-      print(paste("Could not retreive data elements", httr::content(r, "text")))
-      des <- NULL
-    }
-
-  des
 }

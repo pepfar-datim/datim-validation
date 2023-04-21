@@ -9,23 +9,7 @@
 
 getValidOperatingUnits <- function(d2session = dynGet("d2_default_session",
                                                       inherits = TRUE)) {
-  r <-
-    httpcache::GET(utils::URLencode(
-      paste0(
-        d2session$base_url,
-        "api/",
-        api_version(),
-        "/organisationUnits?level=3&fields=id,name&paging=false"
-      )
-    ), httr::timeout(getHTTPTimeout()), handle = d2session$handle)
+    d2_api_get("organisationUnits?level=3&fields=id,name&paging=false", d2session) %>%
+    purrr::pluck("organisationUnits")
 
-  if (r$status == 200) {
-     httr::content(r, "text") %>%
-     jsonlite::fromJSON(., flatten = TRUE) %>%
-     purrr::pluck("organisationUnits")
-  } else {
-    stop(paste(
-      "Could not retreive valid operating units",
-      httr::content(r$status)))
-  }
 }

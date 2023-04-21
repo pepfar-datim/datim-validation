@@ -26,13 +26,8 @@ checkValueTypeCompliance <- function(d,
 
   #There are differences in the API version, so first,
   # we need to know which version we are dealing with
-  url <- utils::URLencode(paste0(d2session$base_url,
-                                 "api/", api_version(),
-                                 "/system/info"))
-  r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()),
-                      handle = d2session$handle)
-  r <-  httr::content(r, "text")
-
+  path <- "system/info"
+  r <- d2_api_get(path, d2session = d2session)
 
   patterns <-
     list(NUMBER = "^(-?[0-9]+)(\\.[0-9]+)?$",
@@ -125,17 +120,11 @@ getOptionSetMap <- function(d2session = dynGet("d2_default_session",
                                                inherits = TRUE)) {
 
 
-  url <- utils::URLencode(
-    paste0(d2session$base_url,
-           "api/", api_version(),
-           "/optionSets?fields=id,name,options[code]&paging=false"))
+  path <- "optionSets?fields=id,name,options[code]&paging=false"
 
-    r <- httpcache::GET(url,
-                        httr::timeout(getHTTPTimeout()),
-                        handle = d2session$handle)
-    if (r$status == 200L) {
-      r <-  httr::content(r, "text")
-      r <-  jsonlite::fromJSON(r, flatten = TRUE)
+    r <- d2_api_get(path, d2session = d2session)
+
+    if (!is.null(r)) {
       option_sets <- as.data.frame(r$optionSets)
     } else {
       stop("Could not get a list of option sets")

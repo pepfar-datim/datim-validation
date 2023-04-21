@@ -86,22 +86,14 @@ getPureDuplicates <- function(d) {
 getCrosswalkMap <- function(d2session = dynGet("d2_default_session",
                                                inherits = TRUE)) {
 
-  r <-
-    httpcache::GET(
-      utils::URLencode(
-        paste0(d2session$base_url,
-               "api/sqlViews/UTlIicJBZFg/data.json&paging=false")),
-      timeout = getHTTPTimeout(),
-      handle = d2session$handle)
-  if (r$status == 200L) {
-    r <- httr::content(r, "text")
-    r <- jsonlite::fromJSON(r, flatten = TRUE)
-    cw <- as.data.frame(r$rows, stringsAsFactors = FALSE)
-    names(cw) <- r$header$name
-    return(cw[, c("dsd_de_uid", "ta_de_uid")])
+  r <- d2_api_get("sqlViews/bqmza8gFqWE/data.json?paging=false", d2session = d2session)
+
+  if (!is.null(r)) {
+    cw <- as.data.frame(r$listGrid$rows, stringsAsFactors = FALSE)
+    names(cw) <- r$listGrid$headers$name
+    return(cw[, c("dsd_uid", "ta_uid")])
   } else {
-    print(paste("Could not retrieve crosswalk map", httr::content(r, "text")))
-    stop()
+    stop(paste("Could not retrieve crosswalk map"))
   }
 }
 
@@ -119,22 +111,7 @@ getCrosswalkMap <- function(d2session = dynGet("d2_default_session",
 #'
 getCrosswalkMechanism <- function(d2session = dynGet("d2_default_session",
                                                      inherits = TRUE)) {
-  r <-
-    httpcache::GET(
-      utils::URLencode(
-        paste0(d2session$base_url,
-               "api/categoryOptionCombos?filter=name:like:00001")),
-      timeout = getHTTPTimeout(),
-      handle = d2session$handle)
-  if (r$status == 200L) {
-    r <- httr::content(r, "text")
-    r <- jsonlite::fromJSON(r, flatten = TRUE)
-    return(r$categoryOptionCombos$id)
-  } else {
-    print(paste("Could not retreive crosswalk mechanism ID",
-                httr::content(r, "text")))
-    stop()
-  }
+  "YGT1o7UxfFu"
 }
 
 #' @export

@@ -14,18 +14,9 @@
 getCategoryOptionCombosMap <- function(d2session = dynGet("d2_default_session",
                                                         inherits = TRUE)) {
 
-  url <- utils::URLencode(
-    paste0(d2session$base_url, "api/", api_version(),
-           "/categoryOptionCombos?fields=id,name,shortName,code&paging=false"))
-  r <- httpcache::GET(url,
-               httr::timeout(300),
-               handle = d2session$handle)
-  if (r$status == 200L) {
-    r <-  httr::content(r, "text")
-    cocs <- jsonlite::fromJSON(r, flatten = TRUE)[[1]]
-    return(cocs)
-  } else {
-    stop(paste("Could not retreive category option combos map",
-               httr::content(r, "text")))
-  }
+  path <- "categoryOptionCombos?fields=id,name,shortName,code&paging=false"
+
+  d2_api_get(path, d2session = d2session) %>%
+    purrr::pluck("categoryOptionCombos")
+
 }
