@@ -40,12 +40,12 @@ getValidDataElements <- function(datasets = NA,
     #We need to use these views here since they are based on
     #the actual HTML form. Certain disaggs may be excluded.
     if (allDataSets[allDataSets$id == datasets[i], "formType"] == "CUSTOM") {
-      path <- paste0("/sqlViews/DotdxKrNZxG/data.json?var=dataSets:",
+      path <- paste0("sqlViews/DotdxKrNZxG/data.json?var=dataSets:",
                datasets[i],
                "&paging=false")
     } else {
       path <- paste0(
-               "/sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",
+               "sqlViews/ZC8oyMiZVQD/data.json?var=dataSets:",
                datasets[i],
                "&paging=false")
     }

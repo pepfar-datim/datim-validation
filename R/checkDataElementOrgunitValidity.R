@@ -19,7 +19,7 @@ getDataElementDetailsMap <- function(dataset, d2session = dynGet("d2_default_ses
 
   path <-
     paste0(
-      "/dataSets/",
+      "dataSets/",
       dataset,
       "?fields=organisationUnits[id],categoryCombo[categoryOptionCombos[id]]",
       ",dataSetElements[dataElement[id]]"
