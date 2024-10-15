@@ -73,7 +73,8 @@ getCurrentDataSets <- function(datastream = "RESULTS",
       "MER Results: Facility Based - DoD ONLY",
       "Host Country Results: Facility (USG)",
       "MER Results: Operating Unit Level (IM)",
-      "Host Country Results: Operating Unit Level (USG)"
+      "Host Country Results: Operating Unit Level (USG)",
+      "Host Country Results: DREAMS (USG)"
     )
 
   mer_targets <-  c(
