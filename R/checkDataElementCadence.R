@@ -6,7 +6,7 @@
 #' Quarterly data elements can be submitted each quarter.
 #' SAPR data elements should only be submiteted in FYQ2 and FYQ4.
 #' APR data elements should only be submitted in FYQ4.
-#'
+#' @importFrom magrittr %<>%
 #' @inheritParams datim_validation_params
 #'
 #' @return Returns a data frame of "dataElement","period",
@@ -23,6 +23,12 @@ checkDataElementCadence <- function(d,
   data <- d$data$import
   #Get a listing of periods which are present in the data
   des_periods <- unique(data[, c("period", "dataElement")])
+
+  if (NROW(des_periods) == 0L) {
+    msg <- "WARNING: No data elements or periods found in the import data."
+    d$info$messages <- appendMessage(d$info$messages, msg, "WARNING")
+    return(d)
+  }
 
   cadence_maps <-
     purrr::map_dfr(
@@ -67,32 +73,17 @@ getDataElementCadenceMapForPeriod <- function(period,
                                               d2session =
                                                 dynGet("d2_default_session",
                                                        inherits = TRUE)) {
-  url <-
-    utils::URLencode(
-      paste0(
-        d2session$base_url,
-        "api/",
-        api_version(),
-        "/dataStore/dataElementCadence/",
-        period
-      )
-    )
 
-    r <- httpcache::GET(url, httr::timeout(getHTTPTimeout()), handle = d2session$handle)
-    if (r$status == 200L) {
-      r <- httr::content(r, "text")
-      cadence_map_json <- jsonlite::fromJSON(r)
-      if (length(cadence_map_json$dataElements) == 0L) {
-        return(NULL)
-      } else {
-        cadence_map <- cadence_map_json$dataElements
-        cadence_map$period <- cadence_map_json$period
-      }
+  path <- paste0("dataStore/dataElementCadence/", period)
+  r <- d2_api_get(path, d2session = d2session)
 
-    } else {
-      warning("Could not retreive data element cadence map for period ", period)
+
+  if (length(r$dataElements) == 0L) {
     return(NULL)
-    }
+  } else {
+    cadence_map <- r$dataElements
+    cadence_map$period <- r$period
+  }
 
   cadence_map
 }
